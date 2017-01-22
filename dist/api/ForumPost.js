@@ -1,23 +1,25 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Get a Treasury's Comments
-*/
-function findTreasuryComments(parameters) {
-    return HttpRequest_1.request(parameters, '/treasuries/:treasury_key/comments', 'GET');
+class ForumPost {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get a Treasury's Comments
+     */
+    findTreasuryComments(parameters) {
+        return this.client.http("/treasuries/:treasury_key/comments", parameters, "GET");
+    }
+    /**
+     * Leave a comment on a Treasury List
+     */
+    postTreasuryComment(parameters) {
+        return this.client.http("/treasuries/:treasury_key/comments", parameters, "POST");
+    }
+    /**
+     * Delete a given comment on a Treasury List
+     */
+    deleteTreasuryComment(parameters) {
+        return this.client.http("/treasuries/:treasury_key/comments/:comment_id", parameters, "DELETE");
+    }
 }
-exports.findTreasuryComments = findTreasuryComments;
-/**
-* Leave a comment on a Treasury List
-*/
-function postTreasuryComment(parameters) {
-    return HttpRequest_1.request(parameters, '/treasuries/:treasury_key/comments', 'POST');
-}
-exports.postTreasuryComment = postTreasuryComment;
-/**
-* Delete a given comment on a Treasury List
-*/
-function deleteTreasuryComment(parameters) {
-    return HttpRequest_1.request(parameters, '/treasuries/:treasury_key/comments/:comment_id', 'DELETE');
-}
-exports.deleteTreasuryComment = deleteTreasuryComment;
+exports.ForumPost = ForumPost;

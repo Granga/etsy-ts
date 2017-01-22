@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopSection {
     shop_section_id: number;
     title: string;
@@ -31,23 +30,27 @@ export interface IDeleteShopSectionParameters extends IStandardParameters {
     shop_id: string | number;
     shop_section_id: number;
 }
-/**
- * Retrieves a set of ShopSection objects associated to a Shop.
- */
-export declare function findAllShopSections<TResult>(parameters: IFindAllShopSectionsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopSectionsParameters>>;
-/**
- * Creates a new ShopSection.
- */
-export declare function createShopSection<TResult>(parameters: ICreateShopSectionParameters): Bluebird<IStandardResponse<TResult, ICreateShopSectionParameters>>;
-/**
- * Retrieves a ShopSection by id and shop_id
- */
-export declare function getShopSection<TResult>(parameters: IGetShopSectionParameters): Bluebird<IStandardResponse<TResult, IGetShopSectionParameters>>;
-/**
- * Updates a ShopSection with the given id.
- */
-export declare function updateShopSection<TResult>(parameters: IUpdateShopSectionParameters): Bluebird<IStandardResponse<TResult, IUpdateShopSectionParameters>>;
-/**
- * Deletes the ShopSection with the given id.
- */
-export declare function deleteShopSection<TResult>(parameters: IDeleteShopSectionParameters): Bluebird<IStandardResponse<TResult, IDeleteShopSectionParameters>>;
+export declare class ShopSection {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a set of ShopSection objects associated to a Shop.
+     */
+    findAllShopSections<TResult>(parameters: IFindAllShopSectionsParameters): Promise<IStandardResponse<IFindAllShopSectionsParameters, TResult>>;
+    /**
+     * Creates a new ShopSection.
+     */
+    createShopSection<TResult>(parameters: ICreateShopSectionParameters): Promise<IStandardResponse<ICreateShopSectionParameters, TResult>>;
+    /**
+     * Retrieves a ShopSection by id and shop_id
+     */
+    getShopSection<TResult>(parameters: IGetShopSectionParameters): Promise<IStandardResponse<IGetShopSectionParameters, TResult>>;
+    /**
+     * Updates a ShopSection with the given id.
+     */
+    updateShopSection<TResult>(parameters: IUpdateShopSectionParameters): Promise<IStandardResponse<IUpdateShopSectionParameters, TResult>>;
+    /**
+     * Deletes the ShopSection with the given id.
+     */
+    deleteShopSection<TResult>(parameters: IDeleteShopSectionParameters): Promise<IStandardResponse<IDeleteShopSectionParameters, TResult>>;
+}

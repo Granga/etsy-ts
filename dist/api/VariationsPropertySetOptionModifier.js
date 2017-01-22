@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Add a value for a given property.
-*/
-function getPropertyOptionModifier(parameters) {
-    return HttpRequest_1.request(parameters, '/property_options/modifiers', 'GET');
+class VariationsPropertySetOptionModifier {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Add a value for a given property.
+     */
+    getPropertyOptionModifier(parameters) {
+        return this.client.http("/property_options/modifiers", parameters, "GET");
+    }
 }
-exports.getPropertyOptionModifier = getPropertyOptionModifier;
+exports.VariationsPropertySetOptionModifier = VariationsPropertySetOptionModifier;

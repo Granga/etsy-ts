@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFeedback {
     feedback_id: number;
     transaction_id: number;
@@ -53,31 +52,35 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
     offset?: number;
     page?: number;
 }
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsAuthorParameters>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsBuyerParameters>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsSellerParameters>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsSubjectParameters>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between the findAllUserFeedbackAsBuyer
- and findAllUserFeedbackAsSubject methods.
- */
-export declare function findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Bluebird<IStandardResponse<TResult, IFindAllFeedbackFromBuyersParameters>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between
- the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
- */
-export declare function findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters): Bluebird<IStandardResponse<TResult, IFindAllFeedbackFromSellersParameters>>;
+export declare class Feedback {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between the findAllUserFeedbackAsBuyer
+     and findAllUserFeedbackAsSubject methods.
+     */
+    findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between
+     the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
+     */
+    findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
+}

@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUser {
     user_id: number;
     login_name: string;
@@ -56,35 +55,39 @@ export interface IConnectUsersParameters extends IStandardParameters {
     user_id: string | number;
     to_user_id: string | number;
 }
-/**
-* Finds all Users whose name or username match the keywords parameter.
-*/
-export declare function findAllUsers<TResult>(parameters: IFindAllUsersParameters): Bluebird<IStandardResponse<TResult, IFindAllUsersParameters>>;
-/**
-* Retrieves a User by id.
-*/
-export declare function getUser<TResult>(parameters: IGetUserParameters): Bluebird<IStandardResponse<TResult, IGetUserParameters>>;
-/**
-* Returns a list of users for a specific team
-*/
-export declare function findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Bluebird<IStandardResponse<TResult, IFindAllUsersForTeamParameters>>;
-/**
-* Returns a list of users who have circled this user
-*/
-export declare function getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Bluebird<IStandardResponse<TResult, IGetCirclesContainingUserParameters>>;
-/**
-* Returns details about a connection between users
-*/
-export declare function getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Bluebird<IStandardResponse<TResult, IGetConnectedUserParameters>>;
-/**
-* Removes a user (to_user_id) from the logged in user's (user_id) circle
-*/
-export declare function unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Bluebird<IStandardResponse<TResult, IUnconnectUsersParameters>>;
-/**
-* Returns a list of users that are in this user's cricle
-*/
-export declare function getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Bluebird<IStandardResponse<TResult, IGetConnectedUsersParameters>>;
-/**
-* Adds user (to_user_id) to the user's (user_id) circle
-*/
-export declare function connectUsers<TResult>(parameters: IConnectUsersParameters): Bluebird<IStandardResponse<TResult, IConnectUsersParameters>>;
+export declare class User {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Finds all Users whose name or username match the keywords parameter.
+     */
+    findAllUsers<TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>>;
+    /**
+     * Retrieves a User by id.
+     */
+    getUser<TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>>;
+    /**
+     * Returns a list of users for a specific team
+     */
+    findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>;
+    /**
+     * Returns a list of users who have circled this user
+     */
+    getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>;
+    /**
+     * Returns details about a connection between users
+     */
+    getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>>;
+    /**
+     * Removes a user (to_user_id) from the logged in user's (user_id) circle
+     */
+    unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>>;
+    /**
+     * Returns a list of users that are in this user's cricle
+     */
+    getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>>;
+    /**
+     * Adds user (to_user_id) to the user's (user_id) circle
+     */
+    connectUsers<TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>>;
+}

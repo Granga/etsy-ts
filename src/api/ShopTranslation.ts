@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShopTranslation {
     shop_id: number,
@@ -20,6 +18,7 @@ export interface IShopTranslation {
     vacation_autoreply: string,
     vacation_message: string
 }
+
 
 export interface IGetShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
@@ -60,27 +59,37 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
     language: string
 }
 
-/**
- * Retrieves a ShopTranslation by shop_id and language
- */
-export function getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Bluebird<IStandardResponse<TResult, IGetShopTranslationParameters>> {
-    return request<IStandardResponse<TResult, IGetShopTranslationParameters>>(parameters, '/shops/:shop_id/translations/:language', 'GET');
-}
-/**
- * Creates a ShopTranslation by shop_id and language
- */
-export function createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Bluebird<IStandardResponse<TResult, ICreateShopTranslationParameters>> {
-    return request<IStandardResponse<TResult, ICreateShopTranslationParameters>>(parameters, '/shops/:shop_id/translations/:language', 'POST');
-}
-/**
- * Updates a ShopTranslation by shop_id and language
- */
-export function updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Bluebird<IStandardResponse<TResult, IUpdateShopTranslationParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShopTranslationParameters>>(parameters, '/shops/:shop_id/translations/:language', 'PUT');
-}
-/**
- * Deletes a ShopTranslation by shop_id and language
- */
-export function deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Bluebird<IStandardResponse<TResult, IDeleteShopTranslationParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShopTranslationParameters>>(parameters, '/shops/:shop_id/translations/:language', 'DELETE');
+export class ShopTranslation {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a ShopTranslation by shop_id and language
+     */
+    getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
+        return this.client.http<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET");
+    }
+
+    /**
+     * Creates a ShopTranslation by shop_id and language
+     */
+    createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
+        return this.client.http<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST");
+    }
+
+    /**
+     * Updates a ShopTranslation by shop_id and language
+     */
+    updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
+        return this.client.http<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT");
+    }
+
+    /**
+     * Deletes a ShopTranslation by shop_id and language
+     */
+    deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
+        return this.client.http<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE");
+    }
 }

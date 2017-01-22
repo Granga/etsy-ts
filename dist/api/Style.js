@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Retrieve all suggested styles.
-*/
-function findSuggestedStyles(parameters) {
-    return HttpRequest_1.request(parameters, '/taxonomy/styles', 'GET');
+class Style {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieve all suggested styles.
+     */
+    findSuggestedStyles(parameters) {
+        return this.client.http("/taxonomy/styles", parameters, "GET");
+    }
 }
-exports.findSuggestedStyles = findSuggestedStyles;
+exports.Style = Style;

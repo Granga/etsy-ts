@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListingTranslation {
     listing_id: number;
     language: string;
@@ -31,19 +30,23 @@ export interface IDeleteListingTranslationParameters extends IStandardParameters
     listing_id: number;
     language: string;
 }
-/**
- * Retrieves a ListingTranslation by listing_id and language
- */
-export declare function getListingTranslation<TResult>(parameters: IGetListingTranslationParameters): Bluebird<IStandardResponse<TResult, IGetListingTranslationParameters>>;
-/**
- * Creates a ListingTranslation by listing_id and language
- */
-export declare function createListingTranslation<TResult>(parameters: ICreateListingTranslationParameters): Bluebird<IStandardResponse<TResult, ICreateListingTranslationParameters>>;
-/**
- * Updates a ListingTranslation by listing_id and language
- */
-export declare function updateListingTranslation<TResult>(parameters: IUpdateListingTranslationParameters): Bluebird<IStandardResponse<TResult, IUpdateListingTranslationParameters>>;
-/**
- * Deletes a ListingTranslation by listing_id and language
- */
-export declare function deleteListingTranslation<TResult>(parameters: IDeleteListingTranslationParameters): Bluebird<IStandardResponse<TResult, IDeleteListingTranslationParameters>>;
+export declare class ListingTranslation {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a ListingTranslation by listing_id and language
+     */
+    getListingTranslation<TResult>(parameters: IGetListingTranslationParameters): Promise<IStandardResponse<IGetListingTranslationParameters, TResult>>;
+    /**
+     * Creates a ListingTranslation by listing_id and language
+     */
+    createListingTranslation<TResult>(parameters: ICreateListingTranslationParameters): Promise<IStandardResponse<ICreateListingTranslationParameters, TResult>>;
+    /**
+     * Updates a ListingTranslation by listing_id and language
+     */
+    updateListingTranslation<TResult>(parameters: IUpdateListingTranslationParameters): Promise<IStandardResponse<IUpdateListingTranslationParameters, TResult>>;
+    /**
+     * Deletes a ListingTranslation by listing_id and language
+     */
+    deleteListingTranslation<TResult>(parameters: IDeleteListingTranslationParameters): Promise<IStandardResponse<IDeleteListingTranslationParameters, TResult>>;
+}

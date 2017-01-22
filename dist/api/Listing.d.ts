@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListing {
     listing_id: number;
     state: string;
@@ -257,95 +256,99 @@ export interface IFindAllCartListingsParameters extends IStandardParameters {
     user_id: string | number;
     cart_id: string | number;
 }
-/**
-* Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
-*/
-export declare function createListing<TResult>(parameters: ICreateListingParameters): Bluebird<IStandardResponse<TResult, ICreateListingParameters>>;
-/**
-* Finds all FeaturedTreasury listings.
-*/
-export declare function findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedListingsParameters>>;
-/**
-* Retrieves a Listing by id.
-*/
-export declare function getListing<TResult>(parameters: IGetListingParameters): Bluebird<IStandardResponse<TResult, IGetListingParameters>>;
-/**
-* Updates a Listing
-*/
-export declare function updateListing<TResult>(parameters: IUpdateListingParameters): Bluebird<IStandardResponse<TResult, IUpdateListingParameters>>;
-/**
-* Deletes a Listing
-*/
-export declare function deleteListing<TResult>(parameters: IDeleteListingParameters): Bluebird<IStandardResponse<TResult, IDeleteListingParameters>>;
-/**
-* Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
-*/
-export declare function findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllListingActiveParameters>>;
-/**
-* Collects the list of interesting listings
-*/
-export declare function getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters): Bluebird<IStandardResponse<TResult, IGetInterestingListingsParameters>>;
-/**
-* Collects the list of listings used to generate the trending listing page
-*/
-export declare function getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters): Bluebird<IStandardResponse<TResult, IGetTrendingListingsParameters>>;
-/**
-* Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
-*/
-export declare function findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters): Bluebird<IStandardResponse<TResult, IFindBrowseSegmentListingsParameters>>;
-/**
-* Finds all listings for a certain FeaturedTreasury.
-*/
-export declare function findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters): Bluebird<IStandardResponse<TResult, IFindAllListingsForFeaturedTreasuryIdParameters>>;
-/**
-* Finds all active listings for a certain FeaturedTreasury.
-*/
-export declare function findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters): Bluebird<IStandardResponse<TResult, IFindAllActiveListingsForFeaturedTreasuryIdParameters>>;
-/**
-* Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
-*/
-export declare function findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllCurrentFeaturedListingsParameters>>;
-/**
-* Finds all listings in a receipt
-*/
-export declare function findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllReceiptListingsParameters>>;
-/**
-* Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
-*/
-export declare function findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsActiveParameters>>;
-/**
-* Finds all of a Shop's draft listings
-*/
-export declare function findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsDraftParameters>>;
-/**
-* Retrieves Listings associated to a Shop that are expired
-*/
-export declare function findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsExpiredParameters>>;
-/**
-* Retrieves a Listing associated to a Shop that is inactive
-*/
-export declare function getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters): Bluebird<IStandardResponse<TResult, IGetShopListingExpiredParameters>>;
-/**
-* Retrieves Listings associated to a Shop that are featured
-*/
-export declare function findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsFeaturedParameters>>;
-/**
-* Retrieves Listings associated to a Shop that are inactive
-*/
-export declare function findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsInactiveParameters>>;
-/**
-* Retrieves a Listing associated to a Shop that is inactive
-*/
-export declare function getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters): Bluebird<IStandardResponse<TResult, IGetShopListingInactiveParameters>>;
-/**
-* Finds all listings within a shop section
-*/
-export declare function findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopSectionListingsParameters>>;
-/**
-* Finds all listings within a shop section
-*/
-export declare function findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopSectionListingsActiveParameters>>;
-/**
-* Finds all listings in a given Cart
-*/
-export declare function findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllCartListingsParameters>>;
+export declare class Listing {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
+     */
+    createListing<TResult>(parameters: ICreateListingParameters): Promise<IStandardResponse<ICreateListingParameters, TResult>>;
+    /**
+     * Finds all FeaturedTreasury listings.
+     */
+    findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>;
+    /**
+     * Retrieves a Listing by id.
+     */
+    getListing<TResult>(parameters: IGetListingParameters): Promise<IStandardResponse<IGetListingParameters, TResult>>;
+    /**
+     * Updates a Listing
+     */
+    updateListing<TResult>(parameters: IUpdateListingParameters): Promise<IStandardResponse<IUpdateListingParameters, TResult>>;
+    /**
+     * Deletes a Listing
+     */
+    deleteListing<TResult>(parameters: IDeleteListingParameters): Promise<IStandardResponse<IDeleteListingParameters, TResult>>;
+    /**
+     * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
+     */
+    findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters): Promise<IStandardResponse<IFindAllListingActiveParameters, TResult>>;
+    /**
+     * Collects the list of interesting listings
+     */
+    getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters): Promise<IStandardResponse<IGetInterestingListingsParameters, TResult>>;
+    /**
+     * Collects the list of listings used to generate the trending listing page
+     */
+    getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters): Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>>;
+    /**
+     * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
+     */
+    findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters): Promise<IStandardResponse<IFindBrowseSegmentListingsParameters, TResult>>;
+    /**
+     * Finds all listings for a certain FeaturedTreasury.
+     */
+    findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>;
+    /**
+     * Finds all active listings for a certain FeaturedTreasury.
+     */
+    findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>;
+    /**
+     * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
+     */
+    findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>;
+    /**
+     * Finds all listings in a receipt
+     */
+    findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters): Promise<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>;
+    /**
+     * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
+     */
+    findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>;
+    /**
+     * Finds all of a Shop's draft listings
+     */
+    findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>;
+    /**
+     * Retrieves Listings associated to a Shop that are expired
+     */
+    findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>;
+    /**
+     * Retrieves a Listing associated to a Shop that is inactive
+     */
+    getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters): Promise<IStandardResponse<IGetShopListingExpiredParameters, TResult>>;
+    /**
+     * Retrieves Listings associated to a Shop that are featured
+     */
+    findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>;
+    /**
+     * Retrieves Listings associated to a Shop that are inactive
+     */
+    findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>;
+    /**
+     * Retrieves a Listing associated to a Shop that is inactive
+     */
+    getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters): Promise<IStandardResponse<IGetShopListingInactiveParameters, TResult>>;
+    /**
+     * Finds all listings within a shop section
+     */
+    findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>;
+    /**
+     * Finds all listings within a shop section
+     */
+    findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>;
+    /**
+     * Finds all listings in a given Cart
+     */
+    findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters): Promise<IStandardResponse<IFindAllCartListingsParameters, TResult>>;
+}

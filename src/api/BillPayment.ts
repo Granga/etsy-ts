@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IBillPayment {
     bill_payment_id: number,
@@ -16,6 +14,7 @@ export interface IBillPayment {
     creation_year: number
 }
 
+
 export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -26,9 +25,16 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     max_created?: number
 }
 
-/**
- * Retrieves a set of BillPayment objects associated to a User.
- */
-export function findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters): Bluebird<IStandardResponse<TResult, IFindAllUserPaymentsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserPaymentsParameters>>(parameters, '/users/:user_id/payments', 'GET');
+export class BillPayment {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a set of BillPayment objects associated to a User.
+     */
+    findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
+        return this.client.http<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET");
+    }
 }

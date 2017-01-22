@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IImageType {
     code: string,
@@ -10,13 +8,21 @@ export interface IImageType {
     sizes: string[]
 }
 
+
 export interface IListImageTypesParameters extends IStandardParameters {
 
 }
 
-/**
- * Lists available image types along with their supported sizes.
- */
-export function listImageTypes<TResult>(parameters: IListImageTypesParameters): Bluebird<IStandardResponse<TResult, IListImageTypesParameters>> {
-    return request<IStandardResponse<TResult, IListImageTypesParameters>>(parameters, '/image_types', 'GET');
+export class ImageType {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Lists available image types along with their supported sizes.
+     */
+    listImageTypes<TResult>(parameters: IListImageTypesParameters): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
+        return this.client.http<IListImageTypesParameters, TResult>("/image_types", parameters, "GET");
+    }
 }

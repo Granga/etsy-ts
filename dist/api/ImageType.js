@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Lists available image types along with their supported sizes.
- */
-function listImageTypes(parameters) {
-    return HttpRequest_1.request(parameters, '/image_types', 'GET');
+class ImageType {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Lists available image types along with their supported sizes.
+     */
+    listImageTypes(parameters) {
+        return this.client.http("/image_types", parameters, "GET");
+    }
 }
-exports.listImageTypes = listImageTypes;
+exports.ImageType = ImageType;

@@ -1,79 +1,73 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Get a user's Carts
-*/
-function getAllUserCarts(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts', 'GET');
+class Cart {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get a user's Carts
+     */
+    getAllUserCarts(parameters) {
+        return this.client.http("/users/:user_id/carts", parameters, "GET");
+    }
+    /**
+     * Add a listing to a cart
+     */
+    addToCart(parameters) {
+        return this.client.http("/users/:user_id/carts", parameters, "POST");
+    }
+    /**
+     * Update a cart listing purchase quantity
+     */
+    updateCartListingQuantity(parameters) {
+        return this.client.http("/users/:user_id/carts", parameters, "PUT");
+    }
+    /**
+     * Remove a listing from a cart
+     */
+    removeCartListing(parameters) {
+        return this.client.http("/users/:user_id/carts", parameters, "DELETE");
+    }
+    /**
+     * Get a cart
+     */
+    getUserCart(parameters) {
+        return this.client.http("/users/:user_id/carts/:cart_id", parameters, "GET");
+    }
+    /**
+     * Update a cart
+     */
+    updateCart(parameters) {
+        return this.client.http("/users/:user_id/carts/:cart_id", parameters, "PUT");
+    }
+    /**
+     * Delete a cart
+     */
+    deleteCart(parameters) {
+        return this.client.http("/users/:user_id/carts/:cart_id", parameters, "DELETE");
+    }
+    /**
+     * Saves and selects a shipping address for apple pay
+     */
+    addAndSelectShippingForApplePay(parameters) {
+        return this.client.http("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
+    }
+    /**
+     * Move a listing to Saved for Later
+     */
+    saveListingForLater(parameters) {
+        return this.client.http("/users/:user_id/carts/save", parameters, "DELETE");
+    }
+    /**
+     * Get a cart from a shop ID
+     */
+    getUserCartForShop(parameters) {
+        return this.client.http("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
+    }
+    /**
+     * Create a single-listing cart from a listing
+     */
+    createSingleListingCart(parameters) {
+        return this.client.http("/users/:user_id/carts/single_listing", parameters, "POST");
+    }
 }
-exports.getAllUserCarts = getAllUserCarts;
-/**
-* Add a listing to a cart
-*/
-function addToCart(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts', 'POST');
-}
-exports.addToCart = addToCart;
-/**
-* Update a cart listing purchase quantity
-*/
-function updateCartListingQuantity(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts', 'PUT');
-}
-exports.updateCartListingQuantity = updateCartListingQuantity;
-/**
-* Remove a listing from a cart
-*/
-function removeCartListing(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts', 'DELETE');
-}
-exports.removeCartListing = removeCartListing;
-/**
-* Get a cart
-*/
-function getUserCart(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/:cart_id', 'GET');
-}
-exports.getUserCart = getUserCart;
-/**
-* Update a cart
-*/
-function updateCart(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/:cart_id', 'PUT');
-}
-exports.updateCart = updateCart;
-/**
-* Delete a cart
-*/
-function deleteCart(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/:cart_id', 'DELETE');
-}
-exports.deleteCart = deleteCart;
-/**
-* Saves and selects a shipping address for apple pay
-*/
-function addAndSelectShippingForApplePay(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple', 'POST');
-}
-exports.addAndSelectShippingForApplePay = addAndSelectShippingForApplePay;
-/**
-* Move a listing to Saved for Later
-*/
-function saveListingForLater(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/save', 'DELETE');
-}
-exports.saveListingForLater = saveListingForLater;
-/**
-* Get a cart from a shop ID
-*/
-function getUserCartForShop(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/shop/:shop_id', 'GET');
-}
-exports.getUserCartForShop = getUserCartForShop;
-/**
-* Create a single-listing cart from a listing
-*/
-function createSingleListingCart(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/carts/single_listing', 'POST');
-}
-exports.createSingleListingCart = createSingleListingCart;
+exports.Cart = Cart;

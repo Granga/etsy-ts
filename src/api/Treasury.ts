@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ITreasury {
     id: string,
@@ -24,6 +22,7 @@ export interface ITreasury {
     creation_tsz: number,
     became_public_date: number
 }
+
 
 export interface IFindAllTreasuriesParameters extends IStandardParameters {
     keywords?: string,
@@ -49,27 +48,37 @@ export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
     page?: number
 }
 
-/**
- * Search Treasuries or else List all Treasuries
- */
-export function findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters): Bluebird<IStandardResponse<TResult, IFindAllTreasuriesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllTreasuriesParameters>>(parameters, '/treasuries', 'GET');
-}
-/**
- * Get a Treasury
- */
-export function getTreasury<TResult>(parameters: IGetTreasuryParameters): Bluebird<IStandardResponse<TResult, IGetTreasuryParameters>> {
-    return request<IStandardResponse<TResult, IGetTreasuryParameters>>(parameters, '/treasuries/:treasury_key', 'GET');
-}
-/**
- * Delete a Treasury
- */
-export function deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters): Bluebird<IStandardResponse<TResult, IDeleteTreasuryParameters>> {
-    return request<IStandardResponse<TResult, IDeleteTreasuryParameters>>(parameters, '/treasuries/:treasury_key', 'DELETE');
-}
-/**
- * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
- */
-export function findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters): Bluebird<IStandardResponse<TResult, IFindAllUserTreasuriesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserTreasuriesParameters>>(parameters, '/users/:user_id/treasuries', 'GET');
+export class Treasury {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Search Treasuries or else List all Treasuries
+     */
+    findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters): Promise<IStandardResponse<IFindAllTreasuriesParameters, TResult>> {
+        return this.client.http<IFindAllTreasuriesParameters, TResult>("/treasuries", parameters, "GET");
+    }
+
+    /**
+     * Get a Treasury
+     */
+    getTreasury<TResult>(parameters: IGetTreasuryParameters): Promise<IStandardResponse<IGetTreasuryParameters, TResult>> {
+        return this.client.http<IGetTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "GET");
+    }
+
+    /**
+     * Delete a Treasury
+     */
+    deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters): Promise<IStandardResponse<IDeleteTreasuryParameters, TResult>> {
+        return this.client.http<IDeleteTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "DELETE");
+    }
+
+    /**
+     * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
+     */
+    findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>> {
+        return this.client.http<IFindAllUserTreasuriesParameters, TResult>("/users/:user_id/treasuries", parameters, "GET");
+    }
 }

@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IReceipt {
     receipt_id: number,
@@ -45,7 +43,8 @@ export interface IReceipt {
     shipments: any[]
 }
 
-export interface IGetShop_Receipt2Parameters extends IStandardParameters {
+
+export interface IGetShopReceipt2Parameters extends IStandardParameters {
     receipt_id: number[]
 }
 export interface IUpdateReceiptParameters extends IStandardParameters {
@@ -97,51 +96,65 @@ export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters
     page?: number
 }
 
-/**
- * Retrieves a Shop_Receipt2 by id.
- */
-export function getShop_Receipt2<TResult>(parameters: IGetShop_Receipt2Parameters): Bluebird<IStandardResponse<TResult, IGetShop_Receipt2Parameters>> {
-    return request<IStandardResponse<TResult, IGetShop_Receipt2Parameters>>(parameters, '/receipts/:receipt_id', 'GET');
-}
-/**
- * Updates a Shop_Receipt2
- */
-export function updateReceipt<TResult>(parameters: IUpdateReceiptParameters): Bluebird<IStandardResponse<TResult, IUpdateReceiptParameters>> {
-    return request<IStandardResponse<TResult, IUpdateReceiptParameters>>(parameters, '/receipts/:receipt_id', 'PUT');
-}
-/**
- * Retrieves a set of Receipt objects associated to a Shop.
- */
-export function findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopReceiptsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopReceiptsParameters>>(parameters, '/shops/:shop_id/receipts', 'GET');
-}
-/**
- * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
- */
-export function submitTracking<TResult>(parameters: ISubmitTrackingParameters): Bluebird<IStandardResponse<TResult, ISubmitTrackingParameters>> {
-    return request<IStandardResponse<TResult, ISubmitTrackingParameters>>(parameters, '/shops/:shop_id/receipts/:receipt_id/tracking', 'POST');
-}
-/**
- * Retrieves a set of Receipt objects associated to a Shop based on the status.
- */
-export function findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters): Bluebird<IStandardResponse<TResult, IFindAllShopReceiptsByStatusParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopReceiptsByStatusParameters>>(parameters, '/shops/:shop_id/receipts/:status', 'GET');
-}
-/**
- * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
- */
-export function findAllOpenLocalDeliveryReceipts<TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllOpenLocalDeliveryReceiptsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllOpenLocalDeliveryReceiptsParameters>>(parameters, '/shops/:shop_id/receipts/local-delivery', 'GET');
-}
-/**
- * Searches the set of Receipt objects associated to a Shop by a query
- */
-export function searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters): Bluebird<IStandardResponse<TResult, ISearchAllShopReceiptsParameters>> {
-    return request<IStandardResponse<TResult, ISearchAllShopReceiptsParameters>>(parameters, '/shops/:shop_id/receipts/search', 'GET');
-}
-/**
- * Retrieves a set of Receipt objects associated to a User.
- */
-export function findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllUserBuyerReceiptsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserBuyerReceiptsParameters>>(parameters, '/users/:user_id/receipts', 'GET');
+export class Receipt {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a Shop_Receipt2 by id.
+     */
+    getShop_Receipt2<TResult>(parameters: IGetShopReceipt2Parameters): Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>> {
+        return this.client.http<IGetShopReceipt2Parameters, TResult>("/receipts/:receipt_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a Shop_Receipt2
+     */
+    updateReceipt<TResult>(parameters: IUpdateReceiptParameters): Promise<IStandardResponse<IUpdateReceiptParameters, TResult>> {
+        return this.client.http<IUpdateReceiptParameters, TResult>("/receipts/:receipt_id", parameters, "PUT");
+    }
+
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop.
+     */
+    findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters): Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>> {
+        return this.client.http<IFindAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts", parameters, "GET");
+    }
+
+    /**
+     * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
+     */
+    submitTracking<TResult>(parameters: ISubmitTrackingParameters): Promise<IStandardResponse<ISubmitTrackingParameters, TResult>> {
+        return this.client.http<ISubmitTrackingParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST");
+    }
+
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop based on the status.
+     */
+    findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>> {
+        return this.client.http<IFindAllShopReceiptsByStatusParameters, TResult>("/shops/:shop_id/receipts/:status", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
+     */
+    findAllOpenLocalDeliveryReceipts<TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters): Promise<IStandardResponse<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>> {
+        return this.client.http<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>("/shops/:shop_id/receipts/local-delivery", parameters, "GET");
+    }
+
+    /**
+     * Searches the set of Receipt objects associated to a Shop by a query
+     */
+    searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>> {
+        return this.client.http<ISearchAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts/search", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of Receipt objects associated to a User.
+     */
+    findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>> {
+        return this.client.http<IFindAllUserBuyerReceiptsParameters, TResult>("/users/:user_id/receipts", parameters, "GET");
+    }
 }

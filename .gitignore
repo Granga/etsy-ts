@@ -13,5 +13,10 @@ build/
 
 src/**/*.js
 
+test/
+dist/test
+
+dist/**/*.map
+
 # Optional npm cache directory
 .npm

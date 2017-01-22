@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IVariationsPropertySet {
     property_set_id: number,
@@ -12,15 +10,23 @@ export interface IVariationsPropertySet {
     qualifiers: [any, any]
 }
 
+
 export interface IFindPropertySetParameters extends IStandardParameters {
     category_id?: number,
     taxonomy_id?: number,
     recipient_id?: number
 }
 
-/**
- * Find the property set for the category id
- */
-export function findPropertySet<TResult>(parameters: IFindPropertySetParameters): Bluebird<IStandardResponse<TResult, IFindPropertySetParameters>> {
-    return request<IStandardResponse<TResult, IFindPropertySetParameters>>(parameters, '/property_sets', 'GET');
+export class VariationsPropertySet {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Find the property set for the category id
+     */
+    findPropertySet<TResult>(parameters: IFindPropertySetParameters): Promise<IStandardResponse<IFindPropertySetParameters, TResult>> {
+        return this.client.http<IFindPropertySetParameters, TResult>("/property_sets", parameters, "GET");
+    }
 }

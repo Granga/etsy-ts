@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IListingOffering {
     offering_id: number,
     price: any,
@@ -6,3 +8,10 @@ export interface IListingOffering {
 }
 
 
+export class ListingOffering {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

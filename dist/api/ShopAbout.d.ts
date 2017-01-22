@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopAbout {
     shop_id: number;
     status: string;
@@ -14,7 +13,11 @@ export interface IShopAbout {
 export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number;
 }
-/**
- * Retrieves a ShopAbout object associated to a Shop.
- */
-export declare function getShopAbout<TResult>(parameters: IGetShopAboutParameters): Bluebird<IStandardResponse<TResult, IGetShopAboutParameters>>;
+export declare class ShopAbout {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a ShopAbout object associated to a Shop.
+     */
+    getShopAbout<TResult>(parameters: IGetShopAboutParameters): Promise<IStandardResponse<IGetShopAboutParameters, TResult>>;
+}

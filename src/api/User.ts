@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IUser {
     user_id: number,
@@ -15,6 +13,7 @@ export interface IUser {
     awaiting_feedback_count: number,
     use_new_inventory_endpoints: boolean
 }
+
 
 export interface IFindAllUsersParameters extends IStandardParameters {
     keywords?: string,
@@ -60,51 +59,65 @@ export interface IConnectUsersParameters extends IStandardParameters {
     to_user_id: string | number
 }
 
-/**
- * Finds all Users whose name or username match the keywords parameter.
- */
-export function findAllUsers<TResult>(parameters: IFindAllUsersParameters): Bluebird<IStandardResponse<TResult, IFindAllUsersParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUsersParameters>>(parameters, '/users', 'GET');
-}
-/**
- * Retrieves a User by id.
- */
-export function getUser<TResult>(parameters: IGetUserParameters): Bluebird<IStandardResponse<TResult, IGetUserParameters>> {
-    return request<IStandardResponse<TResult, IGetUserParameters>>(parameters, '/users/:user_id', 'GET');
-}
-/**
- * Returns a list of users for a specific team
- */
-export function findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Bluebird<IStandardResponse<TResult, IFindAllUsersForTeamParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUsersForTeamParameters>>(parameters, '/teams/:team_id/users/', 'GET');
-}
-/**
- * Returns a list of users who have circled this user
- */
-export function getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Bluebird<IStandardResponse<TResult, IGetCirclesContainingUserParameters>> {
-    return request<IStandardResponse<TResult, IGetCirclesContainingUserParameters>>(parameters, '/users/:user_id/circles', 'GET');
-}
-/**
- * Returns details about a connection between users
- */
-export function getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Bluebird<IStandardResponse<TResult, IGetConnectedUserParameters>> {
-    return request<IStandardResponse<TResult, IGetConnectedUserParameters>>(parameters, '/users/:user_id/circles/:to_user_id', 'GET');
-}
-/**
- * Removes a user (to_user_id) from the logged in user's (user_id) circle
- */
-export function unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Bluebird<IStandardResponse<TResult, IUnconnectUsersParameters>> {
-    return request<IStandardResponse<TResult, IUnconnectUsersParameters>>(parameters, '/users/:user_id/circles/:to_user_id', 'DELETE');
-}
-/**
- * Returns a list of users that are in this user's cricle
- */
-export function getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Bluebird<IStandardResponse<TResult, IGetConnectedUsersParameters>> {
-    return request<IStandardResponse<TResult, IGetConnectedUsersParameters>>(parameters, '/users/:user_id/connected_users', 'GET');
-}
-/**
- * Adds user (to_user_id) to the user's (user_id) circle
- */
-export function connectUsers<TResult>(parameters: IConnectUsersParameters): Bluebird<IStandardResponse<TResult, IConnectUsersParameters>> {
-    return request<IStandardResponse<TResult, IConnectUsersParameters>>(parameters, '/users/:user_id/connected_users', 'POST');
+export class User {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Finds all Users whose name or username match the keywords parameter.
+     */
+    findAllUsers<TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
+        return this.client.http<IFindAllUsersParameters, TResult>("/users", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a User by id.
+     */
+    getUser<TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>> {
+        return this.client.http<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET");
+    }
+
+    /**
+     * Returns a list of users for a specific team
+     */
+    findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
+        return this.client.http<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET");
+    }
+
+    /**
+     * Returns a list of users who have circled this user
+     */
+    getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
+        return this.client.http<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET");
+    }
+
+    /**
+     * Returns details about a connection between users
+     */
+    getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
+        return this.client.http<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET");
+    }
+
+    /**
+     * Removes a user (to_user_id) from the logged in user's (user_id) circle
+     */
+    unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
+        return this.client.http<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE");
+    }
+
+    /**
+     * Returns a list of users that are in this user's cricle
+     */
+    getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
+        return this.client.http<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET");
+    }
+
+    /**
+     * Adds user (to_user_id) to the user's (user_id) circle
+     */
+    connectUsers<TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
+        return this.client.http<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST");
+    }
 }

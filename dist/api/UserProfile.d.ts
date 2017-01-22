@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUserProfile {
     user_profile_id: number;
     user_id: number;
@@ -42,11 +41,15 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     region?: string;
     city?: string;
 }
-/**
-* Returns the UserProfile object associated with a User.
-*/
-export declare function findUserProfile<TResult>(parameters: IFindUserProfileParameters): Bluebird<IStandardResponse<TResult, IFindUserProfileParameters>>;
-/**
-* Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
-*/
-export declare function updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Bluebird<IStandardResponse<TResult, IUpdateUserProfileParameters>>;
+export declare class UserProfile {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Returns the UserProfile object associated with a User.
+     */
+    findUserProfile<TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
+    /**
+     * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
+     */
+    updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
+}

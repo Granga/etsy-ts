@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IGuestCart {
     cart_id: number;
     shop_name: string;
@@ -59,31 +58,35 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
     guest_id: any;
     cart_id: string | number;
 }
-/**
- * Get all guest's carts
- */
-export declare function findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters): Bluebird<IStandardResponse<TResult, IFindAllGuestCartsParameters>>;
-/**
- * Add a listing to guest's cart
- */
-export declare function addToGuestCart<TResult>(parameters: IAddToGuestCartParameters): Bluebird<IStandardResponse<TResult, IAddToGuestCartParameters>>;
-/**
- * Update a guest's cart listing purchase quantity
- */
-export declare function updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters): Bluebird<IStandardResponse<TResult, IUpdateGuestCartListingQuantityParameters>>;
-/**
- * Remove a listing from a guest's cart
- */
-export declare function removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters): Bluebird<IStandardResponse<TResult, IRemoveGuestCartListingParameters>>;
-/**
- * Get a guest's cart
- */
-export declare function findGuestCart<TResult>(parameters: IFindGuestCartParameters): Bluebird<IStandardResponse<TResult, IFindGuestCartParameters>>;
-/**
- * Update a guest's cart
- */
-export declare function updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters): Bluebird<IStandardResponse<TResult, IUpdateGuestCartParameters>>;
-/**
- * Delete a guest's cart
- */
-export declare function deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters): Bluebird<IStandardResponse<TResult, IDeleteGuestCartParameters>>;
+export declare class GuestCart {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Get all guest's carts
+     */
+    findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
+    /**
+     * Add a listing to guest's cart
+     */
+    addToGuestCart<TResult>(parameters: IAddToGuestCartParameters): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
+    /**
+     * Update a guest's cart listing purchase quantity
+     */
+    updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
+    /**
+     * Remove a listing from a guest's cart
+     */
+    removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
+    /**
+     * Get a guest's cart
+     */
+    findGuestCart<TResult>(parameters: IFindGuestCartParameters): Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
+    /**
+     * Update a guest's cart
+     */
+    updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
+    /**
+     * Delete a guest's cart
+     */
+    deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
+}

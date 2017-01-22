@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IVariationsPropertySetOptionModifier {
     prefix: string;
     suffix: string;
@@ -18,7 +17,11 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
     diameter_scale?: number;
     dimensions_scale?: number;
 }
-/**
-* Add a value for a given property.
-*/
-export declare function getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Bluebird<IStandardResponse<TResult, IGetPropertyOptionModifierParameters>>;
+export declare class VariationsPropertySetOptionModifier {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Add a value for a given property.
+     */
+    getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
+}

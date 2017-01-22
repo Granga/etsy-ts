@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Get a Shop Payment Account Ledger
-*/
-function findLedger(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/ledger/', 'GET');
+class Ledger {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get a Shop Payment Account Ledger
+     */
+    findLedger(parameters) {
+        return this.client.http("/shops/:shop_id/ledger/", parameters, "GET");
+    }
 }
-exports.findLedger = findLedger;
+exports.Ledger = Ledger;

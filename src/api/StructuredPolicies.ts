@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IStructuredPolicies {
     structured_policies_id: number,
     payments: any,
@@ -16,3 +18,10 @@ export interface IStructuredPolicies {
 }
 
 
+export class StructuredPolicies {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

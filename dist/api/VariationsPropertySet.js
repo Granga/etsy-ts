@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Find the property set for the category id
-*/
-function findPropertySet(parameters) {
-    return HttpRequest_1.request(parameters, '/property_sets', 'GET');
+class VariationsPropertySet {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Find the property set for the category id
+     */
+    findPropertySet(parameters) {
+        return this.client.http("/property_sets", parameters, "GET");
+    }
 }
-exports.findPropertySet = findPropertySet;
+exports.VariationsPropertySet = VariationsPropertySet;

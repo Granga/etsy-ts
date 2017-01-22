@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITeam {
     group_id: number;
     name: string;
@@ -23,15 +22,19 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-/**
-* Returns all Teams
-*/
-export declare function findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Bluebird<IStandardResponse<TResult, IFindAllTeamsParameters>>;
-/**
-* Returns specified team by ID or team name
-*/
-export declare function findTeams<TResult>(parameters: IFindTeamsParameters): Bluebird<IStandardResponse<TResult, IFindTeamsParameters>>;
-/**
-* Returns a list of teams for a specific user
-*/
-export declare function findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Bluebird<IStandardResponse<TResult, IFindAllTeamsForUserParameters>>;
+export declare class Team {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Returns all Teams
+     */
+    findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+    /**
+     * Returns specified team by ID or team name
+     */
+    findTeams<TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+    /**
+     * Returns a list of teams for a specific user
+     */
+    findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+}

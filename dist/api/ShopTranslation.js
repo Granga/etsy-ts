@@ -1,30 +1,31 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves a ShopTranslation by shop_id and language
- */
-function getShopTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/translations/:language', 'GET');
+class ShopTranslation {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a ShopTranslation by shop_id and language
+     */
+    getShopTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/translations/:language", parameters, "GET");
+    }
+    /**
+     * Creates a ShopTranslation by shop_id and language
+     */
+    createShopTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/translations/:language", parameters, "POST");
+    }
+    /**
+     * Updates a ShopTranslation by shop_id and language
+     */
+    updateShopTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/translations/:language", parameters, "PUT");
+    }
+    /**
+     * Deletes a ShopTranslation by shop_id and language
+     */
+    deleteShopTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/translations/:language", parameters, "DELETE");
+    }
 }
-exports.getShopTranslation = getShopTranslation;
-/**
- * Creates a ShopTranslation by shop_id and language
- */
-function createShopTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/translations/:language', 'POST');
-}
-exports.createShopTranslation = createShopTranslation;
-/**
- * Updates a ShopTranslation by shop_id and language
- */
-function updateShopTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/translations/:language', 'PUT');
-}
-exports.updateShopTranslation = updateShopTranslation;
-/**
- * Deletes a ShopTranslation by shop_id and language
- */
-function deleteShopTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/translations/:language', 'DELETE');
-}
-exports.deleteShopTranslation = deleteShopTranslation;
+exports.ShopTranslation = ShopTranslation;

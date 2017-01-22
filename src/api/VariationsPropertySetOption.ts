@@ -1,14 +1,13 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IVariationsPropertySetOption {
     property_option_id: number,
     name: string,
     formatted_name: string
 }
+
 
 export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardParameters {
     property_id: number,
@@ -23,9 +22,16 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
     dimensions_scale?: number
 }
 
-/**
- * Finds all suggested property options for a given property.
- */
-export function findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Bluebird<IStandardResponse<TResult, IFindAllSuggestedPropertyOptionsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllSuggestedPropertyOptionsParameters>>(parameters, '/property_options/suggested', 'GET');
+export class VariationsPropertySetOption {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Finds all suggested property options for a given property.
+     */
+    findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>> {
+        return this.client.http<IFindAllSuggestedPropertyOptionsParameters, TResult>("/property_options/suggested", parameters, "GET");
+    }
 }

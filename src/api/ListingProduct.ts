@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IListingProduct {
     product_id: number,
     property_values: any[],
@@ -6,3 +8,10 @@ export interface IListingProduct {
 }
 
 
+export class ListingProduct {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

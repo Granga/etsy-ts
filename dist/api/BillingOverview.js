@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves the user's current balance.
- */
-function getUserBillingOverview(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/billing/overview', 'GET');
+class BillingOverview {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves the user's current balance.
+     */
+    getUserBillingOverview(parameters) {
+        return this.client.http("/users/:user_id/billing/overview", parameters, "GET");
+    }
 }
-exports.getUserBillingOverview = getUserBillingOverview;
+exports.BillingOverview = BillingOverview;

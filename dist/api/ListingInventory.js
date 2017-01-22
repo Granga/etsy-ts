@@ -1,16 +1,19 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Get the inventory for a listing [developer preview - may be unstable]
- */
-function getInventory(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/inventory', 'GET');
+class ListingInventory {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get the inventory for a listing [developer preview - may be unstable]
+     */
+    getInventory(parameters) {
+        return this.client.http("/listings/:listing_id/inventory", parameters, "GET");
+    }
+    /**
+     * Update the inventory for a listing [developer preview - may be unstable]
+     */
+    updateInventory(parameters) {
+        return this.client.http("/listings/:listing_id/inventory", parameters, "PUT");
+    }
 }
-exports.getInventory = getInventory;
-/**
- * Update the inventory for a listing [developer preview - may be unstable]
- */
-function updateInventory(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/inventory', 'PUT');
-}
-exports.updateInventory = updateInventory;
+exports.ListingInventory = ListingInventory;

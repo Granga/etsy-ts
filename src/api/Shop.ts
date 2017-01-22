@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShop {
     shop_id: number,
@@ -53,6 +51,7 @@ export interface IShop {
     include_dispute_form_link: boolean
 }
 
+
 export interface IFindAllShopsParameters extends IStandardParameters {
     shop_name?: string,
     limit?: number,
@@ -95,45 +94,58 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
     page?: number
 }
 
-/**
- * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
- */
-export function findAllShops<TResult>(parameters: IFindAllShopsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopsParameters>>(parameters, '/shops', 'GET');
-}
-/**
- * Retrieves a Shop by id.
- */
-export function getShop<TResult>(parameters: IGetShopParameters): Bluebird<IStandardResponse<TResult, IGetShopParameters>> {
-    return request<IStandardResponse<TResult, IGetShopParameters>>(parameters, '/shops/:shop_id', 'GET');
-}
-/**
- * Updates a Shop
- */
-export function updateShop<TResult>(parameters: IUpdateShopParameters): Bluebird<IStandardResponse<TResult, IUpdateShopParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShopParameters>>(parameters, '/shops/:shop_id', 'PUT');
-}
-/**
- * Upload a new shop banner image
- */
-export function uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters): Bluebird<IStandardResponse<TResult, IUploadShopBannerParameters>> {
-    return request<IStandardResponse<TResult, IUploadShopBannerParameters>>(parameters, '/shops/:shop_id/appearance/banner', 'POST');
-}
-/**
- * Deletes a shop banner image
- */
-export function deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters): Bluebird<IStandardResponse<TResult, IDeleteShopBannerParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShopBannerParameters>>(parameters, '/shops/:shop_id/appearance/banner', 'DELETE');
-}
-/**
- * Retrieves a shop by a listing id.
- */
-export function getListingShop<TResult>(parameters: IGetListingShopParameters): Bluebird<IStandardResponse<TResult, IGetListingShopParameters>> {
-    return request<IStandardResponse<TResult, IGetListingShopParameters>>(parameters, '/shops/listing/:listing_id', 'GET');
-}
-/**
- * Retrieves a set of Shop objects associated to a User.
- */
-export function findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters): Bluebird<IStandardResponse<TResult, IFindAllUserShopsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserShopsParameters>>(parameters, '/users/:user_id/shops', 'GET');
+export class Shop {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
+     */
+    findAllShops<TResult>(parameters: IFindAllShopsParameters): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
+        return this.client.http<IFindAllShopsParameters, TResult>("/shops", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a Shop by id.
+     */
+    getShop<TResult>(parameters: IGetShopParameters): Promise<IStandardResponse<IGetShopParameters, TResult>> {
+        return this.client.http<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a Shop
+     */
+    updateShop<TResult>(parameters: IUpdateShopParameters): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
+        return this.client.http<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT");
+    }
+
+    /**
+     * Upload a new shop banner image
+     */
+    uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
+        return this.client.http<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST");
+    }
+
+    /**
+     * Deletes a shop banner image
+     */
+    deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
+        return this.client.http<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE");
+    }
+
+    /**
+     * Retrieves a shop by a listing id.
+     */
+    getListingShop<TResult>(parameters: IGetListingShopParameters): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
+        return this.client.http<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of Shop objects associated to a User.
+     */
+    findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
+        return this.client.http<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET");
+    }
 }

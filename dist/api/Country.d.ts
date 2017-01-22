@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICountry {
     country_id: number;
     iso_country_code: string;
@@ -22,15 +21,19 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     page?: number;
     iso_code: string;
 }
-/**
-* Finds all Country.
-*/
-export declare function findAllCountry<TResult>(parameters: IFindAllCountryParameters): Bluebird<IStandardResponse<TResult, IFindAllCountryParameters>>;
-/**
-* Retrieves a Country by id.
-*/
-export declare function getCountry<TResult>(parameters: IGetCountryParameters): Bluebird<IStandardResponse<TResult, IGetCountryParameters>>;
-/**
-* Get the country info for the given ISO code.
-*/
-export declare function findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Bluebird<IStandardResponse<TResult, IFindByIsoCodeParameters>>;
+export declare class Country {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Finds all Country.
+     */
+    findAllCountry<TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+    /**
+     * Retrieves a Country by id.
+     */
+    getCountry<TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+    /**
+     * Get the country info for the given ISO code.
+     */
+    findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+}

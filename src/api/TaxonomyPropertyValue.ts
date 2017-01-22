@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface ITaxonomyPropertyValue {
     value_id: number,
     name: string,
@@ -6,3 +8,10 @@ export interface ITaxonomyPropertyValue {
 }
 
 
+export class TaxonomyPropertyValue {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

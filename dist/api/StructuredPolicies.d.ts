@@ -1,3 +1,4 @@
+import { EtsyApiClient } from "../client/EtsyApiClient";
 export interface IStructuredPolicies {
     structured_policies_id: number;
     payments: any;
@@ -13,4 +14,8 @@ export interface IStructuredPolicies {
     char_limits: any;
     include_dispute_form_link: boolean;
     privacy: any;
+}
+export declare class StructuredPolicies {
+    private client;
+    constructor(client: EtsyApiClient);
 }

@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShippingTemplate {
     shipping_template_id: number,
@@ -13,6 +11,7 @@ export interface IShippingTemplate {
     processing_days_display_label: string,
     origin_country_id: number
 }
+
 
 export interface ICreateShippingTemplateParameters extends IStandardParameters {
     title: string,
@@ -50,39 +49,51 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
     page?: number
 }
 
-/**
- * Creates a new ShippingTemplate
- */
-export function createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Bluebird<IStandardResponse<TResult, ICreateShippingTemplateParameters>> {
-    return request<IStandardResponse<TResult, ICreateShippingTemplateParameters>>(parameters, '/shipping/templates', 'POST');
-}
-/**
- * Retrieves a ShippingTemplate by id.
- */
-export function getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IGetShippingTemplateParameters>> {
-    return request<IStandardResponse<TResult, IGetShippingTemplateParameters>>(parameters, '/shipping/templates/:shipping_template_id', 'GET');
-}
-/**
- * Updates a ShippingTemplate
- */
-export function updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingTemplateParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShippingTemplateParameters>>(parameters, '/shipping/templates/:shipping_template_id', 'PUT');
-}
-/**
- * Deletes the ShippingTemplate with the given id.
- */
-export function deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingTemplateParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShippingTemplateParameters>>(parameters, '/shipping/templates/:shipping_template_id', 'DELETE');
-}
-/**
- * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
- */
-export function findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Bluebird<IStandardResponse<TResult, IFindAllShippingTemplateEntriesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShippingTemplateEntriesParameters>>(parameters, '/shipping/templates/:shipping_template_id/entries', 'GET');
-}
-/**
- * Retrieves a set of ShippingTemplate objects associated to a User.
- */
-export function findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Bluebird<IStandardResponse<TResult, IFindAllUserShippingProfilesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserShippingProfilesParameters>>(parameters, '/users/:user_id/shipping/templates', 'GET');
+export class ShippingTemplate {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Creates a new ShippingTemplate
+     */
+    createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>> {
+        return this.client.http<ICreateShippingTemplateParameters, TResult>("/shipping/templates", parameters, "POST");
+    }
+
+    /**
+     * Retrieves a ShippingTemplate by id.
+     */
+    getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>> {
+        return this.client.http<IGetShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a ShippingTemplate
+     */
+    updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>> {
+        return this.client.http<IUpdateShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "PUT");
+    }
+
+    /**
+     * Deletes the ShippingTemplate with the given id.
+     */
+    deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>> {
+        return this.client.http<IDeleteShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "DELETE");
+    }
+
+    /**
+     * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
+     */
+    findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>> {
+        return this.client.http<IFindAllShippingTemplateEntriesParameters, TResult>("/shipping/templates/:shipping_template_id/entries", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of ShippingTemplate objects associated to a User.
+     */
+    findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>> {
+        return this.client.http<IFindAllUserShippingProfilesParameters, TResult>("/users/:user_id/shipping/templates", parameters, "GET");
+    }
 }

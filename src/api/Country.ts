@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ICountry {
     country_id: number,
@@ -13,6 +11,7 @@ export interface ICountry {
     lat: number,
     lon: number
 }
+
 
 export interface IFindAllCountryParameters extends IStandardParameters {
 
@@ -27,21 +26,30 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     iso_code: string
 }
 
-/**
- * Finds all Country.
- */
-export function findAllCountry<TResult>(parameters: IFindAllCountryParameters): Bluebird<IStandardResponse<TResult, IFindAllCountryParameters>> {
-    return request<IStandardResponse<TResult, IFindAllCountryParameters>>(parameters, '/countries', 'GET');
-}
-/**
- * Retrieves a Country by id.
- */
-export function getCountry<TResult>(parameters: IGetCountryParameters): Bluebird<IStandardResponse<TResult, IGetCountryParameters>> {
-    return request<IStandardResponse<TResult, IGetCountryParameters>>(parameters, '/countries/:country_id', 'GET');
-}
-/**
- * Get the country info for the given ISO code.
- */
-export function findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Bluebird<IStandardResponse<TResult, IFindByIsoCodeParameters>> {
-    return request<IStandardResponse<TResult, IFindByIsoCodeParameters>>(parameters, '/countries/iso/:iso_code', 'GET');
+export class Country {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Finds all Country.
+     */
+    findAllCountry<TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>> {
+        return this.client.http<IFindAllCountryParameters, TResult>("/countries", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a Country by id.
+     */
+    getCountry<TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>> {
+        return this.client.http<IGetCountryParameters, TResult>("/countries/:country_id", parameters, "GET");
+    }
+
+    /**
+     * Get the country info for the given ISO code.
+     */
+    findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>> {
+        return this.client.http<IFindByIsoCodeParameters, TResult>("/countries/iso/:iso_code", parameters, "GET");
+    }
 }

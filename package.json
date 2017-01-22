@@ -5,14 +5,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "bluebird": "^3.4.7",
-    "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.0.37",
-    "@types/request": "^0.0.39",
-    "@types/request-promise": "^4.1.33",
+    "@types/node-fetch": "^1.6.7",
     "typescript": "^2.1.5"
   },
   "scripts": {

@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShippingTemplateEntry {
     shipping_template_entry_id: number;
     shipping_template_id: number;
@@ -31,19 +30,23 @@ export interface IUpdateShippingTemplateEntryParameters extends IStandardParamet
 export interface IDeleteShippingTemplateEntryParameters extends IStandardParameters {
     shipping_template_entry_id: number;
 }
-/**
- * Creates a new ShippingTemplateEntry
- */
-export declare function createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, ICreateShippingTemplateEntryParameters>>;
-/**
- * Retrieves a ShippingTemplateEntry by id.
- */
-export declare function getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IGetShippingTemplateEntryParameters>>;
-/**
- * Updates a ShippingTemplateEntry
- */
-export declare function updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingTemplateEntryParameters>>;
-/**
- * Deletes the ShippingTemplateEntry
- */
-export declare function deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingTemplateEntryParameters>>;
+export declare class ShippingTemplateEntry {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Creates a new ShippingTemplateEntry
+     */
+    createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Retrieves a ShippingTemplateEntry by id.
+     */
+    getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Updates a ShippingTemplateEntry
+     */
+    updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Deletes the ShippingTemplateEntry
+     */
+    deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>;
+}

@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICategory {
     category_id: number;
     name: string;
@@ -36,27 +35,31 @@ export interface IFindAllSubCategoryChildrenParameters extends IStandardParamete
     tag: string;
     subtag: string;
 }
-/**
- * Retrieves a top-level Category by tag.
- */
-export declare function getCategory<TResult>(parameters: IGetCategoryParameters): Bluebird<IStandardResponse<TResult, IGetCategoryParameters>>;
-/**
- * Retrieves all top-level Categories.
- */
-export declare function findAllTopCategory<TResult>(parameters: IFindAllTopCategoryParameters): Bluebird<IStandardResponse<TResult, IFindAllTopCategoryParameters>>;
-/**
- * Retrieves a second-level Category by tag and subtag.
- */
-export declare function getSubCategory<TResult>(parameters: IGetSubCategoryParameters): Bluebird<IStandardResponse<TResult, IGetSubCategoryParameters>>;
-/**
- * Retrieves a third-level Category by tag, subtag and subsubtag.
- */
-export declare function getSubSubCategory<TResult>(parameters: IGetSubSubCategoryParameters): Bluebird<IStandardResponse<TResult, IGetSubSubCategoryParameters>>;
-/**
- * Retrieves children of a top-level Category by tag.
- */
-export declare function findAllTopCategoryChildren<TResult>(parameters: IFindAllTopCategoryChildrenParameters): Bluebird<IStandardResponse<TResult, IFindAllTopCategoryChildrenParameters>>;
-/**
- * Retrieves children of a second-level Category by tag and subtag.
- */
-export declare function findAllSubCategoryChildren<TResult>(parameters: IFindAllSubCategoryChildrenParameters): Bluebird<IStandardResponse<TResult, IFindAllSubCategoryChildrenParameters>>;
+export declare class Category {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a top-level Category by tag.
+     */
+    getCategory<TResult>(parameters: IGetCategoryParameters): Promise<IStandardResponse<IGetCategoryParameters, TResult>>;
+    /**
+     * Retrieves all top-level Categories.
+     */
+    findAllTopCategory<TResult>(parameters: IFindAllTopCategoryParameters): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>>;
+    /**
+     * Retrieves a second-level Category by tag and subtag.
+     */
+    getSubCategory<TResult>(parameters: IGetSubCategoryParameters): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>>;
+    /**
+     * Retrieves a third-level Category by tag, subtag and subsubtag.
+     */
+    getSubSubCategory<TResult>(parameters: IGetSubSubCategoryParameters): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>>;
+    /**
+     * Retrieves children of a top-level Category by tag.
+     */
+    findAllTopCategoryChildren<TResult>(parameters: IFindAllTopCategoryChildrenParameters): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>>;
+    /**
+     * Retrieves children of a second-level Category by tag and subtag.
+     */
+    findAllSubCategoryChildren<TResult>(parameters: IFindAllSubCategoryChildrenParameters): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>>;
+}

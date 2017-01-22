@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ICoupon {
     coupon_id: number,
@@ -17,6 +15,7 @@ export interface ICoupon {
     expiration_date: number,
     coupon_type: string
 }
+
 
 export interface IFindAllShopCouponsParameters extends IStandardParameters {
     shop_id: string | number
@@ -47,33 +46,44 @@ export interface IDeleteCouponParameters extends IStandardParameters {
     coupon_id: number
 }
 
-/**
- * Retrieves all Shop_Coupons by shop_id
- */
-export function findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopCouponsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopCouponsParameters>>(parameters, '/shops/:shop_id/coupons', 'GET');
-}
-/**
- * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
- */
-export function createCoupon<TResult>(parameters: ICreateCouponParameters): Bluebird<IStandardResponse<TResult, ICreateCouponParameters>> {
-    return request<IStandardResponse<TResult, ICreateCouponParameters>>(parameters, '/shops/:shop_id/coupons', 'POST');
-}
-/**
- * Retrieves a Shop_Coupon by id and shop_id
- */
-export function findCoupon<TResult>(parameters: IFindCouponParameters): Bluebird<IStandardResponse<TResult, IFindCouponParameters>> {
-    return request<IStandardResponse<TResult, IFindCouponParameters>>(parameters, '/shops/:shop_id/coupons/:coupon_id', 'GET');
-}
-/**
- * Updates a coupon
- */
-export function updateCoupon<TResult>(parameters: IUpdateCouponParameters): Bluebird<IStandardResponse<TResult, IUpdateCouponParameters>> {
-    return request<IStandardResponse<TResult, IUpdateCouponParameters>>(parameters, '/shops/:shop_id/coupons/:coupon_id', 'PUT');
-}
-/**
- * Deletes a coupon
- */
-export function deleteCoupon<TResult>(parameters: IDeleteCouponParameters): Bluebird<IStandardResponse<TResult, IDeleteCouponParameters>> {
-    return request<IStandardResponse<TResult, IDeleteCouponParameters>>(parameters, '/shops/:shop_id/coupons/:coupon_id', 'DELETE');
+export class Coupon {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves all Shop_Coupons by shop_id
+     */
+    findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>> {
+        return this.client.http<IFindAllShopCouponsParameters, TResult>("/shops/:shop_id/coupons", parameters, "GET");
+    }
+
+    /**
+     * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
+     */
+    createCoupon<TResult>(parameters: ICreateCouponParameters): Promise<IStandardResponse<ICreateCouponParameters, TResult>> {
+        return this.client.http<ICreateCouponParameters, TResult>("/shops/:shop_id/coupons", parameters, "POST");
+    }
+
+    /**
+     * Retrieves a Shop_Coupon by id and shop_id
+     */
+    findCoupon<TResult>(parameters: IFindCouponParameters): Promise<IStandardResponse<IFindCouponParameters, TResult>> {
+        return this.client.http<IFindCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a coupon
+     */
+    updateCoupon<TResult>(parameters: IUpdateCouponParameters): Promise<IStandardResponse<IUpdateCouponParameters, TResult>> {
+        return this.client.http<IUpdateCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT");
+    }
+
+    /**
+     * Deletes a coupon
+     */
+    deleteCoupon<TResult>(parameters: IDeleteCouponParameters): Promise<IStandardResponse<IDeleteCouponParameters, TResult>> {
+        return this.client.http<IDeleteCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE");
+    }
 }

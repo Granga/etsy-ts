@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IAvatar {
     avatar_id: number,
@@ -18,6 +16,7 @@ export interface IAvatar {
     user_id: number
 }
 
+
 export interface IUploadAvatarParameters extends IStandardParameters {
     src?: string,
     user_id: string | number,
@@ -27,15 +26,23 @@ export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number
 }
 
-/**
- * Upload a new user avatar image
- */
-export function uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Bluebird<IStandardResponse<TResult, IUploadAvatarParameters>> {
-    return request<IStandardResponse<TResult, IUploadAvatarParameters>>(parameters, '/users/:user_id/avatar', 'POST');
-}
-/**
- * Get avatar image source
- */
-export function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Bluebird<IStandardResponse<TResult, IGetAvatarImgSrcParameters>> {
-    return request<IStandardResponse<TResult, IGetAvatarImgSrcParameters>>(parameters, '/users/:user_id/avatar/src', 'GET');
+export class Avatar {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Upload a new user avatar image
+     */
+    uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Promise<IStandardResponse<IUploadAvatarParameters, TResult>> {
+        return this.client.http<IUploadAvatarParameters, TResult>("/users/:user_id/avatar", parameters, "POST");
+    }
+
+    /**
+     * Get avatar image source
+     */
+    getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>> {
+        return this.client.http<IGetAvatarImgSrcParameters, TResult>("/users/:user_id/avatar/src", parameters, "GET");
+    }
 }

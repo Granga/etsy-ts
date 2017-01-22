@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITransaction {
     transaction_id: number;
     title: string;
@@ -29,7 +28,7 @@ export interface ITransaction {
     url: string;
     variations: any[];
 }
-export interface IGetShop_TransactionParameters extends IStandardParameters {
+export interface IGetShopTransactionParameters extends IStandardParameters {
     transaction_id: number[];
 }
 export interface IFindAllListingTransactionsParameters extends IStandardParameters {
@@ -38,7 +37,7 @@ export interface IFindAllListingTransactionsParameters extends IStandardParamete
     offset?: number;
     page?: number;
 }
-export interface IFindAllShop_Receipt2TransactionsParameters extends IStandardParameters {
+export interface IFindAllShopReceipt2TransactionsParameters extends IStandardParameters {
     receipt_id: number;
     limit?: number;
     offset?: number;
@@ -56,23 +55,27 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
     offset?: number;
     page?: number;
 }
-/**
-* Retrieves a Shop_Transaction by id.
-*/
-export declare function getShop_Transaction<TResult>(parameters: IGetShop_TransactionParameters): Bluebird<IStandardResponse<TResult, IGetShop_TransactionParameters>>;
-/**
-* Retrieves a set of Transaction objects associated to a Listing.
-*/
-export declare function findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters): Bluebird<IStandardResponse<TResult, IFindAllListingTransactionsParameters>>;
-/**
-* Retrieves a set of Transaction objects associated to a Shop_Receipt2.
-*/
-export declare function findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShop_Receipt2TransactionsParameters): Bluebird<IStandardResponse<TResult, IFindAllShop_Receipt2TransactionsParameters>>;
-/**
-* Retrieves a set of Transaction objects associated to a Shop.
-*/
-export declare function findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopTransactionsParameters>>;
-/**
-* Retrieves a set of Transaction objects associated to a User.
-*/
-export declare function findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters): Bluebird<IStandardResponse<TResult, IFindAllUserBuyerTransactionsParameters>>;
+export declare class Transaction {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a Shop_Transaction by id.
+     */
+    getShop_Transaction<TResult>(parameters: IGetShopTransactionParameters): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>>;
+    /**
+     * Retrieves a set of Transaction objects associated to a Listing.
+     */
+    findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>;
+    /**
+     * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
+     */
+    findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShopReceipt2TransactionsParameters): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>;
+    /**
+     * Retrieves a set of Transaction objects associated to a Shop.
+     */
+    findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>;
+    /**
+     * Retrieves a set of Transaction objects associated to a User.
+     */
+    findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>;
+}

@@ -1,13 +1,12 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IDataType {
     type: string,
     values: string[]
 }
+
 
 export interface IDescribeOccasionEnumParameters extends IStandardParameters {
 
@@ -22,27 +21,37 @@ export interface IDescribeWhoMadeEnumParameters extends IStandardParameters {
 
 }
 
-/**
- * Describes the legal values for Listing.occasion.
- */
-export function describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters): Bluebird<IStandardResponse<TResult, IDescribeOccasionEnumParameters>> {
-    return request<IStandardResponse<TResult, IDescribeOccasionEnumParameters>>(parameters, '/types/enum/occasion', 'GET');
-}
-/**
- * Describes the legal values for Listing.recipient.
- */
-export function describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters): Bluebird<IStandardResponse<TResult, IDescribeRecipientEnumParameters>> {
-    return request<IStandardResponse<TResult, IDescribeRecipientEnumParameters>>(parameters, '/types/enum/recipient', 'GET');
-}
-/**
- * Describes the legal values for Listing.when_made.
- */
-export function describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters): Bluebird<IStandardResponse<TResult, IDescribeWhenMadeEnumParameters>> {
-    return request<IStandardResponse<TResult, IDescribeWhenMadeEnumParameters>>(parameters, '/types/enum/when_made', 'GET');
-}
-/**
- * Describes the legal values for Listing.who_made.
- */
-export function describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters): Bluebird<IStandardResponse<TResult, IDescribeWhoMadeEnumParameters>> {
-    return request<IStandardResponse<TResult, IDescribeWhoMadeEnumParameters>>(parameters, '/types/enum/who_made', 'GET');
+export class DataType {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Describes the legal values for Listing.occasion.
+     */
+    describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>> {
+        return this.client.http<IDescribeOccasionEnumParameters, TResult>("/types/enum/occasion", parameters, "GET");
+    }
+
+    /**
+     * Describes the legal values for Listing.recipient.
+     */
+    describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>> {
+        return this.client.http<IDescribeRecipientEnumParameters, TResult>("/types/enum/recipient", parameters, "GET");
+    }
+
+    /**
+     * Describes the legal values for Listing.when_made.
+     */
+    describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>> {
+        return this.client.http<IDescribeWhenMadeEnumParameters, TResult>("/types/enum/when_made", parameters, "GET");
+    }
+
+    /**
+     * Describes the legal values for Listing.who_made.
+     */
+    describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>> {
+        return this.client.http<IDescribeWhoMadeEnumParameters, TResult>("/types/enum/who_made", parameters, "GET");
+    }
 }

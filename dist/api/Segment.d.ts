@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ISegment {
     name: string;
     path: string;
@@ -16,7 +15,11 @@ export interface IFindBrowseSegmentsParameters extends IStandardParameters {
     region?: string;
     path?: string;
 }
-/**
- * Find all Browse Segments
- */
-export declare function findBrowseSegments<TResult>(parameters: IFindBrowseSegmentsParameters): Bluebird<IStandardResponse<TResult, IFindBrowseSegmentsParameters>>;
+export declare class Segment {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Find all Browse Segments
+     */
+    findBrowseSegments<TResult>(parameters: IFindBrowseSegmentsParameters): Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
+}

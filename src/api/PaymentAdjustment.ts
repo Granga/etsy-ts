@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IPaymentAdjustment {
     payment_adjustment_id: number,
@@ -19,6 +17,7 @@ export interface IPaymentAdjustment {
     update_date: number
 }
 
+
 export interface IFindPaymentAdjustmentsParameters extends IStandardParameters {
     payment_id: number,
     limit?: number,
@@ -34,21 +33,30 @@ export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandar
     ledger_entry_id: number[]
 }
 
-/**
- * Get a Payment Adjustments from a Payment Id
- */
-export function findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentsParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentAdjustmentsParameters>>(parameters, '/payments/:payment_id/adjustments', 'GET');
-}
-/**
- * Get a Direct Checkout Payment Adjustment
- */
-export function findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentAdjustmentParameters>>(parameters, '/payments/:payment_id/adjustments/:payment_adjustment_id', 'GET');
-}
-/**
- * Get a Payment Adjustment from a Ledger Entry ID, if applicable
- */
-export function findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentForLedgerEntryParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentAdjustmentForLedgerEntryParameters>>(parameters, '/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment', 'GET');
+export class PaymentAdjustment {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a Payment Adjustments from a Payment Id
+     */
+    findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
+        return this.client.http<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET");
+    }
+
+    /**
+     * Get a Direct Checkout Payment Adjustment
+     */
+    findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
+        return this.client.http<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET");
+    }
+
+    /**
+     * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+     */
+    findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
+        return this.client.http<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET");
+    }
 }

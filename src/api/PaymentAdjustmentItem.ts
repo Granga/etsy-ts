@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IPaymentAdjustmentItem {
     payment_adjustment_item_id: number,
@@ -13,6 +11,7 @@ export interface IPaymentAdjustmentItem {
     create_date: number
 }
 
+
 export interface IFindPaymentAdjustmentItemParameters extends IStandardParameters {
     payment_id: number,
     payment_adjustment_id: number,
@@ -21,9 +20,16 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
     page?: number
 }
 
-/**
- * Get Direct Checkout Payment Adjustment Items
- */
-export function findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentItemParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentAdjustmentItemParameters>>(parameters, '/payments/:payment_id/adjustments/:payment_adjustment_id/items', 'GET');
+export class PaymentAdjustmentItem {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get Direct Checkout Payment Adjustment Items
+     */
+    findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>> {
+        return this.client.http<IFindPaymentAdjustmentItemParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
+    }
 }

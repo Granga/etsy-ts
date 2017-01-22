@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Finds all suggested property options for a given property.
-*/
-function findAllSuggestedPropertyOptions(parameters) {
-    return HttpRequest_1.request(parameters, '/property_options/suggested', 'GET');
+class VariationsPropertySetOption {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Finds all suggested property options for a given property.
+     */
+    findAllSuggestedPropertyOptions(parameters) {
+        return this.client.http("/property_options/suggested", parameters, "GET");
+    }
 }
-exports.findAllSuggestedPropertyOptions = findAllSuggestedPropertyOptions;
+exports.VariationsPropertySetOption = VariationsPropertySetOption;

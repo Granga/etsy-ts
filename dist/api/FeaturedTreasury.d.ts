@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFeaturedTreasury {
     treasury_key: string;
     treasury_id: number;
@@ -25,15 +24,19 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardPa
     page?: number;
     owner_id: number;
 }
-/**
-* Finds all FeaturedTreasuries.
-*/
-export declare function findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedTreasuriesParameters>>;
-/**
-* Finds FeaturedTreasury by numeric ID.
-*/
-export declare function getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters): Bluebird<IStandardResponse<TResult, IGetFeaturedTreasuryByIdParameters>>;
-/**
-* Finds all FeaturedTreasury by numeric owner_id.
-*/
-export declare function findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedTreasuriesByOwnerParameters>>;
+export declare class FeaturedTreasury {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Finds all FeaturedTreasuries.
+     */
+    findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>;
+    /**
+     * Finds FeaturedTreasury by numeric ID.
+     */
+    getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>;
+    /**
+     * Finds all FeaturedTreasury by numeric owner_id.
+     */
+    findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>;
+}

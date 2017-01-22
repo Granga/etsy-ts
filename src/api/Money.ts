@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IMoney {
     amount: number,
     divisor: number,
@@ -9,3 +11,10 @@ export interface IMoney {
 }
 
 
+export class Money {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

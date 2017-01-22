@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ILedgerEntry {
     ledger_entry_id: number;
     ledger_id: number;
@@ -25,11 +24,15 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number;
     ledger_entry_id: number;
 }
-/**
-* Get a Shop Payment Account Ledger's Entries
-*/
-export declare function findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Bluebird<IStandardResponse<TResult, IFindLedgerEntriesParameters>>;
-/**
-* Get a Shop Payment Account Ledger Entry
-*/
-export declare function findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindLedgerEntryParameters>>;
+export declare class LedgerEntry {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Get a Shop Payment Account Ledger's Entries
+     */
+    findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
+    /**
+     * Get a Shop Payment Account Ledger Entry
+     */
+    findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
+}

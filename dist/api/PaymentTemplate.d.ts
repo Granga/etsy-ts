@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IPaymentTemplate {
     payment_template_id: number;
     allow_bt: boolean;
@@ -60,19 +59,23 @@ export interface IUpdateShopPaymentTemplateParameters extends IStandardParameter
 export interface IFindAllUserPaymentTemplatesParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Retrieves the PaymentTemplate associated with the Shop
- */
-export declare function findShopPaymentTemplates<TResult>(parameters: IFindShopPaymentTemplatesParameters): Bluebird<IStandardResponse<TResult, IFindShopPaymentTemplatesParameters>>;
-/**
- * Creates a new PaymentTemplate
- */
-export declare function createShopPaymentTemplate<TResult>(parameters: ICreateShopPaymentTemplateParameters): Bluebird<IStandardResponse<TResult, ICreateShopPaymentTemplateParameters>>;
-/**
- * Updates a PaymentTemplate
- */
-export declare function updateShopPaymentTemplate<TResult>(parameters: IUpdateShopPaymentTemplateParameters): Bluebird<IStandardResponse<TResult, IUpdateShopPaymentTemplateParameters>>;
-/**
- * Retrieves a set of PaymentTemplate objects associated to a User.
- */
-export declare function findAllUserPaymentTemplates<TResult>(parameters: IFindAllUserPaymentTemplatesParameters): Bluebird<IStandardResponse<TResult, IFindAllUserPaymentTemplatesParameters>>;
+export declare class PaymentTemplate {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves the PaymentTemplate associated with the Shop
+     */
+    findShopPaymentTemplates<TResult>(parameters: IFindShopPaymentTemplatesParameters): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>;
+    /**
+     * Creates a new PaymentTemplate
+     */
+    createShopPaymentTemplate<TResult>(parameters: ICreateShopPaymentTemplateParameters): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>;
+    /**
+     * Updates a PaymentTemplate
+     */
+    updateShopPaymentTemplate<TResult>(parameters: IUpdateShopPaymentTemplateParameters): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>;
+    /**
+     * Retrieves a set of PaymentTemplate objects associated to a User.
+     */
+    findAllUserPaymentTemplates<TResult>(parameters: IFindAllUserPaymentTemplatesParameters): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>;
+}

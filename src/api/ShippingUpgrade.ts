@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShippingUpgrade {
     shipping_profile_id: number,
@@ -15,6 +13,7 @@ export interface IShippingUpgrade {
     order: number,
     language: number
 }
+
 
 export interface IGetListingShippingUpgradesParameters extends IStandardParameters {
     listing_id: number
@@ -61,51 +60,65 @@ export interface IDeleteShippingTemplateUpgradeParameters extends IStandardParam
     type: number
 }
 
-/**
- * Get the shipping upgrades available for a listing.
- */
-export function getListingShippingUpgrades<TResult>(parameters: IGetListingShippingUpgradesParameters): Bluebird<IStandardResponse<TResult, IGetListingShippingUpgradesParameters>> {
-    return request<IStandardResponse<TResult, IGetListingShippingUpgradesParameters>>(parameters, '/listings/:listing_id/shipping/upgrades', 'GET');
-}
-/**
- * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-export function createListingShippingUpgrade<TResult>(parameters: ICreateListingShippingUpgradeParameters): Bluebird<IStandardResponse<TResult, ICreateListingShippingUpgradeParameters>> {
-    return request<IStandardResponse<TResult, ICreateListingShippingUpgradeParameters>>(parameters, '/listings/:listing_id/shipping/upgrades', 'POST');
-}
-/**
- * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-export function updateListingShippingUpgrade<TResult>(parameters: IUpdateListingShippingUpgradeParameters): Bluebird<IStandardResponse<TResult, IUpdateListingShippingUpgradeParameters>> {
-    return request<IStandardResponse<TResult, IUpdateListingShippingUpgradeParameters>>(parameters, '/listings/:listing_id/shipping/upgrades', 'PUT');
-}
-/**
- * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-export function deleteListingShippingUpgrade<TResult>(parameters: IDeleteListingShippingUpgradeParameters): Bluebird<IStandardResponse<TResult, IDeleteListingShippingUpgradeParameters>> {
-    return request<IStandardResponse<TResult, IDeleteListingShippingUpgradeParameters>>(parameters, '/listings/:listing_id/shipping/upgrades', 'DELETE');
-}
-/**
- * Retrieves a list of shipping upgrades for the parent ShippingTemplate
- */
-export function findAllShippingTemplateUpgrades<TResult>(parameters: IFindAllShippingTemplateUpgradesParameters): Bluebird<IStandardResponse<TResult, IFindAllShippingTemplateUpgradesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShippingTemplateUpgradesParameters>>(parameters, '/shipping/templates/:shipping_template_id/upgrades', 'GET');
-}
-/**
- * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-export function createShippingTemplateUpgrade<TResult>(parameters: ICreateShippingTemplateUpgradeParameters): Bluebird<IStandardResponse<TResult, ICreateShippingTemplateUpgradeParameters>> {
-    return request<IStandardResponse<TResult, ICreateShippingTemplateUpgradeParameters>>(parameters, '/shipping/templates/:shipping_template_id/upgrades', 'POST');
-}
-/**
- * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-export function updateShippingTemplateUpgrade<TResult>(parameters: IUpdateShippingTemplateUpgradeParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingTemplateUpgradeParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShippingTemplateUpgradeParameters>>(parameters, '/shipping/templates/:shipping_template_id/upgrades', 'PUT');
-}
-/**
- * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-export function deleteShippingTemplateUpgrade<TResult>(parameters: IDeleteShippingTemplateUpgradeParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingTemplateUpgradeParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShippingTemplateUpgradeParameters>>(parameters, '/shipping/templates/:shipping_template_id/upgrades', 'DELETE');
+export class ShippingUpgrade {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get the shipping upgrades available for a listing.
+     */
+    getListingShippingUpgrades<TResult>(parameters: IGetListingShippingUpgradesParameters): Promise<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>> {
+        return this.client.http<IGetListingShippingUpgradesParameters, TResult>("/listings/:listing_id/shipping/upgrades", parameters, "GET");
+    }
+
+    /**
+     * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
+     */
+    createListingShippingUpgrade<TResult>(parameters: ICreateListingShippingUpgradeParameters): Promise<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>> {
+        return this.client.http<ICreateListingShippingUpgradeParameters, TResult>("/listings/:listing_id/shipping/upgrades", parameters, "POST");
+    }
+
+    /**
+     * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
+     */
+    updateListingShippingUpgrade<TResult>(parameters: IUpdateListingShippingUpgradeParameters): Promise<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>> {
+        return this.client.http<IUpdateListingShippingUpgradeParameters, TResult>("/listings/:listing_id/shipping/upgrades", parameters, "PUT");
+    }
+
+    /**
+     * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
+     */
+    deleteListingShippingUpgrade<TResult>(parameters: IDeleteListingShippingUpgradeParameters): Promise<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>> {
+        return this.client.http<IDeleteListingShippingUpgradeParameters, TResult>("/listings/:listing_id/shipping/upgrades", parameters, "DELETE");
+    }
+
+    /**
+     * Retrieves a list of shipping upgrades for the parent ShippingTemplate
+     */
+    findAllShippingTemplateUpgrades<TResult>(parameters: IFindAllShippingTemplateUpgradesParameters): Promise<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, TResult>> {
+        return this.client.http<IFindAllShippingTemplateUpgradesParameters, TResult>("/shipping/templates/:shipping_template_id/upgrades", parameters, "GET");
+    }
+
+    /**
+     * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+     */
+    createShippingTemplateUpgrade<TResult>(parameters: ICreateShippingTemplateUpgradeParameters): Promise<IStandardResponse<ICreateShippingTemplateUpgradeParameters, TResult>> {
+        return this.client.http<ICreateShippingTemplateUpgradeParameters, TResult>("/shipping/templates/:shipping_template_id/upgrades", parameters, "POST");
+    }
+
+    /**
+     * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+     */
+    updateShippingTemplateUpgrade<TResult>(parameters: IUpdateShippingTemplateUpgradeParameters): Promise<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, TResult>> {
+        return this.client.http<IUpdateShippingTemplateUpgradeParameters, TResult>("/shipping/templates/:shipping_template_id/upgrades", parameters, "PUT");
+    }
+
+    /**
+     * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+     */
+    deleteShippingTemplateUpgrade<TResult>(parameters: IDeleteShippingTemplateUpgradeParameters): Promise<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, TResult>> {
+        return this.client.http<IDeleteShippingTemplateUpgradeParameters, TResult>("/shipping/templates/:shipping_template_id/upgrades", parameters, "DELETE");
+    }
 }

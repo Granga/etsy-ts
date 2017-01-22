@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IBillCharge {
     bill_charge_id: number,
@@ -17,6 +15,7 @@ export interface IBillCharge {
     last_modified_tsz: number
 }
 
+
 export interface IGetUserChargesMetadataParameters extends IStandardParameters {
     user_id: string | number
 }
@@ -30,15 +29,23 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
     max_created?: number
 }
 
-/**
- * Metadata for the set of BillCharges objects associated to a User
- */
-export function getUserChargesMetadata<TResult>(parameters: IGetUserChargesMetadataParameters): Bluebird<IStandardResponse<TResult, IGetUserChargesMetadataParameters>> {
-    return request<IStandardResponse<TResult, IGetUserChargesMetadataParameters>>(parameters, '/users/:user_id/charges/meta', 'GET');
-}
-/**
- * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
- */
-export function findAllUserCharges<TResult>(parameters: IFindAllUserChargesParameters): Bluebird<IStandardResponse<TResult, IFindAllUserChargesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserChargesParameters>>(parameters, '/users/:user_id/charges', 'GET');
+export class BillCharge {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Metadata for the set of BillCharges objects associated to a User
+     */
+    getUserChargesMetadata<TResult>(parameters: IGetUserChargesMetadataParameters): Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>> {
+        return this.client.http<IGetUserChargesMetadataParameters, TResult>("/users/:user_id/charges/meta", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
+     */
+    findAllUserCharges<TResult>(parameters: IFindAllUserChargesParameters): Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>> {
+        return this.client.http<IFindAllUserChargesParameters, TResult>("/users/:user_id/charges", parameters, "GET");
+    }
 }

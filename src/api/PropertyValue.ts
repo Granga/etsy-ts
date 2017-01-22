@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IPropertyValue {
     property_id: number,
@@ -12,6 +10,7 @@ export interface IPropertyValue {
     value_ids: number[],
     values: string[]
 }
+
 
 export interface IGetAttributesParameters extends IStandardParameters {
     listing_id: number
@@ -32,27 +31,37 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
     property_id: number
 }
 
-/**
- * Get all of the attributes for a listing [developer preview - may be unstable]
- */
-export function getAttributes<TResult>(parameters: IGetAttributesParameters): Bluebird<IStandardResponse<TResult, IGetAttributesParameters>> {
-    return request<IStandardResponse<TResult, IGetAttributesParameters>>(parameters, '/listings/:listing_id/attributes', 'GET');
-}
-/**
- * Get an attribute for a listing [developer preview - may be unstable]
- */
-export function getAttribute<TResult>(parameters: IGetAttributeParameters): Bluebird<IStandardResponse<TResult, IGetAttributeParameters>> {
-    return request<IStandardResponse<TResult, IGetAttributeParameters>>(parameters, '/listings/:listing_id/attributes/:property_id', 'GET');
-}
-/**
- * Update or populate an attribute for a listing [developer preview - may be unstable]
- */
-export function updateAttribute<TResult>(parameters: IUpdateAttributeParameters): Bluebird<IStandardResponse<TResult, IUpdateAttributeParameters>> {
-    return request<IStandardResponse<TResult, IUpdateAttributeParameters>>(parameters, '/listings/:listing_id/attributes/:property_id', 'PUT');
-}
-/**
- * Delete an attribute for a listing [developer preview - may be unstable]
- */
-export function deleteAttribute<TResult>(parameters: IDeleteAttributeParameters): Bluebird<IStandardResponse<TResult, IDeleteAttributeParameters>> {
-    return request<IStandardResponse<TResult, IDeleteAttributeParameters>>(parameters, '/listings/:listing_id/attributes/:property_id', 'DELETE');
+export class PropertyValue {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get all of the attributes for a listing [developer preview - may be unstable]
+     */
+    getAttributes<TResult>(parameters: IGetAttributesParameters): Promise<IStandardResponse<IGetAttributesParameters, TResult>> {
+        return this.client.http<IGetAttributesParameters, TResult>("/listings/:listing_id/attributes", parameters, "GET");
+    }
+
+    /**
+     * Get an attribute for a listing [developer preview - may be unstable]
+     */
+    getAttribute<TResult>(parameters: IGetAttributeParameters): Promise<IStandardResponse<IGetAttributeParameters, TResult>> {
+        return this.client.http<IGetAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "GET");
+    }
+
+    /**
+     * Update or populate an attribute for a listing [developer preview - may be unstable]
+     */
+    updateAttribute<TResult>(parameters: IUpdateAttributeParameters): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>> {
+        return this.client.http<IUpdateAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "PUT");
+    }
+
+    /**
+     * Delete an attribute for a listing [developer preview - may be unstable]
+     */
+    deleteAttribute<TResult>(parameters: IDeleteAttributeParameters): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>> {
+        return this.client.http<IDeleteAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "DELETE");
+    }
 }

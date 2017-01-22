@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IUserProfile {
     user_profile_id: number,
@@ -30,6 +28,7 @@ export interface IUserProfile {
     last_name: string
 }
 
+
 export interface IFindUserProfileParameters extends IStandardParameters {
     user_id: string | number
 }
@@ -46,15 +45,23 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     city?: string
 }
 
-/**
- * Returns the UserProfile object associated with a User.
- */
-export function findUserProfile<TResult>(parameters: IFindUserProfileParameters): Bluebird<IStandardResponse<TResult, IFindUserProfileParameters>> {
-    return request<IStandardResponse<TResult, IFindUserProfileParameters>>(parameters, '/users/:user_id/profile', 'GET');
-}
-/**
- * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
- */
-export function updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Bluebird<IStandardResponse<TResult, IUpdateUserProfileParameters>> {
-    return request<IStandardResponse<TResult, IUpdateUserProfileParameters>>(parameters, '/users/:user_id/profile', 'PUT');
+export class UserProfile {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Returns the UserProfile object associated with a User.
+     */
+    findUserProfile<TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
+        return this.client.http<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET");
+    }
+
+    /**
+     * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
+     */
+    updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
+        return this.client.http<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT");
+    }
 }

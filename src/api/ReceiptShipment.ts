@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IReceiptShipment {
     carrier_name: string,
     receipt_shipping_id: number,
@@ -8,3 +10,10 @@ export interface IReceiptShipment {
 }
 
 
+export class ReceiptShipment {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IListing {
     listing_id: number,
@@ -56,6 +54,7 @@ export interface IListing {
     should_auto_renew: boolean,
     language: string
 }
+
 
 export interface ICreateListingParameters extends IStandardParameters {
     quantity: number,
@@ -261,141 +260,170 @@ export interface IFindAllCartListingsParameters extends IStandardParameters {
     cart_id: string | number
 }
 
-/**
- * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
- */
-export function createListing<TResult>(parameters: ICreateListingParameters): Bluebird<IStandardResponse<TResult, ICreateListingParameters>> {
-    return request<IStandardResponse<TResult, ICreateListingParameters>>(parameters, '/listings', 'POST');
-}
-/**
- * Finds all FeaturedTreasury listings.
- */
-export function findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllFeaturedListingsParameters>>(parameters, '/featured_treasuries/listings', 'GET');
-}
-/**
- * Retrieves a Listing by id.
- */
-export function getListing<TResult>(parameters: IGetListingParameters): Bluebird<IStandardResponse<TResult, IGetListingParameters>> {
-    return request<IStandardResponse<TResult, IGetListingParameters>>(parameters, '/listings/:listing_id', 'GET');
-}
-/**
- * Updates a Listing
- */
-export function updateListing<TResult>(parameters: IUpdateListingParameters): Bluebird<IStandardResponse<TResult, IUpdateListingParameters>> {
-    return request<IStandardResponse<TResult, IUpdateListingParameters>>(parameters, '/listings/:listing_id', 'PUT');
-}
-/**
- * Deletes a Listing
- */
-export function deleteListing<TResult>(parameters: IDeleteListingParameters): Bluebird<IStandardResponse<TResult, IDeleteListingParameters>> {
-    return request<IStandardResponse<TResult, IDeleteListingParameters>>(parameters, '/listings/:listing_id', 'DELETE');
-}
-/**
- * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
- */
-export function findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllListingActiveParameters>> {
-    return request<IStandardResponse<TResult, IFindAllListingActiveParameters>>(parameters, '/listings/active', 'GET');
-}
-/**
- * Collects the list of interesting listings
- */
-export function getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters): Bluebird<IStandardResponse<TResult, IGetInterestingListingsParameters>> {
-    return request<IStandardResponse<TResult, IGetInterestingListingsParameters>>(parameters, '/listings/interesting', 'GET');
-}
-/**
- * Collects the list of listings used to generate the trending listing page
- */
-export function getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters): Bluebird<IStandardResponse<TResult, IGetTrendingListingsParameters>> {
-    return request<IStandardResponse<TResult, IGetTrendingListingsParameters>>(parameters, '/listings/trending', 'GET');
-}
-/**
- * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
- */
-export function findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters): Bluebird<IStandardResponse<TResult, IFindBrowseSegmentListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindBrowseSegmentListingsParameters>>(parameters, '/segments/listings', 'GET');
-}
-/**
- * Finds all listings for a certain FeaturedTreasury.
- */
-export function findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters): Bluebird<IStandardResponse<TResult, IFindAllListingsForFeaturedTreasuryIdParameters>> {
-    return request<IStandardResponse<TResult, IFindAllListingsForFeaturedTreasuryIdParameters>>(parameters, '/featured_treasuries/:featured_treasury_id/listings', 'GET');
-}
-/**
- * Finds all active listings for a certain FeaturedTreasury.
- */
-export function findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters): Bluebird<IStandardResponse<TResult, IFindAllActiveListingsForFeaturedTreasuryIdParameters>> {
-    return request<IStandardResponse<TResult, IFindAllActiveListingsForFeaturedTreasuryIdParameters>>(parameters, '/featured_treasuries/:featured_treasury_id/listings/active', 'GET');
-}
-/**
- * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
- */
-export function findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllCurrentFeaturedListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllCurrentFeaturedListingsParameters>>(parameters, '/featured_treasuries/listings/homepage_current', 'GET');
-}
-/**
- * Finds all listings in a receipt
- */
-export function findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllReceiptListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllReceiptListingsParameters>>(parameters, '/receipts/:receipt_id/listings', 'GET');
-}
-/**
- * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
- */
-export function findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsActiveParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopListingsActiveParameters>>(parameters, '/shops/:shop_id/listings/active', 'GET');
-}
-/**
- * Finds all of a Shop's draft listings
- */
-export function findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsDraftParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopListingsDraftParameters>>(parameters, '/shops/:shop_id/listings/draft', 'GET');
-}
-/**
- * Retrieves Listings associated to a Shop that are expired
- */
-export function findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsExpiredParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopListingsExpiredParameters>>(parameters, '/shops/:shop_id/listings/expired', 'GET');
-}
-/**
- * Retrieves a Listing associated to a Shop that is inactive
- */
-export function getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters): Bluebird<IStandardResponse<TResult, IGetShopListingExpiredParameters>> {
-    return request<IStandardResponse<TResult, IGetShopListingExpiredParameters>>(parameters, '/shops/:shop_id/listings/expired/:listing_id', 'GET');
-}
-/**
- * Retrieves Listings associated to a Shop that are featured
- */
-export function findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsFeaturedParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopListingsFeaturedParameters>>(parameters, '/shops/:shop_id/listings/featured', 'GET');
-}
-/**
- * Retrieves Listings associated to a Shop that are inactive
- */
-export function findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopListingsInactiveParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopListingsInactiveParameters>>(parameters, '/shops/:shop_id/listings/inactive', 'GET');
-}
-/**
- * Retrieves a Listing associated to a Shop that is inactive
- */
-export function getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters): Bluebird<IStandardResponse<TResult, IGetShopListingInactiveParameters>> {
-    return request<IStandardResponse<TResult, IGetShopListingInactiveParameters>>(parameters, '/shops/:shop_id/listings/inactive/:listing_id', 'GET');
-}
-/**
- * Finds all listings within a shop section
- */
-export function findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopSectionListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopSectionListingsParameters>>(parameters, '/shops/:shop_id/sections/:shop_section_id/listings', 'GET');
-}
-/**
- * Finds all listings within a shop section
- */
-export function findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters): Bluebird<IStandardResponse<TResult, IFindAllShopSectionListingsActiveParameters>> {
-    return request<IStandardResponse<TResult, IFindAllShopSectionListingsActiveParameters>>(parameters, '/shops/:shop_id/sections/:shop_section_id/listings/active', 'GET');
-}
-/**
- * Finds all listings in a given Cart
- */
-export function findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters): Bluebird<IStandardResponse<TResult, IFindAllCartListingsParameters>> {
-    return request<IStandardResponse<TResult, IFindAllCartListingsParameters>>(parameters, '/users/:user_id/carts/:cart_id/listings', 'GET');
+export class Listing {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
+     */
+    createListing<TResult>(parameters: ICreateListingParameters): Promise<IStandardResponse<ICreateListingParameters, TResult>> {
+        return this.client.http<ICreateListingParameters, TResult>("/listings", parameters, "POST");
+    }
+
+    /**
+     * Finds all FeaturedTreasury listings.
+     */
+    findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>> {
+        return this.client.http<IFindAllFeaturedListingsParameters, TResult>("/featured_treasuries/listings", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a Listing by id.
+     */
+    getListing<TResult>(parameters: IGetListingParameters): Promise<IStandardResponse<IGetListingParameters, TResult>> {
+        return this.client.http<IGetListingParameters, TResult>("/listings/:listing_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a Listing
+     */
+    updateListing<TResult>(parameters: IUpdateListingParameters): Promise<IStandardResponse<IUpdateListingParameters, TResult>> {
+        return this.client.http<IUpdateListingParameters, TResult>("/listings/:listing_id", parameters, "PUT");
+    }
+
+    /**
+     * Deletes a Listing
+     */
+    deleteListing<TResult>(parameters: IDeleteListingParameters): Promise<IStandardResponse<IDeleteListingParameters, TResult>> {
+        return this.client.http<IDeleteListingParameters, TResult>("/listings/:listing_id", parameters, "DELETE");
+    }
+
+    /**
+     * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
+     */
+    findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters): Promise<IStandardResponse<IFindAllListingActiveParameters, TResult>> {
+        return this.client.http<IFindAllListingActiveParameters, TResult>("/listings/active", parameters, "GET");
+    }
+
+    /**
+     * Collects the list of interesting listings
+     */
+    getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters): Promise<IStandardResponse<IGetInterestingListingsParameters, TResult>> {
+        return this.client.http<IGetInterestingListingsParameters, TResult>("/listings/interesting", parameters, "GET");
+    }
+
+    /**
+     * Collects the list of listings used to generate the trending listing page
+     */
+    getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters): Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>> {
+        return this.client.http<IGetTrendingListingsParameters, TResult>("/listings/trending", parameters, "GET");
+    }
+
+    /**
+     * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
+     */
+    findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters): Promise<IStandardResponse<IFindBrowseSegmentListingsParameters, TResult>> {
+        return this.client.http<IFindBrowseSegmentListingsParameters, TResult>("/segments/listings", parameters, "GET");
+    }
+
+    /**
+     * Finds all listings for a certain FeaturedTreasury.
+     */
+    findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>> {
+        return this.client.http<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>("/featured_treasuries/:featured_treasury_id/listings", parameters, "GET");
+    }
+
+    /**
+     * Finds all active listings for a certain FeaturedTreasury.
+     */
+    findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>> {
+        return this.client.http<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>("/featured_treasuries/:featured_treasury_id/listings/active", parameters, "GET");
+    }
+
+    /**
+     * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
+     */
+    findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>> {
+        return this.client.http<IFindAllCurrentFeaturedListingsParameters, TResult>("/featured_treasuries/listings/homepage_current", parameters, "GET");
+    }
+
+    /**
+     * Finds all listings in a receipt
+     */
+    findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters): Promise<IStandardResponse<IFindAllReceiptListingsParameters, TResult>> {
+        return this.client.http<IFindAllReceiptListingsParameters, TResult>("/receipts/:receipt_id/listings", parameters, "GET");
+    }
+
+    /**
+     * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
+     */
+    findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>> {
+        return this.client.http<IFindAllShopListingsActiveParameters, TResult>("/shops/:shop_id/listings/active", parameters, "GET");
+    }
+
+    /**
+     * Finds all of a Shop's draft listings
+     */
+    findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>> {
+        return this.client.http<IFindAllShopListingsDraftParameters, TResult>("/shops/:shop_id/listings/draft", parameters, "GET");
+    }
+
+    /**
+     * Retrieves Listings associated to a Shop that are expired
+     */
+    findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>> {
+        return this.client.http<IFindAllShopListingsExpiredParameters, TResult>("/shops/:shop_id/listings/expired", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a Listing associated to a Shop that is inactive
+     */
+    getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters): Promise<IStandardResponse<IGetShopListingExpiredParameters, TResult>> {
+        return this.client.http<IGetShopListingExpiredParameters, TResult>("/shops/:shop_id/listings/expired/:listing_id", parameters, "GET");
+    }
+
+    /**
+     * Retrieves Listings associated to a Shop that are featured
+     */
+    findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>> {
+        return this.client.http<IFindAllShopListingsFeaturedParameters, TResult>("/shops/:shop_id/listings/featured", parameters, "GET");
+    }
+
+    /**
+     * Retrieves Listings associated to a Shop that are inactive
+     */
+    findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>> {
+        return this.client.http<IFindAllShopListingsInactiveParameters, TResult>("/shops/:shop_id/listings/inactive", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a Listing associated to a Shop that is inactive
+     */
+    getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters): Promise<IStandardResponse<IGetShopListingInactiveParameters, TResult>> {
+        return this.client.http<IGetShopListingInactiveParameters, TResult>("/shops/:shop_id/listings/inactive/:listing_id", parameters, "GET");
+    }
+
+    /**
+     * Finds all listings within a shop section
+     */
+    findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>> {
+        return this.client.http<IFindAllShopSectionListingsParameters, TResult>("/shops/:shop_id/sections/:shop_section_id/listings", parameters, "GET");
+    }
+
+    /**
+     * Finds all listings within a shop section
+     */
+    findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>> {
+        return this.client.http<IFindAllShopSectionListingsActiveParameters, TResult>("/shops/:shop_id/sections/:shop_section_id/listings/active", parameters, "GET");
+    }
+
+    /**
+     * Finds all listings in a given Cart
+     */
+    findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters): Promise<IStandardResponse<IFindAllCartListingsParameters, TResult>> {
+        return this.client.http<IFindAllCartListingsParameters, TResult>("/users/:user_id/carts/:cart_id/listings", parameters, "GET");
+    }
 }

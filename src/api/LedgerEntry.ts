@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ILedgerEntry {
     ledger_entry_id: number,
@@ -15,6 +13,7 @@ export interface ILedgerEntry {
     running_balance: number,
     create_date: number
 }
+
 
 export interface IFindLedgerEntriesParameters extends IStandardParameters {
     shop_id: string | number,
@@ -29,15 +28,23 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     ledger_entry_id: number
 }
 
-/**
- * Get a Shop Payment Account Ledger's Entries
- */
-export function findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Bluebird<IStandardResponse<TResult, IFindLedgerEntriesParameters>> {
-    return request<IStandardResponse<TResult, IFindLedgerEntriesParameters>>(parameters, '/shops/:shop_id/ledger/entries', 'GET');
-}
-/**
- * Get a Shop Payment Account Ledger Entry
- */
-export function findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindLedgerEntryParameters>> {
-    return request<IStandardResponse<TResult, IFindLedgerEntryParameters>>(parameters, '/shops/:shop_id/ledger/entries/:ledger_entry_id', 'GET');
+export class LedgerEntry {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a Shop Payment Account Ledger's Entries
+     */
+    findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
+        return this.client.http<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET");
+    }
+
+    /**
+     * Get a Shop Payment Account Ledger Entry
+     */
+    findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
+        return this.client.http<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET");
+    }
 }

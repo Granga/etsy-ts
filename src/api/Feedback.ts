@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IFeedback {
     feedback_id: number,
@@ -19,6 +17,7 @@ export interface IFeedback {
     image_url_155x125: string,
     image_url_fullxfull: string
 }
+
 
 export interface IFindAllUserFeedbackAsAuthorParameters extends IStandardParameters {
     user_id: string | number,
@@ -57,43 +56,55 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
     page?: number
 }
 
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export function findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsAuthorParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFeedbackAsAuthorParameters>>(parameters, '/users/:user_id/feedback/as-author', 'GET');
-}
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export function findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsBuyerParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFeedbackAsBuyerParameters>>(parameters, '/users/:user_id/feedback/as-buyer', 'GET');
-}
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export function findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsSellerParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFeedbackAsSellerParameters>>(parameters, '/users/:user_id/feedback/as-seller', 'GET');
-}
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export function findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFeedbackAsSubjectParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFeedbackAsSubjectParameters>>(parameters, '/users/:user_id/feedback/as-subject', 'GET');
-}
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between the findAllUserFeedbackAsBuyer
- and findAllUserFeedbackAsSubject methods.
- */
-export function findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Bluebird<IStandardResponse<TResult, IFindAllFeedbackFromBuyersParameters>> {
-    return request<IStandardResponse<TResult, IFindAllFeedbackFromBuyersParameters>>(parameters, '/users/:user_id/feedback/from-buyers', 'GET');
-}
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between
- the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
- */
-export function findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters): Bluebird<IStandardResponse<TResult, IFindAllFeedbackFromSellersParameters>> {
-    return request<IStandardResponse<TResult, IFindAllFeedbackFromSellersParameters>>(parameters, '/users/:user_id/feedback/from-sellers', 'GET');
+export class Feedback {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>> {
+        return this.client.http<IFindAllUserFeedbackAsAuthorParameters, TResult>("/users/:user_id/feedback/as-author", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>> {
+        return this.client.http<IFindAllUserFeedbackAsBuyerParameters, TResult>("/users/:user_id/feedback/as-buyer", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>> {
+        return this.client.http<IFindAllUserFeedbackAsSellerParameters, TResult>("/users/:user_id/feedback/as-seller", parameters, "GET");
+    }
+
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>> {
+        return this.client.http<IFindAllUserFeedbackAsSubjectParameters, TResult>("/users/:user_id/feedback/as-subject", parameters, "GET");
+    }
+
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between the findAllUserFeedbackAsBuyer
+     and findAllUserFeedbackAsSubject methods.
+     */
+    findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>> {
+        return this.client.http<IFindAllFeedbackFromBuyersParameters, TResult>("/users/:user_id/feedback/from-buyers", parameters, "GET");
+    }
+
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between
+     the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
+     */
+    findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>> {
+        return this.client.http<IFindAllFeedbackFromSellersParameters, TResult>("/users/:user_id/feedback/from-sellers", parameters, "GET");
+    }
 }

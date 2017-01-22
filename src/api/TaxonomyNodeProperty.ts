@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ITaxonomyNodeProperty {
     property_id: number,
@@ -17,13 +15,21 @@ export interface ITaxonomyNodeProperty {
     selected_values: any[]
 }
 
+
 export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
     taxonomy_id: number
 }
 
-/**
- * Get the possible properties of a taxonomy node [developer preview - may be unstable]
- */
-export function getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Bluebird<IStandardResponse<TResult, IGetTaxonomyNodePropertiesParameters>> {
-    return request<IStandardResponse<TResult, IGetTaxonomyNodePropertiesParameters>>(parameters, '/taxonomy/seller/:taxonomy_id/properties', 'GET');
+export class TaxonomyNodeProperty {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get the possible properties of a taxonomy node [developer preview - may be unstable]
+     */
+    getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
+        return this.client.http<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
+    }
 }

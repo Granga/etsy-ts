@@ -1,16 +1,19 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Add listing to a Treasury
-*/
-function addTreasuryListing(parameters) {
-    return HttpRequest_1.request(parameters, '/treasuries/:treasury_key/listings', 'POST');
+class TreasuryListing {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Add listing to a Treasury
+     */
+    addTreasuryListing(parameters) {
+        return this.client.http("/treasuries/:treasury_key/listings", parameters, "POST");
+    }
+    /**
+     * Remove listing from a Treasury
+     */
+    removeTreasuryListing(parameters) {
+        return this.client.http("/treasuries/:treasury_key/listings/:listing_id", parameters, "DELETE");
+    }
 }
-exports.addTreasuryListing = addTreasuryListing;
-/**
-* Remove listing from a Treasury
-*/
-function removeTreasuryListing(parameters) {
-    return HttpRequest_1.request(parameters, '/treasuries/:treasury_key/listings/:listing_id', 'DELETE');
-}
-exports.removeTreasuryListing = removeTreasuryListing;
+exports.TreasuryListing = TreasuryListing;

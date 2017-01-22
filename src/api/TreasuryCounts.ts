@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface ITreasuryCounts {
     clicks: number,
     views: number,
@@ -6,3 +8,10 @@ export interface ITreasuryCounts {
 }
 
 
+export class TreasuryCounts {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

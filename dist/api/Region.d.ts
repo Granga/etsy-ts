@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IRegion {
     region_id: number;
     region_name: string;
@@ -14,15 +13,19 @@ export interface IGetRegionParameters extends IStandardParameters {
 }
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 }
-/**
- * Finds all Region.
- */
-export declare function findAllRegion<TResult>(parameters: IFindAllRegionParameters): Bluebird<IStandardResponse<TResult, IFindAllRegionParameters>>;
-/**
- * Retrieves a Region by id.
- */
-export declare function getRegion<TResult>(parameters: IGetRegionParameters): Bluebird<IStandardResponse<TResult, IGetRegionParameters>>;
-/**
- *
- */
-export declare function findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters): Bluebird<IStandardResponse<TResult, IFindEligibleRegionsParameters>>;
+export declare class Region {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Finds all Region.
+     */
+    findAllRegion<TResult>(parameters: IFindAllRegionParameters): Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
+    /**
+     * Retrieves a Region by id.
+     */
+    getRegion<TResult>(parameters: IGetRegionParameters): Promise<IStandardResponse<IGetRegionParameters, TResult>>;
+    /**
+     *
+     */
+    findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
+}

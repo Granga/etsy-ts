@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShippingInfo {
     shipping_info_id: number,
@@ -16,6 +14,7 @@ export interface IShippingInfo {
     origin_country_name: string,
     destination_country_name: string
 }
+
 
 export interface IFindAllListingShippingProfileEntriesParameters extends IStandardParameters {
 
@@ -42,33 +41,44 @@ export interface IDeleteShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number
 }
 
-/**
- * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
- */
-export function findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters): Bluebird<IStandardResponse<TResult, IFindAllListingShippingProfileEntriesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllListingShippingProfileEntriesParameters>>(parameters, '/listings/:listing_id/shipping/info', 'GET');
-}
-/**
- * Creates a new ShippingInfo.
- */
-export function createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters): Bluebird<IStandardResponse<TResult, ICreateShippingInfoParameters>> {
-    return request<IStandardResponse<TResult, ICreateShippingInfoParameters>>(parameters, '/listings/:listing_id/shipping/info', 'POST');
-}
-/**
- * Retrieves a ShippingInfo by id.
- */
-export function getShippingInfo<TResult>(parameters: IGetShippingInfoParameters): Bluebird<IStandardResponse<TResult, IGetShippingInfoParameters>> {
-    return request<IStandardResponse<TResult, IGetShippingInfoParameters>>(parameters, '/shipping/info/:shipping_info_id', 'GET');
-}
-/**
- * Updates a ShippingInfo with the given id.
- */
-export function updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingInfoParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShippingInfoParameters>>(parameters, '/shipping/info/:shipping_info_id', 'PUT');
-}
-/**
- * Deletes the ShippingInfo with the given id.
- */
-export function deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingInfoParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShippingInfoParameters>>(parameters, '/shipping/info/:shipping_info_id', 'DELETE');
+export class ShippingInfo {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
+     */
+    findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>> {
+        return this.client.http<IFindAllListingShippingProfileEntriesParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "GET");
+    }
+
+    /**
+     * Creates a new ShippingInfo.
+     */
+    createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>> {
+        return this.client.http<ICreateShippingInfoParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "POST");
+    }
+
+    /**
+     * Retrieves a ShippingInfo by id.
+     */
+    getShippingInfo<TResult>(parameters: IGetShippingInfoParameters): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>> {
+        return this.client.http<IGetShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a ShippingInfo with the given id.
+     */
+    updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>> {
+        return this.client.http<IUpdateShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "PUT");
+    }
+
+    /**
+     * Deletes the ShippingInfo with the given id.
+     */
+    deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>> {
+        return this.client.http<IDeleteShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "DELETE");
+    }
 }

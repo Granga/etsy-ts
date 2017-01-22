@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IImageType {
     code: string;
     desc: string;
@@ -9,7 +8,11 @@ export interface IImageType {
 }
 export interface IListImageTypesParameters extends IStandardParameters {
 }
-/**
- * Lists available image types along with their supported sizes.
- */
-export declare function listImageTypes<TResult>(parameters: IListImageTypesParameters): Bluebird<IStandardResponse<TResult, IListImageTypesParameters>>;
+export declare class ImageType {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Lists available image types along with their supported sizes.
+     */
+    listImageTypes<TResult>(parameters: IListImageTypesParameters): Promise<IStandardResponse<IListImageTypesParameters, TResult>>;
+}

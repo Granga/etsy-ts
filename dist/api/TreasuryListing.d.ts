@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITreasuryListing {
     data: any;
     creation_tsz: number;
@@ -14,11 +13,15 @@ export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     treasury_key: string;
     listing_id: number;
 }
-/**
-* Add listing to a Treasury
-*/
-export declare function addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Bluebird<IStandardResponse<TResult, IAddTreasuryListingParameters>>;
-/**
-* Remove listing from a Treasury
-*/
-export declare function removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Bluebird<IStandardResponse<TResult, IRemoveTreasuryListingParameters>>;
+export declare class TreasuryListing {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Add listing to a Treasury
+     */
+    addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
+    /**
+     * Remove listing from a Treasury
+     */
+    removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
+}

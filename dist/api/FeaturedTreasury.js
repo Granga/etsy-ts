@@ -1,23 +1,25 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Finds all FeaturedTreasuries.
-*/
-function findAllFeaturedTreasuries(parameters) {
-    return HttpRequest_1.request(parameters, '/featured_treasuries', 'GET');
+class FeaturedTreasury {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Finds all FeaturedTreasuries.
+     */
+    findAllFeaturedTreasuries(parameters) {
+        return this.client.http("/featured_treasuries", parameters, "GET");
+    }
+    /**
+     * Finds FeaturedTreasury by numeric ID.
+     */
+    getFeaturedTreasuryById(parameters) {
+        return this.client.http("/featured_treasuries/:featured_treasury_id", parameters, "GET");
+    }
+    /**
+     * Finds all FeaturedTreasury by numeric owner_id.
+     */
+    findAllFeaturedTreasuriesByOwner(parameters) {
+        return this.client.http("/featured_treasuries/owner/:owner_id", parameters, "GET");
+    }
 }
-exports.findAllFeaturedTreasuries = findAllFeaturedTreasuries;
-/**
-* Finds FeaturedTreasury by numeric ID.
-*/
-function getFeaturedTreasuryById(parameters) {
-    return HttpRequest_1.request(parameters, '/featured_treasuries/:featured_treasury_id', 'GET');
-}
-exports.getFeaturedTreasuryById = getFeaturedTreasuryById;
-/**
-* Finds all FeaturedTreasury by numeric owner_id.
-*/
-function findAllFeaturedTreasuriesByOwner(parameters) {
-    return HttpRequest_1.request(parameters, '/featured_treasuries/owner/:owner_id', 'GET');
-}
-exports.findAllFeaturedTreasuriesByOwner = findAllFeaturedTreasuriesByOwner;
+exports.FeaturedTreasury = FeaturedTreasury;

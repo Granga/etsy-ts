@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Get the possible properties of a taxonomy node [developer preview - may be unstable]
-*/
-function getTaxonomyNodeProperties(parameters) {
-    return HttpRequest_1.request(parameters, '/taxonomy/seller/:taxonomy_id/properties', 'GET');
+class TaxonomyNodeProperty {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get the possible properties of a taxonomy node [developer preview - may be unstable]
+     */
+    getTaxonomyNodeProperties(parameters) {
+        return this.client.http("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
+    }
 }
-exports.getTaxonomyNodeProperties = getTaxonomyNodeProperties;
+exports.TaxonomyNodeProperty = TaxonomyNodeProperty;

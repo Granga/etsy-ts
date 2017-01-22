@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IAvatar {
     avatar_id: number;
     hex_code: string;
@@ -23,11 +22,15 @@ export interface IUploadAvatarParameters extends IStandardParameters {
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
-* Upload a new user avatar image
-*/
-export declare function uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Bluebird<IStandardResponse<TResult, IUploadAvatarParameters>>;
-/**
-* Get avatar image source
-*/
-export declare function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Bluebird<IStandardResponse<TResult, IGetAvatarImgSrcParameters>>;
+export declare class Avatar {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Upload a new user avatar image
+     */
+    uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
+    /**
+     * Get avatar image source
+     */
+    getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
+}

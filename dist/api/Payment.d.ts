@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IPayment {
     payment_id: number;
     buyer_user_id: number;
@@ -38,15 +37,19 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
     receipt_id: number;
     shop_id: string | number;
 }
-/**
- * Get a Direct Checkout Payment
- */
-export declare function findPayment<TResult>(parameters: IFindPaymentParameters): Bluebird<IStandardResponse<TResult, IFindPaymentParameters>>;
-/**
- * Get a Payment from a Ledger Entry ID, if applicable
- */
-export declare function findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindPaymentForLedgerEntryParameters>>;
-/**
- * Get a Payment by Shop Receipt ID
- */
-export declare function findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters): Bluebird<IStandardResponse<TResult, IFindShopPaymentByReceiptParameters>>;
+export declare class Payment {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Get a Direct Checkout Payment
+     */
+    findPayment<TResult>(parameters: IFindPaymentParameters): Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
+    /**
+     * Get a Payment from a Ledger Entry ID, if applicable
+     */
+    findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
+    /**
+     * Get a Payment by Shop Receipt ID
+     */
+    findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
+}

@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IListingInventory {
     products: any[],
@@ -10,6 +8,7 @@ export interface IListingInventory {
     quantity_on_property: number[],
     sku_on_property: number[]
 }
+
 
 export interface IGetInventoryParameters extends IStandardParameters {
     listing_id: number
@@ -22,15 +21,23 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
     sku_on_property?: number[]
 }
 
-/**
- * Get the inventory for a listing [developer preview - may be unstable]
- */
-export function getInventory<TResult>(parameters: IGetInventoryParameters): Bluebird<IStandardResponse<TResult, IGetInventoryParameters>> {
-    return request<IStandardResponse<TResult, IGetInventoryParameters>>(parameters, '/listings/:listing_id/inventory', 'GET');
-}
-/**
- * Update the inventory for a listing [developer preview - may be unstable]
- */
-export function updateInventory<TResult>(parameters: IUpdateInventoryParameters): Bluebird<IStandardResponse<TResult, IUpdateInventoryParameters>> {
-    return request<IStandardResponse<TResult, IUpdateInventoryParameters>>(parameters, '/listings/:listing_id/inventory', 'PUT');
+export class ListingInventory {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get the inventory for a listing [developer preview - may be unstable]
+     */
+    getInventory<TResult>(parameters: IGetInventoryParameters): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
+        return this.client.http<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET");
+    }
+
+    /**
+     * Update the inventory for a listing [developer preview - may be unstable]
+     */
+    updateInventory<TResult>(parameters: IUpdateInventoryParameters): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
+        return this.client.http<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT");
+    }
 }

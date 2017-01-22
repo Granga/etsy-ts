@@ -1,13 +1,12 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ITreasuryListing {
     data: any,
     creation_tsz: number
 }
+
 
 export interface IAddTreasuryListingParameters extends IStandardParameters {
     treasury_key: string,
@@ -18,15 +17,23 @@ export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     listing_id: number
 }
 
-/**
- * Add listing to a Treasury
- */
-export function addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Bluebird<IStandardResponse<TResult, IAddTreasuryListingParameters>> {
-    return request<IStandardResponse<TResult, IAddTreasuryListingParameters>>(parameters, '/treasuries/:treasury_key/listings', 'POST');
-}
-/**
- * Remove listing from a Treasury
- */
-export function removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Bluebird<IStandardResponse<TResult, IRemoveTreasuryListingParameters>> {
-    return request<IStandardResponse<TResult, IRemoveTreasuryListingParameters>>(parameters, '/treasuries/:treasury_key/listings/:listing_id', 'DELETE');
+export class TreasuryListing {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Add listing to a Treasury
+     */
+    addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>> {
+        return this.client.http<IAddTreasuryListingParameters, TResult>("/treasuries/:treasury_key/listings", parameters, "POST");
+    }
+
+    /**
+     * Remove listing from a Treasury
+     */
+    removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>> {
+        return this.client.http<IRemoveTreasuryListingParameters, TResult>("/treasuries/:treasury_key/listings/:listing_id", parameters, "DELETE");
+    }
 }

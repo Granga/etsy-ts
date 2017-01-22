@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IVariationsSelectedProperty {
     property_id: number,
     value_id: number,
@@ -7,3 +9,10 @@ export interface IVariationsSelectedProperty {
 }
 
 
+export class VariationsSelectedProperty {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

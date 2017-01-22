@@ -1,21 +1,27 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IStyle {
     style_id: number,
     style: string
 }
 
+
 export interface IFindSuggestedStylesParameters extends IStandardParameters {
 
 }
 
-/**
- * Retrieve all suggested styles.
- */
-export function findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters): Bluebird<IStandardResponse<TResult, IFindSuggestedStylesParameters>> {
-    return request<IStandardResponse<TResult, IFindSuggestedStylesParameters>>(parameters, '/taxonomy/styles', 'GET');
+export class Style {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieve all suggested styles.
+     */
+    findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters): Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>> {
+        return this.client.http<IFindSuggestedStylesParameters, TResult>("/taxonomy/styles", parameters, "GET");
+    }
 }

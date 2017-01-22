@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopTranslation {
     shop_id: number;
     language: string;
@@ -56,19 +55,23 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
     shop_id: string | number;
     language: string;
 }
-/**
- * Retrieves a ShopTranslation by shop_id and language
- */
-export declare function getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Bluebird<IStandardResponse<TResult, IGetShopTranslationParameters>>;
-/**
- * Creates a ShopTranslation by shop_id and language
- */
-export declare function createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Bluebird<IStandardResponse<TResult, ICreateShopTranslationParameters>>;
-/**
- * Updates a ShopTranslation by shop_id and language
- */
-export declare function updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Bluebird<IStandardResponse<TResult, IUpdateShopTranslationParameters>>;
-/**
- * Deletes a ShopTranslation by shop_id and language
- */
-export declare function deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Bluebird<IStandardResponse<TResult, IDeleteShopTranslationParameters>>;
+export declare class ShopTranslation {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a ShopTranslation by shop_id and language
+     */
+    getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>>;
+    /**
+     * Creates a ShopTranslation by shop_id and language
+     */
+    createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>>;
+    /**
+     * Updates a ShopTranslation by shop_id and language
+     */
+    updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>>;
+    /**
+     * Deletes a ShopTranslation by shop_id and language
+     */
+    deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>>;
+}

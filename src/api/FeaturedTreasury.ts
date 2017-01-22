@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IFeaturedTreasury {
     treasury_key: string,
@@ -12,6 +10,7 @@ export interface IFeaturedTreasury {
     region: string,
     active_date: number
 }
+
 
 export interface IFindAllFeaturedTreasuriesParameters extends IStandardParameters {
     limit?: number,
@@ -29,21 +28,30 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardPa
     owner_id: number
 }
 
-/**
- * Finds all FeaturedTreasuries.
- */
-export function findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedTreasuriesParameters>> {
-    return request<IStandardResponse<TResult, IFindAllFeaturedTreasuriesParameters>>(parameters, '/featured_treasuries', 'GET');
-}
-/**
- * Finds FeaturedTreasury by numeric ID.
- */
-export function getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters): Bluebird<IStandardResponse<TResult, IGetFeaturedTreasuryByIdParameters>> {
-    return request<IStandardResponse<TResult, IGetFeaturedTreasuryByIdParameters>>(parameters, '/featured_treasuries/:featured_treasury_id', 'GET');
-}
-/**
- * Finds all FeaturedTreasury by numeric owner_id.
- */
-export function findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters): Bluebird<IStandardResponse<TResult, IFindAllFeaturedTreasuriesByOwnerParameters>> {
-    return request<IStandardResponse<TResult, IFindAllFeaturedTreasuriesByOwnerParameters>>(parameters, '/featured_treasuries/owner/:owner_id', 'GET');
+export class FeaturedTreasury {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Finds all FeaturedTreasuries.
+     */
+    findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>> {
+        return this.client.http<IFindAllFeaturedTreasuriesParameters, TResult>("/featured_treasuries", parameters, "GET");
+    }
+
+    /**
+     * Finds FeaturedTreasury by numeric ID.
+     */
+    getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>> {
+        return this.client.http<IGetFeaturedTreasuryByIdParameters, TResult>("/featured_treasuries/:featured_treasury_id", parameters, "GET");
+    }
+
+    /**
+     * Finds all FeaturedTreasury by numeric owner_id.
+     */
+    findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>> {
+        return this.client.http<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>("/featured_treasuries/owner/:owner_id", parameters, "GET");
+    }
 }

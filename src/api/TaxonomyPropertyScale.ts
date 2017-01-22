@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface ITaxonomyPropertyScale {
     scale_id: number,
     display_name: string,
@@ -5,3 +7,10 @@ export interface ITaxonomyPropertyScale {
 }
 
 
+export class TaxonomyPropertyScale {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

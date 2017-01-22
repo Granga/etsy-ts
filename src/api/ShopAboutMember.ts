@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IShopAboutMember {
     shop_about_member_id: number,
     shop_id: number,
@@ -12,3 +14,10 @@ export interface IShopAboutMember {
 }
 
 
+export class ShopAboutMember {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

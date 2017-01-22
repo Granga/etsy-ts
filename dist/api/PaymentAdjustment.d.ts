@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IPaymentAdjustment {
     payment_adjustment_id: number;
     payment_id: number;
@@ -30,15 +29,19 @@ export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandar
     shop_id: string | number;
     ledger_entry_id: number[];
 }
-/**
- * Get a Payment Adjustments from a Payment Id
- */
-export declare function findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentsParameters>>;
-/**
- * Get a Direct Checkout Payment Adjustment
- */
-export declare function findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentParameters>>;
-/**
- * Get a Payment Adjustment from a Ledger Entry ID, if applicable
- */
-export declare function findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindPaymentAdjustmentForLedgerEntryParameters>>;
+export declare class PaymentAdjustment {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Get a Payment Adjustments from a Payment Id
+     */
+    findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
+    /**
+     * Get a Direct Checkout Payment Adjustment
+     */
+    findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
+    /**
+     * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+     */
+    findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
+}

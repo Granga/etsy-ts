@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IShippingOption {
     option_id: string,
     name: string,
@@ -7,3 +9,10 @@ export interface IShippingOption {
 }
 
 
+export class ShippingOption {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

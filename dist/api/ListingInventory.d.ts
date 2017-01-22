@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListingInventory {
     products: any[];
     price_on_property: number[];
@@ -18,11 +17,15 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
     quantity_on_property?: number[];
     sku_on_property?: number[];
 }
-/**
- * Get the inventory for a listing [developer preview - may be unstable]
- */
-export declare function getInventory<TResult>(parameters: IGetInventoryParameters): Bluebird<IStandardResponse<TResult, IGetInventoryParameters>>;
-/**
- * Update the inventory for a listing [developer preview - may be unstable]
- */
-export declare function updateInventory<TResult>(parameters: IUpdateInventoryParameters): Bluebird<IStandardResponse<TResult, IUpdateInventoryParameters>>;
+export declare class ListingInventory {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Get the inventory for a listing [developer preview - may be unstable]
+     */
+    getInventory<TResult>(parameters: IGetInventoryParameters): Promise<IStandardResponse<IGetInventoryParameters, TResult>>;
+    /**
+     * Update the inventory for a listing [developer preview - may be unstable]
+     */
+    updateInventory<TResult>(parameters: IUpdateInventoryParameters): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>>;
+}

@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IListingTranslation {
     listing_id: number,
@@ -11,6 +9,7 @@ export interface IListingTranslation {
     description: string,
     tags: string[]
 }
+
 
 export interface IGetListingTranslationParameters extends IStandardParameters {
     listing_id: number,
@@ -35,27 +34,37 @@ export interface IDeleteListingTranslationParameters extends IStandardParameters
     language: string
 }
 
-/**
- * Retrieves a ListingTranslation by listing_id and language
- */
-export function getListingTranslation<TResult>(parameters: IGetListingTranslationParameters): Bluebird<IStandardResponse<TResult, IGetListingTranslationParameters>> {
-    return request<IStandardResponse<TResult, IGetListingTranslationParameters>>(parameters, '/listings/:listing_id/translations/:language', 'GET');
-}
-/**
- * Creates a ListingTranslation by listing_id and language
- */
-export function createListingTranslation<TResult>(parameters: ICreateListingTranslationParameters): Bluebird<IStandardResponse<TResult, ICreateListingTranslationParameters>> {
-    return request<IStandardResponse<TResult, ICreateListingTranslationParameters>>(parameters, '/listings/:listing_id/translations/:language', 'POST');
-}
-/**
- * Updates a ListingTranslation by listing_id and language
- */
-export function updateListingTranslation<TResult>(parameters: IUpdateListingTranslationParameters): Bluebird<IStandardResponse<TResult, IUpdateListingTranslationParameters>> {
-    return request<IStandardResponse<TResult, IUpdateListingTranslationParameters>>(parameters, '/listings/:listing_id/translations/:language', 'PUT');
-}
-/**
- * Deletes a ListingTranslation by listing_id and language
- */
-export function deleteListingTranslation<TResult>(parameters: IDeleteListingTranslationParameters): Bluebird<IStandardResponse<TResult, IDeleteListingTranslationParameters>> {
-    return request<IStandardResponse<TResult, IDeleteListingTranslationParameters>>(parameters, '/listings/:listing_id/translations/:language', 'DELETE');
+export class ListingTranslation {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a ListingTranslation by listing_id and language
+     */
+    getListingTranslation<TResult>(parameters: IGetListingTranslationParameters): Promise<IStandardResponse<IGetListingTranslationParameters, TResult>> {
+        return this.client.http<IGetListingTranslationParameters, TResult>("/listings/:listing_id/translations/:language", parameters, "GET");
+    }
+
+    /**
+     * Creates a ListingTranslation by listing_id and language
+     */
+    createListingTranslation<TResult>(parameters: ICreateListingTranslationParameters): Promise<IStandardResponse<ICreateListingTranslationParameters, TResult>> {
+        return this.client.http<ICreateListingTranslationParameters, TResult>("/listings/:listing_id/translations/:language", parameters, "POST");
+    }
+
+    /**
+     * Updates a ListingTranslation by listing_id and language
+     */
+    updateListingTranslation<TResult>(parameters: IUpdateListingTranslationParameters): Promise<IStandardResponse<IUpdateListingTranslationParameters, TResult>> {
+        return this.client.http<IUpdateListingTranslationParameters, TResult>("/listings/:listing_id/translations/:language", parameters, "PUT");
+    }
+
+    /**
+     * Deletes a ListingTranslation by listing_id and language
+     */
+    deleteListingTranslation<TResult>(parameters: IDeleteListingTranslationParameters): Promise<IStandardResponse<IDeleteListingTranslationParameters, TResult>> {
+        return this.client.http<IDeleteListingTranslationParameters, TResult>("/listings/:listing_id/translations/:language", parameters, "DELETE");
+    }
 }

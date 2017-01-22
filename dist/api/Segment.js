@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Find all Browse Segments
- */
-function findBrowseSegments(parameters) {
-    return HttpRequest_1.request(parameters, '/segments', 'GET');
+class Segment {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Find all Browse Segments
+     */
+    findBrowseSegments(parameters) {
+        return this.client.http("/segments", parameters, "GET");
+    }
 }
-exports.findBrowseSegments = findBrowseSegments;
+exports.Segment = Segment;

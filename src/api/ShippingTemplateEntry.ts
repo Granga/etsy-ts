@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IShippingTemplateEntry {
     shipping_template_entry_id: number,
@@ -14,6 +12,7 @@ export interface IShippingTemplateEntry {
     primary_cost: number,
     secondary_cost: number
 }
+
 
 export interface ICreateShippingTemplateEntryParameters extends IStandardParameters {
     shipping_template_id: number,
@@ -35,27 +34,37 @@ export interface IDeleteShippingTemplateEntryParameters extends IStandardParamet
     shipping_template_entry_id: number
 }
 
-/**
- * Creates a new ShippingTemplateEntry
- */
-export function createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, ICreateShippingTemplateEntryParameters>> {
-    return request<IStandardResponse<TResult, ICreateShippingTemplateEntryParameters>>(parameters, '/shipping/templates/entries', 'POST');
-}
-/**
- * Retrieves a ShippingTemplateEntry by id.
- */
-export function getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IGetShippingTemplateEntryParameters>> {
-    return request<IStandardResponse<TResult, IGetShippingTemplateEntryParameters>>(parameters, '/shipping/templates/entries/:shipping_template_entry_id', 'GET');
-}
-/**
- * Updates a ShippingTemplateEntry
- */
-export function updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingTemplateEntryParameters>> {
-    return request<IStandardResponse<TResult, IUpdateShippingTemplateEntryParameters>>(parameters, '/shipping/templates/entries/:shipping_template_entry_id', 'PUT');
-}
-/**
- * Deletes the ShippingTemplateEntry
- */
-export function deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingTemplateEntryParameters>> {
-    return request<IStandardResponse<TResult, IDeleteShippingTemplateEntryParameters>>(parameters, '/shipping/templates/entries/:shipping_template_entry_id', 'DELETE');
+export class ShippingTemplateEntry {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Creates a new ShippingTemplateEntry
+     */
+    createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>> {
+        return this.client.http<ICreateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries", parameters, "POST");
+    }
+
+    /**
+     * Retrieves a ShippingTemplateEntry by id.
+     */
+    getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>> {
+        return this.client.http<IGetShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET");
+    }
+
+    /**
+     * Updates a ShippingTemplateEntry
+     */
+    updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>> {
+        return this.client.http<IUpdateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT");
+    }
+
+    /**
+     * Deletes the ShippingTemplateEntry
+     */
+    deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>> {
+        return this.client.http<IDeleteShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE");
+    }
 }

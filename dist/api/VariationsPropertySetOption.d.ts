@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IVariationsPropertySetOption {
     property_option_id: number;
     name: string;
@@ -19,7 +18,11 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
     diameter_scale?: number;
     dimensions_scale?: number;
 }
-/**
-* Finds all suggested property options for a given property.
-*/
-export declare function findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Bluebird<IStandardResponse<TResult, IFindAllSuggestedPropertyOptionsParameters>>;
+export declare class VariationsPropertySetOption {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Finds all suggested property options for a given property.
+     */
+    findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
+}

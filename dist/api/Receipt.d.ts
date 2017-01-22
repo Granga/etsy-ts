@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IReceipt {
     receipt_id: number;
     receipt_type: number;
@@ -42,7 +41,7 @@ export interface IReceipt {
     shipping_notification_date: number;
     shipments: any[];
 }
-export interface IGetShop_Receipt2Parameters extends IStandardParameters {
+export interface IGetShopReceipt2Parameters extends IStandardParameters {
     receipt_id: number[];
 }
 export interface IUpdateReceiptParameters extends IStandardParameters {
@@ -93,35 +92,39 @@ export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters
     offset?: number;
     page?: number;
 }
-/**
- * Retrieves a Shop_Receipt2 by id.
- */
-export declare function getShop_Receipt2<TResult>(parameters: IGetShop_Receipt2Parameters): Bluebird<IStandardResponse<TResult, IGetShop_Receipt2Parameters>>;
-/**
- * Updates a Shop_Receipt2
- */
-export declare function updateReceipt<TResult>(parameters: IUpdateReceiptParameters): Bluebird<IStandardResponse<TResult, IUpdateReceiptParameters>>;
-/**
- * Retrieves a set of Receipt objects associated to a Shop.
- */
-export declare function findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllShopReceiptsParameters>>;
-/**
- * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
- */
-export declare function submitTracking<TResult>(parameters: ISubmitTrackingParameters): Bluebird<IStandardResponse<TResult, ISubmitTrackingParameters>>;
-/**
- * Retrieves a set of Receipt objects associated to a Shop based on the status.
- */
-export declare function findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters): Bluebird<IStandardResponse<TResult, IFindAllShopReceiptsByStatusParameters>>;
-/**
- * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
- */
-export declare function findAllOpenLocalDeliveryReceipts<TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllOpenLocalDeliveryReceiptsParameters>>;
-/**
- * Searches the set of Receipt objects associated to a Shop by a query
- */
-export declare function searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters): Bluebird<IStandardResponse<TResult, ISearchAllShopReceiptsParameters>>;
-/**
- * Retrieves a set of Receipt objects associated to a User.
- */
-export declare function findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters): Bluebird<IStandardResponse<TResult, IFindAllUserBuyerReceiptsParameters>>;
+export declare class Receipt {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a Shop_Receipt2 by id.
+     */
+    getShop_Receipt2<TResult>(parameters: IGetShopReceipt2Parameters): Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>>;
+    /**
+     * Updates a Shop_Receipt2
+     */
+    updateReceipt<TResult>(parameters: IUpdateReceiptParameters): Promise<IStandardResponse<IUpdateReceiptParameters, TResult>>;
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop.
+     */
+    findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters): Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>;
+    /**
+     * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
+     */
+    submitTracking<TResult>(parameters: ISubmitTrackingParameters): Promise<IStandardResponse<ISubmitTrackingParameters, TResult>>;
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop based on the status.
+     */
+    findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>;
+    /**
+     * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
+     */
+    findAllOpenLocalDeliveryReceipts<TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters): Promise<IStandardResponse<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>>;
+    /**
+     * Searches the set of Receipt objects associated to a Shop by a query
+     */
+    searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>;
+    /**
+     * Retrieves a set of Receipt objects associated to a User.
+     */
+    findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>;
+}

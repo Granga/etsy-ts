@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IApiMethod {
     name: string,
@@ -14,13 +12,21 @@ export interface IApiMethod {
     http_method: string
 }
 
+
 export interface IGetMethodTableParameters extends IStandardParameters {
 
 }
 
-/**
- * Get a list of all methods available.
- */
-export function getMethodTable<TResult>(parameters: IGetMethodTableParameters): Bluebird<IStandardResponse<TResult, IGetMethodTableParameters>> {
-    return request<IStandardResponse<TResult, IGetMethodTableParameters>>(parameters, '/', 'GET');
+export class ApiMethod {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a list of all methods available.
+     */
+    getMethodTable<TResult>(parameters: IGetMethodTableParameters): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
+        return this.client.http<IGetMethodTableParameters, TResult>("/", parameters, "GET");
+    }
 }

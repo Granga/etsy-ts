@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves a ShopAbout object associated to a Shop.
- */
-function getShopAbout(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/about', 'GET');
+class ShopAbout {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a ShopAbout object associated to a Shop.
+     */
+    getShopAbout(parameters) {
+        return this.client.http("/shops/:shop_id/about", parameters, "GET");
+    }
 }
-exports.getShopAbout = getShopAbout;
+exports.ShopAbout = ShopAbout;

@@ -1,51 +1,49 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
- */
-function findAllShops(parameters) {
-    return HttpRequest_1.request(parameters, '/shops', 'GET');
+class Shop {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
+     */
+    findAllShops(parameters) {
+        return this.client.http("/shops", parameters, "GET");
+    }
+    /**
+     * Retrieves a Shop by id.
+     */
+    getShop(parameters) {
+        return this.client.http("/shops/:shop_id", parameters, "GET");
+    }
+    /**
+     * Updates a Shop
+     */
+    updateShop(parameters) {
+        return this.client.http("/shops/:shop_id", parameters, "PUT");
+    }
+    /**
+     * Upload a new shop banner image
+     */
+    uploadShopBanner(parameters) {
+        return this.client.http("/shops/:shop_id/appearance/banner", parameters, "POST");
+    }
+    /**
+     * Deletes a shop banner image
+     */
+    deleteShopBanner(parameters) {
+        return this.client.http("/shops/:shop_id/appearance/banner", parameters, "DELETE");
+    }
+    /**
+     * Retrieves a shop by a listing id.
+     */
+    getListingShop(parameters) {
+        return this.client.http("/shops/listing/:listing_id", parameters, "GET");
+    }
+    /**
+     * Retrieves a set of Shop objects associated to a User.
+     */
+    findAllUserShops(parameters) {
+        return this.client.http("/users/:user_id/shops", parameters, "GET");
+    }
 }
-exports.findAllShops = findAllShops;
-/**
- * Retrieves a Shop by id.
- */
-function getShop(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id', 'GET');
-}
-exports.getShop = getShop;
-/**
- * Updates a Shop
- */
-function updateShop(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id', 'PUT');
-}
-exports.updateShop = updateShop;
-/**
- * Upload a new shop banner image
- */
-function uploadShopBanner(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/appearance/banner', 'POST');
-}
-exports.uploadShopBanner = uploadShopBanner;
-/**
- * Deletes a shop banner image
- */
-function deleteShopBanner(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/appearance/banner', 'DELETE');
-}
-exports.deleteShopBanner = deleteShopBanner;
-/**
- * Retrieves a shop by a listing id.
- */
-function getListingShop(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/listing/:listing_id', 'GET');
-}
-exports.getListingShop = getListingShop;
-/**
- * Retrieves a set of Shop objects associated to a User.
- */
-function findAllUserShops(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/shops', 'GET');
-}
-exports.findAllUserShops = findAllUserShops;
+exports.Shop = Shop;

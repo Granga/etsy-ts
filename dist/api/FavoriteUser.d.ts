@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFavoriteUser {
     user_id: number;
     favorite_user_id: number;
@@ -32,23 +31,27 @@ export interface IDeleteUserFavoriteUsersParameters extends IStandardParameters 
     user_id: string | number;
     target_user_id: string | number;
 }
-/**
-* Retrieves a set of FavoriteUser objects associated to a User.
-*/
-export declare function findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFavoredByParameters>>;
-/**
-* Finds all favorite users for a user
-*/
-export declare function findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFavoriteUsersParameters>>;
-/**
-* Finds a favorite user for a user
-*/
-export declare function findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IFindUserFavoriteUsersParameters>>;
-/**
-* Creates a new favorite listing for a user
-*/
-export declare function createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, ICreateUserFavoriteUsersParameters>>;
-/**
-* Delete a favorite listing for a user
-*/
-export declare function deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IDeleteUserFavoriteUsersParameters>>;
+export declare class FavoriteUser {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves a set of FavoriteUser objects associated to a User.
+     */
+    findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters): Promise<IStandardResponse<IFindAllUserFavoredByParameters, TResult>>;
+    /**
+     * Finds all favorite users for a user
+     */
+    findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters): Promise<IStandardResponse<IFindAllUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Finds a favorite user for a user
+     */
+    findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters): Promise<IStandardResponse<IFindUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Creates a new favorite listing for a user
+     */
+    createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters): Promise<IStandardResponse<ICreateUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Delete a favorite listing for a user
+     */
+    deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters): Promise<IStandardResponse<IDeleteUserFavoriteUsersParameters, TResult>>;
+}

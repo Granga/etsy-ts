@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
-* Retrieves a set of BillPayment objects associated to a User.
-*/
-function findAllUserPayments(parameters) {
-    return HttpRequest_1.request(parameters, '/users/:user_id/payments', 'GET');
+class BillPayment {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a set of BillPayment objects associated to a User.
+     */
+    findAllUserPayments(parameters) {
+        return this.client.http("/users/:user_id/payments", parameters, "GET");
+    }
 }
-exports.findAllUserPayments = findAllUserPayments;
+exports.BillPayment = BillPayment;

@@ -1,30 +1,31 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function getShopSectionTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/sections/:shop_section_id/translations/:language', 'GET');
+class ShopSectionTranslation {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    getShopSectionTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "GET");
+    }
+    /**
+     * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    createShopSectionTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "POST");
+    }
+    /**
+     * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    updateShopSectionTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "PUT");
+    }
+    /**
+     * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    deleteShopSectionTranslation(parameters) {
+        return this.client.http("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "DELETE");
+    }
 }
-exports.getShopSectionTranslation = getShopSectionTranslation;
-/**
- * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function createShopSectionTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/sections/:shop_section_id/translations/:language', 'POST');
-}
-exports.createShopSectionTranslation = createShopSectionTranslation;
-/**
- * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function updateShopSectionTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/sections/:shop_section_id/translations/:language', 'PUT');
-}
-exports.updateShopSectionTranslation = updateShopSectionTranslation;
-/**
- * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function deleteShopSectionTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/shops/:shop_id/sections/:shop_section_id/translations/:language', 'DELETE');
-}
-exports.deleteShopSectionTranslation = deleteShopSectionTranslation;
+exports.ShopSectionTranslation = ShopSectionTranslation;

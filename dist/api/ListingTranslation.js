@@ -1,30 +1,31 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves a ListingTranslation by listing_id and language
- */
-function getListingTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/translations/:language', 'GET');
+class ListingTranslation {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a ListingTranslation by listing_id and language
+     */
+    getListingTranslation(parameters) {
+        return this.client.http("/listings/:listing_id/translations/:language", parameters, "GET");
+    }
+    /**
+     * Creates a ListingTranslation by listing_id and language
+     */
+    createListingTranslation(parameters) {
+        return this.client.http("/listings/:listing_id/translations/:language", parameters, "POST");
+    }
+    /**
+     * Updates a ListingTranslation by listing_id and language
+     */
+    updateListingTranslation(parameters) {
+        return this.client.http("/listings/:listing_id/translations/:language", parameters, "PUT");
+    }
+    /**
+     * Deletes a ListingTranslation by listing_id and language
+     */
+    deleteListingTranslation(parameters) {
+        return this.client.http("/listings/:listing_id/translations/:language", parameters, "DELETE");
+    }
 }
-exports.getListingTranslation = getListingTranslation;
-/**
- * Creates a ListingTranslation by listing_id and language
- */
-function createListingTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/translations/:language', 'POST');
-}
-exports.createListingTranslation = createListingTranslation;
-/**
- * Updates a ListingTranslation by listing_id and language
- */
-function updateListingTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/translations/:language', 'PUT');
-}
-exports.updateListingTranslation = updateListingTranslation;
-/**
- * Deletes a ListingTranslation by listing_id and language
- */
-function deleteListingTranslation(parameters) {
-    return HttpRequest_1.request(parameters, '/listings/:listing_id/translations/:language', 'DELETE');
-}
-exports.deleteListingTranslation = deleteListingTranslation;
+exports.ListingTranslation = ListingTranslation;

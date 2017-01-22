@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ICart {
     cart_id: number,
@@ -24,6 +22,7 @@ export interface ICart {
     has_vat: boolean,
     shipping_option: any
 }
+
 
 export interface IGetAllUserCartsParameters extends IStandardParameters {
     user_id: string | number,
@@ -92,69 +91,86 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
     selected_variations?: [any, any]
 }
 
-/**
- * Get a user's Carts
- */
-export function getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters): Bluebird<IStandardResponse<TResult, IGetAllUserCartsParameters>> {
-    return request<IStandardResponse<TResult, IGetAllUserCartsParameters>>(parameters, '/users/:user_id/carts', 'GET');
-}
-/**
- * Add a listing to a cart
- */
-export function addToCart<TResult>(parameters: IAddToCartParameters): Bluebird<IStandardResponse<TResult, IAddToCartParameters>> {
-    return request<IStandardResponse<TResult, IAddToCartParameters>>(parameters, '/users/:user_id/carts', 'POST');
-}
-/**
- * Update a cart listing purchase quantity
- */
-export function updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters): Bluebird<IStandardResponse<TResult, IUpdateCartListingQuantityParameters>> {
-    return request<IStandardResponse<TResult, IUpdateCartListingQuantityParameters>>(parameters, '/users/:user_id/carts', 'PUT');
-}
-/**
- * Remove a listing from a cart
- */
-export function removeCartListing<TResult>(parameters: IRemoveCartListingParameters): Bluebird<IStandardResponse<TResult, IRemoveCartListingParameters>> {
-    return request<IStandardResponse<TResult, IRemoveCartListingParameters>>(parameters, '/users/:user_id/carts', 'DELETE');
-}
-/**
- * Get a cart
- */
-export function getUserCart<TResult>(parameters: IGetUserCartParameters): Bluebird<IStandardResponse<TResult, IGetUserCartParameters>> {
-    return request<IStandardResponse<TResult, IGetUserCartParameters>>(parameters, '/users/:user_id/carts/:cart_id', 'GET');
-}
-/**
- * Update a cart
- */
-export function updateCart<TResult>(parameters: IUpdateCartParameters): Bluebird<IStandardResponse<TResult, IUpdateCartParameters>> {
-    return request<IStandardResponse<TResult, IUpdateCartParameters>>(parameters, '/users/:user_id/carts/:cart_id', 'PUT');
-}
-/**
- * Delete a cart
- */
-export function deleteCart<TResult>(parameters: IDeleteCartParameters): Bluebird<IStandardResponse<TResult, IDeleteCartParameters>> {
-    return request<IStandardResponse<TResult, IDeleteCartParameters>>(parameters, '/users/:user_id/carts/:cart_id', 'DELETE');
-}
-/**
- * Saves and selects a shipping address for apple pay
- */
-export function addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Bluebird<IStandardResponse<TResult, IAddAndSelectShippingForApplePayParameters>> {
-    return request<IStandardResponse<TResult, IAddAndSelectShippingForApplePayParameters>>(parameters, '/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple', 'POST');
-}
-/**
- * Move a listing to Saved for Later
- */
-export function saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters): Bluebird<IStandardResponse<TResult, ISaveListingForLaterParameters>> {
-    return request<IStandardResponse<TResult, ISaveListingForLaterParameters>>(parameters, '/users/:user_id/carts/save', 'DELETE');
-}
-/**
- * Get a cart from a shop ID
- */
-export function getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters): Bluebird<IStandardResponse<TResult, IGetUserCartForShopParameters>> {
-    return request<IStandardResponse<TResult, IGetUserCartForShopParameters>>(parameters, '/users/:user_id/carts/shop/:shop_id', 'GET');
-}
-/**
- * Create a single-listing cart from a listing
- */
-export function createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters): Bluebird<IStandardResponse<TResult, ICreateSingleListingCartParameters>> {
-    return request<IStandardResponse<TResult, ICreateSingleListingCartParameters>>(parameters, '/users/:user_id/carts/single_listing', 'POST');
+export class Cart {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a user's Carts
+     */
+    getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
+        return this.client.http<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET");
+    }
+
+    /**
+     * Add a listing to a cart
+     */
+    addToCart<TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
+        return this.client.http<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST");
+    }
+
+    /**
+     * Update a cart listing purchase quantity
+     */
+    updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
+        return this.client.http<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT");
+    }
+
+    /**
+     * Remove a listing from a cart
+     */
+    removeCartListing<TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
+        return this.client.http<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE");
+    }
+
+    /**
+     * Get a cart
+     */
+    getUserCart<TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
+        return this.client.http<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET");
+    }
+
+    /**
+     * Update a cart
+     */
+    updateCart<TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
+        return this.client.http<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT");
+    }
+
+    /**
+     * Delete a cart
+     */
+    deleteCart<TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
+        return this.client.http<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE");
+    }
+
+    /**
+     * Saves and selects a shipping address for apple pay
+     */
+    addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
+        return this.client.http<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
+    }
+
+    /**
+     * Move a listing to Saved for Later
+     */
+    saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
+        return this.client.http<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE");
+    }
+
+    /**
+     * Get a cart from a shop ID
+     */
+    getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
+        return this.client.http<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
+    }
+
+    /**
+     * Create a single-listing cart from a listing
+     */
+    createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
+        return this.client.http<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST");
+    }
 }

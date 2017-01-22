@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Find Browse SegmentPosters by Segment slug
- */
-function findBrowseSegmentPosters(parameters) {
-    return HttpRequest_1.request(parameters, '/segments/posters', 'GET');
+class SegmentPoster {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Find Browse SegmentPosters by Segment slug
+     */
+    findBrowseSegmentPosters(parameters) {
+        return this.client.http("/segments/posters", parameters, "GET");
+    }
 }
-exports.findBrowseSegmentPosters = findBrowseSegmentPosters;
+exports.SegmentPoster = SegmentPoster;

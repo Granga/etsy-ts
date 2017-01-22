@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShippingTemplate {
     shipping_template_id: number;
     title: string;
@@ -46,27 +45,31 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
     offset?: number;
     page?: number;
 }
-/**
- * Creates a new ShippingTemplate
- */
-export declare function createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Bluebird<IStandardResponse<TResult, ICreateShippingTemplateParameters>>;
-/**
- * Retrieves a ShippingTemplate by id.
- */
-export declare function getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IGetShippingTemplateParameters>>;
-/**
- * Updates a ShippingTemplate
- */
-export declare function updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IUpdateShippingTemplateParameters>>;
-/**
- * Deletes the ShippingTemplate with the given id.
- */
-export declare function deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Bluebird<IStandardResponse<TResult, IDeleteShippingTemplateParameters>>;
-/**
- * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
- */
-export declare function findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Bluebird<IStandardResponse<TResult, IFindAllShippingTemplateEntriesParameters>>;
-/**
- * Retrieves a set of ShippingTemplate objects associated to a User.
- */
-export declare function findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Bluebird<IStandardResponse<TResult, IFindAllUserShippingProfilesParameters>>;
+export declare class ShippingTemplate {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Creates a new ShippingTemplate
+     */
+    createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
+    /**
+     * Retrieves a ShippingTemplate by id.
+     */
+    getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
+    /**
+     * Updates a ShippingTemplate
+     */
+    updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
+    /**
+     * Deletes the ShippingTemplate with the given id.
+     */
+    deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
+    /**
+     * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
+     */
+    findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
+    /**
+     * Retrieves a set of ShippingTemplate objects associated to a User.
+     */
+    findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
+}

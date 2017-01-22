@@ -1,3 +1,5 @@
+import {EtsyApiClient} from "../client/EtsyApiClient";
+
 export interface IManufacturer {
     name: string,
     description: string[],
@@ -5,3 +7,10 @@ export interface IManufacturer {
 }
 
 
+export class Manufacturer {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+}

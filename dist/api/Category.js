@@ -1,44 +1,43 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Retrieves a top-level Category by tag.
- */
-function getCategory(parameters) {
-    return HttpRequest_1.request(parameters, '/categories/:tag', 'GET');
+class Category {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Retrieves a top-level Category by tag.
+     */
+    getCategory(parameters) {
+        return this.client.http("/categories/:tag", parameters, "GET");
+    }
+    /**
+     * Retrieves all top-level Categories.
+     */
+    findAllTopCategory(parameters) {
+        return this.client.http("/taxonomy/categories", parameters, "GET");
+    }
+    /**
+     * Retrieves a second-level Category by tag and subtag.
+     */
+    getSubCategory(parameters) {
+        return this.client.http("/categories/:tag/:subtag", parameters, "GET");
+    }
+    /**
+     * Retrieves a third-level Category by tag, subtag and subsubtag.
+     */
+    getSubSubCategory(parameters) {
+        return this.client.http("/categories/:tag/:subtag/:subsubtag", parameters, "GET");
+    }
+    /**
+     * Retrieves children of a top-level Category by tag.
+     */
+    findAllTopCategoryChildren(parameters) {
+        return this.client.http("/taxonomy/categories/:tag", parameters, "GET");
+    }
+    /**
+     * Retrieves children of a second-level Category by tag and subtag.
+     */
+    findAllSubCategoryChildren(parameters) {
+        return this.client.http("/taxonomy/categories/:tag/:subtag", parameters, "GET");
+    }
 }
-exports.getCategory = getCategory;
-/**
- * Retrieves all top-level Categories.
- */
-function findAllTopCategory(parameters) {
-    return HttpRequest_1.request(parameters, '/taxonomy/categories', 'GET');
-}
-exports.findAllTopCategory = findAllTopCategory;
-/**
- * Retrieves a second-level Category by tag and subtag.
- */
-function getSubCategory(parameters) {
-    return HttpRequest_1.request(parameters, '/categories/:tag/:subtag', 'GET');
-}
-exports.getSubCategory = getSubCategory;
-/**
- * Retrieves a third-level Category by tag, subtag and subsubtag.
- */
-function getSubSubCategory(parameters) {
-    return HttpRequest_1.request(parameters, '/categories/:tag/:subtag/:subsubtag', 'GET');
-}
-exports.getSubSubCategory = getSubSubCategory;
-/**
- * Retrieves children of a top-level Category by tag.
- */
-function findAllTopCategoryChildren(parameters) {
-    return HttpRequest_1.request(parameters, '/taxonomy/categories/:tag', 'GET');
-}
-exports.findAllTopCategoryChildren = findAllTopCategoryChildren;
-/**
- * Retrieves children of a second-level Category by tag and subtag.
- */
-function findAllSubCategoryChildren(parameters) {
-    return HttpRequest_1.request(parameters, '/taxonomy/categories/:tag/:subtag', 'GET');
-}
-exports.findAllSubCategoryChildren = findAllSubCategoryChildren;
+exports.Category = Category;

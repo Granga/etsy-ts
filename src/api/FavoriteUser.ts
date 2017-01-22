@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IFavoriteUser {
     user_id: number,
@@ -10,6 +8,7 @@ export interface IFavoriteUser {
     target_user_id: number,
     creation_tsz: number
 }
+
 
 export interface IFindAllUserFavoredByParameters extends IStandardParameters {
     user_id: string | number,
@@ -36,33 +35,44 @@ export interface IDeleteUserFavoriteUsersParameters extends IStandardParameters 
     target_user_id: string | number
 }
 
-/**
- * Retrieves a set of FavoriteUser objects associated to a User.
- */
-export function findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFavoredByParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFavoredByParameters>>(parameters, '/users/:user_id/favored-by', 'GET');
-}
-/**
- * Finds all favorite users for a user
- */
-export function findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IFindAllUserFavoriteUsersParameters>> {
-    return request<IStandardResponse<TResult, IFindAllUserFavoriteUsersParameters>>(parameters, '/users/:user_id/favorites/users', 'GET');
-}
-/**
- * Finds a favorite user for a user
- */
-export function findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IFindUserFavoriteUsersParameters>> {
-    return request<IStandardResponse<TResult, IFindUserFavoriteUsersParameters>>(parameters, '/users/:user_id/favorites/users/:target_user_id', 'GET');
-}
-/**
- * Creates a new favorite listing for a user
- */
-export function createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, ICreateUserFavoriteUsersParameters>> {
-    return request<IStandardResponse<TResult, ICreateUserFavoriteUsersParameters>>(parameters, '/users/:user_id/favorites/users/:target_user_id', 'POST');
-}
-/**
- * Delete a favorite listing for a user
- */
-export function deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters): Bluebird<IStandardResponse<TResult, IDeleteUserFavoriteUsersParameters>> {
-    return request<IStandardResponse<TResult, IDeleteUserFavoriteUsersParameters>>(parameters, '/users/:user_id/favorites/users/:target_user_id', 'DELETE');
+export class FavoriteUser {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves a set of FavoriteUser objects associated to a User.
+     */
+    findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters): Promise<IStandardResponse<IFindAllUserFavoredByParameters, TResult>> {
+        return this.client.http<IFindAllUserFavoredByParameters, TResult>("/users/:user_id/favored-by", parameters, "GET");
+    }
+
+    /**
+     * Finds all favorite users for a user
+     */
+    findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters): Promise<IStandardResponse<IFindAllUserFavoriteUsersParameters, TResult>> {
+        return this.client.http<IFindAllUserFavoriteUsersParameters, TResult>("/users/:user_id/favorites/users", parameters, "GET");
+    }
+
+    /**
+     * Finds a favorite user for a user
+     */
+    findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters): Promise<IStandardResponse<IFindUserFavoriteUsersParameters, TResult>> {
+        return this.client.http<IFindUserFavoriteUsersParameters, TResult>("/users/:user_id/favorites/users/:target_user_id", parameters, "GET");
+    }
+
+    /**
+     * Creates a new favorite listing for a user
+     */
+    createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters): Promise<IStandardResponse<ICreateUserFavoriteUsersParameters, TResult>> {
+        return this.client.http<ICreateUserFavoriteUsersParameters, TResult>("/users/:user_id/favorites/users/:target_user_id", parameters, "POST");
+    }
+
+    /**
+     * Delete a favorite listing for a user
+     */
+    deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters): Promise<IStandardResponse<IDeleteUserFavoriteUsersParameters, TResult>> {
+        return this.client.http<IDeleteUserFavoriteUsersParameters, TResult>("/users/:user_id/favorites/users/:target_user_id", parameters, "DELETE");
+    }
 }

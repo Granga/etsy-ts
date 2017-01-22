@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface ILedger {
     ledger_id: number,
@@ -12,13 +10,21 @@ export interface ILedger {
     update_date: number
 }
 
+
 export interface IFindLedgerParameters extends IStandardParameters {
     shop_id: string | number
 }
 
-/**
- * Get a Shop Payment Account Ledger
- */
-export function findLedger<TResult>(parameters: IFindLedgerParameters): Bluebird<IStandardResponse<TResult, IFindLedgerParameters>> {
-    return request<IStandardResponse<TResult, IFindLedgerParameters>>(parameters, '/shops/:shop_id/ledger/', 'GET');
+export class Ledger {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a Shop Payment Account Ledger
+     */
+    findLedger<TResult>(parameters: IFindLedgerParameters): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
+        return this.client.http<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET");
+    }
 }

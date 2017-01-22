@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IBillingOverview {
     is_overdue: boolean,
@@ -14,13 +12,21 @@ export interface IBillingOverview {
     date_overdue: number
 }
 
+
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number
 }
 
-/**
- * Retrieves the user's current balance.
- */
-export function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Bluebird<IStandardResponse<TResult, IGetUserBillingOverviewParameters>> {
-    return request<IStandardResponse<TResult, IGetUserBillingOverviewParameters>>(parameters, '/users/:user_id/billing/overview', 'GET');
+export class BillingOverview {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Retrieves the user's current balance.
+     */
+    getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
+        return this.client.http<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET");
+    }
 }

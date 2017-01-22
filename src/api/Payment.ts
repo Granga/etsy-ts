@@ -1,8 +1,6 @@
-import * as Bluebird from "bluebird";
-import {request} from "../common/HttpRequest";
-import {IStandardParameters} from "../common/IStandardParameters";
-import {IStandardResponse} from "../common/IStandardResponse";
-
+import {IStandardParameters} from "../client/IStandardParameters";
+import {EtsyApiClient} from "../client/EtsyApiClient";
+import {IStandardResponse} from "../client/IStandardResponse";
 
 export interface IPayment {
     payment_id: number,
@@ -30,6 +28,7 @@ export interface IPayment {
     update_date: number
 }
 
+
 export interface IFindPaymentParameters extends IStandardParameters {
     payment_id: number[]
 }
@@ -42,21 +41,30 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
     shop_id: string | number
 }
 
-/**
- * Get a Direct Checkout Payment
- */
-export function findPayment<TResult>(parameters: IFindPaymentParameters): Bluebird<IStandardResponse<TResult, IFindPaymentParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentParameters>>(parameters, '/payments/:payment_id', 'GET');
-}
-/**
- * Get a Payment from a Ledger Entry ID, if applicable
- */
-export function findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters): Bluebird<IStandardResponse<TResult, IFindPaymentForLedgerEntryParameters>> {
-    return request<IStandardResponse<TResult, IFindPaymentForLedgerEntryParameters>>(parameters, '/shops/:shop_id/ledger/entries/:ledger_entry_id/payment', 'GET');
-}
-/**
- * Get a Payment by Shop Receipt ID
- */
-export function findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters): Bluebird<IStandardResponse<TResult, IFindShopPaymentByReceiptParameters>> {
-    return request<IStandardResponse<TResult, IFindShopPaymentByReceiptParameters>>(parameters, '/shops/:shop_id/receipts/:receipt_id/payments', 'GET');
+export class Payment {
+    constructor(private client: EtsyApiClient) {
+
+    }
+
+
+    /**
+     * Get a Direct Checkout Payment
+     */
+    findPayment<TResult>(parameters: IFindPaymentParameters): Promise<IStandardResponse<IFindPaymentParameters, TResult>> {
+        return this.client.http<IFindPaymentParameters, TResult>("/payments/:payment_id", parameters, "GET");
+    }
+
+    /**
+     * Get a Payment from a Ledger Entry ID, if applicable
+     */
+    findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>> {
+        return this.client.http<IFindPaymentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET");
+    }
+
+    /**
+     * Get a Payment by Shop Receipt ID
+     */
+    findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>> {
+        return this.client.http<IFindShopPaymentByReceiptParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET");
+    }
 }

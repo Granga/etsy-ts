@@ -1,23 +1,25 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Finds all Region.
- */
-function findAllRegion(parameters) {
-    return HttpRequest_1.request(parameters, '/regions', 'GET');
+class Region {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Finds all Region.
+     */
+    findAllRegion(parameters) {
+        return this.client.http("/regions", parameters, "GET");
+    }
+    /**
+     * Retrieves a Region by id.
+     */
+    getRegion(parameters) {
+        return this.client.http("/regions/:region_id", parameters, "GET");
+    }
+    /**
+     *
+     */
+    findEligibleRegions(parameters) {
+        return this.client.http("/regions/eligible", parameters, "GET");
+    }
 }
-exports.findAllRegion = findAllRegion;
-/**
- * Retrieves a Region by id.
- */
-function getRegion(parameters) {
-    return HttpRequest_1.request(parameters, '/regions/:region_id', 'GET');
-}
-exports.getRegion = getRegion;
-/**
- *
- */
-function findEligibleRegions(parameters) {
-    return HttpRequest_1.request(parameters, '/regions/eligible', 'GET');
-}
-exports.findEligibleRegions = findEligibleRegions;
+exports.Region = Region;

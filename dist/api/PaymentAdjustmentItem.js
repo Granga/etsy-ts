@@ -1,9 +1,13 @@
 "use strict";
-const HttpRequest_1 = require("../common/HttpRequest");
-/**
- * Get Direct Checkout Payment Adjustment Items
- */
-function findPaymentAdjustmentItem(parameters) {
-    return HttpRequest_1.request(parameters, '/payments/:payment_id/adjustments/:payment_adjustment_id/items', 'GET');
+class PaymentAdjustmentItem {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get Direct Checkout Payment Adjustment Items
+     */
+    findPaymentAdjustmentItem(parameters) {
+        return this.client.http("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
+    }
 }
-exports.findPaymentAdjustmentItem = findPaymentAdjustmentItem;
+exports.PaymentAdjustmentItem = PaymentAdjustmentItem;

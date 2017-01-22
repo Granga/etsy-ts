@@ -1,7 +1,6 @@
-/// <reference types="bluebird" />
-import * as Bluebird from "bluebird";
-import { IStandardParameters } from "../common/IStandardParameters";
-import { IStandardResponse } from "../common/IStandardResponse";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { EtsyApiClient } from "../client/EtsyApiClient";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IBillingOverview {
     is_overdue: boolean;
     currency_code: string;
@@ -14,7 +13,11 @@ export interface IBillingOverview {
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Retrieves the user's current balance.
- */
-export declare function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Bluebird<IStandardResponse<TResult, IGetUserBillingOverviewParameters>>;
+export declare class BillingOverview {
+    private client;
+    constructor(client: EtsyApiClient);
+    /**
+     * Retrieves the user's current balance.
+     */
+    getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
+}
