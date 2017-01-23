@@ -30,7 +30,15 @@ export class HttpClient {
             body = JSON.stringify(parameters);
         }
 
-        let response = await nodeFetch(url, {method, body});
+        let fetch;
+        if (window && window["fetch"]) {
+            fetch = window["fetch"];
+        }
+        else {
+            fetch = nodeFetch;
+        }
+
+        let response = await fetch(url, {method, body});
         console.log(response);
 
         if (response.ok == true) {

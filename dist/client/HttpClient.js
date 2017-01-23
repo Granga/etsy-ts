@@ -38,7 +38,14 @@ class HttpClient {
             else if (method === "POST" || method === "PATCH" || method === "PUT") {
                 body = JSON.stringify(parameters);
             }
-            let response = yield node_fetch_1.default(url, { method, body });
+            let fetch;
+            if (window && window["fetch"]) {
+                fetch = window["fetch"];
+            }
+            else {
+                fetch = node_fetch_1.default;
+            }
+            let response = yield fetch(url, { method, body });
             console.log(response);
             if (response.ok == true) {
                 return response.json();
