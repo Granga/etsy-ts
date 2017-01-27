@@ -1,18 +1,19 @@
 import {IStandardResponse} from "./IStandardResponse";
-import nodeFetch from "node-fetch";
 
 export interface IHttpClientOptions {
     baseUrl: string
 }
 
 export class HttpClient {
-    constructor(protected options: IHttpClientOptions) {
+    constructor(private fetch: typeof window.fetch, private options?: IHttpClientOptions) {
         const defaultOptions = {
             baseUrl: "https://etsy.com/api/v2/ajax",
             json: true
         };
 
-        this.options = {options, ...defaultOptions};
+        //todo: code for authentication
+
+        this.options = {...defaultOptions, ...options};
     }
 
     async http<TParameters, TResult>(url: string, parameters: TParameters, method: string = "GET"): Promise<IStandardResponse<TParameters, TResult>> {
@@ -30,15 +31,8 @@ export class HttpClient {
             body = JSON.stringify(parameters);
         }
 
-        let fetch;
-        if (window && window["fetch"]) {
-            fetch = window["fetch"];
-        }
-        else {
-            fetch = nodeFetch;
-        }
 
-        let response = await fetch(url, {method, body});
+        let response = await this.fetch(url, {method, body});
         console.log(response);
 
         if (response.ok == true) {

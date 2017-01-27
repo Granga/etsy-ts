@@ -15,15 +15,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const node_fetch_1 = require("node-fetch");
 class HttpClient {
-    constructor(options) {
+    constructor(fetch, options) {
+        this.fetch = fetch;
         this.options = options;
         const defaultOptions = {
             baseUrl: "https://etsy.com/api/v2/ajax",
             json: true
         };
-        this.options = __assign({ options }, defaultOptions);
+        //todo: code for authentication
+        this.options = __assign({}, defaultOptions, options);
     }
     http(url, parameters, method = "GET") {
         return __awaiter(this, void 0, void 0, function* () {
@@ -38,14 +39,7 @@ class HttpClient {
             else if (method === "POST" || method === "PATCH" || method === "PUT") {
                 body = JSON.stringify(parameters);
             }
-            let fetch;
-            if (window && window["fetch"]) {
-                fetch = window["fetch"];
-            }
-            else {
-                fetch = node_fetch_1.default;
-            }
-            let response = yield fetch(url, { method, body });
+            let response = yield this.fetch(url, { method, body });
             console.log(response);
             if (response.ok == true) {
                 return response.json();

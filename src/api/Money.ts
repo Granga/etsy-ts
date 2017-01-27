@@ -7,7 +7,8 @@ export interface IMoney {
     formatted_raw: string,
     formatted_short: string,
     formatted_long: string,
-    original_currency_code: string
+    original_currency_code: string,
+    before_conversion: any
 }
 
 

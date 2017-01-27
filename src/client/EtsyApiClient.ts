@@ -81,8 +81,8 @@ import {VariationsSelectedProperty} from "../api/VariationsSelectedProperty";
 //imports end
 
 export class EtsyApiClient extends HttpClient {
-    constructor(private httpClientOptions?: IHttpClientOptions) {
-        super(httpClientOptions);
+    constructor(fetch: any, options?: IHttpClientOptions) {
+        super(fetch, options);
     }
 
     //api start

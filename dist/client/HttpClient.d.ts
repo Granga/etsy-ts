@@ -3,7 +3,8 @@ export interface IHttpClientOptions {
     baseUrl: string;
 }
 export declare class HttpClient {
-    protected options: IHttpClientOptions;
-    constructor(options: IHttpClientOptions);
+    private fetch;
+    private options;
+    constructor(fetch: typeof window.fetch, options?: IHttpClientOptions);
     http<TParameters, TResult>(url: string, parameters: TParameters, method?: string): Promise<IStandardResponse<TParameters, TResult>>;
 }

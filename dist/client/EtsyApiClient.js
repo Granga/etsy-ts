@@ -80,9 +80,8 @@ const VariationsPropertySetProperty_1 = require("../api/VariationsPropertySetPro
 const VariationsSelectedProperty_1 = require("../api/VariationsSelectedProperty");
 //imports end
 class EtsyApiClient extends HttpClient_1.HttpClient {
-    constructor(httpClientOptions) {
-        super(httpClientOptions);
-        this.httpClientOptions = httpClientOptions;
+    constructor(fetch, options) {
+        super(fetch, options);
     }
     get ApiMethod() {
         return this._ApiMethod || (this._ApiMethod = new ApiMethod_1.ApiMethod(this));

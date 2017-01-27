@@ -77,8 +77,7 @@ import { VariationsPropertySetOptionModifier } from "../api/VariationsPropertySe
 import { VariationsPropertySetProperty } from "../api/VariationsPropertySetProperty";
 import { VariationsSelectedProperty } from "../api/VariationsSelectedProperty";
 export declare class EtsyApiClient extends HttpClient {
-    private httpClientOptions;
-    constructor(httpClientOptions?: IHttpClientOptions);
+    constructor(fetch: any, options?: IHttpClientOptions);
     private _ApiMethod;
     readonly ApiMethod: ApiMethod;
     private _Avatar;

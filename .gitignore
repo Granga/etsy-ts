@@ -12,6 +12,7 @@ build/
 .idea/
 
 src/**/*.js
+src/**/*.map
 
 test/
 dist/test

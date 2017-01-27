@@ -5,7 +5,8 @@
         "moduleResolution": "node",
         "target": "es6",
         "preserveConstEnums": true,
-        "declaration": true
+        "declaration": true,
+        "sourceMap": false
     },
-    "compileOnSave": true
+    "compileOnSave": false
 }
