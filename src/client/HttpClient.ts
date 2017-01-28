@@ -5,7 +5,7 @@ export interface IHttpClientOptions {
 }
 
 export class HttpClient {
-    constructor(private fetch: typeof window.fetch, private options?: IHttpClientOptions) {
+    constructor(private fetch: any, private options?: IHttpClientOptions) {
         const defaultOptions = {
             baseUrl: "https://etsy.com/api/v2/ajax",
             json: true

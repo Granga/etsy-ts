@@ -5,6 +5,6 @@ export interface IHttpClientOptions {
 export declare class HttpClient {
     private fetch;
     private options;
-    constructor(fetch: typeof window.fetch, options?: IHttpClientOptions);
+    constructor(fetch: any, options?: IHttpClientOptions);
     http<TParameters, TResult>(url: string, parameters: TParameters, method?: string): Promise<IStandardResponse<TParameters, TResult>>;
 }
