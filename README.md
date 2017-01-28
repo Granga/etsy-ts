@@ -32,7 +32,13 @@ let client = new EtsyApiClient(fetch, {
     baseUrl: "https://openapi.etsy.com/v2"
 });
 try {
-    let listings = (await client.Listing.findAllListingActive<IListing>({})).results;
+    let listings = (await client.Listing.findAllListingActive<IListing>({
+            limit: 50,
+            geo_level: "city",
+            tags: ["art", "wall"],
+            api_key: "<YOUR_API_KEY>"
+        })).results;
+    
     console.log(listings);
 }
 catch (e) {
@@ -49,7 +55,13 @@ let client = new EtsyApiClient(window.fetch, {
     baseUrl: "https://openapi.etsy.com/v2"
 });
 try {
-    let listings = (await client.Listing.findAllListingActive<IListing>({})).results;
+    let listings = (await client.Listing.findAllListingActive<IListing>({
+            limit: 50,
+            geo_level: "city",
+            tags: ["art", "wall"],
+            api_key: "<YOUR_API_KEY>"
+        })).results;
+        
     console.log(listings);
 }
 catch (e) {
