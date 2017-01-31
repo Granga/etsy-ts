@@ -2,6 +2,8 @@
 
 Still under active development.
 
+Most of the code in this package is _generated_ by [etsy-api-scrapper](https://github.com/Granga/etsy-api-scraper).
+
 ## Installation:
 `npm install etsy-ts --save`
 
