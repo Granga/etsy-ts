@@ -1,0 +1,1 @@
+{"version":3,"file":"ImageType.js","sourceRoot":"","sources":["../../src/api/ImageType.ts"],"names":[],"mappings":";AAeA;IACI,YAAoB,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAEzC,CAAC;IAGL;;MAEE;IACF,cAAc,CAAU,UAAqC;QACzD,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAqC,cAAc,EAAE,UAAU,EAAE,KAAK,CAAC,CAAC;IACnG,CAAC;CACA;AAZD,8BAYC"}
