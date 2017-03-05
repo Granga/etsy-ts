@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class TaxonomyNodeProperty {
     constructor(client) {
         this.client = client;

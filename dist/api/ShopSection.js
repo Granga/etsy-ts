@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class ShopSection {
     constructor(client) {
         this.client = client;

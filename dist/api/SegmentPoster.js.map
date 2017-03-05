@@ -1,1 +1,0 @@
-{"version":3,"file":"SegmentPoster.js","sourceRoot":"","sources":["../../src/api/SegmentPoster.ts"],"names":[],"mappings":";AAmBA;IACI,YAAoB,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAEzC,CAAC;IAGL;;MAEE;IACF,wBAAwB,CAAU,UAA+C;QAC7E,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAA+C,mBAAmB,EAAE,UAAU,EAAE,KAAK,CAAC,CAAC;IAClH,CAAC;CACA;AAZD,sCAYC"}

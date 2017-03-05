@@ -1,1 +1,0 @@
-{"version":3,"file":"Ledger.js","sourceRoot":"","sources":["../../src/api/Ledger.ts"],"names":[],"mappings":";AAiBA;IACI,YAAoB,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAEzC,CAAC;IAGL;;MAEE;IACF,UAAU,CAAU,UAAiC;QACjD,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAiC,yBAAyB,EAAE,UAAU,EAAE,KAAK,CAAC,CAAC;IAC1G,CAAC;CACA;AAZD,wBAYC"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"TaxonomyNodeProperty.js","sourceRoot":"","sources":["../../src/api/TaxonomyNodeProperty.ts"],"names":[],"mappings":";AAsBA;IACI,YAAoB,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAEzC,CAAC;IAGL;;MAEE;IACF,yBAAyB,CAAU,UAAgD;QAC/E,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAgD,0CAA0C,EAAE,UAAU,EAAE,KAAK,CAAC,CAAC;IAC1I,CAAC;CACA;AAZD,oDAYC"}

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class ShippingUpgrade {
     constructor(client) {
         this.client = client;

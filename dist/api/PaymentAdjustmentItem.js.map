@@ -1,1 +1,0 @@
-{"version":3,"file":"PaymentAdjustmentItem.js","sourceRoot":"","sources":["../../src/api/PaymentAdjustmentItem.ts"],"names":[],"mappings":";AAsBA;IACI,YAAoB,MAAqB;QAArB,WAAM,GAAN,MAAM,CAAe;IAEzC,CAAC;IAGL;;MAEE;IACF,yBAAyB,CAAU,UAAgD;QAC/E,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAgD,gEAAgE,EAAE,UAAU,EAAE,KAAK,CAAC,CAAC;IAChK,CAAC;CACA;AAZD,sDAYC"}

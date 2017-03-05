@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class SegmentPoster {
     constructor(client) {
         this.client = client;

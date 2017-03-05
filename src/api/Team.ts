@@ -17,7 +17,7 @@ export interface IFindAllTeamsParameters extends IStandardParameters {
     page?: number
 }
 export interface IFindTeamsParameters extends IStandardParameters {
-    team_ids: string | number[]
+    team_ids: (string | number)[]
 }
 export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     user_id: string | number,

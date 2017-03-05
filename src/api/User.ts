@@ -22,7 +22,7 @@ export interface IFindAllUsersParameters extends IStandardParameters {
     page?: number
 }
 export interface IGetUserParameters extends IStandardParameters {
-    user_id: string | number[]
+    user_id: (string | number)[]
 }
 export interface IFindAllUsersForTeamParameters extends IStandardParameters {
     team_id: number,

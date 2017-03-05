@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const HttpClient_1 = require("./HttpClient");
 //imports start
 const ApiMethod_1 = require("../api/ApiMethod");

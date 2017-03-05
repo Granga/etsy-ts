@@ -59,7 +59,7 @@ export interface IFindAllShopsParameters extends IStandardParameters {
     distance_max?: number;
 }
 export interface IGetShopParameters extends IStandardParameters {
-    shop_id: string | number[];
+    shop_id: (string | number)[];
 }
 export interface IUpdateShopParameters extends IStandardParameters {
     shop_id: string | number;
