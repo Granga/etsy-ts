@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ILedgerEntry {
     ledger_entry_id: number,
     ledger_id: number,
@@ -14,6 +15,7 @@ export interface ILedgerEntry {
     create_date: number
 }
 
+//parameters types
 
 export interface IFindLedgerEntriesParameters extends IStandardParameters {
     shop_id: string | number,
@@ -28,23 +30,19 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     ledger_entry_id: number
 }
 
-export class LedgerEntry {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get a Shop Payment Account Ledger's Entries
-     */
-    findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
-        return this.client.http<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET");
-    }
-
-    /**
-     * Get a Shop Payment Account Ledger Entry
-     */
-    findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
-        return this.client.http<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET");
-    }
+/**
+ * Get a Shop Payment Account Ledger's Entries
+ */
+export function findLedgerEntries <TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
+    return request<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET");
 }
+/**
+ * Get a Shop Payment Account Ledger Entry
+ */
+export function findLedgerEntry <TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
+    return request<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET");
+}
+
+export const LedgerEntry = {findLedgerEntries, findLedgerEntry};

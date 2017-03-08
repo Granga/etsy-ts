@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IShopTranslation {
     shop_id: number,
     language: string,
@@ -19,6 +20,7 @@ export interface IShopTranslation {
     vacation_message: string
 }
 
+//parameters types
 
 export interface IGetShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
@@ -59,37 +61,36 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
     language: string
 }
 
-export class ShopTranslation {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves a ShopTranslation by shop_id and language
-     */
-    getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
-        return this.client.http<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET");
-    }
-
-    /**
-     * Creates a ShopTranslation by shop_id and language
-     */
-    createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
-        return this.client.http<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST");
-    }
-
-    /**
-     * Updates a ShopTranslation by shop_id and language
-     */
-    updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
-        return this.client.http<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT");
-    }
-
-    /**
-     * Deletes a ShopTranslation by shop_id and language
-     */
-    deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
-        return this.client.http<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE");
-    }
+/**
+ * Retrieves a ShopTranslation by shop_id and language
+ */
+export function getShopTranslation <TResult>(parameters: IGetShopTranslationParameters): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
+    return request<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET");
 }
+/**
+ * Creates a ShopTranslation by shop_id and language
+ */
+export function createShopTranslation <TResult>(parameters: ICreateShopTranslationParameters): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
+    return request<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST");
+}
+/**
+ * Updates a ShopTranslation by shop_id and language
+ */
+export function updateShopTranslation <TResult>(parameters: IUpdateShopTranslationParameters): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
+    return request<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT");
+}
+/**
+ * Deletes a ShopTranslation by shop_id and language
+ */
+export function deleteShopTranslation <TResult>(parameters: IDeleteShopTranslationParameters): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
+    return request<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE");
+}
+
+export const ShopTranslation = {
+    getShopTranslation,
+    createShopTranslation,
+    updateShopTranslation,
+    deleteShopTranslation
+};

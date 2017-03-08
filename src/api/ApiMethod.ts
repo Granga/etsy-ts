@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IApiMethod {
     name: string,
     uri: string,
@@ -12,21 +13,19 @@ export interface IApiMethod {
     http_method: string
 }
 
+//parameters types
 
 export interface IGetMethodTableParameters extends IStandardParameters {
 
 }
 
-export class ApiMethod {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get a list of all methods available.
-     */
-    getMethodTable<TResult>(parameters: IGetMethodTableParameters): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
-        return this.client.http<IGetMethodTableParameters, TResult>("/", parameters, "GET");
-    }
+/**
+ * Get a list of all methods available.
+ */
+export function getMethodTable <TResult>(parameters: IGetMethodTableParameters): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
+    return request<IGetMethodTableParameters, TResult>("/", parameters, "GET");
 }
+
+export const ApiMethod = {getMethodTable};

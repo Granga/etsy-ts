@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ICart {
     cart_id: number;
     shop_name: string;
@@ -87,51 +86,60 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
     quantity?: number;
     selected_variations?: [any, any];
 }
-export declare class Cart {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Get a user's Carts
-     */
-    getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>>;
-    /**
-     * Add a listing to a cart
-     */
-    addToCart<TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>>;
-    /**
-     * Update a cart listing purchase quantity
-     */
-    updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>;
-    /**
-     * Remove a listing from a cart
-     */
-    removeCartListing<TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>>;
-    /**
-     * Get a cart
-     */
-    getUserCart<TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>>;
-    /**
-     * Update a cart
-     */
-    updateCart<TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>>;
-    /**
-     * Delete a cart
-     */
-    deleteCart<TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>>;
-    /**
-     * Saves and selects a shipping address for apple pay
-     */
-    addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>;
-    /**
-     * Move a listing to Saved for Later
-     */
-    saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>>;
-    /**
-     * Get a cart from a shop ID
-     */
-    getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>>;
-    /**
-     * Create a single-listing cart from a listing
-     */
-    createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>>;
-}
+/**
+ * Get a user's Carts
+ */
+export declare function getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>>;
+/**
+ * Add a listing to a cart
+ */
+export declare function addToCart<TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>>;
+/**
+ * Update a cart listing purchase quantity
+ */
+export declare function updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>;
+/**
+ * Remove a listing from a cart
+ */
+export declare function removeCartListing<TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>>;
+/**
+ * Get a cart
+ */
+export declare function getUserCart<TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>>;
+/**
+ * Update a cart
+ */
+export declare function updateCart<TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>>;
+/**
+ * Delete a cart
+ */
+export declare function deleteCart<TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>>;
+/**
+ * Saves and selects a shipping address for apple pay
+ */
+export declare function addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>;
+/**
+ * Move a listing to Saved for Later
+ */
+export declare function saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>>;
+/**
+ * Get a cart from a shop ID
+ */
+export declare function getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>>;
+/**
+ * Create a single-listing cart from a listing
+ */
+export declare function createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>>;
+export declare const Cart: {
+    getAllUserCarts: <TResult>(parameters: IGetAllUserCartsParameters) => Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>>;
+    addToCart: <TResult>(parameters: IAddToCartParameters) => Promise<IStandardResponse<IAddToCartParameters, TResult>>;
+    updateCartListingQuantity: <TResult>(parameters: IUpdateCartListingQuantityParameters) => Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>;
+    removeCartListing: <TResult>(parameters: IRemoveCartListingParameters) => Promise<IStandardResponse<IRemoveCartListingParameters, TResult>>;
+    getUserCart: <TResult>(parameters: IGetUserCartParameters) => Promise<IStandardResponse<IGetUserCartParameters, TResult>>;
+    updateCart: <TResult>(parameters: IUpdateCartParameters) => Promise<IStandardResponse<IUpdateCartParameters, TResult>>;
+    deleteCart: <TResult>(parameters: IDeleteCartParameters) => Promise<IStandardResponse<IDeleteCartParameters, TResult>>;
+    addAndSelectShippingForApplePay: <TResult>(parameters: IAddAndSelectShippingForApplePayParameters) => Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>;
+    saveListingForLater: <TResult>(parameters: ISaveListingForLaterParameters) => Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>>;
+    getUserCartForShop: <TResult>(parameters: IGetUserCartForShopParameters) => Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>>;
+    createSingleListingCart: <TResult>(parameters: ICreateSingleListingCartParameters) => Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>>;
+};

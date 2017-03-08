@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IStructuredPolicies {
     structured_policies_id: number,
     payments: any,
@@ -17,11 +16,10 @@ export interface IStructuredPolicies {
     privacy: any
 }
 
-
-export class StructuredPolicies {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const StructuredPolicies = {};

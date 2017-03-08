@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ILedger {
     ledger_id: number,
     shop_id: string,
@@ -10,21 +11,19 @@ export interface ILedger {
     update_date: number
 }
 
+//parameters types
 
 export interface IFindLedgerParameters extends IStandardParameters {
     shop_id: string | number
 }
 
-export class Ledger {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get a Shop Payment Account Ledger
-     */
-    findLedger<TResult>(parameters: IFindLedgerParameters): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
-        return this.client.http<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET");
-    }
+/**
+ * Get a Shop Payment Account Ledger
+ */
+export function findLedger <TResult>(parameters: IFindLedgerParameters): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
+    return request<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET");
 }
+
+export const Ledger = {findLedger};

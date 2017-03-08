@@ -3,10 +3,14 @@
         "outDir": "../dist",
         "module": "commonjs",
         "moduleResolution": "node",
-        "target": "es6",
+        "target": "es5",
         "preserveConstEnums": true,
         "declaration": true,
-        "sourceMap": false
+        "sourceMap": false,
+        "lib": [
+            "dom",
+            "es2015"
+        ]
     },
     "compileOnSave": false
 }

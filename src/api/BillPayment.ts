@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IBillPayment {
     bill_payment_id: number,
     creation_tsz: number,
@@ -14,6 +15,7 @@ export interface IBillPayment {
     creation_year: number
 }
 
+//parameters types
 
 export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     limit?: number,
@@ -25,16 +27,13 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     max_created?: number
 }
 
-export class BillPayment {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves a set of BillPayment objects associated to a User.
-     */
-    findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
-        return this.client.http<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET");
-    }
+/**
+ * Retrieves a set of BillPayment objects associated to a User.
+ */
+export function findAllUserPayments <TResult>(parameters: IFindAllUserPaymentsParameters): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
+    return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET");
 }
+
+export const BillPayment = {findAllUserPayments};

@@ -1,8 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ParamList {
-    constructor(client) {
-        this.client = client;
-    }
-}
-exports.ParamList = ParamList;
+Object.defineProperty(exports, "__esModule", {value: true});
+//parameters types
+//methods
+exports.ParamList = {};

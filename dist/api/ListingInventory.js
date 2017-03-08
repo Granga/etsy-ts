@@ -1,20 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ListingInventory {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Get the inventory for a listing [developer preview - may be unstable]
-     */
-    getInventory(parameters) {
-        return this.client.http("/listings/:listing_id/inventory", parameters, "GET");
-    }
-    /**
-     * Update the inventory for a listing [developer preview - may be unstable]
-     */
-    updateInventory(parameters) {
-        return this.client.http("/listings/:listing_id/inventory", parameters, "PUT");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Get the inventory for a listing [developer preview - may be unstable]
+ */
+function getInventory(parameters) {
+    return httpClient_1.request("/listings/:listing_id/inventory", parameters, "GET");
 }
-exports.ListingInventory = ListingInventory;
+exports.getInventory = getInventory;
+/**
+ * Update the inventory for a listing [developer preview - may be unstable]
+ */
+function updateInventory(parameters) {
+    return httpClient_1.request("/listings/:listing_id/inventory", parameters, "PUT");
+}
+exports.updateInventory = updateInventory;
+exports.ListingInventory = {getInventory: getInventory, updateInventory: updateInventory};

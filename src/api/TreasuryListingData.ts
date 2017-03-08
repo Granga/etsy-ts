@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface ITreasuryListingData {
     user_id: number,
     title: string,
@@ -13,11 +12,10 @@ export interface ITreasuryListingData {
     image_url_170x135: string
 }
 
-
-export class TreasuryListingData {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const TreasuryListingData = {};

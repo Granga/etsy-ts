@@ -1,20 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Avatar {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Upload a new user avatar image
-     */
-    uploadAvatar(parameters) {
-        return this.client.http("/users/:user_id/avatar", parameters, "POST");
-    }
-    /**
-     * Get avatar image source
-     */
-    getAvatarImgSrc(parameters) {
-        return this.client.http("/users/:user_id/avatar/src", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Upload a new user avatar image
+ */
+function uploadAvatar(parameters) {
+    return httpClient_1.request("/users/:user_id/avatar", parameters, "POST");
 }
-exports.Avatar = Avatar;
+exports.uploadAvatar = uploadAvatar;
+/**
+ * Get avatar image source
+ */
+function getAvatarImgSrc(parameters) {
+    return httpClient_1.request("/users/:user_id/avatar/src", parameters, "GET");
+}
+exports.getAvatarImgSrc = getAvatarImgSrc;
+exports.Avatar = {uploadAvatar: uploadAvatar, getAvatarImgSrc: getAvatarImgSrc};

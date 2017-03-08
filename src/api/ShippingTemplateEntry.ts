@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IShippingTemplateEntry {
     shipping_template_entry_id: number,
     shipping_template_id: number,
@@ -13,6 +14,7 @@ export interface IShippingTemplateEntry {
     secondary_cost: number
 }
 
+//parameters types
 
 export interface ICreateShippingTemplateEntryParameters extends IStandardParameters {
     shipping_template_id: number,
@@ -34,37 +36,36 @@ export interface IDeleteShippingTemplateEntryParameters extends IStandardParamet
     shipping_template_entry_id: number
 }
 
-export class ShippingTemplateEntry {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Creates a new ShippingTemplateEntry
-     */
-    createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>> {
-        return this.client.http<ICreateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries", parameters, "POST");
-    }
-
-    /**
-     * Retrieves a ShippingTemplateEntry by id.
-     */
-    getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>> {
-        return this.client.http<IGetShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET");
-    }
-
-    /**
-     * Updates a ShippingTemplateEntry
-     */
-    updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>> {
-        return this.client.http<IUpdateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT");
-    }
-
-    /**
-     * Deletes the ShippingTemplateEntry
-     */
-    deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>> {
-        return this.client.http<IDeleteShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE");
-    }
+/**
+ * Creates a new ShippingTemplateEntry
+ */
+export function createShippingTemplateEntry <TResult>(parameters: ICreateShippingTemplateEntryParameters): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>> {
+    return request<ICreateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries", parameters, "POST");
 }
+/**
+ * Retrieves a ShippingTemplateEntry by id.
+ */
+export function getShippingTemplateEntry <TResult>(parameters: IGetShippingTemplateEntryParameters): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>> {
+    return request<IGetShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET");
+}
+/**
+ * Updates a ShippingTemplateEntry
+ */
+export function updateShippingTemplateEntry <TResult>(parameters: IUpdateShippingTemplateEntryParameters): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>> {
+    return request<IUpdateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT");
+}
+/**
+ * Deletes the ShippingTemplateEntry
+ */
+export function deleteShippingTemplateEntry <TResult>(parameters: IDeleteShippingTemplateEntryParameters): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>> {
+    return request<IDeleteShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE");
+}
+
+export const ShippingTemplateEntry = {
+    createShippingTemplateEntry,
+    getShippingTemplateEntry,
+    updateShippingTemplateEntry,
+    deleteShippingTemplateEntry
+};

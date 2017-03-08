@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ITeam {
     group_id: number;
     name: string;
@@ -22,19 +21,20 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-export declare class Team {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Returns all Teams
-     */
-    findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
-    /**
-     * Returns specified team by ID or team name
-     */
-    findTeams<TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
-    /**
-     * Returns a list of teams for a specific user
-     */
-    findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
-}
+/**
+ * Returns all Teams
+ */
+export declare function findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+/**
+ * Returns specified team by ID or team name
+ */
+export declare function findTeams<TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+/**
+ * Returns a list of teams for a specific user
+ */
+export declare function findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+export declare const Team: {
+    findAllTeams: <TResult>(parameters: IFindAllTeamsParameters) => Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+    findTeams: <TResult>(parameters: IFindTeamsParameters) => Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+    findAllTeamsForUser: <TResult>(parameters: IFindAllTeamsForUserParameters) => Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+};

@@ -1,13 +1,15 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IVariationsPropertySetOption {
     property_option_id: number,
     name: string,
     formatted_name: string
 }
 
+//parameters types
 
 export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardParameters {
     property_id: number,
@@ -22,16 +24,13 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
     dimensions_scale?: number
 }
 
-export class VariationsPropertySetOption {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Finds all suggested property options for a given property.
-     */
-    findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>> {
-        return this.client.http<IFindAllSuggestedPropertyOptionsParameters, TResult>("/property_options/suggested", parameters, "GET");
-    }
+/**
+ * Finds all suggested property options for a given property.
+ */
+export function findAllSuggestedPropertyOptions <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>> {
+    return request<IFindAllSuggestedPropertyOptionsParameters, TResult>("/property_options/suggested", parameters, "GET");
 }
+
+export const VariationsPropertySetOption = {findAllSuggestedPropertyOptions};

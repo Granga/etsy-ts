@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IVariationsPropertySetOptionModifier {
     prefix: string;
     suffix: string;
@@ -17,11 +16,10 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
     diameter_scale?: number;
     dimensions_scale?: number;
 }
-export declare class VariationsPropertySetOptionModifier {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Add a value for a given property.
-     */
-    getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
-}
+/**
+ * Add a value for a given property.
+ */
+export declare function getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
+export declare const VariationsPropertySetOptionModifier: {
+    getPropertyOptionModifier: <TResult>(parameters: IGetPropertyOptionModifierParameters) => Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
+};

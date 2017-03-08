@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class TaxonomyNodeProperty {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Get the possible properties of a taxonomy node [developer preview - may be unstable]
-     */
-    getTaxonomyNodeProperties(parameters) {
-        return this.client.http("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Get the possible properties of a taxonomy node [developer preview - may be unstable]
+ */
+function getTaxonomyNodeProperties(parameters) {
+    return httpClient_1.request("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
 }
-exports.TaxonomyNodeProperty = TaxonomyNodeProperty;
+exports.getTaxonomyNodeProperties = getTaxonomyNodeProperties;
+exports.TaxonomyNodeProperty = {getTaxonomyNodeProperties: getTaxonomyNodeProperties};

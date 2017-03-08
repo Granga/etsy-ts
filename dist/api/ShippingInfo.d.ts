@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IShippingInfo {
     shipping_info_id: number;
     origin_country_id: number;
@@ -36,27 +35,30 @@ export interface IUpdateShippingInfoParameters extends IStandardParameters {
 export interface IDeleteShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number;
 }
-export declare class ShippingInfo {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
-     */
-    findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>;
-    /**
-     * Creates a new ShippingInfo.
-     */
-    createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>>;
-    /**
-     * Retrieves a ShippingInfo by id.
-     */
-    getShippingInfo<TResult>(parameters: IGetShippingInfoParameters): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>>;
-    /**
-     * Updates a ShippingInfo with the given id.
-     */
-    updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>>;
-    /**
-     * Deletes the ShippingInfo with the given id.
-     */
-    deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>>;
-}
+/**
+ * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
+ */
+export declare function findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>;
+/**
+ * Creates a new ShippingInfo.
+ */
+export declare function createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>>;
+/**
+ * Retrieves a ShippingInfo by id.
+ */
+export declare function getShippingInfo<TResult>(parameters: IGetShippingInfoParameters): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>>;
+/**
+ * Updates a ShippingInfo with the given id.
+ */
+export declare function updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>>;
+/**
+ * Deletes the ShippingInfo with the given id.
+ */
+export declare function deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>>;
+export declare const ShippingInfo: {
+    findAllListingShippingProfileEntries: <TResult>(parameters: IFindAllListingShippingProfileEntriesParameters) => Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>;
+    createShippingInfo: <TResult>(parameters: ICreateShippingInfoParameters) => Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>>;
+    getShippingInfo: <TResult>(parameters: IGetShippingInfoParameters) => Promise<IStandardResponse<IGetShippingInfoParameters, TResult>>;
+    updateShippingInfo: <TResult>(parameters: IUpdateShippingInfoParameters) => Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>>;
+    deleteShippingInfo: <TResult>(parameters: IDeleteShippingInfoParameters) => Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>>;
+};

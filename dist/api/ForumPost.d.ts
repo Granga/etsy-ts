@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IForumPost {
     thread_id: number;
     post_id: number;
@@ -20,19 +19,20 @@ export interface IPostTreasuryCommentParameters extends IStandardParameters {
 }
 export interface IDeleteTreasuryCommentParameters extends IStandardParameters {
 }
-export declare class ForumPost {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Get a Treasury's Comments
-     */
-    findTreasuryComments<TResult>(parameters: IFindTreasuryCommentsParameters): Promise<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>;
-    /**
-     * Leave a comment on a Treasury List
-     */
-    postTreasuryComment<TResult>(parameters: IPostTreasuryCommentParameters): Promise<IStandardResponse<IPostTreasuryCommentParameters, TResult>>;
-    /**
-     * Delete a given comment on a Treasury List
-     */
-    deleteTreasuryComment<TResult>(parameters: IDeleteTreasuryCommentParameters): Promise<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>;
-}
+/**
+ * Get a Treasury's Comments
+ */
+export declare function findTreasuryComments<TResult>(parameters: IFindTreasuryCommentsParameters): Promise<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>;
+/**
+ * Leave a comment on a Treasury List
+ */
+export declare function postTreasuryComment<TResult>(parameters: IPostTreasuryCommentParameters): Promise<IStandardResponse<IPostTreasuryCommentParameters, TResult>>;
+/**
+ * Delete a given comment on a Treasury List
+ */
+export declare function deleteTreasuryComment<TResult>(parameters: IDeleteTreasuryCommentParameters): Promise<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>;
+export declare const ForumPost: {
+    findTreasuryComments: <TResult>(parameters: IFindTreasuryCommentsParameters) => Promise<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>;
+    postTreasuryComment: <TResult>(parameters: IPostTreasuryCommentParameters) => Promise<IStandardResponse<IPostTreasuryCommentParameters, TResult>>;
+    deleteTreasuryComment: <TResult>(parameters: IDeleteTreasuryCommentParameters) => Promise<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>;
+};

@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IVariationsPropertyQualifier {
     property_id: number,
     options: number[],
@@ -7,11 +6,10 @@ export interface IVariationsPropertyQualifier {
     aliases: [any, any]
 }
 
-
-export class VariationsPropertyQualifier {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const VariationsPropertyQualifier = {};

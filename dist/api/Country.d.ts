@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ICountry {
     country_id: number;
     iso_country_code: string;
@@ -21,19 +20,20 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     page?: number;
     iso_code: string;
 }
-export declare class Country {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Finds all Country.
-     */
-    findAllCountry<TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
-    /**
-     * Retrieves a Country by id.
-     */
-    getCountry<TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
-    /**
-     * Get the country info for the given ISO code.
-     */
-    findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
-}
+/**
+ * Finds all Country.
+ */
+export declare function findAllCountry<TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+/**
+ * Retrieves a Country by id.
+ */
+export declare function getCountry<TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+/**
+ * Get the country info for the given ISO code.
+ */
+export declare function findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+export declare const Country: {
+    findAllCountry: <TResult>(parameters: IFindAllCountryParameters) => Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+    getCountry: <TResult>(parameters: IGetCountryParameters) => Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+    findByIsoCode: <TResult>(parameters: IFindByIsoCodeParameters) => Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+};

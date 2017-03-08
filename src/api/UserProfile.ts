@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IUserProfile {
     user_profile_id: number,
     user_id: number,
@@ -28,6 +29,7 @@ export interface IUserProfile {
     last_name: string
 }
 
+//parameters types
 
 export interface IFindUserProfileParameters extends IStandardParameters {
     user_id: string | number
@@ -45,23 +47,19 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     city?: string
 }
 
-export class UserProfile {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Returns the UserProfile object associated with a User.
-     */
-    findUserProfile<TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
-        return this.client.http<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET");
-    }
-
-    /**
-     * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
-     */
-    updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
-        return this.client.http<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT");
-    }
+/**
+ * Returns the UserProfile object associated with a User.
+ */
+export function findUserProfile <TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
+    return request<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET");
 }
+/**
+ * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
+ */
+export function updateUserProfile <TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
+    return request<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT");
+}
+
+export const UserProfile = {findUserProfile, updateUserProfile};

@@ -1,32 +1,38 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ListingTranslation {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Retrieves a ListingTranslation by listing_id and language
-     */
-    getListingTranslation(parameters) {
-        return this.client.http("/listings/:listing_id/translations/:language", parameters, "GET");
-    }
-    /**
-     * Creates a ListingTranslation by listing_id and language
-     */
-    createListingTranslation(parameters) {
-        return this.client.http("/listings/:listing_id/translations/:language", parameters, "POST");
-    }
-    /**
-     * Updates a ListingTranslation by listing_id and language
-     */
-    updateListingTranslation(parameters) {
-        return this.client.http("/listings/:listing_id/translations/:language", parameters, "PUT");
-    }
-    /**
-     * Deletes a ListingTranslation by listing_id and language
-     */
-    deleteListingTranslation(parameters) {
-        return this.client.http("/listings/:listing_id/translations/:language", parameters, "DELETE");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Retrieves a ListingTranslation by listing_id and language
+ */
+function getListingTranslation(parameters) {
+    return httpClient_1.request("/listings/:listing_id/translations/:language", parameters, "GET");
 }
-exports.ListingTranslation = ListingTranslation;
+exports.getListingTranslation = getListingTranslation;
+/**
+ * Creates a ListingTranslation by listing_id and language
+ */
+function createListingTranslation(parameters) {
+    return httpClient_1.request("/listings/:listing_id/translations/:language", parameters, "POST");
+}
+exports.createListingTranslation = createListingTranslation;
+/**
+ * Updates a ListingTranslation by listing_id and language
+ */
+function updateListingTranslation(parameters) {
+    return httpClient_1.request("/listings/:listing_id/translations/:language", parameters, "PUT");
+}
+exports.updateListingTranslation = updateListingTranslation;
+/**
+ * Deletes a ListingTranslation by listing_id and language
+ */
+function deleteListingTranslation(parameters) {
+    return httpClient_1.request("/listings/:listing_id/translations/:language", parameters, "DELETE");
+}
+exports.deleteListingTranslation = deleteListingTranslation;
+exports.ListingTranslation = {
+    getListingTranslation: getListingTranslation,
+    createListingTranslation: createListingTranslation,
+    updateListingTranslation: updateListingTranslation,
+    deleteListingTranslation: deleteListingTranslation
+};

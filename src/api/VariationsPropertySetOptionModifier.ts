@@ -1,12 +1,14 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IVariationsPropertySetOptionModifier {
     prefix: string,
     suffix: string
 }
 
+//parameters types
 
 export interface IGetPropertyOptionModifierParameters extends IStandardParameters {
     property_id: number,
@@ -21,16 +23,13 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
     dimensions_scale?: number
 }
 
-export class VariationsPropertySetOptionModifier {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Add a value for a given property.
-     */
-    getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>> {
-        return this.client.http<IGetPropertyOptionModifierParameters, TResult>("/property_options/modifiers", parameters, "GET");
-    }
+/**
+ * Add a value for a given property.
+ */
+export function getPropertyOptionModifier <TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>> {
+    return request<IGetPropertyOptionModifierParameters, TResult>("/property_options/modifiers", parameters, "GET");
 }
+
+export const VariationsPropertySetOptionModifier = {getPropertyOptionModifier};

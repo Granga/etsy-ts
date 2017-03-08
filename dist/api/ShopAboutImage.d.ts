@@ -1,4 +1,3 @@
-import { EtsyApiClient } from "../client/EtsyApiClient";
 export interface IShopAboutImage {
     shop_id: number;
     image_id: number;
@@ -9,7 +8,4 @@ export interface IShopAboutImage {
     url_760xN: string;
     url_fullxfull: string;
 }
-export declare class ShopAboutImage {
-    private client;
-    constructor(client: EtsyApiClient);
-}
+export declare const ShopAboutImage: {};

@@ -1,4 +1,3 @@
-import { EtsyApiClient } from "../client/EtsyApiClient";
 export interface ICartListing {
     listing_id: number;
     purchase_quantity: number;
@@ -11,7 +10,4 @@ export interface ICartListing {
     selected_variations: any[];
     offers_local_delivery: boolean;
 }
-export declare class CartListing {
-    private client;
-    constructor(client: EtsyApiClient);
-}
+export declare const CartListing: {};

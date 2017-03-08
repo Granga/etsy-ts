@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ImageType {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Lists available image types along with their supported sizes.
-     */
-    listImageTypes(parameters) {
-        return this.client.http("/image_types", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Lists available image types along with their supported sizes.
+ */
+function listImageTypes(parameters) {
+    return httpClient_1.request("/image_types", parameters, "GET");
 }
-exports.ImageType = ImageType;
+exports.listImageTypes = listImageTypes;
+exports.ImageType = {listImageTypes: listImageTypes};

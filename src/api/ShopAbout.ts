@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IShopAbout {
     shop_id: number,
     status: string,
@@ -12,21 +13,19 @@ export interface IShopAbout {
     url: string
 }
 
+//parameters types
 
 export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number
 }
 
-export class ShopAbout {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves a ShopAbout object associated to a Shop.
-     */
-    getShopAbout<TResult>(parameters: IGetShopAboutParameters): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
-        return this.client.http<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET");
-    }
+/**
+ * Retrieves a ShopAbout object associated to a Shop.
+ */
+export function getShopAbout <TResult>(parameters: IGetShopAboutParameters): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
+    return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET");
 }
+
+export const ShopAbout = {getShopAbout};

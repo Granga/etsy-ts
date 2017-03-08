@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ITaxonomyNodeProperty {
     property_id: number,
     name: string,
@@ -15,21 +16,19 @@ export interface ITaxonomyNodeProperty {
     selected_values: any[]
 }
 
+//parameters types
 
 export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
     taxonomy_id: number
 }
 
-export class TaxonomyNodeProperty {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get the possible properties of a taxonomy node [developer preview - may be unstable]
-     */
-    getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
-        return this.client.http<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
-    }
+/**
+ * Get the possible properties of a taxonomy node [developer preview - may be unstable]
+ */
+export function getTaxonomyNodeProperties <TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
+    return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
 }
+
+export const TaxonomyNodeProperty = {getTaxonomyNodeProperties};

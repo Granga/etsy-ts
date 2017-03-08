@@ -1,16 +1,14 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IManufacturer {
     name: string,
     description: string[],
     location: string
 }
 
-
-export class Manufacturer {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const Manufacturer = {};

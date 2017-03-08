@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IVariationsSelectedProperty {
     property_id: number,
     value_id: number,
@@ -8,11 +7,10 @@ export interface IVariationsSelectedProperty {
     is_valid: boolean
 }
 
-
-export class VariationsSelectedProperty {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const VariationsSelectedProperty = {};

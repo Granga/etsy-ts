@@ -2,6 +2,6 @@
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {value: true});
 __export(require("./client/EtsyApiClient"));
-__export(require("./client/HttpClient"));
+__export(require("./client/httpClient"));

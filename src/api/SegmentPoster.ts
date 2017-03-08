@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ISegmentPoster {
     name: string,
     path: string,
@@ -12,21 +13,19 @@ export interface ISegmentPoster {
     listing_id: number
 }
 
+//parameters types
 
 export interface IFindBrowseSegmentPostersParameters extends IStandardParameters {
     path?: string
 }
 
-export class SegmentPoster {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Find Browse SegmentPosters by Segment slug
-     */
-    findBrowseSegmentPosters<TResult>(parameters: IFindBrowseSegmentPostersParameters): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>> {
-        return this.client.http<IFindBrowseSegmentPostersParameters, TResult>("/segments/posters", parameters, "GET");
-    }
+/**
+ * Find Browse SegmentPosters by Segment slug
+ */
+export function findBrowseSegmentPosters <TResult>(parameters: IFindBrowseSegmentPostersParameters): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>> {
+    return request<IFindBrowseSegmentPostersParameters, TResult>("/segments/posters", parameters, "GET");
 }
+
+export const SegmentPoster = {findBrowseSegmentPosters};

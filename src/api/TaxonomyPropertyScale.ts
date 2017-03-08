@@ -1,16 +1,14 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface ITaxonomyPropertyScale {
     scale_id: number,
     display_name: string,
     description: string
 }
 
-
-export class TaxonomyPropertyScale {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const TaxonomyPropertyScale = {};

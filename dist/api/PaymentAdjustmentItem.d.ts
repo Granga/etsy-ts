@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IPaymentAdjustmentItem {
     payment_adjustment_item_id: number;
     payment_adjustment_id: number;
@@ -16,11 +15,10 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
     offset?: number;
     page?: number;
 }
-export declare class PaymentAdjustmentItem {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Get Direct Checkout Payment Adjustment Items
-     */
-    findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
-}
+/**
+ * Get Direct Checkout Payment Adjustment Items
+ */
+export declare function findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
+export declare const PaymentAdjustmentItem: {
+    findPaymentAdjustmentItem: <TResult>(parameters: IFindPaymentAdjustmentItemParameters) => Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
+};

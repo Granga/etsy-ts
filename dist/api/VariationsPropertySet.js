@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class VariationsPropertySet {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Find the property set for the category id
-     */
-    findPropertySet(parameters) {
-        return this.client.http("/property_sets", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Find the property set for the category id
+ */
+function findPropertySet(parameters) {
+    return httpClient_1.request("/property_sets", parameters, "GET");
 }
-exports.VariationsPropertySet = VariationsPropertySet;
+exports.findPropertySet = findPropertySet;
+exports.VariationsPropertySet = {findPropertySet: findPropertySet};

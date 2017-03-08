@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IShop {
     shop_id: number;
     shop_name: string;
@@ -90,35 +89,40 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-export declare class Shop {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
-     */
-    findAllShops<TResult>(parameters: IFindAllShopsParameters): Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
-    /**
-     * Retrieves a Shop by id.
-     */
-    getShop<TResult>(parameters: IGetShopParameters): Promise<IStandardResponse<IGetShopParameters, TResult>>;
-    /**
-     * Updates a Shop
-     */
-    updateShop<TResult>(parameters: IUpdateShopParameters): Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
-    /**
-     * Upload a new shop banner image
-     */
-    uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
-    /**
-     * Deletes a shop banner image
-     */
-    deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
-    /**
-     * Retrieves a shop by a listing id.
-     */
-    getListingShop<TResult>(parameters: IGetListingShopParameters): Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
-    /**
-     * Retrieves a set of Shop objects associated to a User.
-     */
-    findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
-}
+/**
+ * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
+ */
+export declare function findAllShops<TResult>(parameters: IFindAllShopsParameters): Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
+/**
+ * Retrieves a Shop by id.
+ */
+export declare function getShop<TResult>(parameters: IGetShopParameters): Promise<IStandardResponse<IGetShopParameters, TResult>>;
+/**
+ * Updates a Shop
+ */
+export declare function updateShop<TResult>(parameters: IUpdateShopParameters): Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
+/**
+ * Upload a new shop banner image
+ */
+export declare function uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
+/**
+ * Deletes a shop banner image
+ */
+export declare function deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
+/**
+ * Retrieves a shop by a listing id.
+ */
+export declare function getListingShop<TResult>(parameters: IGetListingShopParameters): Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
+/**
+ * Retrieves a set of Shop objects associated to a User.
+ */
+export declare function findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
+export declare const Shop: {
+    findAllShops: <TResult>(parameters: IFindAllShopsParameters) => Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
+    getShop: <TResult>(parameters: IGetShopParameters) => Promise<IStandardResponse<IGetShopParameters, TResult>>;
+    updateShop: <TResult>(parameters: IUpdateShopParameters) => Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
+    uploadShopBanner: <TResult>(parameters: IUploadShopBannerParameters) => Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
+    deleteShopBanner: <TResult>(parameters: IDeleteShopBannerParameters) => Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
+    getListingShop: <TResult>(parameters: IGetListingShopParameters) => Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
+    findAllUserShops: <TResult>(parameters: IFindAllUserShopsParameters) => Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
+};

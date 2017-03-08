@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class PaymentAdjustmentItem {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Get Direct Checkout Payment Adjustment Items
-     */
-    findPaymentAdjustmentItem(parameters) {
-        return this.client.http("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Get Direct Checkout Payment Adjustment Items
+ */
+function findPaymentAdjustmentItem(parameters) {
+    return httpClient_1.request("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
 }
-exports.PaymentAdjustmentItem = PaymentAdjustmentItem;
+exports.findPaymentAdjustmentItem = findPaymentAdjustmentItem;
+exports.PaymentAdjustmentItem = {findPaymentAdjustmentItem: findPaymentAdjustmentItem};

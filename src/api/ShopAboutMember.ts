@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IShopAboutMember {
     shop_about_member_id: number,
     shop_id: number,
@@ -13,11 +12,10 @@ export interface IShopAboutMember {
     has_stale_translations: boolean
 }
 
-
-export class ShopAboutMember {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const ShopAboutMember = {};

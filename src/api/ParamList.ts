@@ -1,14 +1,12 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IParamList {
     param_name: string
 }
 
-
-export class ParamList {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const ParamList = {};

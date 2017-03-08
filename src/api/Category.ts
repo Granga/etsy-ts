@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ICategory {
     category_id: number,
     name: string,
@@ -16,6 +17,7 @@ export interface ICategory {
     num_children: number
 }
 
+//parameters types
 
 export interface IGetCategoryParameters extends IStandardParameters {
     tag: string
@@ -40,51 +42,50 @@ export interface IFindAllSubCategoryChildrenParameters extends IStandardParamete
     subtag: string
 }
 
-export class Category {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves a top-level Category by tag.
-     */
-    getCategory<TResult>(parameters: IGetCategoryParameters): Promise<IStandardResponse<IGetCategoryParameters, TResult>> {
-        return this.client.http<IGetCategoryParameters, TResult>("/categories/:tag", parameters, "GET");
-    }
-
-    /**
-     * Retrieves all top-level Categories.
-     */
-    findAllTopCategory<TResult>(parameters: IFindAllTopCategoryParameters): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>> {
-        return this.client.http<IFindAllTopCategoryParameters, TResult>("/taxonomy/categories", parameters, "GET");
-    }
-
-    /**
-     * Retrieves a second-level Category by tag and subtag.
-     */
-    getSubCategory<TResult>(parameters: IGetSubCategoryParameters): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>> {
-        return this.client.http<IGetSubCategoryParameters, TResult>("/categories/:tag/:subtag", parameters, "GET");
-    }
-
-    /**
-     * Retrieves a third-level Category by tag, subtag and subsubtag.
-     */
-    getSubSubCategory<TResult>(parameters: IGetSubSubCategoryParameters): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>> {
-        return this.client.http<IGetSubSubCategoryParameters, TResult>("/categories/:tag/:subtag/:subsubtag", parameters, "GET");
-    }
-
-    /**
-     * Retrieves children of a top-level Category by tag.
-     */
-    findAllTopCategoryChildren<TResult>(parameters: IFindAllTopCategoryChildrenParameters): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>> {
-        return this.client.http<IFindAllTopCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag", parameters, "GET");
-    }
-
-    /**
-     * Retrieves children of a second-level Category by tag and subtag.
-     */
-    findAllSubCategoryChildren<TResult>(parameters: IFindAllSubCategoryChildrenParameters): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>> {
-        return this.client.http<IFindAllSubCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag/:subtag", parameters, "GET");
-    }
+/**
+ * Retrieves a top-level Category by tag.
+ */
+export function getCategory <TResult>(parameters: IGetCategoryParameters): Promise<IStandardResponse<IGetCategoryParameters, TResult>> {
+    return request<IGetCategoryParameters, TResult>("/categories/:tag", parameters, "GET");
 }
+/**
+ * Retrieves all top-level Categories.
+ */
+export function findAllTopCategory <TResult>(parameters: IFindAllTopCategoryParameters): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>> {
+    return request<IFindAllTopCategoryParameters, TResult>("/taxonomy/categories", parameters, "GET");
+}
+/**
+ * Retrieves a second-level Category by tag and subtag.
+ */
+export function getSubCategory <TResult>(parameters: IGetSubCategoryParameters): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>> {
+    return request<IGetSubCategoryParameters, TResult>("/categories/:tag/:subtag", parameters, "GET");
+}
+/**
+ * Retrieves a third-level Category by tag, subtag and subsubtag.
+ */
+export function getSubSubCategory <TResult>(parameters: IGetSubSubCategoryParameters): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>> {
+    return request<IGetSubSubCategoryParameters, TResult>("/categories/:tag/:subtag/:subsubtag", parameters, "GET");
+}
+/**
+ * Retrieves children of a top-level Category by tag.
+ */
+export function findAllTopCategoryChildren <TResult>(parameters: IFindAllTopCategoryChildrenParameters): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>> {
+    return request<IFindAllTopCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag", parameters, "GET");
+}
+/**
+ * Retrieves children of a second-level Category by tag and subtag.
+ */
+export function findAllSubCategoryChildren <TResult>(parameters: IFindAllSubCategoryChildrenParameters): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>> {
+    return request<IFindAllSubCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag/:subtag", parameters, "GET");
+}
+
+export const Category = {
+    getCategory,
+    findAllTopCategory,
+    getSubCategory,
+    getSubSubCategory,
+    findAllTopCategoryChildren,
+    findAllSubCategoryChildren
+};

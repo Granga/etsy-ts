@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ApiMethod {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Get a list of all methods available.
-     */
-    getMethodTable(parameters) {
-        return this.client.http("/", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Get a list of all methods available.
+ */
+function getMethodTable(parameters) {
+    return httpClient_1.request("/", parameters, "GET");
 }
-exports.ApiMethod = ApiMethod;
+exports.getMethodTable = getMethodTable;
+exports.ApiMethod = {getMethodTable: getMethodTable};

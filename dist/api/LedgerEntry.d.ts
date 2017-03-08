@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ILedgerEntry {
     ledger_entry_id: number;
     ledger_id: number;
@@ -24,15 +23,15 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number;
     ledger_entry_id: number;
 }
-export declare class LedgerEntry {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Get a Shop Payment Account Ledger's Entries
-     */
-    findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
-    /**
-     * Get a Shop Payment Account Ledger Entry
-     */
-    findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
-}
+/**
+ * Get a Shop Payment Account Ledger's Entries
+ */
+export declare function findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
+/**
+ * Get a Shop Payment Account Ledger Entry
+ */
+export declare function findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
+export declare const LedgerEntry: {
+    findLedgerEntries: <TResult>(parameters: IFindLedgerEntriesParameters) => Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
+    findLedgerEntry: <TResult>(parameters: IFindLedgerEntryParameters) => Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
+};

@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IPaymentTemplate {
     payment_template_id: number,
     allow_bt: boolean,
@@ -22,6 +23,7 @@ export interface IPaymentTemplate {
     listing_payment_id: number
 }
 
+//parameters types
 
 export interface IFindShopPaymentTemplatesParameters extends IStandardParameters {
     shop_id: string | number
@@ -63,37 +65,36 @@ export interface IFindAllUserPaymentTemplatesParameters extends IStandardParamet
     user_id: string | number
 }
 
-export class PaymentTemplate {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves the PaymentTemplate associated with the Shop
-     */
-    findShopPaymentTemplates<TResult>(parameters: IFindShopPaymentTemplatesParameters): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>> {
-        return this.client.http<IFindShopPaymentTemplatesParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "GET");
-    }
-
-    /**
-     * Creates a new PaymentTemplate
-     */
-    createShopPaymentTemplate<TResult>(parameters: ICreateShopPaymentTemplateParameters): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>> {
-        return this.client.http<ICreateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "POST");
-    }
-
-    /**
-     * Updates a PaymentTemplate
-     */
-    updateShopPaymentTemplate<TResult>(parameters: IUpdateShopPaymentTemplateParameters): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>> {
-        return this.client.http<IUpdateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT");
-    }
-
-    /**
-     * Retrieves a set of PaymentTemplate objects associated to a User.
-     */
-    findAllUserPaymentTemplates<TResult>(parameters: IFindAllUserPaymentTemplatesParameters): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>> {
-        return this.client.http<IFindAllUserPaymentTemplatesParameters, TResult>("/users/:user_id/payments/templates", parameters, "GET");
-    }
+/**
+ * Retrieves the PaymentTemplate associated with the Shop
+ */
+export function findShopPaymentTemplates <TResult>(parameters: IFindShopPaymentTemplatesParameters): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>> {
+    return request<IFindShopPaymentTemplatesParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "GET");
 }
+/**
+ * Creates a new PaymentTemplate
+ */
+export function createShopPaymentTemplate <TResult>(parameters: ICreateShopPaymentTemplateParameters): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>> {
+    return request<ICreateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "POST");
+}
+/**
+ * Updates a PaymentTemplate
+ */
+export function updateShopPaymentTemplate <TResult>(parameters: IUpdateShopPaymentTemplateParameters): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>> {
+    return request<IUpdateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT");
+}
+/**
+ * Retrieves a set of PaymentTemplate objects associated to a User.
+ */
+export function findAllUserPaymentTemplates <TResult>(parameters: IFindAllUserPaymentTemplatesParameters): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>> {
+    return request<IFindAllUserPaymentTemplatesParameters, TResult>("/users/:user_id/payments/templates", parameters, "GET");
+}
+
+export const PaymentTemplate = {
+    findShopPaymentTemplates,
+    createShopPaymentTemplate,
+    updateShopPaymentTemplate,
+    findAllUserPaymentTemplates
+};

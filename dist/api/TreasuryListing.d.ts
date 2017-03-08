@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ITreasuryListing {
     data: any;
     creation_tsz: number;
@@ -13,15 +12,15 @@ export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     treasury_key: string;
     listing_id: number;
 }
-export declare class TreasuryListing {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Add listing to a Treasury
-     */
-    addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
-    /**
-     * Remove listing from a Treasury
-     */
-    removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
-}
+/**
+ * Add listing to a Treasury
+ */
+export declare function addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
+/**
+ * Remove listing from a Treasury
+ */
+export declare function removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
+export declare const TreasuryListing: {
+    addTreasuryListing: <TResult>(parameters: IAddTreasuryListingParameters) => Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
+    removeTreasuryListing: <TResult>(parameters: IRemoveTreasuryListingParameters) => Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
+};

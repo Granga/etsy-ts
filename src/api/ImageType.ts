@@ -1,28 +1,27 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IImageType {
     code: string,
     desc: string,
     sizes: string[]
 }
 
+//parameters types
 
 export interface IListImageTypesParameters extends IStandardParameters {
 
 }
 
-export class ImageType {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Lists available image types along with their supported sizes.
-     */
-    listImageTypes<TResult>(parameters: IListImageTypesParameters): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
-        return this.client.http<IListImageTypesParameters, TResult>("/image_types", parameters, "GET");
-    }
+/**
+ * Lists available image types along with their supported sizes.
+ */
+export function listImageTypes <TResult>(parameters: IListImageTypesParameters): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
+    return request<IListImageTypesParameters, TResult>("/image_types", parameters, "GET");
 }
+
+export const ImageType = {listImageTypes};

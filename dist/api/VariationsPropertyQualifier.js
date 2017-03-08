@@ -1,8 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class VariationsPropertyQualifier {
-    constructor(client) {
-        this.client = client;
-    }
-}
-exports.VariationsPropertyQualifier = VariationsPropertyQualifier;
+Object.defineProperty(exports, "__esModule", {value: true});
+//parameters types
+//methods
+exports.VariationsPropertyQualifier = {};

@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IPaymentAdjustment {
     payment_adjustment_id: number,
     payment_id: number,
@@ -17,6 +18,7 @@ export interface IPaymentAdjustment {
     update_date: number
 }
 
+//parameters types
 
 export interface IFindPaymentAdjustmentsParameters extends IStandardParameters {
     payment_id: number,
@@ -33,30 +35,25 @@ export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandar
     ledger_entry_id: number[]
 }
 
-export class PaymentAdjustment {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get a Payment Adjustments from a Payment Id
-     */
-    findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
-        return this.client.http<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET");
-    }
-
-    /**
-     * Get a Direct Checkout Payment Adjustment
-     */
-    findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
-        return this.client.http<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET");
-    }
-
-    /**
-     * Get a Payment Adjustment from a Ledger Entry ID, if applicable
-     */
-    findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
-        return this.client.http<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET");
-    }
+/**
+ * Get a Payment Adjustments from a Payment Id
+ */
+export function findPaymentAdjustments <TResult>(parameters: IFindPaymentAdjustmentsParameters): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
+    return request<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET");
 }
+/**
+ * Get a Direct Checkout Payment Adjustment
+ */
+export function findPaymentAdjustment <TResult>(parameters: IFindPaymentAdjustmentParameters): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
+    return request<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET");
+}
+/**
+ * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+ */
+export function findPaymentAdjustmentForLedgerEntry <TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
+    return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET");
+}
+
+export const PaymentAdjustment = {findPaymentAdjustments, findPaymentAdjustment, findPaymentAdjustmentForLedgerEntry};

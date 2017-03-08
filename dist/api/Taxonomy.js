@@ -1,20 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Taxonomy {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Retrieve the entire taxonomy as seen by buyers in search.
-     */
-    getBuyerTaxonomy(parameters) {
-        return this.client.http("/taxonomy/buyer/get", parameters, "GET");
-    }
-    /**
-     * Retrieve the entire taxonomy as used by sellers in the listing process.
-     */
-    getSellerTaxonomy(parameters) {
-        return this.client.http("/taxonomy/seller/get", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Retrieve the entire taxonomy as seen by buyers in search.
+ */
+function getBuyerTaxonomy(parameters) {
+    return httpClient_1.request("/taxonomy/buyer/get", parameters, "GET");
 }
-exports.Taxonomy = Taxonomy;
+exports.getBuyerTaxonomy = getBuyerTaxonomy;
+/**
+ * Retrieve the entire taxonomy as used by sellers in the listing process.
+ */
+function getSellerTaxonomy(parameters) {
+    return httpClient_1.request("/taxonomy/seller/get", parameters, "GET");
+}
+exports.getSellerTaxonomy = getSellerTaxonomy;
+exports.Taxonomy = {getBuyerTaxonomy: getBuyerTaxonomy, getSellerTaxonomy: getSellerTaxonomy};

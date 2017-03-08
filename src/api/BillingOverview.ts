@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IBillingOverview {
     is_overdue: boolean,
     currency_code: string,
@@ -12,21 +13,19 @@ export interface IBillingOverview {
     date_overdue: number
 }
 
+//parameters types
 
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number
 }
 
-export class BillingOverview {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieves the user's current balance.
-     */
-    getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
-        return this.client.http<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET");
-    }
+/**
+ * Retrieves the user's current balance.
+ */
+export function getUserBillingOverview <TResult>(parameters: IGetUserBillingOverviewParameters): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
+    return request<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET");
 }
+
+export const BillingOverview = {getUserBillingOverview};

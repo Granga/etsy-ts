@@ -1,8 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Money {
-    constructor(client) {
-        this.client = client;
-    }
-}
-exports.Money = Money;
+Object.defineProperty(exports, "__esModule", {value: true});
+//parameters types
+//methods
+exports.Money = {};

@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface ITaxonomyPropertyValue {
     value_id: number,
     name: string,
@@ -7,11 +6,10 @@ export interface ITaxonomyPropertyValue {
     equal_to: number[]
 }
 
-
-export class TaxonomyPropertyValue {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const TaxonomyPropertyValue = {};

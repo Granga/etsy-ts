@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IShippingOption {
     option_id: string,
     name: string,
@@ -8,11 +7,10 @@ export interface IShippingOption {
     currency_code: string
 }
 
-
-export class ShippingOption {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const ShippingOption = {};

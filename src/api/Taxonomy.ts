@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ITaxonomy {
     id: number,
     level: number,
@@ -15,6 +16,7 @@ export interface ITaxonomy {
     full_path_taxonomy_ids: number[]
 }
 
+//parameters types
 
 export interface IGetBuyerTaxonomyParameters extends IStandardParameters {
 
@@ -23,23 +25,19 @@ export interface IGetSellerTaxonomyParameters extends IStandardParameters {
 
 }
 
-export class Taxonomy {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Retrieve the entire taxonomy as seen by buyers in search.
-     */
-    getBuyerTaxonomy<TResult>(parameters: IGetBuyerTaxonomyParameters): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>> {
-        return this.client.http<IGetBuyerTaxonomyParameters, TResult>("/taxonomy/buyer/get", parameters, "GET");
-    }
-
-    /**
-     * Retrieve the entire taxonomy as used by sellers in the listing process.
-     */
-    getSellerTaxonomy<TResult>(parameters: IGetSellerTaxonomyParameters): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>> {
-        return this.client.http<IGetSellerTaxonomyParameters, TResult>("/taxonomy/seller/get", parameters, "GET");
-    }
+/**
+ * Retrieve the entire taxonomy as seen by buyers in search.
+ */
+export function getBuyerTaxonomy <TResult>(parameters: IGetBuyerTaxonomyParameters): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>> {
+    return request<IGetBuyerTaxonomyParameters, TResult>("/taxonomy/buyer/get", parameters, "GET");
 }
+/**
+ * Retrieve the entire taxonomy as used by sellers in the listing process.
+ */
+export function getSellerTaxonomy <TResult>(parameters: IGetSellerTaxonomyParameters): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>> {
+    return request<IGetSellerTaxonomyParameters, TResult>("/taxonomy/seller/get", parameters, "GET");
+}
+
+export const Taxonomy = {getBuyerTaxonomy, getSellerTaxonomy};

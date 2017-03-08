@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IAvatar {
     avatar_id: number;
     hex_code: string;
@@ -22,15 +21,15 @@ export interface IUploadAvatarParameters extends IStandardParameters {
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number;
 }
-export declare class Avatar {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Upload a new user avatar image
-     */
-    uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
-    /**
-     * Get avatar image source
-     */
-    getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
-}
+/**
+ * Upload a new user avatar image
+ */
+export declare function uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
+/**
+ * Get avatar image source
+ */
+export declare function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
+export declare const Avatar: {
+    uploadAvatar: <TResult>(parameters: IUploadAvatarParameters) => Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
+    getAvatarImgSrc: <TResult>(parameters: IGetAvatarImgSrcParameters) => Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
+};

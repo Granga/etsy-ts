@@ -1,4 +1,4 @@
 export * from "./client/EtsyApiClient";
-export * from "./client/HttpClient";
+export * from "./client/httpClient";
 export * from "./client/IStandardParameters";
 export * from "./client/IStandardResponse";

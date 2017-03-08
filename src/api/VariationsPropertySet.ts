@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IVariationsPropertySet {
     property_set_id: number,
     properties: [any, any],
@@ -10,6 +11,7 @@ export interface IVariationsPropertySet {
     qualifiers: [any, any]
 }
 
+//parameters types
 
 export interface IFindPropertySetParameters extends IStandardParameters {
     category_id?: number,
@@ -17,16 +19,13 @@ export interface IFindPropertySetParameters extends IStandardParameters {
     recipient_id?: number
 }
 
-export class VariationsPropertySet {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Find the property set for the category id
-     */
-    findPropertySet<TResult>(parameters: IFindPropertySetParameters): Promise<IStandardResponse<IFindPropertySetParameters, TResult>> {
-        return this.client.http<IFindPropertySetParameters, TResult>("/property_sets", parameters, "GET");
-    }
+/**
+ * Find the property set for the category id
+ */
+export function findPropertySet <TResult>(parameters: IFindPropertySetParameters): Promise<IStandardResponse<IFindPropertySetParameters, TResult>> {
+    return request<IFindPropertySetParameters, TResult>("/property_sets", parameters, "GET");
 }
+
+export const VariationsPropertySet = {findPropertySet};

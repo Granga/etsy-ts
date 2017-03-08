@@ -1,8 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class TaxonomyPropertyValue {
-    constructor(client) {
-        this.client = client;
-    }
-}
-exports.TaxonomyPropertyValue = TaxonomyPropertyValue;
+Object.defineProperty(exports, "__esModule", {value: true});
+//parameters types
+//methods
+exports.TaxonomyPropertyValue = {};

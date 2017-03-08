@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface IUser {
     user_id: number,
     login_name: string,
@@ -14,6 +15,7 @@ export interface IUser {
     use_new_inventory_endpoints: boolean
 }
 
+//parameters types
 
 export interface IFindAllUsersParameters extends IStandardParameters {
     keywords?: string,
@@ -59,65 +61,64 @@ export interface IConnectUsersParameters extends IStandardParameters {
     to_user_id: string | number
 }
 
-export class User {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Finds all Users whose name or username match the keywords parameter.
-     */
-    findAllUsers<TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
-        return this.client.http<IFindAllUsersParameters, TResult>("/users", parameters, "GET");
-    }
-
-    /**
-     * Retrieves a User by id.
-     */
-    getUser<TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>> {
-        return this.client.http<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET");
-    }
-
-    /**
-     * Returns a list of users for a specific team
-     */
-    findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
-        return this.client.http<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET");
-    }
-
-    /**
-     * Returns a list of users who have circled this user
-     */
-    getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
-        return this.client.http<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET");
-    }
-
-    /**
-     * Returns details about a connection between users
-     */
-    getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
-        return this.client.http<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET");
-    }
-
-    /**
-     * Removes a user (to_user_id) from the logged in user's (user_id) circle
-     */
-    unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
-        return this.client.http<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE");
-    }
-
-    /**
-     * Returns a list of users that are in this user's cricle
-     */
-    getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
-        return this.client.http<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET");
-    }
-
-    /**
-     * Adds user (to_user_id) to the user's (user_id) circle
-     */
-    connectUsers<TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
-        return this.client.http<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST");
-    }
+/**
+ * Finds all Users whose name or username match the keywords parameter.
+ */
+export function findAllUsers <TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
+    return request<IFindAllUsersParameters, TResult>("/users", parameters, "GET");
 }
+/**
+ * Retrieves a User by id.
+ */
+export function getUser <TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>> {
+    return request<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET");
+}
+/**
+ * Returns a list of users for a specific team
+ */
+export function findAllUsersForTeam <TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
+    return request<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET");
+}
+/**
+ * Returns a list of users who have circled this user
+ */
+export function getCirclesContainingUser <TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
+    return request<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET");
+}
+/**
+ * Returns details about a connection between users
+ */
+export function getConnectedUser <TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
+    return request<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET");
+}
+/**
+ * Removes a user (to_user_id) from the logged in user's (user_id) circle
+ */
+export function unconnectUsers <TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
+    return request<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE");
+}
+/**
+ * Returns a list of users that are in this user's cricle
+ */
+export function getConnectedUsers <TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
+    return request<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET");
+}
+/**
+ * Adds user (to_user_id) to the user's (user_id) circle
+ */
+export function connectUsers <TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
+    return request<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST");
+}
+
+export const User = {
+    findAllUsers,
+    getUser,
+    findAllUsersForTeam,
+    getCirclesContainingUser,
+    getConnectedUser,
+    unconnectUsers,
+    getConnectedUsers,
+    connectUsers
+};

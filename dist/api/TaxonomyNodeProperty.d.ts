@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface ITaxonomyNodeProperty {
     property_id: number;
     name: string;
@@ -16,11 +15,10 @@ export interface ITaxonomyNodeProperty {
 export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
     taxonomy_id: number;
 }
-export declare class TaxonomyNodeProperty {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Get the possible properties of a taxonomy node [developer preview - may be unstable]
-     */
-    getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
-}
+/**
+ * Get the possible properties of a taxonomy node [developer preview - may be unstable]
+ */
+export declare function getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
+export declare const TaxonomyNodeProperty: {
+    getTaxonomyNodeProperties: <TResult>(parameters: IGetTaxonomyNodePropertiesParameters) => Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
+};

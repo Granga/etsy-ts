@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ICart {
     cart_id: number,
     shop_name: string,
@@ -23,6 +24,7 @@ export interface ICart {
     shipping_option: any
 }
 
+//parameters types
 
 export interface IGetAllUserCartsParameters extends IStandardParameters {
     user_id: string | number,
@@ -91,86 +93,85 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
     selected_variations?: [any, any]
 }
 
-export class Cart {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Get a user's Carts
-     */
-    getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
-        return this.client.http<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET");
-    }
-
-    /**
-     * Add a listing to a cart
-     */
-    addToCart<TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
-        return this.client.http<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST");
-    }
-
-    /**
-     * Update a cart listing purchase quantity
-     */
-    updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
-        return this.client.http<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT");
-    }
-
-    /**
-     * Remove a listing from a cart
-     */
-    removeCartListing<TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
-        return this.client.http<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE");
-    }
-
-    /**
-     * Get a cart
-     */
-    getUserCart<TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
-        return this.client.http<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET");
-    }
-
-    /**
-     * Update a cart
-     */
-    updateCart<TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
-        return this.client.http<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT");
-    }
-
-    /**
-     * Delete a cart
-     */
-    deleteCart<TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
-        return this.client.http<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE");
-    }
-
-    /**
-     * Saves and selects a shipping address for apple pay
-     */
-    addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
-        return this.client.http<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
-    }
-
-    /**
-     * Move a listing to Saved for Later
-     */
-    saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
-        return this.client.http<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE");
-    }
-
-    /**
-     * Get a cart from a shop ID
-     */
-    getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
-        return this.client.http<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
-    }
-
-    /**
-     * Create a single-listing cart from a listing
-     */
-    createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
-        return this.client.http<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST");
-    }
+/**
+ * Get a user's Carts
+ */
+export function getAllUserCarts <TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
+    return request<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET");
 }
+/**
+ * Add a listing to a cart
+ */
+export function addToCart <TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
+    return request<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST");
+}
+/**
+ * Update a cart listing purchase quantity
+ */
+export function updateCartListingQuantity <TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
+    return request<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT");
+}
+/**
+ * Remove a listing from a cart
+ */
+export function removeCartListing <TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
+    return request<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE");
+}
+/**
+ * Get a cart
+ */
+export function getUserCart <TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
+    return request<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET");
+}
+/**
+ * Update a cart
+ */
+export function updateCart <TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
+    return request<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT");
+}
+/**
+ * Delete a cart
+ */
+export function deleteCart <TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
+    return request<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE");
+}
+/**
+ * Saves and selects a shipping address for apple pay
+ */
+export function addAndSelectShippingForApplePay <TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
+    return request<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
+}
+/**
+ * Move a listing to Saved for Later
+ */
+export function saveListingForLater <TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
+    return request<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE");
+}
+/**
+ * Get a cart from a shop ID
+ */
+export function getUserCartForShop <TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
+    return request<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
+}
+/**
+ * Create a single-listing cart from a listing
+ */
+export function createSingleListingCart <TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
+    return request<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST");
+}
+
+export const Cart = {
+    getAllUserCarts,
+    addToCart,
+    updateCartListingQuantity,
+    removeCartListing,
+    getUserCart,
+    updateCart,
+    deleteCart,
+    addAndSelectShippingForApplePay,
+    saveListingForLater,
+    getUserCartForShop,
+    createSingleListingCart
+};

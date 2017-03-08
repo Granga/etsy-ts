@@ -1,6 +1,5 @@
-import { IStandardParameters } from "../client/IStandardParameters";
-import { EtsyApiClient } from "../client/EtsyApiClient";
-import { IStandardResponse } from "../client/IStandardResponse";
+import {IStandardParameters} from "../client/IStandardParameters";
+import {IStandardResponse} from "../client/IStandardResponse";
 export interface IShippingTemplate {
     shipping_template_id: number;
     title: string;
@@ -45,31 +44,35 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
     offset?: number;
     page?: number;
 }
-export declare class ShippingTemplate {
-    private client;
-    constructor(client: EtsyApiClient);
-    /**
-     * Creates a new ShippingTemplate
-     */
-    createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
-    /**
-     * Retrieves a ShippingTemplate by id.
-     */
-    getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
-    /**
-     * Updates a ShippingTemplate
-     */
-    updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
-    /**
-     * Deletes the ShippingTemplate with the given id.
-     */
-    deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
-    /**
-     * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
-     */
-    findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
-    /**
-     * Retrieves a set of ShippingTemplate objects associated to a User.
-     */
-    findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
-}
+/**
+ * Creates a new ShippingTemplate
+ */
+export declare function createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
+/**
+ * Retrieves a ShippingTemplate by id.
+ */
+export declare function getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
+/**
+ * Updates a ShippingTemplate
+ */
+export declare function updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
+/**
+ * Deletes the ShippingTemplate with the given id.
+ */
+export declare function deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
+/**
+ * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
+ */
+export declare function findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
+/**
+ * Retrieves a set of ShippingTemplate objects associated to a User.
+ */
+export declare function findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
+export declare const ShippingTemplate: {
+    createShippingTemplate: <TResult>(parameters: ICreateShippingTemplateParameters) => Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
+    getShippingTemplate: <TResult>(parameters: IGetShippingTemplateParameters) => Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
+    updateShippingTemplate: <TResult>(parameters: IUpdateShippingTemplateParameters) => Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
+    deleteShippingTemplate: <TResult>(parameters: IDeleteShippingTemplateParameters) => Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
+    findAllShippingTemplateEntries: <TResult>(parameters: IFindAllShippingTemplateEntriesParameters) => Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
+    findAllUserShippingProfiles: <TResult>(parameters: IFindAllUserShippingProfilesParameters) => Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
+};

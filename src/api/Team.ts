@@ -1,7 +1,8 @@
 import {IStandardParameters} from "../client/IStandardParameters";
-import {EtsyApiClient} from "../client/EtsyApiClient";
+import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
+//fields
 export interface ITeam {
     group_id: number,
     name: string,
@@ -10,6 +11,7 @@ export interface ITeam {
     tags: string[]
 }
 
+//parameters types
 
 export interface IFindAllTeamsParameters extends IStandardParameters {
     limit?: number,
@@ -26,30 +28,25 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     page?: number
 }
 
-export class Team {
-    constructor(private client: EtsyApiClient) {
+//methods
 
-    }
-
-
-    /**
-     * Returns all Teams
-     */
-    findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>> {
-        return this.client.http<IFindAllTeamsParameters, TResult>("/teams", parameters, "GET");
-    }
-
-    /**
-     * Returns specified team by ID or team name
-     */
-    findTeams<TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>> {
-        return this.client.http<IFindTeamsParameters, TResult>("/teams/:team_ids/", parameters, "GET");
-    }
-
-    /**
-     * Returns a list of teams for a specific user
-     */
-    findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>> {
-        return this.client.http<IFindAllTeamsForUserParameters, TResult>("/users/:user_id/teams", parameters, "GET");
-    }
+/**
+ * Returns all Teams
+ */
+export function findAllTeams <TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>> {
+    return request<IFindAllTeamsParameters, TResult>("/teams", parameters, "GET");
 }
+/**
+ * Returns specified team by ID or team name
+ */
+export function findTeams <TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>> {
+    return request<IFindTeamsParameters, TResult>("/teams/:team_ids/", parameters, "GET");
+}
+/**
+ * Returns a list of teams for a specific user
+ */
+export function findAllTeamsForUser <TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>> {
+    return request<IFindAllTeamsForUserParameters, TResult>("/users/:user_id/teams", parameters, "GET");
+}
+
+export const Team = {findAllTeams, findTeams, findAllTeamsForUser};

@@ -1,5 +1,4 @@
-import {EtsyApiClient} from "../client/EtsyApiClient";
-
+//fields
 export interface IListingOffering {
     offering_id: number,
     price: any,
@@ -7,11 +6,10 @@ export interface IListingOffering {
     is_enabled: boolean
 }
 
-
-export class ListingOffering {
-    constructor(private client: EtsyApiClient) {
-
-    }
+//parameters types
 
 
-}
+//methods
+
+
+export const ListingOffering = {};

@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class BillingOverview {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Retrieves the user's current balance.
-     */
-    getUserBillingOverview(parameters) {
-        return this.client.http("/users/:user_id/billing/overview", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Retrieves the user's current balance.
+ */
+function getUserBillingOverview(parameters) {
+    return httpClient_1.request("/users/:user_id/billing/overview", parameters, "GET");
 }
-exports.BillingOverview = BillingOverview;
+exports.getUserBillingOverview = getUserBillingOverview;
+exports.BillingOverview = {getUserBillingOverview: getUserBillingOverview};

@@ -1,14 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ShopAbout {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Retrieves a ShopAbout object associated to a Shop.
-     */
-    getShopAbout(parameters) {
-        return this.client.http("/shops/:shop_id/about", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Retrieves a ShopAbout object associated to a Shop.
+ */
+function getShopAbout(parameters) {
+    return httpClient_1.request("/shops/:shop_id/about", parameters, "GET");
 }
-exports.ShopAbout = ShopAbout;
+exports.getShopAbout = getShopAbout;
+exports.ShopAbout = {getShopAbout: getShopAbout};

@@ -1,32 +1,38 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Treasury {
-    constructor(client) {
-        this.client = client;
-    }
-    /**
-     * Search Treasuries or else List all Treasuries
-     */
-    findAllTreasuries(parameters) {
-        return this.client.http("/treasuries", parameters, "GET");
-    }
-    /**
-     * Get a Treasury
-     */
-    getTreasury(parameters) {
-        return this.client.http("/treasuries/:treasury_key", parameters, "GET");
-    }
-    /**
-     * Delete a Treasury
-     */
-    deleteTreasury(parameters) {
-        return this.client.http("/treasuries/:treasury_key", parameters, "DELETE");
-    }
-    /**
-     * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
-     */
-    findAllUserTreasuries(parameters) {
-        return this.client.http("/users/:user_id/treasuries", parameters, "GET");
-    }
+Object.defineProperty(exports, "__esModule", {value: true});
+var httpClient_1 = require("../client/httpClient");
+//methods
+/**
+ * Search Treasuries or else List all Treasuries
+ */
+function findAllTreasuries(parameters) {
+    return httpClient_1.request("/treasuries", parameters, "GET");
 }
-exports.Treasury = Treasury;
+exports.findAllTreasuries = findAllTreasuries;
+/**
+ * Get a Treasury
+ */
+function getTreasury(parameters) {
+    return httpClient_1.request("/treasuries/:treasury_key", parameters, "GET");
+}
+exports.getTreasury = getTreasury;
+/**
+ * Delete a Treasury
+ */
+function deleteTreasury(parameters) {
+    return httpClient_1.request("/treasuries/:treasury_key", parameters, "DELETE");
+}
+exports.deleteTreasury = deleteTreasury;
+/**
+ * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
+ */
+function findAllUserTreasuries(parameters) {
+    return httpClient_1.request("/users/:user_id/treasuries", parameters, "GET");
+}
+exports.findAllUserTreasuries = findAllUserTreasuries;
+exports.Treasury = {
+    findAllTreasuries: findAllTreasuries,
+    getTreasury: getTreasury,
+    deleteTreasury: deleteTreasury,
+    findAllUserTreasuries: findAllUserTreasuries
+};
