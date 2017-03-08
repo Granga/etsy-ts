@@ -1,19 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get the inventory for a listing [developer preview - may be unstable]
- */
-function getInventory(parameters) {
-    return httpClient_1.request("/listings/:listing_id/inventory", parameters, "GET");
+* Get the inventory for a listing [developer preview - may be unstable]
+*/
+function getInventory(parameters, options) {
+    return client_1.request("/listings/:listing_id/inventory", parameters, "GET", options);
 }
-exports.getInventory = getInventory;
 /**
- * Update the inventory for a listing [developer preview - may be unstable]
- */
-function updateInventory(parameters) {
-    return httpClient_1.request("/listings/:listing_id/inventory", parameters, "PUT");
+* Update the inventory for a listing [developer preview - may be unstable]
+*/
+function updateInventory(parameters, options) {
+    return client_1.request("/listings/:listing_id/inventory", parameters, "PUT", options);
 }
-exports.updateInventory = updateInventory;
-exports.ListingInventory = {getInventory: getInventory, updateInventory: updateInventory};
+exports.ListingInventory = { getInventory: getInventory, updateInventory: updateInventory };

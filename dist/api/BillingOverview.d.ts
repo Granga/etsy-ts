@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IBillingOverview {
     is_overdue: boolean;
     currency_code: string;
@@ -12,10 +13,6 @@ export interface IBillingOverview {
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Retrieves the user's current balance.
- */
-export declare function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
 export declare const BillingOverview: {
-    getUserBillingOverview: <TResult>(parameters: IGetUserBillingOverviewParameters) => Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
+    getUserBillingOverview: <TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions) => Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
 };

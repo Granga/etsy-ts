@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -53,7 +53,6 @@ export interface IShop {
 }
 
 //parameters types
-
 export interface IFindAllShopsParameters extends IStandardParameters {
     shop_name?: string,
     limit?: number,
@@ -97,48 +96,47 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
  */
-export function findAllShops <TResult>(parameters: IFindAllShopsParameters): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
-    return request<IFindAllShopsParameters, TResult>("/shops", parameters, "GET");
+function findAllShops <TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
+    return request<IFindAllShopsParameters, TResult>("/shops", parameters, "GET", options);
 }
 /**
  * Retrieves a Shop by id.
  */
-export function getShop <TResult>(parameters: IGetShopParameters): Promise<IStandardResponse<IGetShopParameters, TResult>> {
-    return request<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET");
+function getShop <TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>> {
+    return request<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET", options);
 }
 /**
  * Updates a Shop
  */
-export function updateShop <TResult>(parameters: IUpdateShopParameters): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
-    return request<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT");
+function updateShop <TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
+    return request<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT", options);
 }
 /**
  * Upload a new shop banner image
  */
-export function uploadShopBanner <TResult>(parameters: IUploadShopBannerParameters): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
-    return request<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST");
+function uploadShopBanner <TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
+    return request<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST", options);
 }
 /**
  * Deletes a shop banner image
  */
-export function deleteShopBanner <TResult>(parameters: IDeleteShopBannerParameters): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
-    return request<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE");
+function deleteShopBanner <TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
+    return request<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE", options);
 }
 /**
  * Retrieves a shop by a listing id.
  */
-export function getListingShop <TResult>(parameters: IGetListingShopParameters): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
-    return request<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET");
+function getListingShop <TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
+    return request<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Shop objects associated to a User.
  */
-export function findAllUserShops <TResult>(parameters: IFindAllUserShopsParameters): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
-    return request<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET");
+function findAllUserShops <TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
+    return request<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET", options);
 }
 
 export const Shop = {

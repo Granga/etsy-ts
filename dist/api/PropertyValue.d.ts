@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IPropertyValue {
     property_id: number;
     property_name: string;
@@ -26,25 +27,9 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
     listing_id: number;
     property_id: number;
 }
-/**
- * Get all of the attributes for a listing [developer preview - may be unstable]
- */
-export declare function getAttributes<TResult>(parameters: IGetAttributesParameters): Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
-/**
- * Get an attribute for a listing [developer preview - may be unstable]
- */
-export declare function getAttribute<TResult>(parameters: IGetAttributeParameters): Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
-/**
- * Update or populate an attribute for a listing [developer preview - may be unstable]
- */
-export declare function updateAttribute<TResult>(parameters: IUpdateAttributeParameters): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
-/**
- * Delete an attribute for a listing [developer preview - may be unstable]
- */
-export declare function deleteAttribute<TResult>(parameters: IDeleteAttributeParameters): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
 export declare const PropertyValue: {
-    getAttributes: <TResult>(parameters: IGetAttributesParameters) => Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
-    getAttribute: <TResult>(parameters: IGetAttributeParameters) => Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
-    updateAttribute: <TResult>(parameters: IUpdateAttributeParameters) => Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
-    deleteAttribute: <TResult>(parameters: IDeleteAttributeParameters) => Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
+    getAttributes: <TResult>(parameters: IGetAttributesParameters, options?: IOptions) => Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
+    getAttribute: <TResult>(parameters: IGetAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
+    updateAttribute: <TResult>(parameters: IUpdateAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
+    deleteAttribute: <TResult>(parameters: IDeleteAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
 };

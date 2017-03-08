@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Finds all suggested property options for a given property.
- */
-function findAllSuggestedPropertyOptions(parameters) {
-    return httpClient_1.request("/property_options/suggested", parameters, "GET");
+* Finds all suggested property options for a given property.
+*/
+function findAllSuggestedPropertyOptions(parameters, options) {
+    return client_1.request("/property_options/suggested", parameters, "GET", options);
 }
-exports.findAllSuggestedPropertyOptions = findAllSuggestedPropertyOptions;
-exports.VariationsPropertySetOption = {findAllSuggestedPropertyOptions: findAllSuggestedPropertyOptions};
+exports.VariationsPropertySetOption = { findAllSuggestedPropertyOptions: findAllSuggestedPropertyOptions };

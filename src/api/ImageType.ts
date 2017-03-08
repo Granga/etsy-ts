@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -10,18 +10,16 @@ export interface IImageType {
 }
 
 //parameters types
-
 export interface IListImageTypesParameters extends IStandardParameters {
 
 }
 
 //methods
-
 /**
  * Lists available image types along with their supported sizes.
  */
-export function listImageTypes <TResult>(parameters: IListImageTypesParameters): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
-    return request<IListImageTypesParameters, TResult>("/image_types", parameters, "GET");
+function listImageTypes <TResult>(parameters: IListImageTypesParameters, options?: IOptions): Promise<IStandardResponse<IListImageTypesParameters, TResult>> {
+    return request<IListImageTypesParameters, TResult>("/image_types", parameters, "GET", options);
 }
 
 export const ImageType = {listImageTypes};

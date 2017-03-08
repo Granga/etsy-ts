@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ISegmentPoster {
     name: string;
     path: string;
@@ -12,10 +13,6 @@ export interface ISegmentPoster {
 export interface IFindBrowseSegmentPostersParameters extends IStandardParameters {
     path?: string;
 }
-/**
- * Find Browse SegmentPosters by Segment slug
- */
-export declare function findBrowseSegmentPosters<TResult>(parameters: IFindBrowseSegmentPostersParameters): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>>;
 export declare const SegmentPoster: {
-    findBrowseSegmentPosters: <TResult>(parameters: IFindBrowseSegmentPostersParameters) => Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>>;
+    findBrowseSegmentPosters: <TResult>(parameters: IFindBrowseSegmentPostersParameters, options?: IOptions) => Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>>;
 };

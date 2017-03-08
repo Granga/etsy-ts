@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -13,7 +13,6 @@ export interface IPaymentAdjustmentItem {
 }
 
 //parameters types
-
 export interface IFindPaymentAdjustmentItemParameters extends IStandardParameters {
     payment_id: number,
     payment_adjustment_id: number,
@@ -23,12 +22,11 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
 }
 
 //methods
-
 /**
  * Get Direct Checkout Payment Adjustment Items
  */
-export function findPaymentAdjustmentItem <TResult>(parameters: IFindPaymentAdjustmentItemParameters): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>> {
-    return request<IFindPaymentAdjustmentItemParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
+function findPaymentAdjustmentItem <TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>> {
+    return request<IFindPaymentAdjustmentItemParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET", options);
 }
 
 export const PaymentAdjustmentItem = {findPaymentAdjustmentItem};

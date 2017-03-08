@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICoupon {
     coupon_id: number;
     coupon_code: string;
@@ -41,30 +42,10 @@ export interface IDeleteCouponParameters extends IStandardParameters {
     shop_id: string | number;
     coupon_id: number;
 }
-/**
- * Retrieves all Shop_Coupons by shop_id
- */
-export declare function findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
-/**
- * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
- */
-export declare function createCoupon<TResult>(parameters: ICreateCouponParameters): Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
-/**
- * Retrieves a Shop_Coupon by id and shop_id
- */
-export declare function findCoupon<TResult>(parameters: IFindCouponParameters): Promise<IStandardResponse<IFindCouponParameters, TResult>>;
-/**
- * Updates a coupon
- */
-export declare function updateCoupon<TResult>(parameters: IUpdateCouponParameters): Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
-/**
- * Deletes a coupon
- */
-export declare function deleteCoupon<TResult>(parameters: IDeleteCouponParameters): Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
 export declare const Coupon: {
-    findAllShopCoupons: <TResult>(parameters: IFindAllShopCouponsParameters) => Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
-    createCoupon: <TResult>(parameters: ICreateCouponParameters) => Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
-    findCoupon: <TResult>(parameters: IFindCouponParameters) => Promise<IStandardResponse<IFindCouponParameters, TResult>>;
-    updateCoupon: <TResult>(parameters: IUpdateCouponParameters) => Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
-    deleteCoupon: <TResult>(parameters: IDeleteCouponParameters) => Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
+    findAllShopCoupons: <TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
+    createCoupon: <TResult>(parameters: ICreateCouponParameters, options?: IOptions) => Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
+    findCoupon: <TResult>(parameters: IFindCouponParameters, options?: IOptions) => Promise<IStandardResponse<IFindCouponParameters, TResult>>;
+    updateCoupon: <TResult>(parameters: IUpdateCouponParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
+    deleteCoupon: <TResult>(parameters: IDeleteCouponParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
 };

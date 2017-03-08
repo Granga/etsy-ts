@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -14,18 +14,16 @@ export interface IShopAbout {
 }
 
 //parameters types
-
 export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number
 }
 
 //methods
-
 /**
  * Retrieves a ShopAbout object associated to a Shop.
  */
-export function getShopAbout <TResult>(parameters: IGetShopAboutParameters): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
-    return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET");
+function getShopAbout <TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
+    return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET", options);
 }
 
 export const ShopAbout = {getShopAbout};

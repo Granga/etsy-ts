@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -15,7 +15,6 @@ export interface IShippingTemplateEntry {
 }
 
 //parameters types
-
 export interface ICreateShippingTemplateEntryParameters extends IStandardParameters {
     shipping_template_id: number,
     destination_country_id?: number,
@@ -37,30 +36,29 @@ export interface IDeleteShippingTemplateEntryParameters extends IStandardParamet
 }
 
 //methods
-
 /**
  * Creates a new ShippingTemplateEntry
  */
-export function createShippingTemplateEntry <TResult>(parameters: ICreateShippingTemplateEntryParameters): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>> {
-    return request<ICreateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries", parameters, "POST");
+function createShippingTemplateEntry <TResult>(parameters: ICreateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>> {
+    return request<ICreateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries", parameters, "POST", options);
 }
 /**
  * Retrieves a ShippingTemplateEntry by id.
  */
-export function getShippingTemplateEntry <TResult>(parameters: IGetShippingTemplateEntryParameters): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>> {
-    return request<IGetShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET");
+function getShippingTemplateEntry <TResult>(parameters: IGetShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>> {
+    return request<IGetShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET", options);
 }
 /**
  * Updates a ShippingTemplateEntry
  */
-export function updateShippingTemplateEntry <TResult>(parameters: IUpdateShippingTemplateEntryParameters): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>> {
-    return request<IUpdateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT");
+function updateShippingTemplateEntry <TResult>(parameters: IUpdateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>> {
+    return request<IUpdateShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT", options);
 }
 /**
  * Deletes the ShippingTemplateEntry
  */
-export function deleteShippingTemplateEntry <TResult>(parameters: IDeleteShippingTemplateEntryParameters): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>> {
-    return request<IDeleteShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE");
+function deleteShippingTemplateEntry <TResult>(parameters: IDeleteShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>> {
+    return request<IDeleteShippingTemplateEntryParameters, TResult>("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE", options);
 }
 
 export const ShippingTemplateEntry = {

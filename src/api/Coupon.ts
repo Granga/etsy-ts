@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -18,7 +18,6 @@ export interface ICoupon {
 }
 
 //parameters types
-
 export interface IFindAllShopCouponsParameters extends IStandardParameters {
     shop_id: string | number
 }
@@ -49,36 +48,35 @@ export interface IDeleteCouponParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Retrieves all Shop_Coupons by shop_id
  */
-export function findAllShopCoupons <TResult>(parameters: IFindAllShopCouponsParameters): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>> {
-    return request<IFindAllShopCouponsParameters, TResult>("/shops/:shop_id/coupons", parameters, "GET");
+function findAllShopCoupons <TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>> {
+    return request<IFindAllShopCouponsParameters, TResult>("/shops/:shop_id/coupons", parameters, "GET", options);
 }
 /**
  * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
  */
-export function createCoupon <TResult>(parameters: ICreateCouponParameters): Promise<IStandardResponse<ICreateCouponParameters, TResult>> {
-    return request<ICreateCouponParameters, TResult>("/shops/:shop_id/coupons", parameters, "POST");
+function createCoupon <TResult>(parameters: ICreateCouponParameters, options?: IOptions): Promise<IStandardResponse<ICreateCouponParameters, TResult>> {
+    return request<ICreateCouponParameters, TResult>("/shops/:shop_id/coupons", parameters, "POST", options);
 }
 /**
  * Retrieves a Shop_Coupon by id and shop_id
  */
-export function findCoupon <TResult>(parameters: IFindCouponParameters): Promise<IStandardResponse<IFindCouponParameters, TResult>> {
-    return request<IFindCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "GET");
+function findCoupon <TResult>(parameters: IFindCouponParameters, options?: IOptions): Promise<IStandardResponse<IFindCouponParameters, TResult>> {
+    return request<IFindCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "GET", options);
 }
 /**
  * Updates a coupon
  */
-export function updateCoupon <TResult>(parameters: IUpdateCouponParameters): Promise<IStandardResponse<IUpdateCouponParameters, TResult>> {
-    return request<IUpdateCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT");
+function updateCoupon <TResult>(parameters: IUpdateCouponParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCouponParameters, TResult>> {
+    return request<IUpdateCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT", options);
 }
 /**
  * Deletes a coupon
  */
-export function deleteCoupon <TResult>(parameters: IDeleteCouponParameters): Promise<IStandardResponse<IDeleteCouponParameters, TResult>> {
-    return request<IDeleteCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE");
+function deleteCoupon <TResult>(parameters: IDeleteCouponParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCouponParameters, TResult>> {
+    return request<IDeleteCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE", options);
 }
 
 export const Coupon = {findAllShopCoupons, createCoupon, findCoupon, updateCoupon, deleteCoupon};

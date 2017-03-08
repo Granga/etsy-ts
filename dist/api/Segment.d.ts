@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ISegment {
     name: string;
     path: string;
@@ -14,10 +15,6 @@ export interface IFindBrowseSegmentsParameters extends IStandardParameters {
     region?: string;
     path?: string;
 }
-/**
- * Find all Browse Segments
- */
-export declare function findBrowseSegments<TResult>(parameters: IFindBrowseSegmentsParameters): Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
 export declare const Segment: {
-    findBrowseSegments: <TResult>(parameters: IFindBrowseSegmentsParameters) => Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
+    findBrowseSegments: <TResult>(parameters: IFindBrowseSegmentsParameters, options?: IOptions) => Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
 };

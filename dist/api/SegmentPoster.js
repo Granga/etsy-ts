@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Find Browse SegmentPosters by Segment slug
- */
-function findBrowseSegmentPosters(parameters) {
-    return httpClient_1.request("/segments/posters", parameters, "GET");
+* Find Browse SegmentPosters by Segment slug
+*/
+function findBrowseSegmentPosters(parameters, options) {
+    return client_1.request("/segments/posters", parameters, "GET", options);
 }
-exports.findBrowseSegmentPosters = findBrowseSegmentPosters;
-exports.SegmentPoster = {findBrowseSegmentPosters: findBrowseSegmentPosters};
+exports.SegmentPoster = { findBrowseSegmentPosters: findBrowseSegmentPosters };

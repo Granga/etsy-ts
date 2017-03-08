@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -14,7 +14,6 @@ export interface IShippingTemplate {
 }
 
 //parameters types
-
 export interface ICreateShippingTemplateParameters extends IStandardParameters {
     title: string,
     origin_country_id: number,
@@ -52,42 +51,41 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
 }
 
 //methods
-
 /**
  * Creates a new ShippingTemplate
  */
-export function createShippingTemplate <TResult>(parameters: ICreateShippingTemplateParameters): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>> {
-    return request<ICreateShippingTemplateParameters, TResult>("/shipping/templates", parameters, "POST");
+function createShippingTemplate <TResult>(parameters: ICreateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>> {
+    return request<ICreateShippingTemplateParameters, TResult>("/shipping/templates", parameters, "POST", options);
 }
 /**
  * Retrieves a ShippingTemplate by id.
  */
-export function getShippingTemplate <TResult>(parameters: IGetShippingTemplateParameters): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>> {
-    return request<IGetShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "GET");
+function getShippingTemplate <TResult>(parameters: IGetShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>> {
+    return request<IGetShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "GET", options);
 }
 /**
  * Updates a ShippingTemplate
  */
-export function updateShippingTemplate <TResult>(parameters: IUpdateShippingTemplateParameters): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>> {
-    return request<IUpdateShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "PUT");
+function updateShippingTemplate <TResult>(parameters: IUpdateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>> {
+    return request<IUpdateShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "PUT", options);
 }
 /**
  * Deletes the ShippingTemplate with the given id.
  */
-export function deleteShippingTemplate <TResult>(parameters: IDeleteShippingTemplateParameters): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>> {
-    return request<IDeleteShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "DELETE");
+function deleteShippingTemplate <TResult>(parameters: IDeleteShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>> {
+    return request<IDeleteShippingTemplateParameters, TResult>("/shipping/templates/:shipping_template_id", parameters, "DELETE", options);
 }
 /**
  * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
  */
-export function findAllShippingTemplateEntries <TResult>(parameters: IFindAllShippingTemplateEntriesParameters): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>> {
-    return request<IFindAllShippingTemplateEntriesParameters, TResult>("/shipping/templates/:shipping_template_id/entries", parameters, "GET");
+function findAllShippingTemplateEntries <TResult>(parameters: IFindAllShippingTemplateEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>> {
+    return request<IFindAllShippingTemplateEntriesParameters, TResult>("/shipping/templates/:shipping_template_id/entries", parameters, "GET", options);
 }
 /**
  * Retrieves a set of ShippingTemplate objects associated to a User.
  */
-export function findAllUserShippingProfiles <TResult>(parameters: IFindAllUserShippingProfilesParameters): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>> {
-    return request<IFindAllUserShippingProfilesParameters, TResult>("/users/:user_id/shipping/templates", parameters, "GET");
+function findAllUserShippingProfiles <TResult>(parameters: IFindAllUserShippingProfilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>> {
+    return request<IFindAllUserShippingProfilesParameters, TResult>("/users/:user_id/shipping/templates", parameters, "GET", options);
 }
 
 export const ShippingTemplate = {

@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFeedback {
     feedback_id: number;
     transaction_id: number;
@@ -51,39 +52,11 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
     offset?: number;
     page?: number;
 }
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-export declare function findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between the findAllUserFeedbackAsBuyer
- and findAllUserFeedbackAsSubject methods.
- */
-export declare function findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between
- the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
- */
-export declare function findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
 export declare const Feedback: {
-    findAllUserFeedbackAsAuthor: <TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters) => Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
-    findAllUserFeedbackAsBuyer: <TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters) => Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
-    findAllUserFeedbackAsSeller: <TResult>(parameters: IFindAllUserFeedbackAsSellerParameters) => Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
-    findAllUserFeedbackAsSubject: <TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters) => Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
-    findAllFeedbackFromBuyers: <TResult>(parameters: IFindAllFeedbackFromBuyersParameters) => Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
-    findAllFeedbackFromSellers: <TResult>(parameters: IFindAllFeedbackFromSellersParameters) => Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
+    findAllUserFeedbackAsAuthor: <TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
+    findAllUserFeedbackAsBuyer: <TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
+    findAllUserFeedbackAsSeller: <TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
+    findAllUserFeedbackAsSubject: <TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
+    findAllFeedbackFromBuyers: <TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
+    findAllFeedbackFromSellers: <TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
 };

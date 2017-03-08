@@ -1,30 +1,23 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Finds all FeaturedTreasuries.
- */
-function findAllFeaturedTreasuries(parameters) {
-    return httpClient_1.request("/featured_treasuries", parameters, "GET");
+* Finds all FeaturedTreasuries.
+*/
+function findAllFeaturedTreasuries(parameters, options) {
+    return client_1.request("/featured_treasuries", parameters, "GET", options);
 }
-exports.findAllFeaturedTreasuries = findAllFeaturedTreasuries;
 /**
- * Finds FeaturedTreasury by numeric ID.
- */
-function getFeaturedTreasuryById(parameters) {
-    return httpClient_1.request("/featured_treasuries/:featured_treasury_id", parameters, "GET");
+* Finds FeaturedTreasury by numeric ID.
+*/
+function getFeaturedTreasuryById(parameters, options) {
+    return client_1.request("/featured_treasuries/:featured_treasury_id", parameters, "GET", options);
 }
-exports.getFeaturedTreasuryById = getFeaturedTreasuryById;
 /**
- * Finds all FeaturedTreasury by numeric owner_id.
- */
-function findAllFeaturedTreasuriesByOwner(parameters) {
-    return httpClient_1.request("/featured_treasuries/owner/:owner_id", parameters, "GET");
+* Finds all FeaturedTreasury by numeric owner_id.
+*/
+function findAllFeaturedTreasuriesByOwner(parameters, options) {
+    return client_1.request("/featured_treasuries/owner/:owner_id", parameters, "GET", options);
 }
-exports.findAllFeaturedTreasuriesByOwner = findAllFeaturedTreasuriesByOwner;
-exports.FeaturedTreasury = {
-    findAllFeaturedTreasuries: findAllFeaturedTreasuries,
-    getFeaturedTreasuryById: getFeaturedTreasuryById,
-    findAllFeaturedTreasuriesByOwner: findAllFeaturedTreasuriesByOwner
-};
+exports.FeaturedTreasury = { findAllFeaturedTreasuries: findAllFeaturedTreasuries, getFeaturedTreasuryById: getFeaturedTreasuryById, findAllFeaturedTreasuriesByOwner: findAllFeaturedTreasuriesByOwner };

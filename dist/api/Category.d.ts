@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICategory {
     category_id: number;
     name: string;
@@ -34,35 +35,11 @@ export interface IFindAllSubCategoryChildrenParameters extends IStandardParamete
     tag: string;
     subtag: string;
 }
-/**
- * Retrieves a top-level Category by tag.
- */
-export declare function getCategory<TResult>(parameters: IGetCategoryParameters): Promise<IStandardResponse<IGetCategoryParameters, TResult>>;
-/**
- * Retrieves all top-level Categories.
- */
-export declare function findAllTopCategory<TResult>(parameters: IFindAllTopCategoryParameters): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>>;
-/**
- * Retrieves a second-level Category by tag and subtag.
- */
-export declare function getSubCategory<TResult>(parameters: IGetSubCategoryParameters): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>>;
-/**
- * Retrieves a third-level Category by tag, subtag and subsubtag.
- */
-export declare function getSubSubCategory<TResult>(parameters: IGetSubSubCategoryParameters): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>>;
-/**
- * Retrieves children of a top-level Category by tag.
- */
-export declare function findAllTopCategoryChildren<TResult>(parameters: IFindAllTopCategoryChildrenParameters): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>>;
-/**
- * Retrieves children of a second-level Category by tag and subtag.
- */
-export declare function findAllSubCategoryChildren<TResult>(parameters: IFindAllSubCategoryChildrenParameters): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>>;
 export declare const Category: {
-    getCategory: <TResult>(parameters: IGetCategoryParameters) => Promise<IStandardResponse<IGetCategoryParameters, TResult>>;
-    findAllTopCategory: <TResult>(parameters: IFindAllTopCategoryParameters) => Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>>;
-    getSubCategory: <TResult>(parameters: IGetSubCategoryParameters) => Promise<IStandardResponse<IGetSubCategoryParameters, TResult>>;
-    getSubSubCategory: <TResult>(parameters: IGetSubSubCategoryParameters) => Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>>;
-    findAllTopCategoryChildren: <TResult>(parameters: IFindAllTopCategoryChildrenParameters) => Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>>;
-    findAllSubCategoryChildren: <TResult>(parameters: IFindAllSubCategoryChildrenParameters) => Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>>;
+    getCategory: <TResult>(parameters: IGetCategoryParameters, options?: IOptions) => Promise<IStandardResponse<IGetCategoryParameters, TResult>>;
+    findAllTopCategory: <TResult>(parameters: IFindAllTopCategoryParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>>;
+    getSubCategory: <TResult>(parameters: IGetSubCategoryParameters, options?: IOptions) => Promise<IStandardResponse<IGetSubCategoryParameters, TResult>>;
+    getSubSubCategory: <TResult>(parameters: IGetSubSubCategoryParameters, options?: IOptions) => Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>>;
+    findAllTopCategoryChildren: <TResult>(parameters: IFindAllTopCategoryChildrenParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>>;
+    findAllSubCategoryChildren: <TResult>(parameters: IFindAllSubCategoryChildrenParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>>;
 };

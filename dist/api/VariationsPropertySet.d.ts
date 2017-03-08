@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IVariationsPropertySet {
     property_set_id: number;
     properties: [any, any];
@@ -12,10 +13,6 @@ export interface IFindPropertySetParameters extends IStandardParameters {
     taxonomy_id?: number;
     recipient_id?: number;
 }
-/**
- * Find the property set for the category id
- */
-export declare function findPropertySet<TResult>(parameters: IFindPropertySetParameters): Promise<IStandardResponse<IFindPropertySetParameters, TResult>>;
 export declare const VariationsPropertySet: {
-    findPropertySet: <TResult>(parameters: IFindPropertySetParameters) => Promise<IStandardResponse<IFindPropertySetParameters, TResult>>;
+    findPropertySet: <TResult>(parameters: IFindPropertySetParameters, options?: IOptions) => Promise<IStandardResponse<IFindPropertySetParameters, TResult>>;
 };

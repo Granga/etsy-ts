@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IReceipt {
     receipt_id: number;
     receipt_type: number;
@@ -91,45 +92,13 @@ export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters
     offset?: number;
     page?: number;
 }
-/**
- * Retrieves a Shop_Receipt2 by id.
- */
-export declare function getShop_Receipt2<TResult>(parameters: IGetShopReceipt2Parameters): Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>>;
-/**
- * Updates a Shop_Receipt2
- */
-export declare function updateReceipt<TResult>(parameters: IUpdateReceiptParameters): Promise<IStandardResponse<IUpdateReceiptParameters, TResult>>;
-/**
- * Retrieves a set of Receipt objects associated to a Shop.
- */
-export declare function findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters): Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>;
-/**
- * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
- */
-export declare function submitTracking<TResult>(parameters: ISubmitTrackingParameters): Promise<IStandardResponse<ISubmitTrackingParameters, TResult>>;
-/**
- * Retrieves a set of Receipt objects associated to a Shop based on the status.
- */
-export declare function findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>;
-/**
- * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
- */
-export declare function findAllOpenLocalDeliveryReceipts<TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters): Promise<IStandardResponse<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>>;
-/**
- * Searches the set of Receipt objects associated to a Shop by a query
- */
-export declare function searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>;
-/**
- * Retrieves a set of Receipt objects associated to a User.
- */
-export declare function findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>;
 export declare const Receipt: {
-    getShop_Receipt2: <TResult>(parameters: IGetShopReceipt2Parameters) => Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>>;
-    updateReceipt: <TResult>(parameters: IUpdateReceiptParameters) => Promise<IStandardResponse<IUpdateReceiptParameters, TResult>>;
-    findAllShopReceipts: <TResult>(parameters: IFindAllShopReceiptsParameters) => Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>;
-    submitTracking: <TResult>(parameters: ISubmitTrackingParameters) => Promise<IStandardResponse<ISubmitTrackingParameters, TResult>>;
-    findAllShopReceiptsByStatus: <TResult>(parameters: IFindAllShopReceiptsByStatusParameters) => Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>;
-    findAllOpenLocalDeliveryReceipts: <TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters) => Promise<IStandardResponse<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>>;
-    searchAllShopReceipts: <TResult>(parameters: ISearchAllShopReceiptsParameters) => Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>;
-    findAllUserBuyerReceipts: <TResult>(parameters: IFindAllUserBuyerReceiptsParameters) => Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>;
+    getShop_Receipt2: <TResult>(parameters: IGetShopReceipt2Parameters, options?: IOptions) => Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>>;
+    updateReceipt: <TResult>(parameters: IUpdateReceiptParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateReceiptParameters, TResult>>;
+    findAllShopReceipts: <TResult>(parameters: IFindAllShopReceiptsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>;
+    submitTracking: <TResult>(parameters: ISubmitTrackingParameters, options?: IOptions) => Promise<IStandardResponse<ISubmitTrackingParameters, TResult>>;
+    findAllShopReceiptsByStatus: <TResult>(parameters: IFindAllShopReceiptsByStatusParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>;
+    findAllOpenLocalDeliveryReceipts: <TResult>(parameters: IFindAllOpenLocalDeliveryReceiptsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllOpenLocalDeliveryReceiptsParameters, TResult>>;
+    searchAllShopReceipts: <TResult>(parameters: ISearchAllShopReceiptsParameters, options?: IOptions) => Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>;
+    findAllUserBuyerReceipts: <TResult>(parameters: IFindAllUserBuyerReceiptsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>;
 };

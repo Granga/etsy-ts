@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -18,7 +18,6 @@ export interface ICategory {
 }
 
 //parameters types
-
 export interface IGetCategoryParameters extends IStandardParameters {
     tag: string
 }
@@ -43,42 +42,41 @@ export interface IFindAllSubCategoryChildrenParameters extends IStandardParamete
 }
 
 //methods
-
 /**
  * Retrieves a top-level Category by tag.
  */
-export function getCategory <TResult>(parameters: IGetCategoryParameters): Promise<IStandardResponse<IGetCategoryParameters, TResult>> {
-    return request<IGetCategoryParameters, TResult>("/categories/:tag", parameters, "GET");
+function getCategory <TResult>(parameters: IGetCategoryParameters, options?: IOptions): Promise<IStandardResponse<IGetCategoryParameters, TResult>> {
+    return request<IGetCategoryParameters, TResult>("/categories/:tag", parameters, "GET", options);
 }
 /**
  * Retrieves all top-level Categories.
  */
-export function findAllTopCategory <TResult>(parameters: IFindAllTopCategoryParameters): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>> {
-    return request<IFindAllTopCategoryParameters, TResult>("/taxonomy/categories", parameters, "GET");
+function findAllTopCategory <TResult>(parameters: IFindAllTopCategoryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTopCategoryParameters, TResult>> {
+    return request<IFindAllTopCategoryParameters, TResult>("/taxonomy/categories", parameters, "GET", options);
 }
 /**
  * Retrieves a second-level Category by tag and subtag.
  */
-export function getSubCategory <TResult>(parameters: IGetSubCategoryParameters): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>> {
-    return request<IGetSubCategoryParameters, TResult>("/categories/:tag/:subtag", parameters, "GET");
+function getSubCategory <TResult>(parameters: IGetSubCategoryParameters, options?: IOptions): Promise<IStandardResponse<IGetSubCategoryParameters, TResult>> {
+    return request<IGetSubCategoryParameters, TResult>("/categories/:tag/:subtag", parameters, "GET", options);
 }
 /**
  * Retrieves a third-level Category by tag, subtag and subsubtag.
  */
-export function getSubSubCategory <TResult>(parameters: IGetSubSubCategoryParameters): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>> {
-    return request<IGetSubSubCategoryParameters, TResult>("/categories/:tag/:subtag/:subsubtag", parameters, "GET");
+function getSubSubCategory <TResult>(parameters: IGetSubSubCategoryParameters, options?: IOptions): Promise<IStandardResponse<IGetSubSubCategoryParameters, TResult>> {
+    return request<IGetSubSubCategoryParameters, TResult>("/categories/:tag/:subtag/:subsubtag", parameters, "GET", options);
 }
 /**
  * Retrieves children of a top-level Category by tag.
  */
-export function findAllTopCategoryChildren <TResult>(parameters: IFindAllTopCategoryChildrenParameters): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>> {
-    return request<IFindAllTopCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag", parameters, "GET");
+function findAllTopCategoryChildren <TResult>(parameters: IFindAllTopCategoryChildrenParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTopCategoryChildrenParameters, TResult>> {
+    return request<IFindAllTopCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag", parameters, "GET", options);
 }
 /**
  * Retrieves children of a second-level Category by tag and subtag.
  */
-export function findAllSubCategoryChildren <TResult>(parameters: IFindAllSubCategoryChildrenParameters): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>> {
-    return request<IFindAllSubCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag/:subtag", parameters, "GET");
+function findAllSubCategoryChildren <TResult>(parameters: IFindAllSubCategoryChildrenParameters, options?: IOptions): Promise<IStandardResponse<IFindAllSubCategoryChildrenParameters, TResult>> {
+    return request<IFindAllSubCategoryChildrenParameters, TResult>("/taxonomy/categories/:tag/:subtag", parameters, "GET", options);
 }
 
 export const Category = {

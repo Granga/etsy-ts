@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -17,7 +17,6 @@ export interface IShippingInfo {
 }
 
 //parameters types
-
 export interface IFindAllListingShippingProfileEntriesParameters extends IStandardParameters {
 
 }
@@ -44,36 +43,35 @@ export interface IDeleteShippingInfoParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
  */
-export function findAllListingShippingProfileEntries <TResult>(parameters: IFindAllListingShippingProfileEntriesParameters): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>> {
-    return request<IFindAllListingShippingProfileEntriesParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "GET");
+function findAllListingShippingProfileEntries <TResult>(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>> {
+    return request<IFindAllListingShippingProfileEntriesParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "GET", options);
 }
 /**
  * Creates a new ShippingInfo.
  */
-export function createShippingInfo <TResult>(parameters: ICreateShippingInfoParameters): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>> {
-    return request<ICreateShippingInfoParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "POST");
+function createShippingInfo <TResult>(parameters: ICreateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>> {
+    return request<ICreateShippingInfoParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "POST", options);
 }
 /**
  * Retrieves a ShippingInfo by id.
  */
-export function getShippingInfo <TResult>(parameters: IGetShippingInfoParameters): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>> {
-    return request<IGetShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "GET");
+function getShippingInfo <TResult>(parameters: IGetShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>> {
+    return request<IGetShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "GET", options);
 }
 /**
  * Updates a ShippingInfo with the given id.
  */
-export function updateShippingInfo <TResult>(parameters: IUpdateShippingInfoParameters): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>> {
-    return request<IUpdateShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "PUT");
+function updateShippingInfo <TResult>(parameters: IUpdateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>> {
+    return request<IUpdateShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "PUT", options);
 }
 /**
  * Deletes the ShippingInfo with the given id.
  */
-export function deleteShippingInfo <TResult>(parameters: IDeleteShippingInfoParameters): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>> {
-    return request<IDeleteShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "DELETE");
+function deleteShippingInfo <TResult>(parameters: IDeleteShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>> {
+    return request<IDeleteShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "DELETE", options);
 }
 
 export const ShippingInfo = {

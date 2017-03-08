@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a ShopAbout object associated to a Shop.
- */
-function getShopAbout(parameters) {
-    return httpClient_1.request("/shops/:shop_id/about", parameters, "GET");
+* Retrieves a ShopAbout object associated to a Shop.
+*/
+function getShopAbout(parameters, options) {
+    return client_1.request("/shops/:shop_id/about", parameters, "GET", options);
 }
-exports.getShopAbout = getShopAbout;
-exports.ShopAbout = {getShopAbout: getShopAbout};
+exports.ShopAbout = { getShopAbout: getShopAbout };

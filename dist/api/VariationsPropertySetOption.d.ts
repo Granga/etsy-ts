@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IVariationsPropertySetOption {
     property_option_id: number;
     name: string;
@@ -17,10 +18,6 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
     diameter_scale?: number;
     dimensions_scale?: number;
 }
-/**
- * Finds all suggested property options for a given property.
- */
-export declare function findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
 export declare const VariationsPropertySetOption: {
-    findAllSuggestedPropertyOptions: <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters) => Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
+    findAllSuggestedPropertyOptions: <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
 };

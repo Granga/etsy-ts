@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -32,7 +32,6 @@ export interface ITransaction {
 }
 
 //parameters types
-
 export interface IGetShopTransactionParameters extends IStandardParameters {
     transaction_id: number[]
 }
@@ -62,36 +61,35 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
 }
 
 //methods
-
 /**
  * Retrieves a Shop_Transaction by id.
  */
-export function getShop_Transaction <TResult>(parameters: IGetShopTransactionParameters): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>> {
-    return request<IGetShopTransactionParameters, TResult>("/transactions/:transaction_id", parameters, "GET");
+function getShop_Transaction <TResult>(parameters: IGetShopTransactionParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>> {
+    return request<IGetShopTransactionParameters, TResult>("/transactions/:transaction_id", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Transaction objects associated to a Listing.
  */
-export function findAllListingTransactions <TResult>(parameters: IFindAllListingTransactionsParameters): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>> {
-    return request<IFindAllListingTransactionsParameters, TResult>("/listings/:listing_id/transactions", parameters, "GET");
+function findAllListingTransactions <TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>> {
+    return request<IFindAllListingTransactionsParameters, TResult>("/listings/:listing_id/transactions", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
  */
-export function findAllShop_Receipt2Transactions <TResult>(parameters: IFindAllShopReceipt2TransactionsParameters): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>> {
-    return request<IFindAllShopReceipt2TransactionsParameters, TResult>("/receipts/:receipt_id/transactions", parameters, "GET");
+function findAllShop_Receipt2Transactions <TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>> {
+    return request<IFindAllShopReceipt2TransactionsParameters, TResult>("/receipts/:receipt_id/transactions", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Transaction objects associated to a Shop.
  */
-export function findAllShopTransactions <TResult>(parameters: IFindAllShopTransactionsParameters): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>> {
-    return request<IFindAllShopTransactionsParameters, TResult>("/shops/:shop_id/transactions", parameters, "GET");
+function findAllShopTransactions <TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>> {
+    return request<IFindAllShopTransactionsParameters, TResult>("/shops/:shop_id/transactions", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Transaction objects associated to a User.
  */
-export function findAllUserBuyerTransactions <TResult>(parameters: IFindAllUserBuyerTransactionsParameters): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>> {
-    return request<IFindAllUserBuyerTransactionsParameters, TResult>("/users/:user_id/transactions", parameters, "GET");
+function findAllUserBuyerTransactions <TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>> {
+    return request<IFindAllUserBuyerTransactionsParameters, TResult>("/users/:user_id/transactions", parameters, "GET", options);
 }
 
 export const Transaction = {

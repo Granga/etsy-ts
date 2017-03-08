@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUserProfile {
     user_profile_id: number;
     user_id: number;
@@ -40,15 +41,7 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     region?: string;
     city?: string;
 }
-/**
- * Returns the UserProfile object associated with a User.
- */
-export declare function findUserProfile<TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
-/**
- * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
- */
-export declare function updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
 export declare const UserProfile: {
-    findUserProfile: <TResult>(parameters: IFindUserProfileParameters) => Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
-    updateUserProfile: <TResult>(parameters: IUpdateUserProfileParameters) => Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
+    findUserProfile: <TResult>(parameters: IFindUserProfileParameters, options?: IOptions) => Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
+    updateUserProfile: <TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
 };

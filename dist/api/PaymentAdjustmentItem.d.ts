@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IPaymentAdjustmentItem {
     payment_adjustment_item_id: number;
     payment_adjustment_id: number;
@@ -15,10 +16,6 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
     offset?: number;
     page?: number;
 }
-/**
- * Get Direct Checkout Payment Adjustment Items
- */
-export declare function findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
 export declare const PaymentAdjustmentItem: {
-    findPaymentAdjustmentItem: <TResult>(parameters: IFindPaymentAdjustmentItemParameters) => Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
+    findPaymentAdjustmentItem: <TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
 };

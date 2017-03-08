@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Add a value for a given property.
- */
-function getPropertyOptionModifier(parameters) {
-    return httpClient_1.request("/property_options/modifiers", parameters, "GET");
+* Add a value for a given property.
+*/
+function getPropertyOptionModifier(parameters, options) {
+    return client_1.request("/property_options/modifiers", parameters, "GET", options);
 }
-exports.getPropertyOptionModifier = getPropertyOptionModifier;
-exports.VariationsPropertySetOptionModifier = {getPropertyOptionModifier: getPropertyOptionModifier};
+exports.VariationsPropertySetOptionModifier = { getPropertyOptionModifier: getPropertyOptionModifier };

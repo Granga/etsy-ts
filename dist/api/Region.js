@@ -1,26 +1,23 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Finds all Region.
- */
-function findAllRegion(parameters) {
-    return httpClient_1.request("/regions", parameters, "GET");
+* Finds all Region.
+*/
+function findAllRegion(parameters, options) {
+    return client_1.request("/regions", parameters, "GET", options);
 }
-exports.findAllRegion = findAllRegion;
 /**
- * Retrieves a Region by id.
- */
-function getRegion(parameters) {
-    return httpClient_1.request("/regions/:region_id", parameters, "GET");
+* Retrieves a Region by id.
+*/
+function getRegion(parameters, options) {
+    return client_1.request("/regions/:region_id", parameters, "GET", options);
 }
-exports.getRegion = getRegion;
 /**
- *
- */
-function findEligibleRegions(parameters) {
-    return httpClient_1.request("/regions/eligible", parameters, "GET");
+*
+*/
+function findEligibleRegions(parameters, options) {
+    return client_1.request("/regions/eligible", parameters, "GET", options);
 }
-exports.findEligibleRegions = findEligibleRegions;
-exports.Region = {findAllRegion: findAllRegion, getRegion: getRegion, findEligibleRegions: findEligibleRegions};
+exports.Region = { findAllRegion: findAllRegion, getRegion: getRegion, findEligibleRegions: findEligibleRegions };

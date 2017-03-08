@@ -1,70 +1,53 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get the shipping upgrades available for a listing.
- */
-function getListingShippingUpgrades(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/upgrades", parameters, "GET");
+* Get the shipping upgrades available for a listing.
+*/
+function getListingShippingUpgrades(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "GET", options);
 }
-exports.getListingShippingUpgrades = getListingShippingUpgrades;
 /**
- * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-function createListingShippingUpgrade(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/upgrades", parameters, "POST");
+* Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
+*/
+function createListingShippingUpgrade(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "POST", options);
 }
-exports.createListingShippingUpgrade = createListingShippingUpgrade;
 /**
- * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-function updateListingShippingUpgrade(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/upgrades", parameters, "PUT");
+* Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
+*/
+function updateListingShippingUpgrade(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "PUT", options);
 }
-exports.updateListingShippingUpgrade = updateListingShippingUpgrade;
 /**
- * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
- */
-function deleteListingShippingUpgrade(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/upgrades", parameters, "DELETE");
+* Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
+*/
+function deleteListingShippingUpgrade(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/upgrades", parameters, "DELETE", options);
 }
-exports.deleteListingShippingUpgrade = deleteListingShippingUpgrade;
 /**
- * Retrieves a list of shipping upgrades for the parent ShippingTemplate
- */
-function findAllShippingTemplateUpgrades(parameters) {
-    return httpClient_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "GET");
+* Retrieves a list of shipping upgrades for the parent ShippingTemplate
+*/
+function findAllShippingTemplateUpgrades(parameters, options) {
+    return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "GET", options);
 }
-exports.findAllShippingTemplateUpgrades = findAllShippingTemplateUpgrades;
 /**
- * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-function createShippingTemplateUpgrade(parameters) {
-    return httpClient_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "POST");
+* Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+*/
+function createShippingTemplateUpgrade(parameters, options) {
+    return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "POST", options);
 }
-exports.createShippingTemplateUpgrade = createShippingTemplateUpgrade;
 /**
- * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-function updateShippingTemplateUpgrade(parameters) {
-    return httpClient_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "PUT");
+* Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+*/
+function updateShippingTemplateUpgrade(parameters, options) {
+    return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "PUT", options);
 }
-exports.updateShippingTemplateUpgrade = updateShippingTemplateUpgrade;
 /**
- * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
- */
-function deleteShippingTemplateUpgrade(parameters) {
-    return httpClient_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "DELETE");
+* Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
+*/
+function deleteShippingTemplateUpgrade(parameters, options) {
+    return client_1.request("/shipping/templates/:shipping_template_id/upgrades", parameters, "DELETE", options);
 }
-exports.deleteShippingTemplateUpgrade = deleteShippingTemplateUpgrade;
-exports.ShippingUpgrade = {
-    getListingShippingUpgrades: getListingShippingUpgrades,
-    createListingShippingUpgrade: createListingShippingUpgrade,
-    updateListingShippingUpgrade: updateListingShippingUpgrade,
-    deleteListingShippingUpgrade: deleteListingShippingUpgrade,
-    findAllShippingTemplateUpgrades: findAllShippingTemplateUpgrades,
-    createShippingTemplateUpgrade: createShippingTemplateUpgrade,
-    updateShippingTemplateUpgrade: updateShippingTemplateUpgrade,
-    deleteShippingTemplateUpgrade: deleteShippingTemplateUpgrade
-};
+exports.ShippingUpgrade = { getListingShippingUpgrades: getListingShippingUpgrades, createListingShippingUpgrade: createListingShippingUpgrade, updateListingShippingUpgrade: updateListingShippingUpgrade, deleteListingShippingUpgrade: deleteListingShippingUpgrade, findAllShippingTemplateUpgrades: findAllShippingTemplateUpgrades, createShippingTemplateUpgrade: createShippingTemplateUpgrade, updateShippingTemplateUpgrade: updateShippingTemplateUpgrade, deleteShippingTemplateUpgrade: deleteShippingTemplateUpgrade };

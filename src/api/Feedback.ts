@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -20,7 +20,6 @@ export interface IFeedback {
 }
 
 //parameters types
-
 export interface IFindAllUserFeedbackAsAuthorParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
@@ -59,46 +58,45 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
 }
 
 //methods
-
 /**
  * Retrieves a set of Feedback objects associated to a User.
  */
-export function findAllUserFeedbackAsAuthor <TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>> {
-    return request<IFindAllUserFeedbackAsAuthorParameters, TResult>("/users/:user_id/feedback/as-author", parameters, "GET");
+function findAllUserFeedbackAsAuthor <TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>> {
+    return request<IFindAllUserFeedbackAsAuthorParameters, TResult>("/users/:user_id/feedback/as-author", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Feedback objects associated to a User.
  */
-export function findAllUserFeedbackAsBuyer <TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>> {
-    return request<IFindAllUserFeedbackAsBuyerParameters, TResult>("/users/:user_id/feedback/as-buyer", parameters, "GET");
+function findAllUserFeedbackAsBuyer <TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>> {
+    return request<IFindAllUserFeedbackAsBuyerParameters, TResult>("/users/:user_id/feedback/as-buyer", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Feedback objects associated to a User.
  */
-export function findAllUserFeedbackAsSeller <TResult>(parameters: IFindAllUserFeedbackAsSellerParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>> {
-    return request<IFindAllUserFeedbackAsSellerParameters, TResult>("/users/:user_id/feedback/as-seller", parameters, "GET");
+function findAllUserFeedbackAsSeller <TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>> {
+    return request<IFindAllUserFeedbackAsSellerParameters, TResult>("/users/:user_id/feedback/as-seller", parameters, "GET", options);
 }
 /**
  * Retrieves a set of Feedback objects associated to a User.
  */
-export function findAllUserFeedbackAsSubject <TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>> {
-    return request<IFindAllUserFeedbackAsSubjectParameters, TResult>("/users/:user_id/feedback/as-subject", parameters, "GET");
+function findAllUserFeedbackAsSubject <TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>> {
+    return request<IFindAllUserFeedbackAsSubjectParameters, TResult>("/users/:user_id/feedback/as-subject", parameters, "GET", options);
 }
 /**
  * Returns a set of FeedBack objects associated to a User.
  This is essentially the union between the findAllUserFeedbackAsBuyer
  and findAllUserFeedbackAsSubject methods.
  */
-export function findAllFeedbackFromBuyers <TResult>(parameters: IFindAllFeedbackFromBuyersParameters): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>> {
-    return request<IFindAllFeedbackFromBuyersParameters, TResult>("/users/:user_id/feedback/from-buyers", parameters, "GET");
+function findAllFeedbackFromBuyers <TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>> {
+    return request<IFindAllFeedbackFromBuyersParameters, TResult>("/users/:user_id/feedback/from-buyers", parameters, "GET", options);
 }
 /**
  * Returns a set of FeedBack objects associated to a User.
  This is essentially the union between
  the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
  */
-export function findAllFeedbackFromSellers <TResult>(parameters: IFindAllFeedbackFromSellersParameters): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>> {
-    return request<IFindAllFeedbackFromSellersParameters, TResult>("/users/:user_id/feedback/from-sellers", parameters, "GET");
+function findAllFeedbackFromSellers <TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>> {
+    return request<IFindAllFeedbackFromSellersParameters, TResult>("/users/:user_id/feedback/from-sellers", parameters, "GET", options);
 }
 
 export const Feedback = {

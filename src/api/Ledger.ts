@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -12,18 +12,16 @@ export interface ILedger {
 }
 
 //parameters types
-
 export interface IFindLedgerParameters extends IStandardParameters {
     shop_id: string | number
 }
 
 //methods
-
 /**
  * Get a Shop Payment Account Ledger
  */
-export function findLedger <TResult>(parameters: IFindLedgerParameters): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
-    return request<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET");
+function findLedger <TResult>(parameters: IFindLedgerParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
+    return request<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET", options);
 }
 
 export const Ledger = {findLedger};

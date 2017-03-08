@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IGuestCart {
     cart_id: number;
     shop_name: string;
@@ -57,40 +58,12 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
     guest_id: any;
     cart_id: string | number;
 }
-/**
- * Get all guest's carts
- */
-export declare function findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
-/**
- * Add a listing to guest's cart
- */
-export declare function addToGuestCart<TResult>(parameters: IAddToGuestCartParameters): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
-/**
- * Update a guest's cart listing purchase quantity
- */
-export declare function updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
-/**
- * Remove a listing from a guest's cart
- */
-export declare function removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
-/**
- * Get a guest's cart
- */
-export declare function findGuestCart<TResult>(parameters: IFindGuestCartParameters): Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
-/**
- * Update a guest's cart
- */
-export declare function updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
-/**
- * Delete a guest's cart
- */
-export declare function deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
 export declare const GuestCart: {
-    findAllGuestCarts: <TResult>(parameters: IFindAllGuestCartsParameters) => Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
-    addToGuestCart: <TResult>(parameters: IAddToGuestCartParameters) => Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
-    updateGuestCartListingQuantity: <TResult>(parameters: IUpdateGuestCartListingQuantityParameters) => Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
-    removeGuestCartListing: <TResult>(parameters: IRemoveGuestCartListingParameters) => Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
-    findGuestCart: <TResult>(parameters: IFindGuestCartParameters) => Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
-    updateGuestCart: <TResult>(parameters: IUpdateGuestCartParameters) => Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
-    deleteGuestCart: <TResult>(parameters: IDeleteGuestCartParameters) => Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
+    findAllGuestCarts: <TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
+    addToGuestCart: <TResult>(parameters: IAddToGuestCartParameters, options?: IOptions) => Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
+    updateGuestCartListingQuantity: <TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
+    removeGuestCartListing: <TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions) => Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
+    findGuestCart: <TResult>(parameters: IFindGuestCartParameters, options?: IOptions) => Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
+    updateGuestCart: <TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
+    deleteGuestCart: <TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
 };

@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get a list of all methods available.
- */
-function getMethodTable(parameters) {
-    return httpClient_1.request("/", parameters, "GET");
+* Get a list of all methods available.
+*/
+function getMethodTable(parameters, options) {
+    return client_1.request("/", parameters, "GET", options);
 }
-exports.getMethodTable = getMethodTable;
-exports.ApiMethod = {getMethodTable: getMethodTable};
+exports.ApiMethod = { getMethodTable: getMethodTable };

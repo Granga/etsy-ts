@@ -1,46 +1,35 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves all Shop_Coupons by shop_id
- */
-function findAllShopCoupons(parameters) {
-    return httpClient_1.request("/shops/:shop_id/coupons", parameters, "GET");
+* Retrieves all Shop_Coupons by shop_id
+*/
+function findAllShopCoupons(parameters, options) {
+    return client_1.request("/shops/:shop_id/coupons", parameters, "GET", options);
 }
-exports.findAllShopCoupons = findAllShopCoupons;
 /**
- * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
- */
-function createCoupon(parameters) {
-    return httpClient_1.request("/shops/:shop_id/coupons", parameters, "POST");
+* Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
+*/
+function createCoupon(parameters, options) {
+    return client_1.request("/shops/:shop_id/coupons", parameters, "POST", options);
 }
-exports.createCoupon = createCoupon;
 /**
- * Retrieves a Shop_Coupon by id and shop_id
- */
-function findCoupon(parameters) {
-    return httpClient_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "GET");
+* Retrieves a Shop_Coupon by id and shop_id
+*/
+function findCoupon(parameters, options) {
+    return client_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "GET", options);
 }
-exports.findCoupon = findCoupon;
 /**
- * Updates a coupon
- */
-function updateCoupon(parameters) {
-    return httpClient_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT");
+* Updates a coupon
+*/
+function updateCoupon(parameters, options) {
+    return client_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT", options);
 }
-exports.updateCoupon = updateCoupon;
 /**
- * Deletes a coupon
- */
-function deleteCoupon(parameters) {
-    return httpClient_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE");
+* Deletes a coupon
+*/
+function deleteCoupon(parameters, options) {
+    return client_1.request("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE", options);
 }
-exports.deleteCoupon = deleteCoupon;
-exports.Coupon = {
-    findAllShopCoupons: findAllShopCoupons,
-    createCoupon: createCoupon,
-    findCoupon: findCoupon,
-    updateCoupon: updateCoupon,
-    deleteCoupon: deleteCoupon
-};
+exports.Coupon = { findAllShopCoupons: findAllShopCoupons, createCoupon: createCoupon, findCoupon: findCoupon, updateCoupon: updateCoupon, deleteCoupon: deleteCoupon };

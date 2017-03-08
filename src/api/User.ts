@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -16,7 +16,6 @@ export interface IUser {
 }
 
 //parameters types
-
 export interface IFindAllUsersParameters extends IStandardParameters {
     keywords?: string,
     limit?: number,
@@ -62,54 +61,53 @@ export interface IConnectUsersParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Finds all Users whose name or username match the keywords parameter.
  */
-export function findAllUsers <TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
-    return request<IFindAllUsersParameters, TResult>("/users", parameters, "GET");
+function findAllUsers <TResult>(parameters: IFindAllUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
+    return request<IFindAllUsersParameters, TResult>("/users", parameters, "GET", options);
 }
 /**
  * Retrieves a User by id.
  */
-export function getUser <TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>> {
-    return request<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET");
+function getUser <TResult>(parameters: IGetUserParameters, options?: IOptions): Promise<IStandardResponse<IGetUserParameters, TResult>> {
+    return request<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET", options);
 }
 /**
  * Returns a list of users for a specific team
  */
-export function findAllUsersForTeam <TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
-    return request<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET");
+function findAllUsersForTeam <TResult>(parameters: IFindAllUsersForTeamParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
+    return request<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET", options);
 }
 /**
  * Returns a list of users who have circled this user
  */
-export function getCirclesContainingUser <TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
-    return request<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET");
+function getCirclesContainingUser <TResult>(parameters: IGetCirclesContainingUserParameters, options?: IOptions): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
+    return request<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET", options);
 }
 /**
  * Returns details about a connection between users
  */
-export function getConnectedUser <TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
-    return request<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET");
+function getConnectedUser <TResult>(parameters: IGetConnectedUserParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
+    return request<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET", options);
 }
 /**
  * Removes a user (to_user_id) from the logged in user's (user_id) circle
  */
-export function unconnectUsers <TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
-    return request<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE");
+function unconnectUsers <TResult>(parameters: IUnconnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
+    return request<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE", options);
 }
 /**
  * Returns a list of users that are in this user's cricle
  */
-export function getConnectedUsers <TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
-    return request<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET");
+function getConnectedUsers <TResult>(parameters: IGetConnectedUsersParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
+    return request<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET", options);
 }
 /**
  * Adds user (to_user_id) to the user's (user_id) circle
  */
-export function connectUsers <TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
-    return request<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST");
+function connectUsers <TResult>(parameters: IConnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
+    return request<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST", options);
 }
 
 export const User = {

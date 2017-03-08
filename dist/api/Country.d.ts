@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICountry {
     country_id: number;
     iso_country_code: string;
@@ -20,20 +21,8 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     page?: number;
     iso_code: string;
 }
-/**
- * Finds all Country.
- */
-export declare function findAllCountry<TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
-/**
- * Retrieves a Country by id.
- */
-export declare function getCountry<TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
-/**
- * Get the country info for the given ISO code.
- */
-export declare function findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
 export declare const Country: {
-    findAllCountry: <TResult>(parameters: IFindAllCountryParameters) => Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
-    getCountry: <TResult>(parameters: IGetCountryParameters) => Promise<IStandardResponse<IGetCountryParameters, TResult>>;
-    findByIsoCode: <TResult>(parameters: IFindByIsoCodeParameters) => Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+    findAllCountry: <TResult>(parameters: IFindAllCountryParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+    getCountry: <TResult>(parameters: IGetCountryParameters, options?: IOptions) => Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+    findByIsoCode: <TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions) => Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
 };

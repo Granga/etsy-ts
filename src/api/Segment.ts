@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -15,19 +15,17 @@ export interface ISegment {
 }
 
 //parameters types
-
 export interface IFindBrowseSegmentsParameters extends IStandardParameters {
     region?: string,
     path?: string
 }
 
 //methods
-
 /**
  * Find all Browse Segments
  */
-export function findBrowseSegments <TResult>(parameters: IFindBrowseSegmentsParameters): Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>> {
-    return request<IFindBrowseSegmentsParameters, TResult>("/segments", parameters, "GET");
+function findBrowseSegments <TResult>(parameters: IFindBrowseSegmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>> {
+    return request<IFindBrowseSegmentsParameters, TResult>("/segments", parameters, "GET", options);
 }
 
 export const Segment = {findBrowseSegments};

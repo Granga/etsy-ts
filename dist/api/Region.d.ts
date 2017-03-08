@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IRegion {
     region_id: number;
     region_name: string;
@@ -12,20 +13,8 @@ export interface IGetRegionParameters extends IStandardParameters {
 }
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 }
-/**
- * Finds all Region.
- */
-export declare function findAllRegion<TResult>(parameters: IFindAllRegionParameters): Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
-/**
- * Retrieves a Region by id.
- */
-export declare function getRegion<TResult>(parameters: IGetRegionParameters): Promise<IStandardResponse<IGetRegionParameters, TResult>>;
-/**
- *
- */
-export declare function findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
 export declare const Region: {
-    findAllRegion: <TResult>(parameters: IFindAllRegionParameters) => Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
-    getRegion: <TResult>(parameters: IGetRegionParameters) => Promise<IStandardResponse<IGetRegionParameters, TResult>>;
-    findEligibleRegions: <TResult>(parameters: IFindEligibleRegionsParameters) => Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
+    findAllRegion: <TResult>(parameters: IFindAllRegionParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
+    getRegion: <TResult>(parameters: IGetRegionParameters, options?: IOptions) => Promise<IStandardResponse<IGetRegionParameters, TResult>>;
+    findEligibleRegions: <TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
 };

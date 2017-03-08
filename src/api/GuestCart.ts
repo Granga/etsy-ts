@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -25,7 +25,6 @@ export interface IGuestCart {
 }
 
 //parameters types
-
 export interface IFindAllGuestCartsParameters extends IStandardParameters {
     guest_id: any
 }
@@ -65,48 +64,47 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Get all guest's carts
  */
-export function findAllGuestCarts <TResult>(parameters: IFindAllGuestCartsParameters): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>> {
-    return request<IFindAllGuestCartsParameters, TResult>("/guests/:guest_id/carts", parameters, "GET");
+function findAllGuestCarts <TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>> {
+    return request<IFindAllGuestCartsParameters, TResult>("/guests/:guest_id/carts", parameters, "GET", options);
 }
 /**
  * Add a listing to guest's cart
  */
-export function addToGuestCart <TResult>(parameters: IAddToGuestCartParameters): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>> {
-    return request<IAddToGuestCartParameters, TResult>("/guests/:guest_id/carts", parameters, "POST");
+function addToGuestCart <TResult>(parameters: IAddToGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>> {
+    return request<IAddToGuestCartParameters, TResult>("/guests/:guest_id/carts", parameters, "POST", options);
 }
 /**
  * Update a guest's cart listing purchase quantity
  */
-export function updateGuestCartListingQuantity <TResult>(parameters: IUpdateGuestCartListingQuantityParameters): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>> {
-    return request<IUpdateGuestCartListingQuantityParameters, TResult>("/guests/:guest_id/carts", parameters, "PUT");
+function updateGuestCartListingQuantity <TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>> {
+    return request<IUpdateGuestCartListingQuantityParameters, TResult>("/guests/:guest_id/carts", parameters, "PUT", options);
 }
 /**
  * Remove a listing from a guest's cart
  */
-export function removeGuestCartListing <TResult>(parameters: IRemoveGuestCartListingParameters): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>> {
-    return request<IRemoveGuestCartListingParameters, TResult>("/guests/:guest_id/carts", parameters, "DELETE");
+function removeGuestCartListing <TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>> {
+    return request<IRemoveGuestCartListingParameters, TResult>("/guests/:guest_id/carts", parameters, "DELETE", options);
 }
 /**
  * Get a guest's cart
  */
-export function findGuestCart <TResult>(parameters: IFindGuestCartParameters): Promise<IStandardResponse<IFindGuestCartParameters, TResult>> {
-    return request<IFindGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "GET");
+function findGuestCart <TResult>(parameters: IFindGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IFindGuestCartParameters, TResult>> {
+    return request<IFindGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "GET", options);
 }
 /**
  * Update a guest's cart
  */
-export function updateGuestCart <TResult>(parameters: IUpdateGuestCartParameters): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>> {
-    return request<IUpdateGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "PUT");
+function updateGuestCart <TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>> {
+    return request<IUpdateGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "PUT", options);
 }
 /**
  * Delete a guest's cart
  */
-export function deleteGuestCart <TResult>(parameters: IDeleteGuestCartParameters): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>> {
-    return request<IDeleteGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "DELETE");
+function deleteGuestCart <TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>> {
+    return request<IDeleteGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "DELETE", options);
 }
 
 export const GuestCart = {

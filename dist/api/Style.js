@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieve all suggested styles.
- */
-function findSuggestedStyles(parameters) {
-    return httpClient_1.request("/taxonomy/styles", parameters, "GET");
+* Retrieve all suggested styles.
+*/
+function findSuggestedStyles(parameters, options) {
+    return client_1.request("/taxonomy/styles", parameters, "GET", options);
 }
-exports.findSuggestedStyles = findSuggestedStyles;
-exports.Style = {findSuggestedStyles: findSuggestedStyles};
+exports.Style = { findSuggestedStyles: findSuggestedStyles };

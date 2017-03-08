@@ -1,30 +1,23 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get a Direct Checkout Payment
- */
-function findPayment(parameters) {
-    return httpClient_1.request("/payments/:payment_id", parameters, "GET");
+* Get a Direct Checkout Payment
+*/
+function findPayment(parameters, options) {
+    return client_1.request("/payments/:payment_id", parameters, "GET", options);
 }
-exports.findPayment = findPayment;
 /**
- * Get a Payment from a Ledger Entry ID, if applicable
- */
-function findPaymentForLedgerEntry(parameters) {
-    return httpClient_1.request("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET");
+* Get a Payment from a Ledger Entry ID, if applicable
+*/
+function findPaymentForLedgerEntry(parameters, options) {
+    return client_1.request("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET", options);
 }
-exports.findPaymentForLedgerEntry = findPaymentForLedgerEntry;
 /**
- * Get a Payment by Shop Receipt ID
- */
-function findShopPaymentByReceipt(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET");
+* Get a Payment by Shop Receipt ID
+*/
+function findShopPaymentByReceipt(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET", options);
 }
-exports.findShopPaymentByReceipt = findShopPaymentByReceipt;
-exports.Payment = {
-    findPayment: findPayment,
-    findPaymentForLedgerEntry: findPaymentForLedgerEntry,
-    findShopPaymentByReceipt: findShopPaymentByReceipt
-};
+exports.Payment = { findPayment: findPayment, findPaymentForLedgerEntry: findPaymentForLedgerEntry, findShopPaymentByReceipt: findShopPaymentByReceipt };

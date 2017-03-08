@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -25,7 +25,6 @@ export interface IListingImage {
 }
 
 //parameters types
-
 export interface IFindAllListingImagesParameters extends IStandardParameters {
     listing_id: number
 }
@@ -47,12 +46,11 @@ export interface IDeleteListingImageParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Retrieves a set of ListingImage objects associated to a Listing.
  */
-export function findAllListingImages <TResult>(parameters: IFindAllListingImagesParameters): Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>> {
-    return request<IFindAllListingImagesParameters, TResult>("/listings/:listing_id/images", parameters, "GET");
+function findAllListingImages <TResult>(parameters: IFindAllListingImagesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>> {
+    return request<IFindAllListingImagesParameters, TResult>("/listings/:listing_id/images", parameters, "GET", options);
 }
 /**
  * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
@@ -65,22 +63,22 @@ export function findAllListingImages <TResult>(parameters: IFindAllListingImages
  When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
  will not be affected by this parameter.
  */
-export function uploadListingImage <TResult>(parameters: IUploadListingImageParameters): Promise<IStandardResponse<IUploadListingImageParameters, TResult>> {
-    return request<IUploadListingImageParameters, TResult>("/listings/:listing_id/images", parameters, "POST");
+function uploadListingImage <TResult>(parameters: IUploadListingImageParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingImageParameters, TResult>> {
+    return request<IUploadListingImageParameters, TResult>("/listings/:listing_id/images", parameters, "POST", options);
 }
 /**
  * Retrieves a Image_Listing by id.
  */
-export function getImage_Listing <TResult>(parameters: IGetImageListingParameters): Promise<IStandardResponse<IGetImageListingParameters, TResult>> {
-    return request<IGetImageListingParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "GET");
+function getImage_Listing <TResult>(parameters: IGetImageListingParameters, options?: IOptions): Promise<IStandardResponse<IGetImageListingParameters, TResult>> {
+    return request<IGetImageListingParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "GET", options);
 }
 /**
  * Deletes a listing image. A copy of the file remains on our servers,
  and so a deleted image may be re-associated with the listing without
  re-uploading the original image; see uploadListingImage
  */
-export function deleteListingImage <TResult>(parameters: IDeleteListingImageParameters): Promise<IStandardResponse<IDeleteListingImageParameters, TResult>> {
-    return request<IDeleteListingImageParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE");
+function deleteListingImage <TResult>(parameters: IDeleteListingImageParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingImageParameters, TResult>> {
+    return request<IDeleteListingImageParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE", options);
 }
 
 export const ListingImage = {findAllListingImages, uploadListingImage, getImage_Listing, deleteListingImage};

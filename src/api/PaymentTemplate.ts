@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -24,7 +24,6 @@ export interface IPaymentTemplate {
 }
 
 //parameters types
-
 export interface IFindShopPaymentTemplatesParameters extends IStandardParameters {
     shop_id: string | number
 }
@@ -66,30 +65,29 @@ export interface IFindAllUserPaymentTemplatesParameters extends IStandardParamet
 }
 
 //methods
-
 /**
  * Retrieves the PaymentTemplate associated with the Shop
  */
-export function findShopPaymentTemplates <TResult>(parameters: IFindShopPaymentTemplatesParameters): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>> {
-    return request<IFindShopPaymentTemplatesParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "GET");
+function findShopPaymentTemplates <TResult>(parameters: IFindShopPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>> {
+    return request<IFindShopPaymentTemplatesParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "GET", options);
 }
 /**
  * Creates a new PaymentTemplate
  */
-export function createShopPaymentTemplate <TResult>(parameters: ICreateShopPaymentTemplateParameters): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>> {
-    return request<ICreateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "POST");
+function createShopPaymentTemplate <TResult>(parameters: ICreateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>> {
+    return request<ICreateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates", parameters, "POST", options);
 }
 /**
  * Updates a PaymentTemplate
  */
-export function updateShopPaymentTemplate <TResult>(parameters: IUpdateShopPaymentTemplateParameters): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>> {
-    return request<IUpdateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT");
+function updateShopPaymentTemplate <TResult>(parameters: IUpdateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>> {
+    return request<IUpdateShopPaymentTemplateParameters, TResult>("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT", options);
 }
 /**
  * Retrieves a set of PaymentTemplate objects associated to a User.
  */
-export function findAllUserPaymentTemplates <TResult>(parameters: IFindAllUserPaymentTemplatesParameters): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>> {
-    return request<IFindAllUserPaymentTemplatesParameters, TResult>("/users/:user_id/payments/templates", parameters, "GET");
+function findAllUserPaymentTemplates <TResult>(parameters: IFindAllUserPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>> {
+    return request<IFindAllUserPaymentTemplatesParameters, TResult>("/users/:user_id/payments/templates", parameters, "GET", options);
 }
 
 export const PaymentTemplate = {

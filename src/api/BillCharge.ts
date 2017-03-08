@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -17,7 +17,6 @@ export interface IBillCharge {
 }
 
 //parameters types
-
 export interface IGetUserChargesMetadataParameters extends IStandardParameters {
     user_id: string | number
 }
@@ -32,18 +31,17 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Metadata for the set of BillCharges objects associated to a User
  */
-export function getUserChargesMetadata <TResult>(parameters: IGetUserChargesMetadataParameters): Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>> {
-    return request<IGetUserChargesMetadataParameters, TResult>("/users/:user_id/charges/meta", parameters, "GET");
+function getUserChargesMetadata <TResult>(parameters: IGetUserChargesMetadataParameters, options?: IOptions): Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>> {
+    return request<IGetUserChargesMetadataParameters, TResult>("/users/:user_id/charges/meta", parameters, "GET", options);
 }
 /**
  * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
  */
-export function findAllUserCharges <TResult>(parameters: IFindAllUserChargesParameters): Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>> {
-    return request<IFindAllUserChargesParameters, TResult>("/users/:user_id/charges", parameters, "GET");
+function findAllUserCharges <TResult>(parameters: IFindAllUserChargesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>> {
+    return request<IFindAllUserChargesParameters, TResult>("/users/:user_id/charges", parameters, "GET", options);
 }
 
 export const BillCharge = {getUserChargesMetadata, findAllUserCharges};

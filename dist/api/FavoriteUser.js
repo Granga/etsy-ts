@@ -1,46 +1,35 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a set of FavoriteUser objects associated to a User.
- */
-function findAllUserFavoredBy(parameters) {
-    return httpClient_1.request("/users/:user_id/favored-by", parameters, "GET");
+* Retrieves a set of FavoriteUser objects associated to a User.
+*/
+function findAllUserFavoredBy(parameters, options) {
+    return client_1.request("/users/:user_id/favored-by", parameters, "GET", options);
 }
-exports.findAllUserFavoredBy = findAllUserFavoredBy;
 /**
- * Finds all favorite users for a user
- */
-function findAllUserFavoriteUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/favorites/users", parameters, "GET");
+* Finds all favorite users for a user
+*/
+function findAllUserFavoriteUsers(parameters, options) {
+    return client_1.request("/users/:user_id/favorites/users", parameters, "GET", options);
 }
-exports.findAllUserFavoriteUsers = findAllUserFavoriteUsers;
 /**
- * Finds a favorite user for a user
- */
-function findUserFavoriteUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "GET");
+* Finds a favorite user for a user
+*/
+function findUserFavoriteUsers(parameters, options) {
+    return client_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "GET", options);
 }
-exports.findUserFavoriteUsers = findUserFavoriteUsers;
 /**
- * Creates a new favorite listing for a user
- */
-function createUserFavoriteUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "POST");
+* Creates a new favorite listing for a user
+*/
+function createUserFavoriteUsers(parameters, options) {
+    return client_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "POST", options);
 }
-exports.createUserFavoriteUsers = createUserFavoriteUsers;
 /**
- * Delete a favorite listing for a user
- */
-function deleteUserFavoriteUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "DELETE");
+* Delete a favorite listing for a user
+*/
+function deleteUserFavoriteUsers(parameters, options) {
+    return client_1.request("/users/:user_id/favorites/users/:target_user_id", parameters, "DELETE", options);
 }
-exports.deleteUserFavoriteUsers = deleteUserFavoriteUsers;
-exports.FavoriteUser = {
-    findAllUserFavoredBy: findAllUserFavoredBy,
-    findAllUserFavoriteUsers: findAllUserFavoriteUsers,
-    findUserFavoriteUsers: findUserFavoriteUsers,
-    createUserFavoriteUsers: createUserFavoriteUsers,
-    deleteUserFavoriteUsers: deleteUserFavoriteUsers
-};
+exports.FavoriteUser = { findAllUserFavoredBy: findAllUserFavoredBy, findAllUserFavoriteUsers: findAllUserFavoriteUsers, findUserFavoriteUsers: findUserFavoriteUsers, createUserFavoriteUsers: createUserFavoriteUsers, deleteUserFavoriteUsers: deleteUserFavoriteUsers };

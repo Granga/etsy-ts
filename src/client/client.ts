@@ -11,7 +11,7 @@ const defaultOptions = {
 
 export async function request <TParameters, TResult>(uri: string, parameters: TParameters, method: string, options?: IOptions): Promise<IStandardResponse<TParameters, TResult>> {
     options = {... defaultOptions, ... options};
-    let url = options.baseUrl + uri;
+    let url = options.baseUrl + fillUriPlaceholders(uri, parameters);
     let body;
 
     switch (method.toUpperCase()) {
@@ -37,3 +37,9 @@ export async function request <TParameters, TResult>(uri: string, parameters: TP
     }
 }
 
+function fillUriPlaceholders(uri: string, parameters: any) {
+    for (let parameter in parameters) {
+        uri = uri.replace(`/:${parameter}`, `/${parameters[parameter]}`);
+    }
+    return uri;
+}

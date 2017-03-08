@@ -1,38 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Describes the legal values for Listing.occasion.
- */
-function describeOccasionEnum(parameters) {
-    return httpClient_1.request("/types/enum/occasion", parameters, "GET");
+* Describes the legal values for Listing.occasion.
+*/
+function describeOccasionEnum(parameters, options) {
+    return client_1.request("/types/enum/occasion", parameters, "GET", options);
 }
-exports.describeOccasionEnum = describeOccasionEnum;
 /**
- * Describes the legal values for Listing.recipient.
- */
-function describeRecipientEnum(parameters) {
-    return httpClient_1.request("/types/enum/recipient", parameters, "GET");
+* Describes the legal values for Listing.recipient.
+*/
+function describeRecipientEnum(parameters, options) {
+    return client_1.request("/types/enum/recipient", parameters, "GET", options);
 }
-exports.describeRecipientEnum = describeRecipientEnum;
 /**
- * Describes the legal values for Listing.when_made.
- */
-function describeWhenMadeEnum(parameters) {
-    return httpClient_1.request("/types/enum/when_made", parameters, "GET");
+* Describes the legal values for Listing.when_made.
+*/
+function describeWhenMadeEnum(parameters, options) {
+    return client_1.request("/types/enum/when_made", parameters, "GET", options);
 }
-exports.describeWhenMadeEnum = describeWhenMadeEnum;
 /**
- * Describes the legal values for Listing.who_made.
- */
-function describeWhoMadeEnum(parameters) {
-    return httpClient_1.request("/types/enum/who_made", parameters, "GET");
+* Describes the legal values for Listing.who_made.
+*/
+function describeWhoMadeEnum(parameters, options) {
+    return client_1.request("/types/enum/who_made", parameters, "GET", options);
 }
-exports.describeWhoMadeEnum = describeWhoMadeEnum;
-exports.DataType = {
-    describeOccasionEnum: describeOccasionEnum,
-    describeRecipientEnum: describeRecipientEnum,
-    describeWhenMadeEnum: describeWhenMadeEnum,
-    describeWhoMadeEnum: describeWhoMadeEnum
-};
+exports.DataType = { describeOccasionEnum: describeOccasionEnum, describeRecipientEnum: describeRecipientEnum, describeWhenMadeEnum: describeWhenMadeEnum, describeWhoMadeEnum: describeWhoMadeEnum };

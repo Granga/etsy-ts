@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUser {
     user_id: number;
     login_name: string;
@@ -54,45 +55,13 @@ export interface IConnectUsersParameters extends IStandardParameters {
     user_id: string | number;
     to_user_id: string | number;
 }
-/**
- * Finds all Users whose name or username match the keywords parameter.
- */
-export declare function findAllUsers<TResult>(parameters: IFindAllUsersParameters): Promise<IStandardResponse<IFindAllUsersParameters, TResult>>;
-/**
- * Retrieves a User by id.
- */
-export declare function getUser<TResult>(parameters: IGetUserParameters): Promise<IStandardResponse<IGetUserParameters, TResult>>;
-/**
- * Returns a list of users for a specific team
- */
-export declare function findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>;
-/**
- * Returns a list of users who have circled this user
- */
-export declare function getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>;
-/**
- * Returns details about a connection between users
- */
-export declare function getConnectedUser<TResult>(parameters: IGetConnectedUserParameters): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>>;
-/**
- * Removes a user (to_user_id) from the logged in user's (user_id) circle
- */
-export declare function unconnectUsers<TResult>(parameters: IUnconnectUsersParameters): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>>;
-/**
- * Returns a list of users that are in this user's cricle
- */
-export declare function getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>>;
-/**
- * Adds user (to_user_id) to the user's (user_id) circle
- */
-export declare function connectUsers<TResult>(parameters: IConnectUsersParameters): Promise<IStandardResponse<IConnectUsersParameters, TResult>>;
 export declare const User: {
-    findAllUsers: <TResult>(parameters: IFindAllUsersParameters) => Promise<IStandardResponse<IFindAllUsersParameters, TResult>>;
-    getUser: <TResult>(parameters: IGetUserParameters) => Promise<IStandardResponse<IGetUserParameters, TResult>>;
-    findAllUsersForTeam: <TResult>(parameters: IFindAllUsersForTeamParameters) => Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>;
-    getCirclesContainingUser: <TResult>(parameters: IGetCirclesContainingUserParameters) => Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>;
-    getConnectedUser: <TResult>(parameters: IGetConnectedUserParameters) => Promise<IStandardResponse<IGetConnectedUserParameters, TResult>>;
-    unconnectUsers: <TResult>(parameters: IUnconnectUsersParameters) => Promise<IStandardResponse<IUnconnectUsersParameters, TResult>>;
-    getConnectedUsers: <TResult>(parameters: IGetConnectedUsersParameters) => Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>>;
-    connectUsers: <TResult>(parameters: IConnectUsersParameters) => Promise<IStandardResponse<IConnectUsersParameters, TResult>>;
+    findAllUsers: <TResult>(parameters: IFindAllUsersParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUsersParameters, TResult>>;
+    getUser: <TResult>(parameters: IGetUserParameters, options?: IOptions) => Promise<IStandardResponse<IGetUserParameters, TResult>>;
+    findAllUsersForTeam: <TResult>(parameters: IFindAllUsersForTeamParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>;
+    getCirclesContainingUser: <TResult>(parameters: IGetCirclesContainingUserParameters, options?: IOptions) => Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>;
+    getConnectedUser: <TResult>(parameters: IGetConnectedUserParameters, options?: IOptions) => Promise<IStandardResponse<IGetConnectedUserParameters, TResult>>;
+    unconnectUsers: <TResult>(parameters: IUnconnectUsersParameters, options?: IOptions) => Promise<IStandardResponse<IUnconnectUsersParameters, TResult>>;
+    getConnectedUsers: <TResult>(parameters: IGetConnectedUsersParameters, options?: IOptions) => Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>>;
+    connectUsers: <TResult>(parameters: IConnectUsersParameters, options?: IOptions) => Promise<IStandardResponse<IConnectUsersParameters, TResult>>;
 };

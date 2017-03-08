@@ -1,94 +1,71 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get a user's Carts
- */
-function getAllUserCarts(parameters) {
-    return httpClient_1.request("/users/:user_id/carts", parameters, "GET");
+* Get a user's Carts
+*/
+function getAllUserCarts(parameters, options) {
+    return client_1.request("/users/:user_id/carts", parameters, "GET", options);
 }
-exports.getAllUserCarts = getAllUserCarts;
 /**
- * Add a listing to a cart
- */
-function addToCart(parameters) {
-    return httpClient_1.request("/users/:user_id/carts", parameters, "POST");
+* Add a listing to a cart
+*/
+function addToCart(parameters, options) {
+    return client_1.request("/users/:user_id/carts", parameters, "POST", options);
 }
-exports.addToCart = addToCart;
 /**
- * Update a cart listing purchase quantity
- */
-function updateCartListingQuantity(parameters) {
-    return httpClient_1.request("/users/:user_id/carts", parameters, "PUT");
+* Update a cart listing purchase quantity
+*/
+function updateCartListingQuantity(parameters, options) {
+    return client_1.request("/users/:user_id/carts", parameters, "PUT", options);
 }
-exports.updateCartListingQuantity = updateCartListingQuantity;
 /**
- * Remove a listing from a cart
- */
-function removeCartListing(parameters) {
-    return httpClient_1.request("/users/:user_id/carts", parameters, "DELETE");
+* Remove a listing from a cart
+*/
+function removeCartListing(parameters, options) {
+    return client_1.request("/users/:user_id/carts", parameters, "DELETE", options);
 }
-exports.removeCartListing = removeCartListing;
 /**
- * Get a cart
- */
-function getUserCart(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/:cart_id", parameters, "GET");
+* Get a cart
+*/
+function getUserCart(parameters, options) {
+    return client_1.request("/users/:user_id/carts/:cart_id", parameters, "GET", options);
 }
-exports.getUserCart = getUserCart;
 /**
- * Update a cart
- */
-function updateCart(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/:cart_id", parameters, "PUT");
+* Update a cart
+*/
+function updateCart(parameters, options) {
+    return client_1.request("/users/:user_id/carts/:cart_id", parameters, "PUT", options);
 }
-exports.updateCart = updateCart;
 /**
- * Delete a cart
- */
-function deleteCart(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/:cart_id", parameters, "DELETE");
+* Delete a cart
+*/
+function deleteCart(parameters, options) {
+    return client_1.request("/users/:user_id/carts/:cart_id", parameters, "DELETE", options);
 }
-exports.deleteCart = deleteCart;
 /**
- * Saves and selects a shipping address for apple pay
- */
-function addAndSelectShippingForApplePay(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
+* Saves and selects a shipping address for apple pay
+*/
+function addAndSelectShippingForApplePay(parameters, options) {
+    return client_1.request("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST", options);
 }
-exports.addAndSelectShippingForApplePay = addAndSelectShippingForApplePay;
 /**
- * Move a listing to Saved for Later
- */
-function saveListingForLater(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/save", parameters, "DELETE");
+* Move a listing to Saved for Later
+*/
+function saveListingForLater(parameters, options) {
+    return client_1.request("/users/:user_id/carts/save", parameters, "DELETE", options);
 }
-exports.saveListingForLater = saveListingForLater;
 /**
- * Get a cart from a shop ID
- */
-function getUserCartForShop(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
+* Get a cart from a shop ID
+*/
+function getUserCartForShop(parameters, options) {
+    return client_1.request("/users/:user_id/carts/shop/:shop_id", parameters, "GET", options);
 }
-exports.getUserCartForShop = getUserCartForShop;
 /**
- * Create a single-listing cart from a listing
- */
-function createSingleListingCart(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/single_listing", parameters, "POST");
+* Create a single-listing cart from a listing
+*/
+function createSingleListingCart(parameters, options) {
+    return client_1.request("/users/:user_id/carts/single_listing", parameters, "POST", options);
 }
-exports.createSingleListingCart = createSingleListingCart;
-exports.Cart = {
-    getAllUserCarts: getAllUserCarts,
-    addToCart: addToCart,
-    updateCartListingQuantity: updateCartListingQuantity,
-    removeCartListing: removeCartListing,
-    getUserCart: getUserCart,
-    updateCart: updateCart,
-    deleteCart: deleteCart,
-    addAndSelectShippingForApplePay: addAndSelectShippingForApplePay,
-    saveListingForLater: saveListingForLater,
-    getUserCartForShop: getUserCartForShop,
-    createSingleListingCart: createSingleListingCart
-};
+exports.Cart = { getAllUserCarts: getAllUserCarts, addToCart: addToCart, updateCartListingQuantity: updateCartListingQuantity, removeCartListing: removeCartListing, getUserCart: getUserCart, updateCart: updateCart, deleteCart: deleteCart, addAndSelectShippingForApplePay: addAndSelectShippingForApplePay, saveListingForLater: saveListingForLater, getUserCartForShop: getUserCartForShop, createSingleListingCart: createSingleListingCart };

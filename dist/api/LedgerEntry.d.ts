@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ILedgerEntry {
     ledger_entry_id: number;
     ledger_id: number;
@@ -23,15 +24,7 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number;
     ledger_entry_id: number;
 }
-/**
- * Get a Shop Payment Account Ledger's Entries
- */
-export declare function findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
-/**
- * Get a Shop Payment Account Ledger Entry
- */
-export declare function findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
 export declare const LedgerEntry: {
-    findLedgerEntries: <TResult>(parameters: IFindLedgerEntriesParameters) => Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
-    findLedgerEntry: <TResult>(parameters: IFindLedgerEntryParameters) => Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
+    findLedgerEntries: <TResult>(parameters: IFindLedgerEntriesParameters, options?: IOptions) => Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
+    findLedgerEntry: <TResult>(parameters: IFindLedgerEntryParameters, options?: IOptions) => Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
 };

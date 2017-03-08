@@ -1,38 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves the PaymentTemplate associated with the Shop
- */
-function findShopPaymentTemplates(parameters) {
-    return httpClient_1.request("/shops/:shop_id/payment_templates", parameters, "GET");
+* Retrieves the PaymentTemplate associated with the Shop
+*/
+function findShopPaymentTemplates(parameters, options) {
+    return client_1.request("/shops/:shop_id/payment_templates", parameters, "GET", options);
 }
-exports.findShopPaymentTemplates = findShopPaymentTemplates;
 /**
- * Creates a new PaymentTemplate
- */
-function createShopPaymentTemplate(parameters) {
-    return httpClient_1.request("/shops/:shop_id/payment_templates", parameters, "POST");
+* Creates a new PaymentTemplate
+*/
+function createShopPaymentTemplate(parameters, options) {
+    return client_1.request("/shops/:shop_id/payment_templates", parameters, "POST", options);
 }
-exports.createShopPaymentTemplate = createShopPaymentTemplate;
 /**
- * Updates a PaymentTemplate
- */
-function updateShopPaymentTemplate(parameters) {
-    return httpClient_1.request("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT");
+* Updates a PaymentTemplate
+*/
+function updateShopPaymentTemplate(parameters, options) {
+    return client_1.request("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT", options);
 }
-exports.updateShopPaymentTemplate = updateShopPaymentTemplate;
 /**
- * Retrieves a set of PaymentTemplate objects associated to a User.
- */
-function findAllUserPaymentTemplates(parameters) {
-    return httpClient_1.request("/users/:user_id/payments/templates", parameters, "GET");
+* Retrieves a set of PaymentTemplate objects associated to a User.
+*/
+function findAllUserPaymentTemplates(parameters, options) {
+    return client_1.request("/users/:user_id/payments/templates", parameters, "GET", options);
 }
-exports.findAllUserPaymentTemplates = findAllUserPaymentTemplates;
-exports.PaymentTemplate = {
-    findShopPaymentTemplates: findShopPaymentTemplates,
-    createShopPaymentTemplate: createShopPaymentTemplate,
-    updateShopPaymentTemplate: updateShopPaymentTemplate,
-    findAllUserPaymentTemplates: findAllUserPaymentTemplates
-};
+exports.PaymentTemplate = { findShopPaymentTemplates: findShopPaymentTemplates, createShopPaymentTemplate: createShopPaymentTemplate, updateShopPaymentTemplate: updateShopPaymentTemplate, findAllUserPaymentTemplates: findAllUserPaymentTemplates };

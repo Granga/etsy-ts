@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Lists available image types along with their supported sizes.
- */
-function listImageTypes(parameters) {
-    return httpClient_1.request("/image_types", parameters, "GET");
+* Lists available image types along with their supported sizes.
+*/
+function listImageTypes(parameters, options) {
+    return client_1.request("/image_types", parameters, "GET", options);
 }
-exports.listImageTypes = listImageTypes;
-exports.ImageType = {listImageTypes: listImageTypes};
+exports.ImageType = { listImageTypes: listImageTypes };

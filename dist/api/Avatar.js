@@ -1,19 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Upload a new user avatar image
- */
-function uploadAvatar(parameters) {
-    return httpClient_1.request("/users/:user_id/avatar", parameters, "POST");
+* Upload a new user avatar image
+*/
+function uploadAvatar(parameters, options) {
+    return client_1.request("/users/:user_id/avatar", parameters, "POST", options);
 }
-exports.uploadAvatar = uploadAvatar;
 /**
- * Get avatar image source
- */
-function getAvatarImgSrc(parameters) {
-    return httpClient_1.request("/users/:user_id/avatar/src", parameters, "GET");
+* Get avatar image source
+*/
+function getAvatarImgSrc(parameters, options) {
+    return client_1.request("/users/:user_id/avatar/src", parameters, "GET", options);
 }
-exports.getAvatarImgSrc = getAvatarImgSrc;
-exports.Avatar = {uploadAvatar: uploadAvatar, getAvatarImgSrc: getAvatarImgSrc};
+exports.Avatar = { uploadAvatar: uploadAvatar, getAvatarImgSrc: getAvatarImgSrc };

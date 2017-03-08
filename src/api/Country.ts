@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -14,7 +14,6 @@ export interface ICountry {
 }
 
 //parameters types
-
 export interface IFindAllCountryParameters extends IStandardParameters {
 
 }
@@ -29,24 +28,23 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Finds all Country.
  */
-export function findAllCountry <TResult>(parameters: IFindAllCountryParameters): Promise<IStandardResponse<IFindAllCountryParameters, TResult>> {
-    return request<IFindAllCountryParameters, TResult>("/countries", parameters, "GET");
+function findAllCountry <TResult>(parameters: IFindAllCountryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCountryParameters, TResult>> {
+    return request<IFindAllCountryParameters, TResult>("/countries", parameters, "GET", options);
 }
 /**
  * Retrieves a Country by id.
  */
-export function getCountry <TResult>(parameters: IGetCountryParameters): Promise<IStandardResponse<IGetCountryParameters, TResult>> {
-    return request<IGetCountryParameters, TResult>("/countries/:country_id", parameters, "GET");
+function getCountry <TResult>(parameters: IGetCountryParameters, options?: IOptions): Promise<IStandardResponse<IGetCountryParameters, TResult>> {
+    return request<IGetCountryParameters, TResult>("/countries/:country_id", parameters, "GET", options);
 }
 /**
  * Get the country info for the given ISO code.
  */
-export function findByIsoCode <TResult>(parameters: IFindByIsoCodeParameters): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>> {
-    return request<IFindByIsoCodeParameters, TResult>("/countries/iso/:iso_code", parameters, "GET");
+function findByIsoCode <TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>> {
+    return request<IFindByIsoCodeParameters, TResult>("/countries/iso/:iso_code", parameters, "GET", options);
 }
 
 export const Country = {findAllCountry, getCountry, findByIsoCode};

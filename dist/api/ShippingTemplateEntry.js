@@ -1,38 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Creates a new ShippingTemplateEntry
- */
-function createShippingTemplateEntry(parameters) {
-    return httpClient_1.request("/shipping/templates/entries", parameters, "POST");
+* Creates a new ShippingTemplateEntry
+*/
+function createShippingTemplateEntry(parameters, options) {
+    return client_1.request("/shipping/templates/entries", parameters, "POST", options);
 }
-exports.createShippingTemplateEntry = createShippingTemplateEntry;
 /**
- * Retrieves a ShippingTemplateEntry by id.
- */
-function getShippingTemplateEntry(parameters) {
-    return httpClient_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET");
+* Retrieves a ShippingTemplateEntry by id.
+*/
+function getShippingTemplateEntry(parameters, options) {
+    return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET", options);
 }
-exports.getShippingTemplateEntry = getShippingTemplateEntry;
 /**
- * Updates a ShippingTemplateEntry
- */
-function updateShippingTemplateEntry(parameters) {
-    return httpClient_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT");
+* Updates a ShippingTemplateEntry
+*/
+function updateShippingTemplateEntry(parameters, options) {
+    return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT", options);
 }
-exports.updateShippingTemplateEntry = updateShippingTemplateEntry;
 /**
- * Deletes the ShippingTemplateEntry
- */
-function deleteShippingTemplateEntry(parameters) {
-    return httpClient_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE");
+* Deletes the ShippingTemplateEntry
+*/
+function deleteShippingTemplateEntry(parameters, options) {
+    return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE", options);
 }
-exports.deleteShippingTemplateEntry = deleteShippingTemplateEntry;
-exports.ShippingTemplateEntry = {
-    createShippingTemplateEntry: createShippingTemplateEntry,
-    getShippingTemplateEntry: getShippingTemplateEntry,
-    updateShippingTemplateEntry: updateShippingTemplateEntry,
-    deleteShippingTemplateEntry: deleteShippingTemplateEntry
-};
+exports.ShippingTemplateEntry = { createShippingTemplateEntry: createShippingTemplateEntry, getShippingTemplateEntry: getShippingTemplateEntry, updateShippingTemplateEntry: updateShippingTemplateEntry, deleteShippingTemplateEntry: deleteShippingTemplateEntry };

@@ -1,70 +1,53 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a Shop_Receipt2 by id.
- */
-function getShop_Receipt2(parameters) {
-    return httpClient_1.request("/receipts/:receipt_id", parameters, "GET");
+* Retrieves a Shop_Receipt2 by id.
+*/
+function getShop_Receipt2(parameters, options) {
+    return client_1.request("/receipts/:receipt_id", parameters, "GET", options);
 }
-exports.getShop_Receipt2 = getShop_Receipt2;
 /**
- * Updates a Shop_Receipt2
- */
-function updateReceipt(parameters) {
-    return httpClient_1.request("/receipts/:receipt_id", parameters, "PUT");
+* Updates a Shop_Receipt2
+*/
+function updateReceipt(parameters, options) {
+    return client_1.request("/receipts/:receipt_id", parameters, "PUT", options);
 }
-exports.updateReceipt = updateReceipt;
 /**
- * Retrieves a set of Receipt objects associated to a Shop.
- */
-function findAllShopReceipts(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts", parameters, "GET");
+* Retrieves a set of Receipt objects associated to a Shop.
+*/
+function findAllShopReceipts(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts", parameters, "GET", options);
 }
-exports.findAllShopReceipts = findAllShopReceipts;
 /**
- * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
- */
-function submitTracking(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST");
+* Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
+*/
+function submitTracking(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST", options);
 }
-exports.submitTracking = submitTracking;
 /**
- * Retrieves a set of Receipt objects associated to a Shop based on the status.
- */
-function findAllShopReceiptsByStatus(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts/:status", parameters, "GET");
+* Retrieves a set of Receipt objects associated to a Shop based on the status.
+*/
+function findAllShopReceiptsByStatus(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts/:status", parameters, "GET", options);
 }
-exports.findAllShopReceiptsByStatus = findAllShopReceiptsByStatus;
 /**
- * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
- */
-function findAllOpenLocalDeliveryReceipts(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts/local-delivery", parameters, "GET");
+* Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
+*/
+function findAllOpenLocalDeliveryReceipts(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts/local-delivery", parameters, "GET", options);
 }
-exports.findAllOpenLocalDeliveryReceipts = findAllOpenLocalDeliveryReceipts;
 /**
- * Searches the set of Receipt objects associated to a Shop by a query
- */
-function searchAllShopReceipts(parameters) {
-    return httpClient_1.request("/shops/:shop_id/receipts/search", parameters, "GET");
+* Searches the set of Receipt objects associated to a Shop by a query
+*/
+function searchAllShopReceipts(parameters, options) {
+    return client_1.request("/shops/:shop_id/receipts/search", parameters, "GET", options);
 }
-exports.searchAllShopReceipts = searchAllShopReceipts;
 /**
- * Retrieves a set of Receipt objects associated to a User.
- */
-function findAllUserBuyerReceipts(parameters) {
-    return httpClient_1.request("/users/:user_id/receipts", parameters, "GET");
+* Retrieves a set of Receipt objects associated to a User.
+*/
+function findAllUserBuyerReceipts(parameters, options) {
+    return client_1.request("/users/:user_id/receipts", parameters, "GET", options);
 }
-exports.findAllUserBuyerReceipts = findAllUserBuyerReceipts;
-exports.Receipt = {
-    getShop_Receipt2: getShop_Receipt2,
-    updateReceipt: updateReceipt,
-    findAllShopReceipts: findAllShopReceipts,
-    submitTracking: submitTracking,
-    findAllShopReceiptsByStatus: findAllShopReceiptsByStatus,
-    findAllOpenLocalDeliveryReceipts: findAllOpenLocalDeliveryReceipts,
-    searchAllShopReceipts: searchAllShopReceipts,
-    findAllUserBuyerReceipts: findAllUserBuyerReceipts
-};
+exports.Receipt = { getShop_Receipt2: getShop_Receipt2, updateReceipt: updateReceipt, findAllShopReceipts: findAllShopReceipts, submitTracking: submitTracking, findAllShopReceiptsByStatus: findAllShopReceiptsByStatus, findAllOpenLocalDeliveryReceipts: findAllOpenLocalDeliveryReceipts, searchAllShopReceipts: searchAllShopReceipts, findAllUserBuyerReceipts: findAllUserBuyerReceipts };

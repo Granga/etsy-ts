@@ -1,19 +1,17 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Add listing to a Treasury
- */
-function addTreasuryListing(parameters) {
-    return httpClient_1.request("/treasuries/:treasury_key/listings", parameters, "POST");
+* Add listing to a Treasury
+*/
+function addTreasuryListing(parameters, options) {
+    return client_1.request("/treasuries/:treasury_key/listings", parameters, "POST", options);
 }
-exports.addTreasuryListing = addTreasuryListing;
 /**
- * Remove listing from a Treasury
- */
-function removeTreasuryListing(parameters) {
-    return httpClient_1.request("/treasuries/:treasury_key/listings/:listing_id", parameters, "DELETE");
+* Remove listing from a Treasury
+*/
+function removeTreasuryListing(parameters, options) {
+    return client_1.request("/treasuries/:treasury_key/listings/:listing_id", parameters, "DELETE", options);
 }
-exports.removeTreasuryListing = removeTreasuryListing;
-exports.TreasuryListing = {addTreasuryListing: addTreasuryListing, removeTreasuryListing: removeTreasuryListing};
+exports.TreasuryListing = { addTreasuryListing: addTreasuryListing, removeTreasuryListing: removeTreasuryListing };

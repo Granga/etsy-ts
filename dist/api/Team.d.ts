@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITeam {
     group_id: number;
     name: string;
@@ -21,20 +22,8 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-/**
- * Returns all Teams
- */
-export declare function findAllTeams<TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
-/**
- * Returns specified team by ID or team name
- */
-export declare function findTeams<TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
-/**
- * Returns a list of teams for a specific user
- */
-export declare function findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
 export declare const Team: {
-    findAllTeams: <TResult>(parameters: IFindAllTeamsParameters) => Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
-    findTeams: <TResult>(parameters: IFindTeamsParameters) => Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
-    findAllTeamsForUser: <TResult>(parameters: IFindAllTeamsForUserParameters) => Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+    findAllTeams: <TResult>(parameters: IFindAllTeamsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+    findTeams: <TResult>(parameters: IFindTeamsParameters, options?: IOptions) => Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+    findAllTeamsForUser: <TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
 };

@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -25,7 +25,6 @@ export interface ICart {
 }
 
 //parameters types
-
 export interface IGetAllUserCartsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
@@ -94,72 +93,71 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
 }
 
 //methods
-
 /**
  * Get a user's Carts
  */
-export function getAllUserCarts <TResult>(parameters: IGetAllUserCartsParameters): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
-    return request<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET");
+function getAllUserCarts <TResult>(parameters: IGetAllUserCartsParameters, options?: IOptions): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
+    return request<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET", options);
 }
 /**
  * Add a listing to a cart
  */
-export function addToCart <TResult>(parameters: IAddToCartParameters): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
-    return request<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST");
+function addToCart <TResult>(parameters: IAddToCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
+    return request<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST", options);
 }
 /**
  * Update a cart listing purchase quantity
  */
-export function updateCartListingQuantity <TResult>(parameters: IUpdateCartListingQuantityParameters): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
-    return request<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT");
+function updateCartListingQuantity <TResult>(parameters: IUpdateCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
+    return request<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT", options);
 }
 /**
  * Remove a listing from a cart
  */
-export function removeCartListing <TResult>(parameters: IRemoveCartListingParameters): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
-    return request<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE");
+function removeCartListing <TResult>(parameters: IRemoveCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
+    return request<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE", options);
 }
 /**
  * Get a cart
  */
-export function getUserCart <TResult>(parameters: IGetUserCartParameters): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
-    return request<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET");
+function getUserCart <TResult>(parameters: IGetUserCartParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
+    return request<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET", options);
 }
 /**
  * Update a cart
  */
-export function updateCart <TResult>(parameters: IUpdateCartParameters): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
-    return request<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT");
+function updateCart <TResult>(parameters: IUpdateCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
+    return request<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT", options);
 }
 /**
  * Delete a cart
  */
-export function deleteCart <TResult>(parameters: IDeleteCartParameters): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
-    return request<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE");
+function deleteCart <TResult>(parameters: IDeleteCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
+    return request<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE", options);
 }
 /**
  * Saves and selects a shipping address for apple pay
  */
-export function addAndSelectShippingForApplePay <TResult>(parameters: IAddAndSelectShippingForApplePayParameters): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
-    return request<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST");
+function addAndSelectShippingForApplePay <TResult>(parameters: IAddAndSelectShippingForApplePayParameters, options?: IOptions): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
+    return request<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST", options);
 }
 /**
  * Move a listing to Saved for Later
  */
-export function saveListingForLater <TResult>(parameters: ISaveListingForLaterParameters): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
-    return request<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE");
+function saveListingForLater <TResult>(parameters: ISaveListingForLaterParameters, options?: IOptions): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
+    return request<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE", options);
 }
 /**
  * Get a cart from a shop ID
  */
-export function getUserCartForShop <TResult>(parameters: IGetUserCartForShopParameters): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
-    return request<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET");
+function getUserCartForShop <TResult>(parameters: IGetUserCartForShopParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
+    return request<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET", options);
 }
 /**
  * Create a single-listing cart from a listing
  */
-export function createSingleListingCart <TResult>(parameters: ICreateSingleListingCartParameters): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
-    return request<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST");
+function createSingleListingCart <TResult>(parameters: ICreateSingleListingCartParameters, options?: IOptions): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
+    return request<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST", options);
 }
 
 export const Cart = {

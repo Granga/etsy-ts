@@ -1,38 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get all of the attributes for a listing [developer preview - may be unstable]
- */
-function getAttributes(parameters) {
-    return httpClient_1.request("/listings/:listing_id/attributes", parameters, "GET");
+* Get all of the attributes for a listing [developer preview - may be unstable]
+*/
+function getAttributes(parameters, options) {
+    return client_1.request("/listings/:listing_id/attributes", parameters, "GET", options);
 }
-exports.getAttributes = getAttributes;
 /**
- * Get an attribute for a listing [developer preview - may be unstable]
- */
-function getAttribute(parameters) {
-    return httpClient_1.request("/listings/:listing_id/attributes/:property_id", parameters, "GET");
+* Get an attribute for a listing [developer preview - may be unstable]
+*/
+function getAttribute(parameters, options) {
+    return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "GET", options);
 }
-exports.getAttribute = getAttribute;
 /**
- * Update or populate an attribute for a listing [developer preview - may be unstable]
- */
-function updateAttribute(parameters) {
-    return httpClient_1.request("/listings/:listing_id/attributes/:property_id", parameters, "PUT");
+* Update or populate an attribute for a listing [developer preview - may be unstable]
+*/
+function updateAttribute(parameters, options) {
+    return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "PUT", options);
 }
-exports.updateAttribute = updateAttribute;
 /**
- * Delete an attribute for a listing [developer preview - may be unstable]
- */
-function deleteAttribute(parameters) {
-    return httpClient_1.request("/listings/:listing_id/attributes/:property_id", parameters, "DELETE");
+* Delete an attribute for a listing [developer preview - may be unstable]
+*/
+function deleteAttribute(parameters, options) {
+    return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "DELETE", options);
 }
-exports.deleteAttribute = deleteAttribute;
-exports.PropertyValue = {
-    getAttributes: getAttributes,
-    getAttribute: getAttribute,
-    updateAttribute: updateAttribute,
-    deleteAttribute: deleteAttribute
-};
+exports.PropertyValue = { getAttributes: getAttributes, getAttribute: getAttribute, updateAttribute: updateAttribute, deleteAttribute: deleteAttribute };

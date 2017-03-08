@@ -1,12 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get Direct Checkout Payment Adjustment Items
- */
-function findPaymentAdjustmentItem(parameters) {
-    return httpClient_1.request("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET");
+* Get Direct Checkout Payment Adjustment Items
+*/
+function findPaymentAdjustmentItem(parameters, options) {
+    return client_1.request("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET", options);
 }
-exports.findPaymentAdjustmentItem = findPaymentAdjustmentItem;
-exports.PaymentAdjustmentItem = {findPaymentAdjustmentItem: findPaymentAdjustmentItem};
+exports.PaymentAdjustmentItem = { findPaymentAdjustmentItem: findPaymentAdjustmentItem };

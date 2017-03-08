@@ -1,46 +1,35 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
- */
-function findAllListingShippingProfileEntries(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/info", parameters, "GET");
+* Retrieves a set of ShippingProfileEntries objects associated to a Listing.
+*/
+function findAllListingShippingProfileEntries(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/info", parameters, "GET", options);
 }
-exports.findAllListingShippingProfileEntries = findAllListingShippingProfileEntries;
 /**
- * Creates a new ShippingInfo.
- */
-function createShippingInfo(parameters) {
-    return httpClient_1.request("/listings/:listing_id/shipping/info", parameters, "POST");
+* Creates a new ShippingInfo.
+*/
+function createShippingInfo(parameters, options) {
+    return client_1.request("/listings/:listing_id/shipping/info", parameters, "POST", options);
 }
-exports.createShippingInfo = createShippingInfo;
 /**
- * Retrieves a ShippingInfo by id.
- */
-function getShippingInfo(parameters) {
-    return httpClient_1.request("/shipping/info/:shipping_info_id", parameters, "GET");
+* Retrieves a ShippingInfo by id.
+*/
+function getShippingInfo(parameters, options) {
+    return client_1.request("/shipping/info/:shipping_info_id", parameters, "GET", options);
 }
-exports.getShippingInfo = getShippingInfo;
 /**
- * Updates a ShippingInfo with the given id.
- */
-function updateShippingInfo(parameters) {
-    return httpClient_1.request("/shipping/info/:shipping_info_id", parameters, "PUT");
+* Updates a ShippingInfo with the given id.
+*/
+function updateShippingInfo(parameters, options) {
+    return client_1.request("/shipping/info/:shipping_info_id", parameters, "PUT", options);
 }
-exports.updateShippingInfo = updateShippingInfo;
 /**
- * Deletes the ShippingInfo with the given id.
- */
-function deleteShippingInfo(parameters) {
-    return httpClient_1.request("/shipping/info/:shipping_info_id", parameters, "DELETE");
+* Deletes the ShippingInfo with the given id.
+*/
+function deleteShippingInfo(parameters, options) {
+    return client_1.request("/shipping/info/:shipping_info_id", parameters, "DELETE", options);
 }
-exports.deleteShippingInfo = deleteShippingInfo;
-exports.ShippingInfo = {
-    findAllListingShippingProfileEntries: findAllListingShippingProfileEntries,
-    createShippingInfo: createShippingInfo,
-    getShippingInfo: getShippingInfo,
-    updateShippingInfo: updateShippingInfo,
-    deleteShippingInfo: deleteShippingInfo
-};
+exports.ShippingInfo = { findAllListingShippingProfileEntries: findAllListingShippingProfileEntries, createShippingInfo: createShippingInfo, getShippingInfo: getShippingInfo, updateShippingInfo: updateShippingInfo, deleteShippingInfo: deleteShippingInfo };

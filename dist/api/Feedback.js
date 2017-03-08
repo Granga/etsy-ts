@@ -1,58 +1,45 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a set of Feedback objects associated to a User.
- */
-function findAllUserFeedbackAsAuthor(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/as-author", parameters, "GET");
+* Retrieves a set of Feedback objects associated to a User.
+*/
+function findAllUserFeedbackAsAuthor(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/as-author", parameters, "GET", options);
 }
-exports.findAllUserFeedbackAsAuthor = findAllUserFeedbackAsAuthor;
 /**
- * Retrieves a set of Feedback objects associated to a User.
- */
-function findAllUserFeedbackAsBuyer(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/as-buyer", parameters, "GET");
+* Retrieves a set of Feedback objects associated to a User.
+*/
+function findAllUserFeedbackAsBuyer(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/as-buyer", parameters, "GET", options);
 }
-exports.findAllUserFeedbackAsBuyer = findAllUserFeedbackAsBuyer;
 /**
- * Retrieves a set of Feedback objects associated to a User.
- */
-function findAllUserFeedbackAsSeller(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/as-seller", parameters, "GET");
+* Retrieves a set of Feedback objects associated to a User.
+*/
+function findAllUserFeedbackAsSeller(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/as-seller", parameters, "GET", options);
 }
-exports.findAllUserFeedbackAsSeller = findAllUserFeedbackAsSeller;
 /**
- * Retrieves a set of Feedback objects associated to a User.
- */
-function findAllUserFeedbackAsSubject(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/as-subject", parameters, "GET");
+* Retrieves a set of Feedback objects associated to a User.
+*/
+function findAllUserFeedbackAsSubject(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/as-subject", parameters, "GET", options);
 }
-exports.findAllUserFeedbackAsSubject = findAllUserFeedbackAsSubject;
 /**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between the findAllUserFeedbackAsBuyer
- and findAllUserFeedbackAsSubject methods.
- */
-function findAllFeedbackFromBuyers(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/from-buyers", parameters, "GET");
+* Returns a set of FeedBack objects associated to a User.
+                    This is essentially the union between the findAllUserFeedbackAsBuyer
+                    and findAllUserFeedbackAsSubject methods.
+*/
+function findAllFeedbackFromBuyers(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/from-buyers", parameters, "GET", options);
 }
-exports.findAllFeedbackFromBuyers = findAllFeedbackFromBuyers;
 /**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between
- the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
- */
-function findAllFeedbackFromSellers(parameters) {
-    return httpClient_1.request("/users/:user_id/feedback/from-sellers", parameters, "GET");
+* Returns a set of FeedBack objects associated to a User.
+                    This is essentially the union between
+                    the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
+*/
+function findAllFeedbackFromSellers(parameters, options) {
+    return client_1.request("/users/:user_id/feedback/from-sellers", parameters, "GET", options);
 }
-exports.findAllFeedbackFromSellers = findAllFeedbackFromSellers;
-exports.Feedback = {
-    findAllUserFeedbackAsAuthor: findAllUserFeedbackAsAuthor,
-    findAllUserFeedbackAsBuyer: findAllUserFeedbackAsBuyer,
-    findAllUserFeedbackAsSeller: findAllUserFeedbackAsSeller,
-    findAllUserFeedbackAsSubject: findAllUserFeedbackAsSubject,
-    findAllFeedbackFromBuyers: findAllFeedbackFromBuyers,
-    findAllFeedbackFromSellers: findAllFeedbackFromSellers
-};
+exports.Feedback = { findAllUserFeedbackAsAuthor: findAllUserFeedbackAsAuthor, findAllUserFeedbackAsBuyer: findAllUserFeedbackAsBuyer, findAllUserFeedbackAsSeller: findAllUserFeedbackAsSeller, findAllUserFeedbackAsSubject: findAllUserFeedbackAsSubject, findAllFeedbackFromBuyers: findAllFeedbackFromBuyers, findAllFeedbackFromSellers: findAllFeedbackFromSellers };

@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IAvatar {
     avatar_id: number;
     hex_code: string;
@@ -21,15 +22,7 @@ export interface IUploadAvatarParameters extends IStandardParameters {
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Upload a new user avatar image
- */
-export declare function uploadAvatar<TResult>(parameters: IUploadAvatarParameters): Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
-/**
- * Get avatar image source
- */
-export declare function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
 export declare const Avatar: {
-    uploadAvatar: <TResult>(parameters: IUploadAvatarParameters) => Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
-    getAvatarImgSrc: <TResult>(parameters: IGetAvatarImgSrcParameters) => Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
+    uploadAvatar: <TResult>(parameters: IUploadAvatarParameters, options?: IOptions) => Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
+    getAvatarImgSrc: <TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions) => Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
 };

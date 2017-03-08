@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -17,7 +17,6 @@ export interface ITaxonomy {
 }
 
 //parameters types
-
 export interface IGetBuyerTaxonomyParameters extends IStandardParameters {
 
 }
@@ -26,18 +25,17 @@ export interface IGetSellerTaxonomyParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Retrieve the entire taxonomy as seen by buyers in search.
  */
-export function getBuyerTaxonomy <TResult>(parameters: IGetBuyerTaxonomyParameters): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>> {
-    return request<IGetBuyerTaxonomyParameters, TResult>("/taxonomy/buyer/get", parameters, "GET");
+function getBuyerTaxonomy <TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>> {
+    return request<IGetBuyerTaxonomyParameters, TResult>("/taxonomy/buyer/get", parameters, "GET", options);
 }
 /**
  * Retrieve the entire taxonomy as used by sellers in the listing process.
  */
-export function getSellerTaxonomy <TResult>(parameters: IGetSellerTaxonomyParameters): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>> {
-    return request<IGetSellerTaxonomyParameters, TResult>("/taxonomy/seller/get", parameters, "GET");
+function getSellerTaxonomy <TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>> {
+    return request<IGetSellerTaxonomyParameters, TResult>("/taxonomy/seller/get", parameters, "GET", options);
 }
 
 export const Taxonomy = {getBuyerTaxonomy, getSellerTaxonomy};

@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IApiMethod {
     name: string;
     uri: string;
@@ -11,10 +12,6 @@ export interface IApiMethod {
 }
 export interface IGetMethodTableParameters extends IStandardParameters {
 }
-/**
- * Get a list of all methods available.
- */
-export declare function getMethodTable<TResult>(parameters: IGetMethodTableParameters): Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
 export declare const ApiMethod: {
-    getMethodTable: <TResult>(parameters: IGetMethodTableParameters) => Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
+    getMethodTable: <TResult>(parameters: IGetMethodTableParameters, options?: IOptions) => Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
 };

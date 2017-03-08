@@ -1,190 +1,143 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
- */
-function createListing(parameters) {
-    return httpClient_1.request("/listings", parameters, "POST");
+* Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
+*/
+function createListing(parameters, options) {
+    return client_1.request("/listings", parameters, "POST", options);
 }
-exports.createListing = createListing;
 /**
- * Finds all FeaturedTreasury listings.
- */
-function findAllFeaturedListings(parameters) {
-    return httpClient_1.request("/featured_treasuries/listings", parameters, "GET");
+* Finds all FeaturedTreasury listings.
+*/
+function findAllFeaturedListings(parameters, options) {
+    return client_1.request("/featured_treasuries/listings", parameters, "GET", options);
 }
-exports.findAllFeaturedListings = findAllFeaturedListings;
 /**
- * Retrieves a Listing by id.
- */
-function getListing(parameters) {
-    return httpClient_1.request("/listings/:listing_id", parameters, "GET");
+* Retrieves a Listing by id.
+*/
+function getListing(parameters, options) {
+    return client_1.request("/listings/:listing_id", parameters, "GET", options);
 }
-exports.getListing = getListing;
 /**
- * Updates a Listing
- */
-function updateListing(parameters) {
-    return httpClient_1.request("/listings/:listing_id", parameters, "PUT");
+* Updates a Listing
+*/
+function updateListing(parameters, options) {
+    return client_1.request("/listings/:listing_id", parameters, "PUT", options);
 }
-exports.updateListing = updateListing;
 /**
- * Deletes a Listing
- */
-function deleteListing(parameters) {
-    return httpClient_1.request("/listings/:listing_id", parameters, "DELETE");
+* Deletes a Listing
+*/
+function deleteListing(parameters, options) {
+    return client_1.request("/listings/:listing_id", parameters, "DELETE", options);
 }
-exports.deleteListing = deleteListing;
 /**
- * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
- */
-function findAllListingActive(parameters) {
-    return httpClient_1.request("/listings/active", parameters, "GET");
+* Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
+*/
+function findAllListingActive(parameters, options) {
+    return client_1.request("/listings/active", parameters, "GET", options);
 }
-exports.findAllListingActive = findAllListingActive;
 /**
- * Collects the list of interesting listings
- */
-function getInterestingListings(parameters) {
-    return httpClient_1.request("/listings/interesting", parameters, "GET");
+* Collects the list of interesting listings
+*/
+function getInterestingListings(parameters, options) {
+    return client_1.request("/listings/interesting", parameters, "GET", options);
 }
-exports.getInterestingListings = getInterestingListings;
 /**
- * Collects the list of listings used to generate the trending listing page
- */
-function getTrendingListings(parameters) {
-    return httpClient_1.request("/listings/trending", parameters, "GET");
+* Collects the list of listings used to generate the trending listing page
+*/
+function getTrendingListings(parameters, options) {
+    return client_1.request("/listings/trending", parameters, "GET", options);
 }
-exports.getTrendingListings = getTrendingListings;
 /**
- * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
- */
-function findBrowseSegmentListings(parameters) {
-    return httpClient_1.request("/segments/listings", parameters, "GET");
+* Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
+*/
+function findBrowseSegmentListings(parameters, options) {
+    return client_1.request("/segments/listings", parameters, "GET", options);
 }
-exports.findBrowseSegmentListings = findBrowseSegmentListings;
 /**
- * Finds all listings for a certain FeaturedTreasury.
- */
-function findAllListingsForFeaturedTreasuryId(parameters) {
-    return httpClient_1.request("/featured_treasuries/:featured_treasury_id/listings", parameters, "GET");
+* Finds all listings for a certain FeaturedTreasury.
+*/
+function findAllListingsForFeaturedTreasuryId(parameters, options) {
+    return client_1.request("/featured_treasuries/:featured_treasury_id/listings", parameters, "GET", options);
 }
-exports.findAllListingsForFeaturedTreasuryId = findAllListingsForFeaturedTreasuryId;
 /**
- * Finds all active listings for a certain FeaturedTreasury.
- */
-function findAllActiveListingsForFeaturedTreasuryId(parameters) {
-    return httpClient_1.request("/featured_treasuries/:featured_treasury_id/listings/active", parameters, "GET");
+* Finds all active listings for a certain FeaturedTreasury.
+*/
+function findAllActiveListingsForFeaturedTreasuryId(parameters, options) {
+    return client_1.request("/featured_treasuries/:featured_treasury_id/listings/active", parameters, "GET", options);
 }
-exports.findAllActiveListingsForFeaturedTreasuryId = findAllActiveListingsForFeaturedTreasuryId;
 /**
- * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
- */
-function findAllCurrentFeaturedListings(parameters) {
-    return httpClient_1.request("/featured_treasuries/listings/homepage_current", parameters, "GET");
+* Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
+*/
+function findAllCurrentFeaturedListings(parameters, options) {
+    return client_1.request("/featured_treasuries/listings/homepage_current", parameters, "GET", options);
 }
-exports.findAllCurrentFeaturedListings = findAllCurrentFeaturedListings;
 /**
- * Finds all listings in a receipt
- */
-function findAllReceiptListings(parameters) {
-    return httpClient_1.request("/receipts/:receipt_id/listings", parameters, "GET");
+* Finds all listings in a receipt
+*/
+function findAllReceiptListings(parameters, options) {
+    return client_1.request("/receipts/:receipt_id/listings", parameters, "GET", options);
 }
-exports.findAllReceiptListings = findAllReceiptListings;
 /**
- * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
- */
-function findAllShopListingsActive(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/active", parameters, "GET");
+* Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
+*/
+function findAllShopListingsActive(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/active", parameters, "GET", options);
 }
-exports.findAllShopListingsActive = findAllShopListingsActive;
 /**
- * Finds all of a Shop's draft listings
- */
-function findAllShopListingsDraft(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/draft", parameters, "GET");
+* Finds all of a Shop's draft listings
+*/
+function findAllShopListingsDraft(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/draft", parameters, "GET", options);
 }
-exports.findAllShopListingsDraft = findAllShopListingsDraft;
 /**
- * Retrieves Listings associated to a Shop that are expired
- */
-function findAllShopListingsExpired(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/expired", parameters, "GET");
+* Retrieves Listings associated to a Shop that are expired
+*/
+function findAllShopListingsExpired(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/expired", parameters, "GET", options);
 }
-exports.findAllShopListingsExpired = findAllShopListingsExpired;
 /**
- * Retrieves a Listing associated to a Shop that is inactive
- */
-function getShopListingExpired(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/expired/:listing_id", parameters, "GET");
+* Retrieves a Listing associated to a Shop that is inactive
+*/
+function getShopListingExpired(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/expired/:listing_id", parameters, "GET", options);
 }
-exports.getShopListingExpired = getShopListingExpired;
 /**
- * Retrieves Listings associated to a Shop that are featured
- */
-function findAllShopListingsFeatured(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/featured", parameters, "GET");
+* Retrieves Listings associated to a Shop that are featured
+*/
+function findAllShopListingsFeatured(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/featured", parameters, "GET", options);
 }
-exports.findAllShopListingsFeatured = findAllShopListingsFeatured;
 /**
- * Retrieves Listings associated to a Shop that are inactive
- */
-function findAllShopListingsInactive(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/inactive", parameters, "GET");
+* Retrieves Listings associated to a Shop that are inactive
+*/
+function findAllShopListingsInactive(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/inactive", parameters, "GET", options);
 }
-exports.findAllShopListingsInactive = findAllShopListingsInactive;
 /**
- * Retrieves a Listing associated to a Shop that is inactive
- */
-function getShopListingInactive(parameters) {
-    return httpClient_1.request("/shops/:shop_id/listings/inactive/:listing_id", parameters, "GET");
+* Retrieves a Listing associated to a Shop that is inactive
+*/
+function getShopListingInactive(parameters, options) {
+    return client_1.request("/shops/:shop_id/listings/inactive/:listing_id", parameters, "GET", options);
 }
-exports.getShopListingInactive = getShopListingInactive;
 /**
- * Finds all listings within a shop section
- */
-function findAllShopSectionListings(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/listings", parameters, "GET");
+* Finds all listings within a shop section
+*/
+function findAllShopSectionListings(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/listings", parameters, "GET", options);
 }
-exports.findAllShopSectionListings = findAllShopSectionListings;
 /**
- * Finds all listings within a shop section
- */
-function findAllShopSectionListingsActive(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/listings/active", parameters, "GET");
+* Finds all listings within a shop section
+*/
+function findAllShopSectionListingsActive(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/listings/active", parameters, "GET", options);
 }
-exports.findAllShopSectionListingsActive = findAllShopSectionListingsActive;
 /**
- * Finds all listings in a given Cart
- */
-function findAllCartListings(parameters) {
-    return httpClient_1.request("/users/:user_id/carts/:cart_id/listings", parameters, "GET");
+* Finds all listings in a given Cart
+*/
+function findAllCartListings(parameters, options) {
+    return client_1.request("/users/:user_id/carts/:cart_id/listings", parameters, "GET", options);
 }
-exports.findAllCartListings = findAllCartListings;
-exports.Listing = {
-    createListing: createListing,
-    findAllFeaturedListings: findAllFeaturedListings,
-    getListing: getListing,
-    updateListing: updateListing,
-    deleteListing: deleteListing,
-    findAllListingActive: findAllListingActive,
-    getInterestingListings: getInterestingListings,
-    getTrendingListings: getTrendingListings,
-    findBrowseSegmentListings: findBrowseSegmentListings,
-    findAllListingsForFeaturedTreasuryId: findAllListingsForFeaturedTreasuryId,
-    findAllActiveListingsForFeaturedTreasuryId: findAllActiveListingsForFeaturedTreasuryId,
-    findAllCurrentFeaturedListings: findAllCurrentFeaturedListings,
-    findAllReceiptListings: findAllReceiptListings,
-    findAllShopListingsActive: findAllShopListingsActive,
-    findAllShopListingsDraft: findAllShopListingsDraft,
-    findAllShopListingsExpired: findAllShopListingsExpired,
-    getShopListingExpired: getShopListingExpired,
-    findAllShopListingsFeatured: findAllShopListingsFeatured,
-    findAllShopListingsInactive: findAllShopListingsInactive,
-    getShopListingInactive: getShopListingInactive,
-    findAllShopSectionListings: findAllShopSectionListings,
-    findAllShopSectionListingsActive: findAllShopSectionListingsActive,
-    findAllCartListings: findAllCartListings
-};
+exports.Listing = { createListing: createListing, findAllFeaturedListings: findAllFeaturedListings, getListing: getListing, updateListing: updateListing, deleteListing: deleteListing, findAllListingActive: findAllListingActive, getInterestingListings: getInterestingListings, getTrendingListings: getTrendingListings, findBrowseSegmentListings: findBrowseSegmentListings, findAllListingsForFeaturedTreasuryId: findAllListingsForFeaturedTreasuryId, findAllActiveListingsForFeaturedTreasuryId: findAllActiveListingsForFeaturedTreasuryId, findAllCurrentFeaturedListings: findAllCurrentFeaturedListings, findAllReceiptListings: findAllReceiptListings, findAllShopListingsActive: findAllShopListingsActive, findAllShopListingsDraft: findAllShopListingsDraft, findAllShopListingsExpired: findAllShopListingsExpired, getShopListingExpired: getShopListingExpired, findAllShopListingsFeatured: findAllShopListingsFeatured, findAllShopListingsInactive: findAllShopListingsInactive, getShopListingInactive: getShopListingInactive, findAllShopSectionListings: findAllShopSectionListings, findAllShopSectionListingsActive: findAllShopSectionListingsActive, findAllCartListings: findAllCartListings };

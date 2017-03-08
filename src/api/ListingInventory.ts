@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -11,7 +11,6 @@ export interface IListingInventory {
 }
 
 //parameters types
-
 export interface IGetInventoryParameters extends IStandardParameters {
     listing_id: number
 }
@@ -24,18 +23,17 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Get the inventory for a listing [developer preview - may be unstable]
  */
-export function getInventory <TResult>(parameters: IGetInventoryParameters): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
-    return request<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET");
+function getInventory <TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
+    return request<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET", options);
 }
 /**
  * Update the inventory for a listing [developer preview - may be unstable]
  */
-export function updateInventory <TResult>(parameters: IUpdateInventoryParameters): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
-    return request<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT");
+function updateInventory <TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
+    return request<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT", options);
 }
 
 export const ListingInventory = {getInventory, updateInventory};

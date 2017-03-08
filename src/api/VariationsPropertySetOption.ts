@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -10,7 +10,6 @@ export interface IVariationsPropertySetOption {
 }
 
 //parameters types
-
 export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardParameters {
     property_id: number,
     category_id?: number,
@@ -25,12 +24,11 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
 }
 
 //methods
-
 /**
  * Finds all suggested property options for a given property.
  */
-export function findAllSuggestedPropertyOptions <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>> {
-    return request<IFindAllSuggestedPropertyOptionsParameters, TResult>("/property_options/suggested", parameters, "GET");
+function findAllSuggestedPropertyOptions <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>> {
+    return request<IFindAllSuggestedPropertyOptionsParameters, TResult>("/property_options/suggested", parameters, "GET", options);
 }
 
 export const VariationsPropertySetOption = {findAllSuggestedPropertyOptions};

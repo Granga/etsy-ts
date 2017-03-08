@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -16,7 +16,6 @@ export interface IBillPayment {
 }
 
 //parameters types
-
 export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -28,12 +27,11 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Retrieves a set of BillPayment objects associated to a User.
  */
-export function findAllUserPayments <TResult>(parameters: IFindAllUserPaymentsParameters): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
-    return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET");
+function findAllUserPayments <TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
+    return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET", options);
 }
 
 export const BillPayment = {findAllUserPayments};

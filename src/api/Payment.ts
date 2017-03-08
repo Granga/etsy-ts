@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -30,7 +30,6 @@ export interface IPayment {
 }
 
 //parameters types
-
 export interface IFindPaymentParameters extends IStandardParameters {
     payment_id: number[]
 }
@@ -44,24 +43,23 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
 }
 
 //methods
-
 /**
  * Get a Direct Checkout Payment
  */
-export function findPayment <TResult>(parameters: IFindPaymentParameters): Promise<IStandardResponse<IFindPaymentParameters, TResult>> {
-    return request<IFindPaymentParameters, TResult>("/payments/:payment_id", parameters, "GET");
+function findPayment <TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>> {
+    return request<IFindPaymentParameters, TResult>("/payments/:payment_id", parameters, "GET", options);
 }
 /**
  * Get a Payment from a Ledger Entry ID, if applicable
  */
-export function findPaymentForLedgerEntry <TResult>(parameters: IFindPaymentForLedgerEntryParameters): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>> {
-    return request<IFindPaymentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET");
+function findPaymentForLedgerEntry <TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>> {
+    return request<IFindPaymentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET", options);
 }
 /**
  * Get a Payment by Shop Receipt ID
  */
-export function findShopPaymentByReceipt <TResult>(parameters: IFindShopPaymentByReceiptParameters): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>> {
-    return request<IFindShopPaymentByReceiptParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET");
+function findShopPaymentByReceipt <TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>> {
+    return request<IFindShopPaymentByReceiptParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET", options);
 }
 
 export const Payment = {findPayment, findPaymentForLedgerEntry, findShopPaymentByReceipt};

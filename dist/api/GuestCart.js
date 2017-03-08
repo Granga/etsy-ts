@@ -1,62 +1,47 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Get all guest's carts
- */
-function findAllGuestCarts(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts", parameters, "GET");
+* Get all guest's carts
+*/
+function findAllGuestCarts(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts", parameters, "GET", options);
 }
-exports.findAllGuestCarts = findAllGuestCarts;
 /**
- * Add a listing to guest's cart
- */
-function addToGuestCart(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts", parameters, "POST");
+* Add a listing to guest's cart
+*/
+function addToGuestCart(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts", parameters, "POST", options);
 }
-exports.addToGuestCart = addToGuestCart;
 /**
- * Update a guest's cart listing purchase quantity
- */
-function updateGuestCartListingQuantity(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts", parameters, "PUT");
+* Update a guest's cart listing purchase quantity
+*/
+function updateGuestCartListingQuantity(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts", parameters, "PUT", options);
 }
-exports.updateGuestCartListingQuantity = updateGuestCartListingQuantity;
 /**
- * Remove a listing from a guest's cart
- */
-function removeGuestCartListing(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts", parameters, "DELETE");
+* Remove a listing from a guest's cart
+*/
+function removeGuestCartListing(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts", parameters, "DELETE", options);
 }
-exports.removeGuestCartListing = removeGuestCartListing;
 /**
- * Get a guest's cart
- */
-function findGuestCart(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts/:cart_id", parameters, "GET");
+* Get a guest's cart
+*/
+function findGuestCart(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "GET", options);
 }
-exports.findGuestCart = findGuestCart;
 /**
- * Update a guest's cart
- */
-function updateGuestCart(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts/:cart_id", parameters, "PUT");
+* Update a guest's cart
+*/
+function updateGuestCart(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "PUT", options);
 }
-exports.updateGuestCart = updateGuestCart;
 /**
- * Delete a guest's cart
- */
-function deleteGuestCart(parameters) {
-    return httpClient_1.request("/guests/:guest_id/carts/:cart_id", parameters, "DELETE");
+* Delete a guest's cart
+*/
+function deleteGuestCart(parameters, options) {
+    return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "DELETE", options);
 }
-exports.deleteGuestCart = deleteGuestCart;
-exports.GuestCart = {
-    findAllGuestCarts: findAllGuestCarts,
-    addToGuestCart: addToGuestCart,
-    updateGuestCartListingQuantity: updateGuestCartListingQuantity,
-    removeGuestCartListing: removeGuestCartListing,
-    findGuestCart: findGuestCart,
-    updateGuestCart: updateGuestCart,
-    deleteGuestCart: deleteGuestCart
-};
+exports.GuestCart = { findAllGuestCarts: findAllGuestCarts, addToGuestCart: addToGuestCart, updateGuestCartListingQuantity: updateGuestCartListingQuantity, removeGuestCartListing: removeGuestCartListing, findGuestCart: findGuestCart, updateGuestCart: updateGuestCart, deleteGuestCart: deleteGuestCart };

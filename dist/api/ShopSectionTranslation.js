@@ -1,38 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function getShopSectionTranslation(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "GET");
+* Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
+*/
+function getShopSectionTranslation(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "GET", options);
 }
-exports.getShopSectionTranslation = getShopSectionTranslation;
 /**
- * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function createShopSectionTranslation(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "POST");
+* Creates a ShopSectionTranslation by shop_id, shop_section_id and language
+*/
+function createShopSectionTranslation(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "POST", options);
 }
-exports.createShopSectionTranslation = createShopSectionTranslation;
 /**
- * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function updateShopSectionTranslation(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "PUT");
+* Updates a ShopSectionTranslation by shop_id, shop_section_id and language
+*/
+function updateShopSectionTranslation(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "PUT", options);
 }
-exports.updateShopSectionTranslation = updateShopSectionTranslation;
 /**
- * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-function deleteShopSectionTranslation(parameters) {
-    return httpClient_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "DELETE");
+* Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
+*/
+function deleteShopSectionTranslation(parameters, options) {
+    return client_1.request("/shops/:shop_id/sections/:shop_section_id/translations/:language", parameters, "DELETE", options);
 }
-exports.deleteShopSectionTranslation = deleteShopSectionTranslation;
-exports.ShopSectionTranslation = {
-    getShopSectionTranslation: getShopSectionTranslation,
-    createShopSectionTranslation: createShopSectionTranslation,
-    updateShopSectionTranslation: updateShopSectionTranslation,
-    deleteShopSectionTranslation: deleteShopSectionTranslation
-};
+exports.ShopSectionTranslation = { getShopSectionTranslation: getShopSectionTranslation, createShopSectionTranslation: createShopSectionTranslation, updateShopSectionTranslation: updateShopSectionTranslation, deleteShopSectionTranslation: deleteShopSectionTranslation };

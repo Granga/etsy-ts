@@ -1,70 +1,53 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
-var httpClient_1 = require("../client/httpClient");
+Object.defineProperty(exports, "__esModule", { value: true });
+var client_1 = require("../client/client");
 //methods
 /**
- * Finds all Users whose name or username match the keywords parameter.
- */
-function findAllUsers(parameters) {
-    return httpClient_1.request("/users", parameters, "GET");
+* Finds all Users whose name or username match the keywords parameter.
+*/
+function findAllUsers(parameters, options) {
+    return client_1.request("/users", parameters, "GET", options);
 }
-exports.findAllUsers = findAllUsers;
 /**
- * Retrieves a User by id.
- */
-function getUser(parameters) {
-    return httpClient_1.request("/users/:user_id", parameters, "GET");
+* Retrieves a User by id.
+*/
+function getUser(parameters, options) {
+    return client_1.request("/users/:user_id", parameters, "GET", options);
 }
-exports.getUser = getUser;
 /**
- * Returns a list of users for a specific team
- */
-function findAllUsersForTeam(parameters) {
-    return httpClient_1.request("/teams/:team_id/users/", parameters, "GET");
+* Returns a list of users for a specific team
+*/
+function findAllUsersForTeam(parameters, options) {
+    return client_1.request("/teams/:team_id/users/", parameters, "GET", options);
 }
-exports.findAllUsersForTeam = findAllUsersForTeam;
 /**
- * Returns a list of users who have circled this user
- */
-function getCirclesContainingUser(parameters) {
-    return httpClient_1.request("/users/:user_id/circles", parameters, "GET");
+* Returns a list of users who have circled this user
+*/
+function getCirclesContainingUser(parameters, options) {
+    return client_1.request("/users/:user_id/circles", parameters, "GET", options);
 }
-exports.getCirclesContainingUser = getCirclesContainingUser;
 /**
- * Returns details about a connection between users
- */
-function getConnectedUser(parameters) {
-    return httpClient_1.request("/users/:user_id/circles/:to_user_id", parameters, "GET");
+* Returns details about a connection between users
+*/
+function getConnectedUser(parameters, options) {
+    return client_1.request("/users/:user_id/circles/:to_user_id", parameters, "GET", options);
 }
-exports.getConnectedUser = getConnectedUser;
 /**
- * Removes a user (to_user_id) from the logged in user's (user_id) circle
- */
-function unconnectUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/circles/:to_user_id", parameters, "DELETE");
+* Removes a user (to_user_id) from the logged in user's (user_id) circle
+*/
+function unconnectUsers(parameters, options) {
+    return client_1.request("/users/:user_id/circles/:to_user_id", parameters, "DELETE", options);
 }
-exports.unconnectUsers = unconnectUsers;
 /**
- * Returns a list of users that are in this user's cricle
- */
-function getConnectedUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/connected_users", parameters, "GET");
+* Returns a list of users that are in this user's cricle
+*/
+function getConnectedUsers(parameters, options) {
+    return client_1.request("/users/:user_id/connected_users", parameters, "GET", options);
 }
-exports.getConnectedUsers = getConnectedUsers;
 /**
- * Adds user (to_user_id) to the user's (user_id) circle
- */
-function connectUsers(parameters) {
-    return httpClient_1.request("/users/:user_id/connected_users", parameters, "POST");
+* Adds user (to_user_id) to the user's (user_id) circle
+*/
+function connectUsers(parameters, options) {
+    return client_1.request("/users/:user_id/connected_users", parameters, "POST", options);
 }
-exports.connectUsers = connectUsers;
-exports.User = {
-    findAllUsers: findAllUsers,
-    getUser: getUser,
-    findAllUsersForTeam: findAllUsersForTeam,
-    getCirclesContainingUser: getCirclesContainingUser,
-    getConnectedUser: getConnectedUser,
-    unconnectUsers: unconnectUsers,
-    getConnectedUsers: getConnectedUsers,
-    connectUsers: connectUsers
-};
+exports.User = { findAllUsers: findAllUsers, getUser: getUser, findAllUsersForTeam: findAllUsersForTeam, getCirclesContainingUser: getCirclesContainingUser, getConnectedUser: getConnectedUser, unconnectUsers: unconnectUsers, getConnectedUsers: getConnectedUsers, connectUsers: connectUsers };

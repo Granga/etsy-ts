@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -12,7 +12,6 @@ export interface ITeam {
 }
 
 //parameters types
-
 export interface IFindAllTeamsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -29,24 +28,23 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Returns all Teams
  */
-export function findAllTeams <TResult>(parameters: IFindAllTeamsParameters): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>> {
-    return request<IFindAllTeamsParameters, TResult>("/teams", parameters, "GET");
+function findAllTeams <TResult>(parameters: IFindAllTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>> {
+    return request<IFindAllTeamsParameters, TResult>("/teams", parameters, "GET", options);
 }
 /**
  * Returns specified team by ID or team name
  */
-export function findTeams <TResult>(parameters: IFindTeamsParameters): Promise<IStandardResponse<IFindTeamsParameters, TResult>> {
-    return request<IFindTeamsParameters, TResult>("/teams/:team_ids/", parameters, "GET");
+function findTeams <TResult>(parameters: IFindTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindTeamsParameters, TResult>> {
+    return request<IFindTeamsParameters, TResult>("/teams/:team_ids/", parameters, "GET", options);
 }
 /**
  * Returns a list of teams for a specific user
  */
-export function findAllTeamsForUser <TResult>(parameters: IFindAllTeamsForUserParameters): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>> {
-    return request<IFindAllTeamsForUserParameters, TResult>("/users/:user_id/teams", parameters, "GET");
+function findAllTeamsForUser <TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>> {
+    return request<IFindAllTeamsForUserParameters, TResult>("/users/:user_id/teams", parameters, "GET", options);
 }
 
 export const Team = {findAllTeams, findTeams, findAllTeamsForUser};

@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -16,7 +16,6 @@ export interface ILedgerEntry {
 }
 
 //parameters types
-
 export interface IFindLedgerEntriesParameters extends IStandardParameters {
     shop_id: string | number,
     min_created?: number,
@@ -31,18 +30,17 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Get a Shop Payment Account Ledger's Entries
  */
-export function findLedgerEntries <TResult>(parameters: IFindLedgerEntriesParameters): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
-    return request<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET");
+function findLedgerEntries <TResult>(parameters: IFindLedgerEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
+    return request<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET", options);
 }
 /**
  * Get a Shop Payment Account Ledger Entry
  */
-export function findLedgerEntry <TResult>(parameters: IFindLedgerEntryParameters): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
-    return request<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET");
+function findLedgerEntry <TResult>(parameters: IFindLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
+    return request<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET", options);
 }
 
 export const LedgerEntry = {findLedgerEntries, findLedgerEntry};

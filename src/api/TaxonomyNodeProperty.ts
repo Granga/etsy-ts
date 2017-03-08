@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -17,18 +17,16 @@ export interface ITaxonomyNodeProperty {
 }
 
 //parameters types
-
 export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
     taxonomy_id: number
 }
 
 //methods
-
 /**
  * Get the possible properties of a taxonomy node [developer preview - may be unstable]
  */
-export function getTaxonomyNodeProperties <TResult>(parameters: IGetTaxonomyNodePropertiesParameters): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
-    return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET");
+function getTaxonomyNodeProperties <TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
+    return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET", options);
 }
 
 export const TaxonomyNodeProperty = {getTaxonomyNodeProperties};

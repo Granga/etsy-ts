@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListingImage {
     listing_image_id: number;
     hex_code: string;
@@ -39,35 +40,9 @@ export interface IDeleteListingImageParameters extends IStandardParameters {
     listing_id: number;
     listing_image_id: number;
 }
-/**
- * Retrieves a set of ListingImage objects associated to a Listing.
- */
-export declare function findAllListingImages<TResult>(parameters: IFindAllListingImagesParameters): Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>>;
-/**
- * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
- to any listing within the same shop that the image's original listing belongs to.
- You MUST pass either a listing_image_id OR an image to this method.
- Passing a listing_image_id serves to re-associate an image that was previously deleted.
- If you wish to re-associate an image, we strongly recommend using the listing_image_id
- argument as opposed to re-uploading a new image each time, to save bandwidth for you as well as us.
- Pass overwrite=1 to replace the existing image at a given rank.
- When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
- will not be affected by this parameter.
- */
-export declare function uploadListingImage<TResult>(parameters: IUploadListingImageParameters): Promise<IStandardResponse<IUploadListingImageParameters, TResult>>;
-/**
- * Retrieves a Image_Listing by id.
- */
-export declare function getImage_Listing<TResult>(parameters: IGetImageListingParameters): Promise<IStandardResponse<IGetImageListingParameters, TResult>>;
-/**
- * Deletes a listing image. A copy of the file remains on our servers,
- and so a deleted image may be re-associated with the listing without
- re-uploading the original image; see uploadListingImage
- */
-export declare function deleteListingImage<TResult>(parameters: IDeleteListingImageParameters): Promise<IStandardResponse<IDeleteListingImageParameters, TResult>>;
 export declare const ListingImage: {
-    findAllListingImages: <TResult>(parameters: IFindAllListingImagesParameters) => Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>>;
-    uploadListingImage: <TResult>(parameters: IUploadListingImageParameters) => Promise<IStandardResponse<IUploadListingImageParameters, TResult>>;
-    getImage_Listing: <TResult>(parameters: IGetImageListingParameters) => Promise<IStandardResponse<IGetImageListingParameters, TResult>>;
-    deleteListingImage: <TResult>(parameters: IDeleteListingImageParameters) => Promise<IStandardResponse<IDeleteListingImageParameters, TResult>>;
+    findAllListingImages: <TResult>(parameters: IFindAllListingImagesParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>>;
+    uploadListingImage: <TResult>(parameters: IUploadListingImageParameters, options?: IOptions) => Promise<IStandardResponse<IUploadListingImageParameters, TResult>>;
+    getImage_Listing: <TResult>(parameters: IGetImageListingParameters, options?: IOptions) => Promise<IStandardResponse<IGetImageListingParameters, TResult>>;
+    deleteListingImage: <TResult>(parameters: IDeleteListingImageParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteListingImageParameters, TResult>>;
 };

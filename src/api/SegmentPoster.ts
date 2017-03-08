@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -14,18 +14,16 @@ export interface ISegmentPoster {
 }
 
 //parameters types
-
 export interface IFindBrowseSegmentPostersParameters extends IStandardParameters {
     path?: string
 }
 
 //methods
-
 /**
  * Find Browse SegmentPosters by Segment slug
  */
-export function findBrowseSegmentPosters <TResult>(parameters: IFindBrowseSegmentPostersParameters): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>> {
-    return request<IFindBrowseSegmentPostersParameters, TResult>("/segments/posters", parameters, "GET");
+function findBrowseSegmentPosters <TResult>(parameters: IFindBrowseSegmentPostersParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>> {
+    return request<IFindBrowseSegmentPostersParameters, TResult>("/segments/posters", parameters, "GET", options);
 }
 
 export const SegmentPoster = {findBrowseSegmentPosters};

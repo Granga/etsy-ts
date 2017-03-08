@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IVariationsPropertySetOptionModifier {
     prefix: string;
     suffix: string;
@@ -16,10 +17,6 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
     diameter_scale?: number;
     dimensions_scale?: number;
 }
-/**
- * Add a value for a given property.
- */
-export declare function getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
 export declare const VariationsPropertySetOptionModifier: {
-    getPropertyOptionModifier: <TResult>(parameters: IGetPropertyOptionModifierParameters) => Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
+    getPropertyOptionModifier: <TResult>(parameters: IGetPropertyOptionModifierParameters, options?: IOptions) => Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
 };

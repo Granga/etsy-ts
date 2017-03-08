@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -30,7 +30,6 @@ export interface IUserProfile {
 }
 
 //parameters types
-
 export interface IFindUserProfileParameters extends IStandardParameters {
     user_id: string | number
 }
@@ -48,18 +47,17 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Returns the UserProfile object associated with a User.
  */
-export function findUserProfile <TResult>(parameters: IFindUserProfileParameters): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
-    return request<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET");
+function findUserProfile <TResult>(parameters: IFindUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
+    return request<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET", options);
 }
 /**
  * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
  */
-export function updateUserProfile <TResult>(parameters: IUpdateUserProfileParameters): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
-    return request<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT");
+function updateUserProfile <TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
+    return request<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT", options);
 }
 
 export const UserProfile = {findUserProfile, updateUserProfile};

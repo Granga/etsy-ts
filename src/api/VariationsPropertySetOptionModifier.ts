@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -9,7 +9,6 @@ export interface IVariationsPropertySetOptionModifier {
 }
 
 //parameters types
-
 export interface IGetPropertyOptionModifierParameters extends IStandardParameters {
     property_id: number,
     category_id?: number,
@@ -24,12 +23,11 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
 }
 
 //methods
-
 /**
  * Add a value for a given property.
  */
-export function getPropertyOptionModifier <TResult>(parameters: IGetPropertyOptionModifierParameters): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>> {
-    return request<IGetPropertyOptionModifierParameters, TResult>("/property_options/modifiers", parameters, "GET");
+function getPropertyOptionModifier <TResult>(parameters: IGetPropertyOptionModifierParameters, options?: IOptions): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>> {
+    return request<IGetPropertyOptionModifierParameters, TResult>("/property_options/modifiers", parameters, "GET", options);
 }
 
 export const VariationsPropertySetOptionModifier = {getPropertyOptionModifier};

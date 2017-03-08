@@ -1,5 +1,6 @@
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopTranslation {
     shop_id: number;
     language: string;
@@ -54,25 +55,9 @@ export interface IDeleteShopTranslationParameters extends IStandardParameters {
     shop_id: string | number;
     language: string;
 }
-/**
- * Retrieves a ShopTranslation by shop_id and language
- */
-export declare function getShopTranslation<TResult>(parameters: IGetShopTranslationParameters): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>>;
-/**
- * Creates a ShopTranslation by shop_id and language
- */
-export declare function createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>>;
-/**
- * Updates a ShopTranslation by shop_id and language
- */
-export declare function updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>>;
-/**
- * Deletes a ShopTranslation by shop_id and language
- */
-export declare function deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>>;
 export declare const ShopTranslation: {
-    getShopTranslation: <TResult>(parameters: IGetShopTranslationParameters) => Promise<IStandardResponse<IGetShopTranslationParameters, TResult>>;
-    createShopTranslation: <TResult>(parameters: ICreateShopTranslationParameters) => Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>>;
-    updateShopTranslation: <TResult>(parameters: IUpdateShopTranslationParameters) => Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>>;
-    deleteShopTranslation: <TResult>(parameters: IDeleteShopTranslationParameters) => Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>>;
+    getShopTranslation: <TResult>(parameters: IGetShopTranslationParameters, options?: IOptions) => Promise<IStandardResponse<IGetShopTranslationParameters, TResult>>;
+    createShopTranslation: <TResult>(parameters: ICreateShopTranslationParameters, options?: IOptions) => Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>>;
+    updateShopTranslation: <TResult>(parameters: IUpdateShopTranslationParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>>;
+    deleteShopTranslation: <TResult>(parameters: IDeleteShopTranslationParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>>;
 };

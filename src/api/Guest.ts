@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -9,7 +9,6 @@ export interface IGuest {
 }
 
 //parameters types
-
 export interface IGetGuestParameters extends IStandardParameters {
     guest_id: any
 }
@@ -25,30 +24,29 @@ export interface IMergeGuestParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Get a guest by ID.
  */
-export function getGuest <TResult>(parameters: IGetGuestParameters): Promise<IStandardResponse<IGetGuestParameters, TResult>> {
-    return request<IGetGuestParameters, TResult>("/guests/:guest_id", parameters, "GET");
+function getGuest <TResult>(parameters: IGetGuestParameters, options?: IOptions): Promise<IStandardResponse<IGetGuestParameters, TResult>> {
+    return request<IGetGuestParameters, TResult>("/guests/:guest_id", parameters, "GET", options);
 }
 /**
  * A helper method that generates a Guest ID to associate to this anonymous session. This method is not strictly necessary, as any sufficiently random guest ID that is 13 characters in length will suffice and automatically create a guest account on use if it does not yet exist.
  */
-export function generateGuest <TResult>(parameters: IGenerateGuestParameters): Promise<IStandardResponse<IGenerateGuestParameters, TResult>> {
-    return request<IGenerateGuestParameters, TResult>("/guests/generator", parameters, "GET");
+function generateGuest <TResult>(parameters: IGenerateGuestParameters, options?: IOptions): Promise<IStandardResponse<IGenerateGuestParameters, TResult>> {
+    return request<IGenerateGuestParameters, TResult>("/guests/generator", parameters, "GET", options);
 }
 /**
  * Claim this guest to the associated user. Merges the GuestCart's associated with this GuestId into the logged in User's Carts. Returns the number of listings merged in meta['listings_merged'].
  */
-export function claimGuest <TResult>(parameters: IClaimGuestParameters): Promise<IStandardResponse<IClaimGuestParameters, TResult>> {
-    return request<IClaimGuestParameters, TResult>("/guests/:guest_id/claim", parameters, "POST");
+function claimGuest <TResult>(parameters: IClaimGuestParameters, options?: IOptions): Promise<IStandardResponse<IClaimGuestParameters, TResult>> {
+    return request<IClaimGuestParameters, TResult>("/guests/:guest_id/claim", parameters, "POST", options);
 }
 /**
  * Merge this guest to a different guest. Merges the GuestCart's associated with this GuestId into the target guest's cart. Returns the number of listings merged in meta['listings_merged'].
  */
-export function mergeGuest <TResult>(parameters: IMergeGuestParameters): Promise<IStandardResponse<IMergeGuestParameters, TResult>> {
-    return request<IMergeGuestParameters, TResult>("/guests/:guest_id/merge", parameters, "POST");
+function mergeGuest <TResult>(parameters: IMergeGuestParameters, options?: IOptions): Promise<IStandardResponse<IMergeGuestParameters, TResult>> {
+    return request<IMergeGuestParameters, TResult>("/guests/:guest_id/merge", parameters, "POST", options);
 }
 
 export const Guest = {getGuest, generateGuest, claimGuest, mergeGuest};

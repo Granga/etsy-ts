@@ -1,5 +1,5 @@
+import {IOptions, request} from "../client/client";
 import {IStandardParameters} from "../client/IStandardParameters";
-import {request} from "../client/httpClient";
 import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
@@ -9,7 +9,6 @@ export interface IDataType {
 }
 
 //parameters types
-
 export interface IDescribeOccasionEnumParameters extends IStandardParameters {
 
 }
@@ -24,30 +23,29 @@ export interface IDescribeWhoMadeEnumParameters extends IStandardParameters {
 }
 
 //methods
-
 /**
  * Describes the legal values for Listing.occasion.
  */
-export function describeOccasionEnum <TResult>(parameters: IDescribeOccasionEnumParameters): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>> {
-    return request<IDescribeOccasionEnumParameters, TResult>("/types/enum/occasion", parameters, "GET");
+function describeOccasionEnum <TResult>(parameters: IDescribeOccasionEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>> {
+    return request<IDescribeOccasionEnumParameters, TResult>("/types/enum/occasion", parameters, "GET", options);
 }
 /**
  * Describes the legal values for Listing.recipient.
  */
-export function describeRecipientEnum <TResult>(parameters: IDescribeRecipientEnumParameters): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>> {
-    return request<IDescribeRecipientEnumParameters, TResult>("/types/enum/recipient", parameters, "GET");
+function describeRecipientEnum <TResult>(parameters: IDescribeRecipientEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>> {
+    return request<IDescribeRecipientEnumParameters, TResult>("/types/enum/recipient", parameters, "GET", options);
 }
 /**
  * Describes the legal values for Listing.when_made.
  */
-export function describeWhenMadeEnum <TResult>(parameters: IDescribeWhenMadeEnumParameters): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>> {
-    return request<IDescribeWhenMadeEnumParameters, TResult>("/types/enum/when_made", parameters, "GET");
+function describeWhenMadeEnum <TResult>(parameters: IDescribeWhenMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>> {
+    return request<IDescribeWhenMadeEnumParameters, TResult>("/types/enum/when_made", parameters, "GET", options);
 }
 /**
  * Describes the legal values for Listing.who_made.
  */
-export function describeWhoMadeEnum <TResult>(parameters: IDescribeWhoMadeEnumParameters): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>> {
-    return request<IDescribeWhoMadeEnumParameters, TResult>("/types/enum/who_made", parameters, "GET");
+function describeWhoMadeEnum <TResult>(parameters: IDescribeWhoMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>> {
+    return request<IDescribeWhoMadeEnumParameters, TResult>("/types/enum/who_made", parameters, "GET", options);
 }
 
 export const DataType = {describeOccasionEnum, describeRecipientEnum, describeWhenMadeEnum, describeWhoMadeEnum};
