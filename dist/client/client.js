@@ -58,10 +58,12 @@ function request(uri, parameters, method, options) {
                     switch (method.toUpperCase()) {
                         case "GET":
                         case "DELETE":
-                            encodedParameters = Object.keys(parameters)
-                                .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]); })
-                                .join('&');
-                            url += "?" + encodedParameters;
+                            if (Object.keys(parameters).length > 0) {
+                                encodedParameters = Object.keys(parameters)
+                                    .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]); })
+                                    .join('&');
+                                url += "?" + encodedParameters;
+                            }
                             break;
                         default:
                             body = JSON.stringify(parameters);
@@ -82,8 +84,10 @@ function request(uri, parameters, method, options) {
 }
 exports.request = request;
 function fillUriPlaceholders(uri, parameters) {
-    for (var parameter in parameters) {
-        uri = uri.replace("/:" + parameter, "/" + parameters[parameter]);
-    }
+    var keys = Object.keys(parameters).filter(function (key) { return uri.indexOf("/:" + key) > -1; });
+    keys.forEach(function (key) {
+        uri = uri.replace("/:" + key, "/" + parameters[key]);
+        delete parameters[key];
+    });
     return uri;
 }

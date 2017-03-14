@@ -1,7 +1,8 @@
 import {IStandardResponse} from "./IStandardResponse";
 
 export interface IOptions {
-    baseUrl: string
+    baseUrl?: string,
+    json?: boolean
 }
 
 const defaultOptions = {
@@ -17,10 +18,12 @@ export async function request <TParameters, TResult>(uri: string, parameters: TP
     switch (method.toUpperCase()) {
         case "GET":
         case "DELETE":
-            let encodedParameters = Object.keys(parameters)
-                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
-                .join('&');
-            url += "?" + encodedParameters;
+            if (Object.keys(parameters).length > 0) {
+                let encodedParameters = Object.keys(parameters)
+                    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
+                    .join('&');
+                url += "?" + encodedParameters;
+            }
             break;
 
         default:
@@ -38,8 +41,10 @@ export async function request <TParameters, TResult>(uri: string, parameters: TP
 }
 
 function fillUriPlaceholders(uri: string, parameters: any) {
-    for (let parameter in parameters) {
-        uri = uri.replace(`/:${parameter}`, `/${parameters[parameter]}`);
-    }
+    let keys = Object.keys(parameters).filter(key => uri.indexOf(`/:${key}`) > -1);
+    keys.forEach(key => {
+        uri = uri.replace(`/:${key}`, `/${parameters[key]}`);
+        delete parameters[key];
+    });
     return uri;
 }
