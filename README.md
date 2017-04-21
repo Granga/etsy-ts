@@ -1,4 +1,4 @@
-#etsy-ts
+# etsy-ts
 
 Still under active development.
 
@@ -39,7 +39,7 @@ client.User.getUser<IUser>({
 }).catch(e => console.error(e));
 ```
 
-##`fetch` in global scope is required
+## `fetch` in global scope is required
 
 You will need [Fetch](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) as well.
 Depending on your environment you have three options:  
