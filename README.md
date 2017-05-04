@@ -8,7 +8,7 @@ Most of the code in this package is _generated_ by [etsy-api-scrapper](https://g
 `npm install etsy-ts --save`
 
 ## Usage:
-```
+```typescript
 import * as client from "etsy-ts";
 import * as fetch from "node-fetch";
 
