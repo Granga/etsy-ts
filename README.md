@@ -4,33 +4,35 @@ Still under active development.
 
 Most of the code in this package is _generated_ by [etsy-api-scrapper](https://github.com/Granga/etsy-api-scraper).
 
+See [Etsy API reference](https://www.etsy.com/developers/documentation/getting_started/api_basics#reference) for detailed info on methods and types you can find in this wrapper.
+
 ## Installation:
 `npm install etsy-ts --save`
 
 ## Usage:
 ```typescript
-import * as client from "etsy-ts";
+import {User, Shop, Listing, IUser, IShop, IListing} from "etsy-ts";
 import * as fetch from "node-fetch";
 
 //for NodeJS add fetch on global
 global["fetch"] = fetch;
 
 //get user, then user's shop, then shop's listings
-client.User.getUser<IUser>({
+User.getUser<IUser>({
     //add your api_key here
     user_id: ["rptr"]
 }).then(response => {
     let user = response.results[0];
-    console.log("User:", user)
+    console.log("User:", user);
 
-    return client.Shop.findAllUserShops<IShop>({
+    return Shop.findAllUserShops<IShop>({
         user_id: user.login_name
     });
 }).then(response => {
     let shop = response.results[0];
     console.log("Shop:", shop);
 
-    return client.Listing.findAllShopListingsActive<IListing>({
+    return Listing.findAllShopListingsActive<IListing>({
         shop_id: shop.shop_id
     });
 }).then(response => {
