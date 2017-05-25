@@ -30,7 +30,7 @@ client.User.getUser<IUser>({
     let shop = response.results[0];
     console.log("Shop:", shop);
 
-    return client.Listing.findAllShopListingsActive<IListing[]>({
+    return client.Listing.findAllShopListingsActive<IListing>({
         shop_id: shop.shop_id
     });
 }).then(response => {
