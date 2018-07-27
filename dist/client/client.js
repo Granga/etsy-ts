@@ -48,7 +48,7 @@ function fillUriPlaceholders(uri, parameters) {
 }
 function encodePrameters(parameters) {
     if (Object.keys(parameters).length > 0) {
-        Object.keys(parameters)
+        return Object.keys(parameters)
             .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]); })
             .join('&');
     }
