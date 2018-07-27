@@ -6,12 +6,12 @@ export interface IOptions {
 }
 
 const defaultOptions = {
-    baseUrl: "https://etsy.com/api/v2/ajax",
+    baseUrl: "https://www.etsy.com/api/v2/ajax",
     json: true
 };
 
-export async function request <TParameters, TResult>(uri: string, parameters: TParameters, method: string, options?: IOptions): Promise<IStandardResponse<TParameters, TResult>> {
-    options = {... defaultOptions, ... options};
+export async function request<TParameters, TResult>(uri: string, parameters: TParameters, method: string, options?: IOptions): Promise<IStandardResponse<TParameters, TResult>> {
+    options = {...defaultOptions, ...options};
     let url = options.baseUrl + fillUriPlaceholders(uri, parameters);
     let body;
 
@@ -19,9 +19,7 @@ export async function request <TParameters, TResult>(uri: string, parameters: TP
         case "GET":
         case "DELETE":
             if (Object.keys(parameters).length > 0) {
-                let encodedParameters = Object.keys(parameters)
-                    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
-                    .join('&');
+                let encodedParameters = encodePrameters(parameters);
                 url += "?" + encodedParameters;
             }
             break;
@@ -47,4 +45,14 @@ function fillUriPlaceholders(uri: string, parameters: any) {
         delete parameters[key];
     });
     return uri;
+}
+
+function encodePrameters(parameters) {
+    if (Object.keys(parameters).length > 0) {
+        Object.keys(parameters)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
+            .join('&');
+    }
+
+    return "";
 }
