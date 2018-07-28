@@ -36,9 +36,26 @@ export interface IGetUserAddressParameters extends IStandardParameters {
 export interface IDeleteUserAddressParameters extends IStandardParameters {
     user_address_id: number;
 }
+/**
+ * Retrieves a set of UserAddress objects associated to a User.
+ */
+declare function findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>>;
+/**
+ * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
+ */
+declare function createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>>;
+/**
+ * Retrieves a UserAddress by id.
+ */
+declare function getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>>;
+/**
+ * Deletes the UserAddress with the given id.
+ */
+declare function deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>>;
 export declare const UserAddress: {
-    findAllUserAddresses: <TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>>;
-    createUserAddress: <TResult>(parameters: ICreateUserAddressParameters, options?: IOptions) => Promise<IStandardResponse<ICreateUserAddressParameters, TResult>>;
-    getUserAddress: <TResult>(parameters: IGetUserAddressParameters, options?: IOptions) => Promise<IStandardResponse<IGetUserAddressParameters, TResult>>;
-    deleteUserAddress: <TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>>;
+    findAllUserAddresses: typeof findAllUserAddresses;
+    createUserAddress: typeof createUserAddress;
+    getUserAddress: typeof getUserAddress;
+    deleteUserAddress: typeof deleteUserAddress;
 };
+export {};

@@ -4,7 +4,9 @@
   "description": "Etsy API wrapper written in typescript.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
   "devDependencies": {
     "@types/node-fetch": "^1.6.7",
     "node-fetch": "^1.6.3",

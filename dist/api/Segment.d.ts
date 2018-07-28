@@ -15,6 +15,11 @@ export interface IFindBrowseSegmentsParameters extends IStandardParameters {
     region?: string;
     path?: string;
 }
+/**
+ * Find all Browse Segments
+ */
+declare function findBrowseSegments<TResult>(parameters: IFindBrowseSegmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
 export declare const Segment: {
-    findBrowseSegments: <TResult>(parameters: IFindBrowseSegmentsParameters, options?: IOptions) => Promise<IStandardResponse<IFindBrowseSegmentsParameters, TResult>>;
+    findBrowseSegments: typeof findBrowseSegments;
 };
+export {};

@@ -25,7 +25,16 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
     min_created?: number;
     max_created?: number;
 }
+/**
+ * Metadata for the set of BillCharges objects associated to a User
+ */
+declare function getUserChargesMetadata<TResult>(parameters: IGetUserChargesMetadataParameters, options?: IOptions): Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>;
+/**
+ * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
+ */
+declare function findAllUserCharges<TResult>(parameters: IFindAllUserChargesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>>;
 export declare const BillCharge: {
-    getUserChargesMetadata: <TResult>(parameters: IGetUserChargesMetadataParameters, options?: IOptions) => Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>;
-    findAllUserCharges: <TResult>(parameters: IFindAllUserChargesParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>>;
+    getUserChargesMetadata: typeof getUserChargesMetadata;
+    findAllUserCharges: typeof findAllUserCharges;
 };
+export {};

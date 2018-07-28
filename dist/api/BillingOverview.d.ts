@@ -13,6 +13,11 @@ export interface IBillingOverview {
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number;
 }
+/**
+ * Retrieves the user's current balance.
+ */
+declare function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
 export declare const BillingOverview: {
-    getUserBillingOverview: <TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions) => Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
+    getUserBillingOverview: typeof getUserBillingOverview;
 };
+export {};

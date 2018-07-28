@@ -256,28 +256,121 @@ export interface IFindAllCartListingsParameters extends IStandardParameters {
     user_id: string | number;
     cart_id: string | number;
 }
+/**
+ * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
+ */
+declare function createListing<TResult>(parameters: ICreateListingParameters, options?: IOptions): Promise<IStandardResponse<ICreateListingParameters, TResult>>;
+/**
+ * Finds all FeaturedTreasury listings.
+ */
+declare function findAllFeaturedListings<TResult>(parameters: IFindAllFeaturedListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>;
+/**
+ * Retrieves a Listing by id.
+ */
+declare function getListing<TResult>(parameters: IGetListingParameters, options?: IOptions): Promise<IStandardResponse<IGetListingParameters, TResult>>;
+/**
+ * Updates a Listing
+ */
+declare function updateListing<TResult>(parameters: IUpdateListingParameters, options?: IOptions): Promise<IStandardResponse<IUpdateListingParameters, TResult>>;
+/**
+ * Deletes a Listing
+ */
+declare function deleteListing<TResult>(parameters: IDeleteListingParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingParameters, TResult>>;
+/**
+ * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
+ */
+declare function findAllListingActive<TResult>(parameters: IFindAllListingActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingActiveParameters, TResult>>;
+/**
+ * Collects the list of interesting listings
+ */
+declare function getInterestingListings<TResult>(parameters: IGetInterestingListingsParameters, options?: IOptions): Promise<IStandardResponse<IGetInterestingListingsParameters, TResult>>;
+/**
+ * Collects the list of listings used to generate the trending listing page
+ */
+declare function getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters, options?: IOptions): Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>>;
+/**
+ * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
+ */
+declare function findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentListingsParameters, TResult>>;
+/**
+ * Finds all listings for a certain FeaturedTreasury.
+ */
+declare function findAllListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>;
+/**
+ * Finds all active listings for a certain FeaturedTreasury.
+ */
+declare function findAllActiveListingsForFeaturedTreasuryId<TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IOptions): Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>;
+/**
+ * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
+ */
+declare function findAllCurrentFeaturedListings<TResult>(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>;
+/**
+ * Finds all listings in a receipt
+ */
+declare function findAllReceiptListings<TResult>(parameters: IFindAllReceiptListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>;
+/**
+ * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
+ */
+declare function findAllShopListingsActive<TResult>(parameters: IFindAllShopListingsActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>;
+/**
+ * Finds all of a Shop's draft listings
+ */
+declare function findAllShopListingsDraft<TResult>(parameters: IFindAllShopListingsDraftParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>;
+/**
+ * Retrieves Listings associated to a Shop that are expired
+ */
+declare function findAllShopListingsExpired<TResult>(parameters: IFindAllShopListingsExpiredParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>;
+/**
+ * Retrieves a Listing associated to a Shop that is inactive
+ */
+declare function getShopListingExpired<TResult>(parameters: IGetShopListingExpiredParameters, options?: IOptions): Promise<IStandardResponse<IGetShopListingExpiredParameters, TResult>>;
+/**
+ * Retrieves Listings associated to a Shop that are featured
+ */
+declare function findAllShopListingsFeatured<TResult>(parameters: IFindAllShopListingsFeaturedParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>;
+/**
+ * Retrieves Listings associated to a Shop that are inactive
+ */
+declare function findAllShopListingsInactive<TResult>(parameters: IFindAllShopListingsInactiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>;
+/**
+ * Retrieves a Listing associated to a Shop that is inactive
+ */
+declare function getShopListingInactive<TResult>(parameters: IGetShopListingInactiveParameters, options?: IOptions): Promise<IStandardResponse<IGetShopListingInactiveParameters, TResult>>;
+/**
+ * Finds all listings within a shop section
+ */
+declare function findAllShopSectionListings<TResult>(parameters: IFindAllShopSectionListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>;
+/**
+ * Finds all listings within a shop section
+ */
+declare function findAllShopSectionListingsActive<TResult>(parameters: IFindAllShopSectionListingsActiveParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>;
+/**
+ * Finds all listings in a given Cart
+ */
+declare function findAllCartListings<TResult>(parameters: IFindAllCartListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCartListingsParameters, TResult>>;
 export declare const Listing: {
-    createListing: <TResult>(parameters: ICreateListingParameters, options?: IOptions) => Promise<IStandardResponse<ICreateListingParameters, TResult>>;
-    findAllFeaturedListings: <TResult>(parameters: IFindAllFeaturedListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>;
-    getListing: <TResult>(parameters: IGetListingParameters, options?: IOptions) => Promise<IStandardResponse<IGetListingParameters, TResult>>;
-    updateListing: <TResult>(parameters: IUpdateListingParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateListingParameters, TResult>>;
-    deleteListing: <TResult>(parameters: IDeleteListingParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteListingParameters, TResult>>;
-    findAllListingActive: <TResult>(parameters: IFindAllListingActiveParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllListingActiveParameters, TResult>>;
-    getInterestingListings: <TResult>(parameters: IGetInterestingListingsParameters, options?: IOptions) => Promise<IStandardResponse<IGetInterestingListingsParameters, TResult>>;
-    getTrendingListings: <TResult>(parameters: IGetTrendingListingsParameters, options?: IOptions) => Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>>;
-    findBrowseSegmentListings: <TResult>(parameters: IFindBrowseSegmentListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindBrowseSegmentListingsParameters, TResult>>;
-    findAllListingsForFeaturedTreasuryId: <TResult>(parameters: IFindAllListingsForFeaturedTreasuryIdParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>;
-    findAllActiveListingsForFeaturedTreasuryId: <TResult>(parameters: IFindAllActiveListingsForFeaturedTreasuryIdParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>;
-    findAllCurrentFeaturedListings: <TResult>(parameters: IFindAllCurrentFeaturedListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>;
-    findAllReceiptListings: <TResult>(parameters: IFindAllReceiptListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>;
-    findAllShopListingsActive: <TResult>(parameters: IFindAllShopListingsActiveParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>;
-    findAllShopListingsDraft: <TResult>(parameters: IFindAllShopListingsDraftParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>;
-    findAllShopListingsExpired: <TResult>(parameters: IFindAllShopListingsExpiredParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>;
-    getShopListingExpired: <TResult>(parameters: IGetShopListingExpiredParameters, options?: IOptions) => Promise<IStandardResponse<IGetShopListingExpiredParameters, TResult>>;
-    findAllShopListingsFeatured: <TResult>(parameters: IFindAllShopListingsFeaturedParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>;
-    findAllShopListingsInactive: <TResult>(parameters: IFindAllShopListingsInactiveParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>;
-    getShopListingInactive: <TResult>(parameters: IGetShopListingInactiveParameters, options?: IOptions) => Promise<IStandardResponse<IGetShopListingInactiveParameters, TResult>>;
-    findAllShopSectionListings: <TResult>(parameters: IFindAllShopSectionListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>;
-    findAllShopSectionListingsActive: <TResult>(parameters: IFindAllShopSectionListingsActiveParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>;
-    findAllCartListings: <TResult>(parameters: IFindAllCartListingsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllCartListingsParameters, TResult>>;
+    createListing: typeof createListing;
+    findAllFeaturedListings: typeof findAllFeaturedListings;
+    getListing: typeof getListing;
+    updateListing: typeof updateListing;
+    deleteListing: typeof deleteListing;
+    findAllListingActive: typeof findAllListingActive;
+    getInterestingListings: typeof getInterestingListings;
+    getTrendingListings: typeof getTrendingListings;
+    findBrowseSegmentListings: typeof findBrowseSegmentListings;
+    findAllListingsForFeaturedTreasuryId: typeof findAllListingsForFeaturedTreasuryId;
+    findAllActiveListingsForFeaturedTreasuryId: typeof findAllActiveListingsForFeaturedTreasuryId;
+    findAllCurrentFeaturedListings: typeof findAllCurrentFeaturedListings;
+    findAllReceiptListings: typeof findAllReceiptListings;
+    findAllShopListingsActive: typeof findAllShopListingsActive;
+    findAllShopListingsDraft: typeof findAllShopListingsDraft;
+    findAllShopListingsExpired: typeof findAllShopListingsExpired;
+    getShopListingExpired: typeof getShopListingExpired;
+    findAllShopListingsFeatured: typeof findAllShopListingsFeatured;
+    findAllShopListingsInactive: typeof findAllShopListingsInactive;
+    getShopListingInactive: typeof getShopListingInactive;
+    findAllShopSectionListings: typeof findAllShopSectionListings;
+    findAllShopSectionListingsActive: typeof findAllShopSectionListingsActive;
+    findAllCartListings: typeof findAllCartListings;
 };
+export {};

@@ -37,8 +37,21 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
     receipt_id: number;
     shop_id: string | number;
 }
+/**
+ * Get a Direct Checkout Payment
+ */
+declare function findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
+/**
+ * Get a Payment from a Ledger Entry ID, if applicable
+ */
+declare function findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
+/**
+ * Get a Payment by Shop Receipt ID
+ */
+declare function findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
 export declare const Payment: {
-    findPayment: <TResult>(parameters: IFindPaymentParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
-    findPaymentForLedgerEntry: <TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
-    findShopPaymentByReceipt: <TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions) => Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
+    findPayment: typeof findPayment;
+    findPaymentForLedgerEntry: typeof findPaymentForLedgerEntry;
+    findShopPaymentByReceipt: typeof findShopPaymentByReceipt;
 };
+export {};

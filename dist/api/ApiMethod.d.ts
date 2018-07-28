@@ -12,6 +12,11 @@ export interface IApiMethod {
 }
 export interface IGetMethodTableParameters extends IStandardParameters {
 }
+/**
+ * Get a list of all methods available.
+ */
+declare function getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
 export declare const ApiMethod: {
-    getMethodTable: <TResult>(parameters: IGetMethodTableParameters, options?: IOptions) => Promise<IStandardResponse<IGetMethodTableParameters, TResult>>;
+    getMethodTable: typeof getMethodTable;
 };
+export {};

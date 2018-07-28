@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
 var defaultOptions = {
     baseUrl: "https://www.etsy.com/api/v2/ajax",
     json: true
 };
 function request(uri, parameters, method, options) {
-    return __awaiter(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var url, body, encodedParameters, response;
-        return __generator(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    options = __assign({}, defaultOptions, options);
+                    options = tslib_1.__assign({}, defaultOptions, options);
                     url = options.baseUrl + fillUriPlaceholders(uri, parameters);
                     switch (method.toUpperCase()) {
                         case "GET":

@@ -29,8 +29,21 @@ export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandar
     shop_id: string | number;
     ledger_entry_id: number[];
 }
+/**
+ * Get a Payment Adjustments from a Payment Id
+ */
+declare function findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
+/**
+ * Get a Direct Checkout Payment Adjustment
+ */
+declare function findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
+/**
+ * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+ */
+declare function findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
 export declare const PaymentAdjustment: {
-    findPaymentAdjustments: <TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
-    findPaymentAdjustment: <TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
-    findPaymentAdjustmentForLedgerEntry: <TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
+    findPaymentAdjustments: typeof findPaymentAdjustments;
+    findPaymentAdjustment: typeof findPaymentAdjustment;
+    findPaymentAdjustmentForLedgerEntry: typeof findPaymentAdjustmentForLedgerEntry;
 };
+export {};

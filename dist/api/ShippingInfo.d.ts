@@ -36,10 +36,31 @@ export interface IUpdateShippingInfoParameters extends IStandardParameters {
 export interface IDeleteShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number;
 }
+/**
+ * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
+ */
+declare function findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>;
+/**
+ * Creates a new ShippingInfo.
+ */
+declare function createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>>;
+/**
+ * Retrieves a ShippingInfo by id.
+ */
+declare function getShippingInfo<TResult>(parameters: IGetShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>>;
+/**
+ * Updates a ShippingInfo with the given id.
+ */
+declare function updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>>;
+/**
+ * Deletes the ShippingInfo with the given id.
+ */
+declare function deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>>;
 export declare const ShippingInfo: {
-    findAllListingShippingProfileEntries: <TResult>(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>;
-    createShippingInfo: <TResult>(parameters: ICreateShippingInfoParameters, options?: IOptions) => Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>>;
-    getShippingInfo: <TResult>(parameters: IGetShippingInfoParameters, options?: IOptions) => Promise<IStandardResponse<IGetShippingInfoParameters, TResult>>;
-    updateShippingInfo: <TResult>(parameters: IUpdateShippingInfoParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>>;
-    deleteShippingInfo: <TResult>(parameters: IDeleteShippingInfoParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>>;
+    findAllListingShippingProfileEntries: typeof findAllListingShippingProfileEntries;
+    createShippingInfo: typeof createShippingInfo;
+    getShippingInfo: typeof getShippingInfo;
+    updateShippingInfo: typeof updateShippingInfo;
+    deleteShippingInfo: typeof deleteShippingInfo;
 };
+export {};

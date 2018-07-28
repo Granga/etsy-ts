@@ -27,9 +27,26 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
     listing_id: number;
     property_id: number;
 }
+/**
+ * Get all of the attributes for a listing [developer preview - may be unstable]
+ */
+declare function getAttributes<TResult>(parameters: IGetAttributesParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
+/**
+ * Get an attribute for a listing [developer preview - may be unstable]
+ */
+declare function getAttribute<TResult>(parameters: IGetAttributeParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
+/**
+ * Update or populate an attribute for a listing [developer preview - may be unstable]
+ */
+declare function updateAttribute<TResult>(parameters: IUpdateAttributeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
+/**
+ * Delete an attribute for a listing [developer preview - may be unstable]
+ */
+declare function deleteAttribute<TResult>(parameters: IDeleteAttributeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
 export declare const PropertyValue: {
-    getAttributes: <TResult>(parameters: IGetAttributesParameters, options?: IOptions) => Promise<IStandardResponse<IGetAttributesParameters, TResult>>;
-    getAttribute: <TResult>(parameters: IGetAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IGetAttributeParameters, TResult>>;
-    updateAttribute: <TResult>(parameters: IUpdateAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateAttributeParameters, TResult>>;
-    deleteAttribute: <TResult>(parameters: IDeleteAttributeParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteAttributeParameters, TResult>>;
+    getAttributes: typeof getAttributes;
+    getAttribute: typeof getAttribute;
+    updateAttribute: typeof updateAttribute;
+    deleteAttribute: typeof deleteAttribute;
 };
+export {};

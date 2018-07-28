@@ -16,6 +16,11 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
     offset?: number;
     page?: number;
 }
+/**
+ * Get Direct Checkout Payment Adjustment Items
+ */
+declare function findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
 export declare const PaymentAdjustmentItem: {
-    findPaymentAdjustmentItem: <TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions) => Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
+    findPaymentAdjustmentItem: typeof findPaymentAdjustmentItem;
 };
+export {};

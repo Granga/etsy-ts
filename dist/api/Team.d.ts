@@ -22,8 +22,21 @@ export interface IFindAllTeamsForUserParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
+/**
+ * Returns all Teams
+ */
+declare function findAllTeams<TResult>(parameters: IFindAllTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
+/**
+ * Returns specified team by ID or team name
+ */
+declare function findTeams<TResult>(parameters: IFindTeamsParameters, options?: IOptions): Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
+/**
+ * Returns a list of teams for a specific user
+ */
+declare function findAllTeamsForUser<TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
 export declare const Team: {
-    findAllTeams: <TResult>(parameters: IFindAllTeamsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTeamsParameters, TResult>>;
-    findTeams: <TResult>(parameters: IFindTeamsParameters, options?: IOptions) => Promise<IStandardResponse<IFindTeamsParameters, TResult>>;
-    findAllTeamsForUser: <TResult>(parameters: IFindAllTeamsForUserParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>;
+    findAllTeams: typeof findAllTeams;
+    findTeams: typeof findTeams;
+    findAllTeamsForUser: typeof findAllTeamsForUser;
 };
+export {};

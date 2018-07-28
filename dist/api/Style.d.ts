@@ -7,6 +7,11 @@ export interface IStyle {
 }
 export interface IFindSuggestedStylesParameters extends IStandardParameters {
 }
+/**
+ * Retrieve all suggested styles.
+ */
+declare function findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters, options?: IOptions): Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>>;
 export declare const Style: {
-    findSuggestedStyles: <TResult>(parameters: IFindSuggestedStylesParameters, options?: IOptions) => Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>>;
+    findSuggestedStyles: typeof findSuggestedStyles;
 };
+export {};

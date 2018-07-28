@@ -13,6 +13,11 @@ export interface IFindPropertySetParameters extends IStandardParameters {
     taxonomy_id?: number;
     recipient_id?: number;
 }
+/**
+ * Find the property set for the category id
+ */
+declare function findPropertySet<TResult>(parameters: IFindPropertySetParameters, options?: IOptions): Promise<IStandardResponse<IFindPropertySetParameters, TResult>>;
 export declare const VariationsPropertySet: {
-    findPropertySet: <TResult>(parameters: IFindPropertySetParameters, options?: IOptions) => Promise<IStandardResponse<IFindPropertySetParameters, TResult>>;
+    findPropertySet: typeof findPropertySet;
 };
+export {};

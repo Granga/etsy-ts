@@ -41,7 +41,16 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
     region?: string;
     city?: string;
 }
+/**
+ * Returns the UserProfile object associated with a User.
+ */
+declare function findUserProfile<TResult>(parameters: IFindUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
+/**
+ * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
+ */
+declare function updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
 export declare const UserProfile: {
-    findUserProfile: <TResult>(parameters: IFindUserProfileParameters, options?: IOptions) => Promise<IStandardResponse<IFindUserProfileParameters, TResult>>;
-    updateUserProfile: <TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions) => Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>>;
+    findUserProfile: typeof findUserProfile;
+    updateUserProfile: typeof updateUserProfile;
 };
+export {};

@@ -11,6 +11,11 @@ export interface ILedger {
 export interface IFindLedgerParameters extends IStandardParameters {
     shop_id: string | number;
 }
+/**
+ * Get a Shop Payment Account Ledger
+ */
+declare function findLedger<TResult>(parameters: IFindLedgerParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerParameters, TResult>>;
 export declare const Ledger: {
-    findLedger: <TResult>(parameters: IFindLedgerParameters, options?: IOptions) => Promise<IStandardResponse<IFindLedgerParameters, TResult>>;
+    findLedger: typeof findLedger;
 };
+export {};

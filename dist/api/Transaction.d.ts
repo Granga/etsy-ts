@@ -55,10 +55,31 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
     offset?: number;
     page?: number;
 }
+/**
+ * Retrieves a Shop_Transaction by id.
+ */
+declare function getShop_Transaction<TResult>(parameters: IGetShopTransactionParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>>;
+/**
+ * Retrieves a set of Transaction objects associated to a Listing.
+ */
+declare function findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>;
+/**
+ * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
+ */
+declare function findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>;
+/**
+ * Retrieves a set of Transaction objects associated to a Shop.
+ */
+declare function findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>;
+/**
+ * Retrieves a set of Transaction objects associated to a User.
+ */
+declare function findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>;
 export declare const Transaction: {
-    getShop_Transaction: <TResult>(parameters: IGetShopTransactionParameters, options?: IOptions) => Promise<IStandardResponse<IGetShopTransactionParameters, TResult>>;
-    findAllListingTransactions: <TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>;
-    findAllShop_Receipt2Transactions: <TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>;
-    findAllShopTransactions: <TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>;
-    findAllUserBuyerTransactions: <TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>;
+    getShop_Transaction: typeof getShop_Transaction;
+    findAllListingTransactions: typeof findAllListingTransactions;
+    findAllShop_Receipt2Transactions: typeof findAllShop_Receipt2Transactions;
+    findAllShopTransactions: typeof findAllShopTransactions;
+    findAllUserBuyerTransactions: typeof findAllUserBuyerTransactions;
 };
+export {};

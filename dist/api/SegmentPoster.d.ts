@@ -13,6 +13,11 @@ export interface ISegmentPoster {
 export interface IFindBrowseSegmentPostersParameters extends IStandardParameters {
     path?: string;
 }
+/**
+ * Find Browse SegmentPosters by Segment slug
+ */
+declare function findBrowseSegmentPosters<TResult>(parameters: IFindBrowseSegmentPostersParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>>;
 export declare const SegmentPoster: {
-    findBrowseSegmentPosters: <TResult>(parameters: IFindBrowseSegmentPostersParameters, options?: IOptions) => Promise<IStandardResponse<IFindBrowseSegmentPostersParameters, TResult>>;
+    findBrowseSegmentPosters: typeof findBrowseSegmentPosters;
 };
+export {};

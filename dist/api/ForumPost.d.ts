@@ -20,8 +20,21 @@ export interface IPostTreasuryCommentParameters extends IStandardParameters {
 }
 export interface IDeleteTreasuryCommentParameters extends IStandardParameters {
 }
+/**
+ * Get a Treasury's Comments
+ */
+declare function findTreasuryComments<TResult>(parameters: IFindTreasuryCommentsParameters, options?: IOptions): Promise<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>;
+/**
+ * Leave a comment on a Treasury List
+ */
+declare function postTreasuryComment<TResult>(parameters: IPostTreasuryCommentParameters, options?: IOptions): Promise<IStandardResponse<IPostTreasuryCommentParameters, TResult>>;
+/**
+ * Delete a given comment on a Treasury List
+ */
+declare function deleteTreasuryComment<TResult>(parameters: IDeleteTreasuryCommentParameters, options?: IOptions): Promise<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>;
 export declare const ForumPost: {
-    findTreasuryComments: <TResult>(parameters: IFindTreasuryCommentsParameters, options?: IOptions) => Promise<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>;
-    postTreasuryComment: <TResult>(parameters: IPostTreasuryCommentParameters, options?: IOptions) => Promise<IStandardResponse<IPostTreasuryCommentParameters, TResult>>;
-    deleteTreasuryComment: <TResult>(parameters: IDeleteTreasuryCommentParameters, options?: IOptions) => Promise<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>;
+    findTreasuryComments: typeof findTreasuryComments;
+    postTreasuryComment: typeof postTreasuryComment;
+    deleteTreasuryComment: typeof deleteTreasuryComment;
 };
+export {};

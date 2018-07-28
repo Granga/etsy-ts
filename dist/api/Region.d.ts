@@ -13,8 +13,21 @@ export interface IGetRegionParameters extends IStandardParameters {
 }
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 }
+/**
+ * Finds all Region.
+ */
+declare function findAllRegion<TResult>(parameters: IFindAllRegionParameters, options?: IOptions): Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
+/**
+ * Retrieves a Region by id.
+ */
+declare function getRegion<TResult>(parameters: IGetRegionParameters, options?: IOptions): Promise<IStandardResponse<IGetRegionParameters, TResult>>;
+/**
+ *
+ */
+declare function findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
 export declare const Region: {
-    findAllRegion: <TResult>(parameters: IFindAllRegionParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllRegionParameters, TResult>>;
-    getRegion: <TResult>(parameters: IGetRegionParameters, options?: IOptions) => Promise<IStandardResponse<IGetRegionParameters, TResult>>;
-    findEligibleRegions: <TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>>;
+    findAllRegion: typeof findAllRegion;
+    getRegion: typeof getRegion;
+    findEligibleRegions: typeof findEligibleRegions;
 };
+export {};

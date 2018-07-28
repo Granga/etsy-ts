@@ -17,6 +17,11 @@ export interface IGetPropertyOptionModifierParameters extends IStandardParameter
     diameter_scale?: number;
     dimensions_scale?: number;
 }
+/**
+ * Add a value for a given property.
+ */
+declare function getPropertyOptionModifier<TResult>(parameters: IGetPropertyOptionModifierParameters, options?: IOptions): Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
 export declare const VariationsPropertySetOptionModifier: {
-    getPropertyOptionModifier: <TResult>(parameters: IGetPropertyOptionModifierParameters, options?: IOptions) => Promise<IStandardResponse<IGetPropertyOptionModifierParameters, TResult>>;
+    getPropertyOptionModifier: typeof getPropertyOptionModifier;
 };
+export {};

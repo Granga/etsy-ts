@@ -18,6 +18,11 @@ export interface IFindAllSuggestedPropertyOptionsParameters extends IStandardPar
     diameter_scale?: number;
     dimensions_scale?: number;
 }
+/**
+ * Finds all suggested property options for a given property.
+ */
+declare function findAllSuggestedPropertyOptions<TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
 export declare const VariationsPropertySetOption: {
-    findAllSuggestedPropertyOptions: <TResult>(parameters: IFindAllSuggestedPropertyOptionsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllSuggestedPropertyOptionsParameters, TResult>>;
+    findAllSuggestedPropertyOptions: typeof findAllSuggestedPropertyOptions;
 };
+export {};

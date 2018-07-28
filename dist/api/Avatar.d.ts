@@ -22,7 +22,16 @@ export interface IUploadAvatarParameters extends IStandardParameters {
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number;
 }
+/**
+ * Upload a new user avatar image
+ */
+declare function uploadAvatar<TResult>(parameters: IUploadAvatarParameters, options?: IOptions): Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
+/**
+ * Get avatar image source
+ */
+declare function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
 export declare const Avatar: {
-    uploadAvatar: <TResult>(parameters: IUploadAvatarParameters, options?: IOptions) => Promise<IStandardResponse<IUploadAvatarParameters, TResult>>;
-    getAvatarImgSrc: <TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions) => Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>;
+    uploadAvatar: typeof uploadAvatar;
+    getAvatarImgSrc: typeof getAvatarImgSrc;
 };
+export {};

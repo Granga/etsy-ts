@@ -8,6 +8,11 @@ export interface IImageType {
 }
 export interface IListImageTypesParameters extends IStandardParameters {
 }
+/**
+ * Lists available image types along with their supported sizes.
+ */
+declare function listImageTypes<TResult>(parameters: IListImageTypesParameters, options?: IOptions): Promise<IStandardResponse<IListImageTypesParameters, TResult>>;
 export declare const ImageType: {
-    listImageTypes: <TResult>(parameters: IListImageTypesParameters, options?: IOptions) => Promise<IStandardResponse<IListImageTypesParameters, TResult>>;
+    listImageTypes: typeof listImageTypes;
 };
+export {};

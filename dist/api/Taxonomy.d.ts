@@ -17,7 +17,16 @@ export interface IGetBuyerTaxonomyParameters extends IStandardParameters {
 }
 export interface IGetSellerTaxonomyParameters extends IStandardParameters {
 }
+/**
+ * Retrieve the entire taxonomy as seen by buyers in search.
+ */
+declare function getBuyerTaxonomy<TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>;
+/**
+ * Retrieve the entire taxonomy as used by sellers in the listing process.
+ */
+declare function getSellerTaxonomy<TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>;
 export declare const Taxonomy: {
-    getBuyerTaxonomy: <TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions) => Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>;
-    getSellerTaxonomy: <TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions) => Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>;
+    getBuyerTaxonomy: typeof getBuyerTaxonomy;
+    getSellerTaxonomy: typeof getSellerTaxonomy;
 };
+export {};

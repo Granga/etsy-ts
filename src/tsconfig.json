@@ -7,7 +7,7 @@
         "preserveConstEnums": true,
         "declaration": true,
         "sourceMap": false,
-        "noEmitHelpers": true,
+        "importHelpers": true,
         "lib": [
             "dom",
             "es2015"

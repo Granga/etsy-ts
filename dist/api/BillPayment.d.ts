@@ -21,6 +21,11 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     min_created?: number;
     max_created?: number;
 }
+/**
+ * Retrieves a set of BillPayment objects associated to a User.
+ */
+declare function findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>;
 export declare const BillPayment: {
-    findAllUserPayments: <TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions) => Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>;
+    findAllUserPayments: typeof findAllUserPayments;
 };
+export {};
