@@ -1,6 +1,6 @@
 {
   "name": "etsy-ts",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Etsy API wrapper written in typescript.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
