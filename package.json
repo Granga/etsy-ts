@@ -1,12 +1,10 @@
 {
   "name": "etsy-ts",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Etsy API wrapper written in typescript.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "dependencies": {
-    "tslib": "^1.9.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node-fetch": "^1.6.7",
     "node-fetch": "^1.6.3",
