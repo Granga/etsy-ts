@@ -2,10 +2,25 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopSection {
+    /**
+     * The numeric ID of the shop section.
+     */
     shop_section_id: number;
+    /**
+     * The title of the section.
+     */
     title: string;
+    /**
+     * Display order.
+     */
     rank: number;
+    /**
+     * The ID of the user who owns this shop section.
+     */
     user_id: number;
+    /**
+     * The number of active listings currently in the section.
+     */
     active_listing_count: number;
 }
 export interface IFindAllShopSectionsParameters extends IStandardParameters {

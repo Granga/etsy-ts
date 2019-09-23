@@ -2,14 +2,41 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShippingUpgrade {
+    /**
+     * Identifier for the parent shipping profile
+     */
     shipping_profile_id: number;
+    /**
+     * Identifier for the value
+     */
     value_id: number;
+    /**
+     * Name of the shipping upgrade, e.g. USPS Priority
+     */
     value: string;
+    /**
+     * Additional cost of adding the shipping upgrade
+     */
     price: number;
+    /**
+     * Additional cost of adding the shipping upgrade with another item
+     */
     secondary_price: number;
+    /**
+     * Currency for the price
+     */
     currency_code: string;
+    /**
+     * Domestic (0) or international (1)
+     */
     type: number;
+    /**
+     * Display order
+     */
     order: number;
+    /**
+     * Language code
+     */
     language: number;
 }
 export interface IGetListingShippingUpgradesParameters extends IStandardParameters {

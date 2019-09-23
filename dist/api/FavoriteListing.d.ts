@@ -2,9 +2,21 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFavoriteListing {
+    /**
+     * The listings numeric ID.
+     */
     listing_id: number;
+    /**
+     * The user's numeric ID.  Note: This field may be absent, depending on the user's privacy settings.
+     */
     user_id: number;
+    /**
+     * The state of the listing.
+     */
     listing_state: string;
+    /**
+     * The date and time that the listing was favorited.
+     */
     create_date: number;
 }
 export interface IFindAllListingFavoredByParameters extends IStandardParameters {

@@ -2,10 +2,25 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListingTranslation {
+    /**
+     * The numeric ID for the Listing.
+     */
     listing_id: number;
+    /**
+     * The IETF language tag (e.g. 'fr') for the language of this translation.
+     */
     language: string;
+    /**
+     * The title of the Listing of this Translation.
+     */
     title: string;
+    /**
+     * The description of the Listing of this Translation.
+     */
     description: string;
+    /**
+     * The tags of the Listing of this Translation.
+     */
     tags: string[];
 }
 export interface IGetListingTranslationParameters extends IStandardParameters {

@@ -2,9 +2,24 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IFavoriteUser {
+    /**
+     * The user's numeric ID.  Note: This field may be absent, depending on the user's privacy settings.
+     */
     user_id: number;
+    /**
+     @deprecated
+     * The numberic ID of this favorite user association.
+
+     Deprecated: do not use.
+     */
     favorite_user_id: number;
+    /**
+     * The targeted favorite user's numeric ID.
+     */
     target_user_id: number;
+    /**
+     * The date and time that the user was favorited.
+     */
     creation_tsz: number;
 }
 export interface IFindAllUserFavoredByParameters extends IStandardParameters {

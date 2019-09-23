@@ -9,7 +9,7 @@ function findPaymentAdjustments(parameters, options) {
     return client_1.request("/payments/:payment_id/adjustments", parameters, "GET", options);
 }
 /**
- * Get a Direct Checkout Payment Adjustment
+ * Get an Etsy Payments Transaction Adjustment
  */
 function findPaymentAdjustment(parameters, options) {
     return client_1.request("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET", options);
@@ -20,4 +20,15 @@ function findPaymentAdjustment(parameters, options) {
 function findPaymentAdjustmentForLedgerEntry(parameters, options) {
     return client_1.request("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
 }
-exports.PaymentAdjustment = { findPaymentAdjustments: findPaymentAdjustments, findPaymentAdjustment: findPaymentAdjustment, findPaymentAdjustmentForLedgerEntry: findPaymentAdjustmentForLedgerEntry };
+/**
+ * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
+ */
+function findPaymentAdjustmentForPaymentAccountLedgerEntry(parameters, options) {
+    return client_1.request("/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
+}
+exports.PaymentAdjustment = {
+    findPaymentAdjustments: findPaymentAdjustments,
+    findPaymentAdjustment: findPaymentAdjustment,
+    findPaymentAdjustmentForLedgerEntry: findPaymentAdjustmentForLedgerEntry,
+    findPaymentAdjustmentForPaymentAccountLedgerEntry: findPaymentAdjustmentForPaymentAccountLedgerEntry
+};

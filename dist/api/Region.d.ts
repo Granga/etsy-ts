@@ -2,8 +2,17 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IRegion {
+    /**
+     * The numeric ID of this region.
+     */
     region_id: number;
+    /**
+     * The name of the region.
+     */
     region_name: string;
+    /**
+     * The eligibilty of this region to be used
+     */
     is_dead: boolean;
 }
 export interface IFindAllRegionParameters extends IStandardParameters {

@@ -2,23 +2,77 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITreasury {
+    /**
+     * Unique id of the collection
+     */
     id: string;
+    /**
+     * Title of the collection
+     */
     title: string;
+    /**
+     * Description of the collection
+     */
     description: string;
+    /**
+     * If the Treasury was featured on the homepage, the time in seconds since the epoch that it was featured
+     */
     homepage: number;
+    /**
+     * Whether the Treasury has been flagged mature or not
+     */
     mature: boolean;
+    /**
+     * Whether the Treasury has been set to private
+     */
     private: boolean;
+    /**
+     * Language/Locale of the collection
+     */
     locale: string;
+    /**
+     * The number of comments on this Treasury
+     */
     comment_count: number;
+    /**
+     * The tags associated with this Treasury
+     */
     tags: string[];
+    /**
+     * Clicks, views, shares, and reports metrics of this collection
+     */
     counts: any;
+    /**
+     * The algorithmic ranking value assigned to this collection
+     */
     hotness: number;
+    /**
+     * The algorithmic ranking value shown as a color (color hexadecimal)
+     */
     hotness_color: string;
+    /**
+     * ID of the user (curator) of the collection
+     */
     user_id: number;
+    /**
+     * Name of the user (curator) of the collection
+     */
     user_name: string;
+    /**
+     * ID of the user's (curator's) avatar
+     */
     user_avatar_id: number;
+    /**
+     * The listings that are in this collection
+     */
     listings: any[];
+    /**
+     * Time this collection was created, in epoch seconds
+     */
     creation_tsz: number;
+    /**
+     * The time that this treasury was published, in epoch seconds
+     */
     became_public_date: number;
 }
 export interface IFindAllTreasuriesParameters extends IStandardParameters {

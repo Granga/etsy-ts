@@ -2,16 +2,49 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface ICoupon {
+    /**
+     * The numeric ID of the coupon
+     */
     coupon_id: number;
+    /**
+     * The alphanumeric coupon code
+     */
     coupon_code: string;
+    /**
+     * True if the coupon is active
+     */
     seller_active: boolean;
+    /**
+     * The discount percent (null for free shipping coupons)
+     */
     pct_discount: number;
+    /**
+     * True if the coupon applies free shipping
+     */
     free_shipping: boolean;
+    /**
+     * True if the coupon free shipping applies to domestic addresses only
+     */
     domestic_only: boolean;
+    /**
+     * The 3 letter currency code relating to currency values if any. fixed_discount or minimum_purchase_price
+     */
     currency_code: string;
+    /**
+     * Discount amount the coupon should take. For currency information see currency_code
+     */
     fixed_discount: string;
+    /**
+     * The minimum amount in a cart before tax or shipping needed in order to apply the coupon. For currency information see currency_code
+     */
     minimum_purchase_price: string;
+    /**
+     * A epoch time (UTC) on which the coupon can no longer be applied
+     */
     expiration_date: number;
+    /**
+     * The type of coupon: fixed_discount, pct_discount, free_shipping for example
+     */
     coupon_type: string;
 }
 export interface IFindAllShopCouponsParameters extends IStandardParameters {

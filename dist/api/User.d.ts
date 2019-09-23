@@ -2,14 +2,41 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUser {
+    /**
+     * The user's numeric ID. This is also valid as the user's shop ID.
+     */
     user_id: number;
+    /**
+     * The user's login name.
+     */
     login_name: string;
+    /**
+     * The user's primary email address.
+     */
     primary_email: string;
+    /**
+     * The date and time the user was created, in epoch seconds.
+     */
     creation_tsz: number;
+    /**
+     * Public key for user
+     */
     user_pub_key: any;
+    /**
+     * The numeric ID of the user that referred this user.
+     */
     referred_by_user_id: number;
+    /**
+     * An associative array of feedback totals for the user.
+     */
     feedback_info: any;
+    /**
+     * The total number of transactions the user has available for a new review.
+     */
     awaiting_feedback_count: number;
+    /**
+     * Should this user's listings be created or edited using the new Inventory endpoints?
+     */
     use_new_inventory_endpoints: boolean;
 }
 export interface IFindAllUsersParameters extends IStandardParameters {

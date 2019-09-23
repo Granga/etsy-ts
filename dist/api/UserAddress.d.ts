@@ -2,16 +2,49 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IUserAddress {
+    /**
+     * The numeric ID of the user's address.
+     */
     user_address_id: number;
+    /**
+     * The user's numeric ID.
+     */
     user_id: number;
+    /**
+     * The user's name for this address.
+     */
     name: string;
+    /**
+     * The first line of the user's address.
+     */
     first_line: string;
+    /**
+     * The second line of the user's address.
+     */
     second_line: string;
+    /**
+     * The city field of the user's address.
+     */
     city: string;
+    /**
+     * The state field of the user's address.
+     */
     state: string;
+    /**
+     * The zip code field of the user's address.
+     */
     zip: string;
+    /**
+     * The country's numeric ID.
+     */
     country_id: number;
+    /**
+     * The name of the user's country
+     */
     country_name: string;
+    /**
+     * Is this the user's default shipping address
+     */
     is_default_shipping: boolean;
 }
 export interface IFindAllUserAddressesParameters extends IStandardParameters {

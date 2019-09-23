@@ -2,13 +2,37 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IListingFile {
+    /**
+     * The numeric ID of the listing file.
+     */
     listing_file_id: number;
+    /**
+     * The numeric ID of the listing the file belongs to.
+     */
     listing_id: number;
+    /**
+     * Display order.
+     */
     rank: number;
+    /**
+     * The file's displayable name.
+     */
     filename: string;
+    /**
+     * The file's size in a displayable format.
+     */
     filesize: string;
+    /**
+     * The file's size in raw bytes.
+     */
     size_bytes: number;
+    /**
+     * The file's mimetype.
+     */
     filetype: string;
+    /**
+     * The time when this file was uploaded, in Epoch seconds.
+     */
     create_date: number;
 }
 export interface IFindAllListingFilesParameters extends IStandardParameters {

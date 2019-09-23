@@ -14,4 +14,10 @@ function getBuyerTaxonomy(parameters, options) {
 function getSellerTaxonomy(parameters, options) {
     return client_1.request("/taxonomy/seller/get", parameters, "GET", options);
 }
-exports.Taxonomy = { getBuyerTaxonomy: getBuyerTaxonomy, getSellerTaxonomy: getSellerTaxonomy };
+/**
+ * Get the current version of the seller taxonomy
+ */
+function getSellerTaxonomyVersion(parameters, options) {
+    return client_1.request("/taxonomy/seller/version", parameters, "GET", options);
+}
+exports.Taxonomy = { getBuyerTaxonomy: getBuyerTaxonomy, getSellerTaxonomy: getSellerTaxonomy, getSellerTaxonomyVersion: getSellerTaxonomyVersion };

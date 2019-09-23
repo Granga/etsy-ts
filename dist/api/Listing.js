@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("../client/client");
 //methods
 /**
- * Creates a new Listing. NOTE: A shipping_template_id is required when creating a listing. NOTE: All listings created on www.etsy.com must be actual items for sale. Please see our guidelines for testing with live listings.
+ * Creates a new Listing.
  */
 function createListing(parameters, options) {
     return client_1.request("/listings", parameters, "POST", options);

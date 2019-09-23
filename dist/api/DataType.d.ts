@@ -2,7 +2,13 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IDataType {
+    /**
+     * Base type of data
+     */
     type: string;
+    /**
+     * Allowable values (for an enum.)
+     */
     values: string[];
 }
 export interface IDescribeOccasionEnumParameters extends IStandardParameters {

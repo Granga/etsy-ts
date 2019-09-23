@@ -4,16 +4,30 @@ import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
 export interface IListingInventory {
+    /**
+     * The products available for this listing.
+     */
     products: any[],
+    /**
+     * Which properties control price?
+     */
     price_on_property: number[],
+    /**
+     * Which properties control quantity?
+     */
     quantity_on_property: number[],
+    /**
+     * Which properties control SKU?
+     */
     sku_on_property: number[]
 }
 
 //parameters types
 export interface IGetInventoryParameters extends IStandardParameters {
-    listing_id: number
+    listing_id: number,
+    write_missing_inventory?: boolean
 }
+
 export interface IUpdateInventoryParameters extends IStandardParameters {
     listing_id: number,
     products: any,
@@ -24,15 +38,16 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
 
 //methods
 /**
- * Get the inventory for a listing [developer preview - may be unstable]
+ * Get the inventory for a listing
  */
-function getInventory <TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
+function getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
     return request<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET", options);
 }
+
 /**
- * Update the inventory for a listing [developer preview - may be unstable]
+ * Update the inventory for a listing
  */
-function updateInventory <TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
+function updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
     return request<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT", options);
 }
 

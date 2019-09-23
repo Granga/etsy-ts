@@ -2,15 +2,45 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IBillCharge {
+    /**
+     * The numeric ID for this bill charge record.
+     */
     bill_charge_id: number;
+    /**
+     * Creation time, in epoch seconds.
+     */
     creation_tsz: number;
+    /**
+     * The name of the type of charge.
+     */
     type: string;
+    /**
+     * The Listing, Transaction or Shipping Label ID to which the charge applies.
+     */
     type_id: number;
+    /**
+     * The user's numeric ID.
+     */
     user_id: number;
+    /**
+     * The amount charged.
+     */
     amount: number;
+    /**
+     * The currency of the charge.
+     */
     currency_code: string;
+    /**
+     * Year that the charge was created.
+     */
     creation_year: number;
+    /**
+     * Month that the charge was created.
+     */
     creation_month: number;
+    /**
+     * Time when charge was last modified.
+     */
     last_modified_tsz: number;
 }
 export interface IGetUserChargesMetadataParameters extends IStandardParameters {

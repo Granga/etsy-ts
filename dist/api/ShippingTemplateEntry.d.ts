@@ -2,13 +2,37 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShippingTemplateEntry {
+    /**
+     * The numeric ID of this shipping template entry.
+     */
     shipping_template_entry_id: number;
+    /**
+     * The numeric ID of the template this entry belongs to.
+     */
     shipping_template_id: number;
+    /**
+     * The currency code for the prices in this template entry.
+     */
     currency_code: string;
+    /**
+     * The numeric ID of the country from which the listing ships.
+     */
     origin_country_id: number;
+    /**
+     * The numeric ID of the country to which the listing ships (optional).  If missing, these fees apply to all destinations.
+     */
     destination_country_id: number;
+    /**
+     * The numeric ID of the region to which the listing ships (optional).  Regions are collections of countries.
+     */
     destination_region_id: number;
+    /**
+     * The shipping fee for this item, if shipped alone.
+     */
     primary_cost: number;
+    /**
+     * The shipping fee for this item, if shipped with another item.
+     */
     secondary_cost: number;
 }
 export interface ICreateShippingTemplateEntryParameters extends IStandardParameters {

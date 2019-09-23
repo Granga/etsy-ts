@@ -2,12 +2,33 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShippingTemplate {
+    /**
+     * The numeric ID of this shipping template.
+     */
     shipping_template_id: number;
+    /**
+     * The name of this shipping template.
+     */
     title: string;
+    /**
+     * The numeric ID of the user who owns this shipping template.
+     */
     user_id: number;
+    /**
+     * The minimum number of days for processing the listing.
+     */
     min_processing_days: number;
+    /**
+     * The maximum number of days for processing the listing.
+     */
     max_processing_days: number;
+    /**
+     * Translated display label for processing days.
+     */
     processing_days_display_label: string;
+    /**
+     * The numeric ID of the country from which the listing ships.
+     */
     origin_country_id: number;
 }
 export interface ICreateShippingTemplateParameters extends IStandardParameters {

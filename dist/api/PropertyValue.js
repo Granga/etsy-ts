@@ -3,25 +3,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("../client/client");
 //methods
 /**
- * Get all of the attributes for a listing [developer preview - may be unstable]
+ * Get all of the attributes for a listing
  */
 function getAttributes(parameters, options) {
     return client_1.request("/listings/:listing_id/attributes", parameters, "GET", options);
 }
 /**
- * Get an attribute for a listing [developer preview - may be unstable]
+ * Get an attribute for a listing
  */
 function getAttribute(parameters, options) {
     return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "GET", options);
 }
 /**
- * Update or populate an attribute for a listing [developer preview - may be unstable]
+ * Update or populate an attribute for a listing
  */
 function updateAttribute(parameters, options) {
     return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "PUT", options);
 }
 /**
- * Delete an attribute for a listing [developer preview - may be unstable]
+ * Delete an attribute for a listing
  */
 function deleteAttribute(parameters, options) {
     return client_1.request("/listings/:listing_id/attributes/:property_id", parameters, "DELETE", options);

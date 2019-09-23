@@ -2,10 +2,25 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITeam {
+    /**
+     * The team's numeric ID.
+     */
     group_id: number;
+    /**
+     * The team's name.
+     */
     name: string;
+    /**
+     * The date and time the team was created in Epoch seconds.
+     */
     create_date: number;
+    /**
+     * The date and time the team was last updated in Epoch seconds.
+     */
     update_date: number;
+    /**
+     * A list of tags describing the team.
+     */
     tags: string[];
 }
 export interface IFindAllTeamsParameters extends IStandardParameters {

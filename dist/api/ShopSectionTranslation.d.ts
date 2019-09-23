@@ -2,8 +2,17 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface IShopSectionTranslation {
+    /**
+     * The numeric ID for the ShopSection.
+     */
     shop_section_id: number;
+    /**
+     * The IETF language tag (e.g. 'fr') for the language of this translation.
+     */
     language: string;
+    /**
+     * Translation of title of ShopSection.
+     */
     title: string;
 }
 export interface IGetShopSectionTranslationParameters extends IStandardParameters {

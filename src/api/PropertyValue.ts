@@ -4,11 +4,29 @@ import {IStandardResponse} from "../client/IStandardResponse";
 
 //fields
 export interface IPropertyValue {
+    /**
+     * The numeric ID of this property.
+     */
     property_id: number,
+    /**
+     * The name of the property, in the requested locale language.
+     */
     property_name: string,
+    /**
+     * The numeric ID of the scale (if any).
+     */
     scale_id: number,
-    scale_label: string,
+    /**
+     * The label used to describe the chosen scale (if any).
+     */
+    scale_name: string,
+    /**
+     * The numeric IDs of the values.
+     */
     value_ids: number[],
+    /**
+     * The literal values of the value.
+     */
     values: string[]
 }
 
@@ -16,10 +34,12 @@ export interface IPropertyValue {
 export interface IGetAttributesParameters extends IStandardParameters {
     listing_id: number
 }
+
 export interface IGetAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number
 }
+
 export interface IUpdateAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number,
@@ -27,6 +47,7 @@ export interface IUpdateAttributeParameters extends IStandardParameters {
     values?: string[],
     scale_id?: number
 }
+
 export interface IDeleteAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number
@@ -34,27 +55,30 @@ export interface IDeleteAttributeParameters extends IStandardParameters {
 
 //methods
 /**
- * Get all of the attributes for a listing [developer preview - may be unstable]
+ * Get all of the attributes for a listing
  */
-function getAttributes <TResult>(parameters: IGetAttributesParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributesParameters, TResult>> {
+function getAttributes<TResult>(parameters: IGetAttributesParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributesParameters, TResult>> {
     return request<IGetAttributesParameters, TResult>("/listings/:listing_id/attributes", parameters, "GET", options);
 }
+
 /**
- * Get an attribute for a listing [developer preview - may be unstable]
+ * Get an attribute for a listing
  */
-function getAttribute <TResult>(parameters: IGetAttributeParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributeParameters, TResult>> {
+function getAttribute<TResult>(parameters: IGetAttributeParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributeParameters, TResult>> {
     return request<IGetAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "GET", options);
 }
+
 /**
- * Update or populate an attribute for a listing [developer preview - may be unstable]
+ * Update or populate an attribute for a listing
  */
-function updateAttribute <TResult>(parameters: IUpdateAttributeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>> {
+function updateAttribute<TResult>(parameters: IUpdateAttributeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>> {
     return request<IUpdateAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "PUT", options);
 }
+
 /**
- * Delete an attribute for a listing [developer preview - may be unstable]
+ * Delete an attribute for a listing
  */
-function deleteAttribute <TResult>(parameters: IDeleteAttributeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>> {
+function deleteAttribute<TResult>(parameters: IDeleteAttributeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>> {
     return request<IDeleteAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "DELETE", options);
 }
 

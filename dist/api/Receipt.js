@@ -33,12 +33,6 @@ function findAllShopReceiptsByStatus(parameters, options) {
     return client_1.request("/shops/:shop_id/receipts/:status", parameters, "GET", options);
 }
 /**
- * Retrieves a set of open Local Delivery Receipt objects associated to a Shop.
- */
-function findAllOpenLocalDeliveryReceipts(parameters, options) {
-    return client_1.request("/shops/:shop_id/receipts/local-delivery", parameters, "GET", options);
-}
-/**
  * Searches the set of Receipt objects associated to a Shop by a query
  */
 function searchAllShopReceipts(parameters, options) {
@@ -56,7 +50,6 @@ exports.Receipt = {
     findAllShopReceipts: findAllShopReceipts,
     submitTracking: submitTracking,
     findAllShopReceiptsByStatus: findAllShopReceiptsByStatus,
-    findAllOpenLocalDeliveryReceipts: findAllOpenLocalDeliveryReceipts,
     searchAllShopReceipts: searchAllShopReceipts,
     findAllUserBuyerReceipts: findAllUserBuyerReceipts
 };

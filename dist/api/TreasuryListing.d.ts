@@ -2,7 +2,13 @@ import { IOptions } from "../client/client";
 import { IStandardParameters } from "../client/IStandardParameters";
 import { IStandardResponse } from "../client/IStandardResponse";
 export interface ITreasuryListing {
+    /**
+     * The detailed fields of the listing
+     */
     data: any;
+    /**
+     * Time the listing was added to this Treasury, in epoch seconds
+     */
     creation_tsz: number;
 }
 export interface IAddTreasuryListingParameters extends IStandardParameters {
