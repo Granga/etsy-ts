@@ -1,7 +1,5 @@
 # etsy-ts
 
-Still under active development.
-
 Most of the code in this package is _generated_ by [etsy-api-scrapper](https://github.com/Granga/etsy-api-scraper).
 
 See [Etsy API reference](https://www.etsy.com/developers/documentation/getting_started/api_basics#reference) for detailed info on methods and types you can find in this wrapper.
@@ -17,28 +15,25 @@ import * as fetch from "node-fetch";
 //for NodeJS add fetch on global
 global["fetch"] = fetch;
 
-//get user, then user's shop, then shop's listings
-User.getUser<IUser>({
-    //add your api_key here
-    user_id: ["rptr"]
-}).then(response => {
-    let user = response.results[0];
-    console.log("User:", user);
+(async () => {
+    //get user, then user's shop, then shop's listings
+    let user = (await User.getUser<IUser>({
+        //add your api_key here
+        user_id: ["rptr"]
+    })).results[0];
 
-    return Shop.findAllUserShops<IShop>({
+    let shop = (await Shop.findAllUserShops<IShop>({
         user_id: user.login_name
-    });
-}).then(response => {
-    let shop = response.results[0];
-    console.log("Shop:", shop);
+    })).results[0];
 
-    return Listing.findAllShopListingsActive<IListing>({
+    let listings = (await Listing.findAllShopListingsActive<IListing>({
         shop_id: shop.shop_id
-    });
-}).then(response => {
-    let listings = response.results;
+    })).results;
+
+    console.log("User:", user);
+    console.log("Shop:", shop);
     console.log("Listings:", listings);
-}).catch(e => console.error(e));
+})();
 ```
 
 ## `fetch` in global scope is required
