@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IUser {
@@ -49,11 +49,9 @@ export interface IFindAllUsersParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IGetUserParameters extends IStandardParameters {
     user_id: (string | number)[]
 }
-
 export interface IFindAllUsersForTeamParameters extends IStandardParameters {
     team_id: number,
     status?: "active" | "invited" | "pending",
@@ -61,14 +59,12 @@ export interface IFindAllUsersForTeamParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IGetCirclesContainingUserParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetConnectedUserParameters extends IStandardParameters {
     user_id: string | number,
     to_user_id: string | number,
@@ -76,19 +72,16 @@ export interface IGetConnectedUserParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IUnconnectUsersParameters extends IStandardParameters {
     user_id: string | number,
     to_user_id: string | number
 }
-
 export interface IGetConnectedUsersParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IConnectUsersParameters extends IStandardParameters {
     user_id: string | number,
     to_user_id: string | number

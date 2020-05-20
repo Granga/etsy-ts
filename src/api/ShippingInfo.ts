@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShippingInfo {
@@ -50,7 +50,6 @@ export interface IShippingInfo {
 export interface IFindAllListingShippingProfileEntriesParameters extends IStandardParameters {
 
 }
-
 export interface ICreateShippingInfoParameters extends IStandardParameters {
     destination_country_id?: number,
     primary_cost: number,
@@ -58,11 +57,9 @@ export interface ICreateShippingInfoParameters extends IStandardParameters {
     region_id?: number,
     listing_id: number
 }
-
 export interface IGetShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number[]
 }
-
 export interface IUpdateShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number,
     destination_country_id?: number,
@@ -71,7 +68,6 @@ export interface IUpdateShippingInfoParameters extends IStandardParameters {
     region_id?: number,
     listing_id?: number
 }
-
 export interface IDeleteShippingInfoParameters extends IStandardParameters {
     shipping_info_id: number
 }

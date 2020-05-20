@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface ITreasuryListing {
@@ -19,7 +19,6 @@ export interface IAddTreasuryListingParameters extends IStandardParameters {
     treasury_key: string,
     listing_id: number
 }
-
 export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     treasury_key: string,
     listing_id: number

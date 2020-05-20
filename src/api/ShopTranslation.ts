@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShopTranslation {
@@ -71,7 +71,6 @@ export interface IGetShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string
 }
-
 export interface ICreateShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string,
@@ -88,7 +87,6 @@ export interface ICreateShopTranslationParameters extends IStandardParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
-
 export interface IUpdateShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string,
@@ -105,7 +103,6 @@ export interface IUpdateShopTranslationParameters extends IStandardParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
-
 export interface IDeleteShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string

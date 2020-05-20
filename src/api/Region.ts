@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IRegion {
@@ -22,11 +22,9 @@ export interface IRegion {
 export interface IFindAllRegionParameters extends IStandardParameters {
 
 }
-
 export interface IGetRegionParameters extends IStandardParameters {
     region_id: number[]
 }
-
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 
 }

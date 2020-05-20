@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IReceipt {
@@ -157,6 +157,10 @@ export interface IReceipt {
      */
     adjusted_grandtotal: number,
     /**
+     * grand total after payment adjustments from the buyer's perspective
+     */
+    buyer_adjusted_grandtotal: number,
+    /**
      * Shipment information associated to this receipt.
      */
     shipments: any[]
@@ -166,13 +170,11 @@ export interface IReceipt {
 export interface IGetShopReceipt2Parameters extends IStandardParameters {
     receipt_id: number[]
 }
-
 export interface IUpdateReceiptParameters extends IStandardParameters {
     receipt_id: number,
     was_paid?: boolean,
     was_shipped?: boolean
 }
-
 export interface IFindAllShopReceiptsParameters extends IStandardParameters {
     shop_id: string | number,
     min_created?: number,
@@ -185,13 +187,11 @@ export interface IFindAllShopReceiptsParameters extends IStandardParameters {
     was_paid?: boolean,
     was_shipped?: boolean
 }
-
 export interface ISubmitTrackingParameters extends IStandardParameters {
     tracking_code: string,
     carrier_name: string,
     send_bcc?: boolean
 }
-
 export interface IFindAllShopReceiptsByStatusParameters extends IStandardParameters {
     shop_id: string | number,
     status: "open" | "unshipped" | "unpaid" | "completed" | "processing" | "all",
@@ -199,7 +199,6 @@ export interface IFindAllShopReceiptsByStatusParameters extends IStandardParamet
     offset?: number,
     page?: number
 }
-
 export interface ISearchAllShopReceiptsParameters extends IStandardParameters {
     shop_id: string | number,
     search_query: string,
@@ -207,7 +206,6 @@ export interface ISearchAllShopReceiptsParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,

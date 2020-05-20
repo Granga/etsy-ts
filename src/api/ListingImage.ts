@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IListingImage {
@@ -82,7 +82,6 @@ export interface IListingImage {
 export interface IFindAllListingImagesParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface IUploadListingImageParameters extends IStandardParameters {
     listing_id: number,
     listing_image_id?: number,
@@ -91,12 +90,10 @@ export interface IUploadListingImageParameters extends IStandardParameters {
     overwrite?: boolean,
     is_watermarked?: boolean
 }
-
 export interface IGetImageListingParameters extends IStandardParameters {
     listing_image_id: number[],
     listing_id: number
 }
-
 export interface IDeleteListingImageParameters extends IStandardParameters {
     listing_id: number,
     listing_image_id: number

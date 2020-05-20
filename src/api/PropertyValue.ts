@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IPropertyValue {
@@ -34,12 +34,10 @@ export interface IPropertyValue {
 export interface IGetAttributesParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface IGetAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number
 }
-
 export interface IUpdateAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number,
@@ -47,7 +45,6 @@ export interface IUpdateAttributeParameters extends IStandardParameters {
     values?: string[],
     scale_id?: number
 }
-
 export interface IDeleteAttributeParameters extends IStandardParameters {
     listing_id: number,
     property_id: number

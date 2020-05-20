@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface ICart {
@@ -88,7 +88,6 @@ export interface IGetAllUserCartsParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IAddToCartParameters extends IStandardParameters {
     user_id: string | number,
     listing_id: number,
@@ -96,25 +95,21 @@ export interface IAddToCartParameters extends IStandardParameters {
     selected_variations?: [any, any],
     personalization?: any
 }
-
 export interface IUpdateCartListingQuantityParameters extends IStandardParameters {
     user_id: string | number,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
-
 export interface IRemoveCartListingParameters extends IStandardParameters {
     user_id: string | number,
     listing_id: number,
     listing_customization_id?: number
 }
-
 export interface IGetUserCartParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: string | number
 }
-
 export interface IUpdateCartParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: string | number,
@@ -124,12 +119,10 @@ export interface IUpdateCartParameters extends IStandardParameters {
     shipping_option_id?: string,
     destination_zip?: string
 }
-
 export interface IDeleteCartParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: string | number
 }
-
 export interface IAddAndSelectShippingForApplePayParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: string | number,
@@ -139,7 +132,6 @@ export interface IAddAndSelectShippingForApplePayParameters extends IStandardPar
     zip: string,
     country_id: number
 }
-
 export interface ISaveListingForLaterParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: number,
@@ -147,12 +139,10 @@ export interface ISaveListingForLaterParameters extends IStandardParameters {
     listing_inventory_id?: number,
     listing_customization_id?: number
 }
-
 export interface IGetUserCartForShopParameters extends IStandardParameters {
     user_id: string | number,
     shop_id: string | number
 }
-
 export interface ICreateSingleListingCartParameters extends IStandardParameters {
     user_id: string | number,
     listing_id: number,

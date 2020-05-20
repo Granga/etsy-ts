@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IAvatar {
@@ -56,7 +56,6 @@ export interface IUploadAvatarParameters extends IStandardParameters {
     user_id: string | number,
     image?: string
 }
-
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number
 }

@@ -42,8 +42,6 @@ export * from "./api/PropertyValue";
 export * from "./api/Receipt";
 export * from "./api/ReceiptShipment";
 export * from "./api/Region";
-export * from "./api/Segment";
-export * from "./api/SegmentPoster";
 export * from "./api/ShippingInfo";
 export * from "./api/ShippingOption";
 export * from "./api/ShippingTemplate";

@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShop {
@@ -225,11 +225,9 @@ export interface IFindAllShopsParameters extends IStandardParameters {
     lon?: number,
     distance_max?: number
 }
-
 export interface IGetShopParameters extends IStandardParameters {
     shop_id: (string | number)[]
 }
-
 export interface IUpdateShopParameters extends IStandardParameters {
     shop_id: string | number,
     title?: string,
@@ -244,20 +242,16 @@ export interface IUpdateShopParameters extends IStandardParameters {
     policy_seller_info?: string,
     digital_sale_message?: string
 }
-
 export interface IUploadShopBannerParameters extends IStandardParameters {
     shop_id: string | number,
     image: any
 }
-
 export interface IDeleteShopBannerParameters extends IStandardParameters {
     shop_id: string | number
 }
-
 export interface IGetListingShopParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface IFindAllUserShopsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,

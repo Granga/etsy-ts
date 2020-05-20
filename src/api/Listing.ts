@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IListing {
@@ -17,7 +17,8 @@ export interface IListing {
      */
     user_id: number,
     /**
-     * The numeric ID of the listing's category.
+     @deprecated
+     * Deprecated: The category parameter is no longer supported—you must pass a buyer taxonomy id instead.
      */
     category_id: number,
     /**
@@ -64,14 +65,6 @@ export interface IListing {
      * A list of tags for the item. A tag is valid if it does not match the pattern: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u
      */
     tags: string[],
-    /**
-     * Name of the category of the item and the names of categories in that hierarchy.
-     */
-    category_path: string[],
-    /**
-     * The numeric ID of each category in the this Listing's category hierarchy.
-     */
-    category_path_ids: number[],
     /**
      * The seller taxonomy id of the listing.
      */
@@ -140,7 +133,7 @@ export interface IListing {
     /**
      * When was the item made.
      */
-    when_made: "made_to_order" | "2010_2019" | "2000_2009" | "before_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
+    when_made: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     /**
      * How much the item weighs.
      */
@@ -223,6 +216,7 @@ export interface ICreateListingParameters extends IStandardParameters {
     price: number,
     materials?: string[],
     shipping_template_id?: number,
+    taxonomy_id: number,
     shop_section_id?: number,
     image_ids?: number[],
     is_customizable?: boolean,
@@ -231,28 +225,23 @@ export interface ICreateListingParameters extends IStandardParameters {
     state?: "active" | "draft",
     processing_min?: number,
     processing_max?: number,
-    category_id?: number,
-    taxonomy_id?: number,
     tags?: string[],
     who_made: "i_did" | "collective" | "someone_else",
     is_supply: boolean,
-    when_made: "made_to_order" | "2010_2019" | "2000_2009" | "before_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
+    when_made: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified",
     occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
     style?: string[]
 }
-
 export interface IFindAllFeaturedListingsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
     page?: number,
     region?: string
 }
-
 export interface IGetListingParameters extends IStandardParameters {
     listing_id: number[]
 }
-
 export interface IUpdateListingParameters extends IStandardParameters {
     listing_id: number,
     title?: string,
@@ -271,12 +260,11 @@ export interface IUpdateListingParameters extends IStandardParameters {
     item_weight_unit?: string,
     item_dimensions_unit?: string,
     non_taxable?: boolean,
-    category_id?: number,
     taxonomy_id?: number,
     tags?: string[],
     who_made?: "i_did" | "collective" | "someone_else",
     is_supply?: boolean,
-    when_made?: "made_to_order" | "2010_2019" | "2000_2009" | "before_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
+    when_made?: "made_to_order" | "2020_2020" | "2010_2019" | "2001_2009" | "before_2001" | "2000_2000" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified",
     occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
     style?: string[],
@@ -284,11 +272,9 @@ export interface IUpdateListingParameters extends IStandardParameters {
     processing_max?: number,
     featured_rank?: number
 }
-
 export interface IDeleteListingParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface IFindAllListingActiveParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -301,7 +287,7 @@ export interface IFindAllListingActiveParameters extends IStandardParameters {
     color?: string,
     color_accuracy?: number,
     tags?: string[],
-    category?: string,
+    taxonomy_id?: number,
     location?: string,
     lat?: number,
     lon?: number,
@@ -310,56 +296,31 @@ export interface IFindAllListingActiveParameters extends IStandardParameters {
     accepts_gift_cards?: boolean,
     translate_keywords?: boolean
 }
-
 export interface IGetInterestingListingsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetTrendingListingsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
-
-export interface IFindBrowseSegmentListingsParameters extends IStandardParameters {
-    path: string,
-    limit?: number,
-    offset?: number,
-    page?: number,
-    keywords?: string,
-    sort_on?: "created" | "price" | "score",
-    sort_order?: "up" | "down",
-    min_price?: number,
-    max_price?: number,
-    ship_to?: string,
-    location?: string,
-    lat?: number,
-    lon?: number,
-    geo_level?: "city" | "state" | "country",
-    accepts_gift_cards?: boolean
-}
-
 export interface IFindAllListingsForFeaturedTreasuryIdParameters extends IStandardParameters {
     featured_treasury_id: number
 }
-
 export interface IFindAllActiveListingsForFeaturedTreasuryIdParameters extends IStandardParameters {
     featured_treasury_id: number
 }
-
 export interface IFindAllCurrentFeaturedListingsParameters extends IStandardParameters {
     region?: string
 }
-
 export interface IFindAllReceiptListingsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
     page?: number,
     receipt_id: number
 }
-
 export interface IFindAllShopListingsActiveParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -373,49 +334,42 @@ export interface IFindAllShopListingsActiveParameters extends IStandardParameter
     color?: string,
     color_accuracy?: number,
     tags?: string[],
-    category?: string,
+    taxonomy_id?: number,
     translate_keywords?: boolean,
     include_private?: boolean
 }
-
 export interface IFindAllShopListingsDraftParameters extends IStandardParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllShopListingsExpiredParameters extends IStandardParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetShopListingExpiredParameters extends IStandardParameters {
     shop_id: string | number,
     listing_id: number
 }
-
 export interface IFindAllShopListingsFeaturedParameters extends IStandardParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllShopListingsInactiveParameters extends IStandardParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetShopListingInactiveParameters extends IStandardParameters {
     shop_id: string | number,
     listing_id: number
 }
-
 export interface IFindAllShopSectionListingsParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -423,7 +377,6 @@ export interface IFindAllShopSectionListingsParameters extends IStandardParamete
     shop_id: string | number,
     shop_section_id: number
 }
-
 export interface IFindAllShopSectionListingsActiveParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -433,7 +386,6 @@ export interface IFindAllShopSectionListingsActiveParameters extends IStandardPa
     sort_on?: "created" | "price",
     sort_order?: "up" | "down"
 }
-
 export interface IFindAllCartListingsParameters extends IStandardParameters {
     user_id: string | number,
     cart_id: string | number
@@ -494,13 +446,6 @@ function getInterestingListings<TResult>(parameters: IGetInterestingListingsPara
  */
 function getTrendingListings<TResult>(parameters: IGetTrendingListingsParameters, options?: IOptions): Promise<IStandardResponse<IGetTrendingListingsParameters, TResult>> {
     return request<IGetTrendingListingsParameters, TResult>("/listings/trending", parameters, "GET", options);
-}
-
-/**
- * Find Listings for a Segment by Segment path. NOTE: Offset must be an integer multiple of limit.
- */
-function findBrowseSegmentListings<TResult>(parameters: IFindBrowseSegmentListingsParameters, options?: IOptions): Promise<IStandardResponse<IFindBrowseSegmentListingsParameters, TResult>> {
-    return request<IFindBrowseSegmentListingsParameters, TResult>("/segments/listings", parameters, "GET", options);
 }
 
 /**
@@ -610,7 +555,6 @@ export const Listing = {
     findAllListingActive,
     getInterestingListings,
     getTrendingListings,
-    findBrowseSegmentListings,
     findAllListingsForFeaturedTreasuryId,
     findAllActiveListingsForFeaturedTreasuryId,
     findAllCurrentFeaturedListings,

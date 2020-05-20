@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IPaymentTemplate {
@@ -78,7 +78,6 @@ export interface IPaymentTemplate {
 export interface IFindShopPaymentTemplatesParameters extends IStandardParameters {
     shop_id: string | number
 }
-
 export interface ICreateShopPaymentTemplateParameters extends IStandardParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -95,7 +94,6 @@ export interface ICreateShopPaymentTemplateParameters extends IStandardParameter
     zip?: string,
     country_id?: number
 }
-
 export interface IUpdateShopPaymentTemplateParameters extends IStandardParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -113,7 +111,6 @@ export interface IUpdateShopPaymentTemplateParameters extends IStandardParameter
     country_id?: number,
     payment_template_id: number
 }
-
 export interface IFindAllUserPaymentTemplatesParameters extends IStandardParameters {
     user_id: string | number
 }

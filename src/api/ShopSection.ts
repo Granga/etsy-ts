@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShopSection {
@@ -30,25 +30,21 @@ export interface IShopSection {
 export interface IFindAllShopSectionsParameters extends IStandardParameters {
     shop_id: string | number
 }
-
 export interface ICreateShopSectionParameters extends IStandardParameters {
     shop_id: string | number,
     title?: string,
     user_id?: number
 }
-
 export interface IGetShopSectionParameters extends IStandardParameters {
     shop_id: string | number,
     shop_section_id: number[]
 }
-
 export interface IUpdateShopSectionParameters extends IStandardParameters {
     shop_id: string | number,
     shop_section_id: number,
     title?: string,
     user_id?: number
 }
-
 export interface IDeleteShopSectionParameters extends IStandardParameters {
     shop_id: string | number,
     shop_section_id: number

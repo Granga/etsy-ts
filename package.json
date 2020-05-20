@@ -6,9 +6,9 @@
   "types": "./dist/index.d.ts",
   "dependencies": {},
   "devDependencies": {
-    "@types/node-fetch": "^1.6.7",
-    "node-fetch": "^1.6.3",
-    "typescript": "^2.2.1"
+    "@types/node-fetch": "^2.5.7",
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.9.3"
   },
   "scripts": {
     "test": "node dist/test/test.js",

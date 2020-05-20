@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IBillCharge {
@@ -50,7 +50,6 @@ export interface IBillCharge {
 export interface IGetUserChargesMetadataParameters extends IStandardParameters {
     user_id: string | number
 }
-
 export interface IFindAllUserChargesParameters extends IStandardParameters {
     limit?: number,
     offset?: number,

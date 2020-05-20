@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IListingTranslation {
@@ -31,7 +31,6 @@ export interface IGetListingTranslationParameters extends IStandardParameters {
     listing_id: number,
     language: string
 }
-
 export interface ICreateListingTranslationParameters extends IStandardParameters {
     listing_id: number,
     language: string,
@@ -39,7 +38,6 @@ export interface ICreateListingTranslationParameters extends IStandardParameters
     description?: string,
     tags?: string[]
 }
-
 export interface IUpdateListingTranslationParameters extends IStandardParameters {
     listing_id: number,
     language: string,
@@ -47,7 +45,6 @@ export interface IUpdateListingTranslationParameters extends IStandardParameters
     description?: string,
     tags?: string[]
 }
-
 export interface IDeleteListingTranslationParameters extends IStandardParameters {
     listing_id: number,
     language: string

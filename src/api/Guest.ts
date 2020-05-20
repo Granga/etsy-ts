@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IGuest {
@@ -18,15 +18,12 @@ export interface IGuest {
 export interface IGetGuestParameters extends IStandardParameters {
     guest_id: any
 }
-
 export interface IGenerateGuestParameters extends IStandardParameters {
 
 }
-
 export interface IClaimGuestParameters extends IStandardParameters {
     guest_id: any
 }
-
 export interface IMergeGuestParameters extends IStandardParameters {
     guest_id: any,
     target_guest_id: any

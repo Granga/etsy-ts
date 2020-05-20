@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IFeedback {
@@ -65,35 +65,30 @@ export interface IFindAllUserFeedbackAsAuthorParameters extends IStandardParamet
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserFeedbackAsBuyerParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserFeedbackAsSellerParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserFeedbackAsSubjectParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllFeedbackFromBuyersParameters extends IStandardParameters {
     user_id?: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllFeedbackFromSellersParameters extends IStandardParameters {
     user_id?: string | number,
     limit?: number,

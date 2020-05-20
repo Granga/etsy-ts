@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IGuestCart {
@@ -85,7 +85,6 @@ export interface IGuestCart {
 export interface IFindAllGuestCartsParameters extends IStandardParameters {
     guest_id: any
 }
-
 export interface IAddToGuestCartParameters extends IStandardParameters {
     guest_id: any,
     listing_id: number,
@@ -93,25 +92,21 @@ export interface IAddToGuestCartParameters extends IStandardParameters {
     selected_variations?: [any, any],
     personalization?: any
 }
-
 export interface IUpdateGuestCartListingQuantityParameters extends IStandardParameters {
     guest_id: any,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
-
 export interface IRemoveGuestCartListingParameters extends IStandardParameters {
     guest_id: any,
     listing_id: number,
     listing_customization_id?: number
 }
-
 export interface IFindGuestCartParameters extends IStandardParameters {
     guest_id: any,
     cart_id: string | number
 }
-
 export interface IUpdateGuestCartParameters extends IStandardParameters {
     guest_id: any,
     cart_id: string | number,
@@ -121,7 +116,6 @@ export interface IUpdateGuestCartParameters extends IStandardParameters {
     shipping_option_id?: string,
     destination_zip?: string
 }
-
 export interface IDeleteGuestCartParameters extends IStandardParameters {
     guest_id: any,
     cart_id: string | number

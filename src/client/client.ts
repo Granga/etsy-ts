@@ -1,4 +1,4 @@
-import {IStandardResponse} from "./IStandardResponse";
+import { IStandardResponse } from "./IStandardResponse";
 
 export interface IOptions {
     baseUrl?: string,

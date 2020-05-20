@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShippingUpgrade {
@@ -46,7 +46,6 @@ export interface IShippingUpgrade {
 export interface IGetListingShippingUpgradesParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface ICreateListingShippingUpgradeParameters extends IStandardParameters {
     listing_id: number,
     type: number,
@@ -54,7 +53,6 @@ export interface ICreateListingShippingUpgradeParameters extends IStandardParame
     price: number,
     secondary_price: number
 }
-
 export interface IUpdateListingShippingUpgradeParameters extends IStandardParameters {
     listing_id: number,
     value_id: number,
@@ -62,17 +60,14 @@ export interface IUpdateListingShippingUpgradeParameters extends IStandardParame
     price: number,
     secondary_price: number
 }
-
 export interface IDeleteListingShippingUpgradeParameters extends IStandardParameters {
     listing_id: number,
     value_id: number,
     type: number
 }
-
 export interface IFindAllShippingTemplateUpgradesParameters extends IStandardParameters {
     shipping_template_id: number
 }
-
 export interface ICreateShippingTemplateUpgradeParameters extends IStandardParameters {
     shipping_template_id: number,
     type: number,
@@ -80,7 +75,6 @@ export interface ICreateShippingTemplateUpgradeParameters extends IStandardParam
     price: number,
     secondary_price: number
 }
-
 export interface IUpdateShippingTemplateUpgradeParameters extends IStandardParameters {
     shipping_template_id: number,
     value_id: number,
@@ -88,7 +82,6 @@ export interface IUpdateShippingTemplateUpgradeParameters extends IStandardParam
     price: number,
     secondary_price: number
 }
-
 export interface IDeleteShippingTemplateUpgradeParameters extends IStandardParameters {
     shipping_template_id: number,
     value_id: number,

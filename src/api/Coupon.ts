@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface ICoupon {
@@ -54,7 +54,6 @@ export interface ICoupon {
 export interface IFindAllShopCouponsParameters extends IStandardParameters {
     shop_id: string | number
 }
-
 export interface ICreateCouponParameters extends IStandardParameters {
     shop_id: string | number,
     coupon_code: string,
@@ -67,18 +66,15 @@ export interface ICreateCouponParameters extends IStandardParameters {
     minimum_purchase_price?: string,
     expiration_date?: number
 }
-
 export interface IFindCouponParameters extends IStandardParameters {
     shop_id: string | number,
     coupon_id: number
 }
-
 export interface IUpdateCouponParameters extends IStandardParameters {
     shop_id: string | number,
     coupon_id: number,
     seller_active?: boolean
 }
-
 export interface IDeleteCouponParameters extends IStandardParameters {
     shop_id: string | number,
     coupon_id: number

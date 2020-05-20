@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IPaymentAdjustment {
@@ -61,17 +61,14 @@ export interface IFindPaymentAdjustmentsParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindPaymentAdjustmentParameters extends IStandardParameters {
     payment_id: number,
     payment_adjustment_id: number
 }
-
 export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
-
 export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]

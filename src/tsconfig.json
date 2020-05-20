@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
-        "outDir": "../dist",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "es5",
-        "preserveConstEnums": true,
-        "declaration": true,
-        "sourceMap": false,
-        "lib": [
-            "dom",
-            "es2015"
-        ]
-    },
-    "compileOnSave": false
+  "compilerOptions": {
+    "outDir": "../dist",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "preserveConstEnums": true,
+    "declaration": true,
+    "sourceMap": false,
+    "lib": [
+      "dom",
+      "es2015"
+    ]
+  },
+  "compileOnSave": false
 }

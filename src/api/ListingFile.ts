@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IListingFile {
@@ -42,7 +42,6 @@ export interface IListingFile {
 export interface IFindAllListingFilesParameters extends IStandardParameters {
     listing_id: number
 }
-
 export interface IUploadListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id?: number,
@@ -50,12 +49,10 @@ export interface IUploadListingFileParameters extends IStandardParameters {
     name?: string,
     rank?: number
 }
-
 export interface IFindListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id: number
 }
-
 export interface IDeleteListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id: number

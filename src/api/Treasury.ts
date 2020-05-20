@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface ITreasury {
@@ -87,15 +87,12 @@ export interface IFindAllTreasuriesParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IGetTreasuryParameters extends IStandardParameters {
     treasury_key: string
 }
-
 export interface IDeleteTreasuryParameters extends IStandardParameters {
 
 }
-
 export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
     user_id: string | number,
     sort_on?: "hotness" | "created",

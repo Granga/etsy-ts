@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IUserAddress {
@@ -57,7 +57,6 @@ export interface IFindAllUserAddressesParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface ICreateUserAddressParameters extends IStandardParameters {
     user_id: string | number,
     name: string,
@@ -68,11 +67,9 @@ export interface ICreateUserAddressParameters extends IStandardParameters {
     zip: string,
     country_id: number
 }
-
 export interface IGetUserAddressParameters extends IStandardParameters {
     user_address_id: number[]
 }
-
 export interface IDeleteUserAddressParameters extends IStandardParameters {
     user_address_id: number
 }

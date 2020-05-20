@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface ILedgerEntry {
@@ -51,7 +51,6 @@ export interface IFindLedgerEntriesParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number

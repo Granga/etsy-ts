@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IFavoriteUser {
@@ -32,24 +32,20 @@ export interface IFindAllUserFavoredByParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserFavoriteUsersParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindUserFavoriteUsersParameters extends IStandardParameters {
     user_id: string | number,
     target_user_id: string | number
 }
-
 export interface ICreateUserFavoriteUsersParameters extends IStandardParameters {
     user_id: string | number,
     target_user_id: string | number
 }
-
 export interface IDeleteUserFavoriteUsersParameters extends IStandardParameters {
     user_id: string | number,
     target_user_id: string | number

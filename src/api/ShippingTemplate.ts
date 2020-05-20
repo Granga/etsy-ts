@@ -1,6 +1,6 @@
-import {IOptions, request} from "../client/client";
-import {IStandardParameters} from "../client/IStandardParameters";
-import {IStandardResponse} from "../client/IStandardResponse";
+import { IOptions, request } from "../client/client";
+import { IStandardParameters } from "../client/IStandardParameters";
+import { IStandardResponse } from "../client/IStandardResponse";
 
 //fields
 export interface IShippingTemplate {
@@ -45,11 +45,9 @@ export interface ICreateShippingTemplateParameters extends IStandardParameters {
     min_processing_days?: number,
     max_processing_days?: number
 }
-
 export interface IGetShippingTemplateParameters extends IStandardParameters {
     shipping_template_id: number[]
 }
-
 export interface IUpdateShippingTemplateParameters extends IStandardParameters {
     shipping_template_id: number,
     title?: string,
@@ -57,18 +55,15 @@ export interface IUpdateShippingTemplateParameters extends IStandardParameters {
     min_processing_days?: number,
     max_processing_days?: number
 }
-
 export interface IDeleteShippingTemplateParameters extends IStandardParameters {
     shipping_template_id: number
 }
-
 export interface IFindAllShippingTemplateEntriesParameters extends IStandardParameters {
     shipping_template_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserShippingProfilesParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
