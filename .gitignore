@@ -19,7 +19,7 @@ dist/test
 
 dist/**/*.map
 
-dist
-
 # Optional npm cache directory
 .npm
+
+tsconfig.tsbuildinfo
