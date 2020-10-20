@@ -1,3 +1,4 @@
+import axios, { Method } from "axios";
 import { IStandardResponse } from "./IStandardResponse";
 
 export interface IOptions {
@@ -10,7 +11,7 @@ const defaultOptions = {
     json: true
 };
 
-export async function request<TParameters, TResult>(uri: string, parameters: TParameters, method: string, options?: IOptions): Promise<IStandardResponse<TParameters, TResult>> {
+export async function request<TParameters, TResult>(uri: string, parameters: TParameters, method: Method, options?: IOptions): Promise<IStandardResponse<TParameters, TResult>> {
     options = {...defaultOptions, ...options};
     let url = options.baseUrl + fillUriPlaceholders(uri, parameters);
     let body;
@@ -28,10 +29,14 @@ export async function request<TParameters, TResult>(uri: string, parameters: TPa
             body = JSON.stringify(parameters);
     }
 
-    let response = await fetch(url, {method, body});
+    let response = (await axios({
+        method: method,
+        url: url,
+        data: body
+    }));
 
-    if (response.ok == true) {
-        return response.json() as Promise<IStandardResponse<TParameters, TResult>>;
+    if (response.status >= 200 && response.status < 300) {
+        return response.data as Promise<IStandardResponse<TParameters, TResult>>;
     }
     else {
         throw response.statusText;
@@ -47,7 +52,7 @@ function fillUriPlaceholders(uri: string, parameters: any) {
     return uri;
 }
 
-function encodePrameters(parameters) {
+function encodePrameters(parameters: any) {
     if (Object.keys(parameters).length > 0) {
         return Object.keys(parameters)
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
