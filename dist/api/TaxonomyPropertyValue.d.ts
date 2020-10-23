@@ -20,4 +20,5 @@ export interface ITaxonomyPropertyValue {
      */
     equal_to: number[];
 }
-export declare const TaxonomyPropertyValue: {};
+export declare class TaxonomyPropertyValue {
+}

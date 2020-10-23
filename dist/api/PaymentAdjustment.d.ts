@@ -69,26 +69,21 @@ export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters ex
     shop_id: string | number;
     ledger_entry_id: number[];
 }
-/**
- * Get a Payment Adjustments from a Payment Id
- */
-declare function findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
-/**
- * Get an Etsy Payments Transaction Adjustment
- */
-declare function findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
-/**
- * Get a Payment Adjustment from a Ledger Entry ID, if applicable
- */
-declare function findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
-/**
- * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
- */
-declare function findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>;
-export declare const PaymentAdjustment: {
-    findPaymentAdjustments: typeof findPaymentAdjustments;
-    findPaymentAdjustment: typeof findPaymentAdjustment;
-    findPaymentAdjustmentForLedgerEntry: typeof findPaymentAdjustmentForLedgerEntry;
-    findPaymentAdjustmentForPaymentAccountLedgerEntry: typeof findPaymentAdjustmentForPaymentAccountLedgerEntry;
-};
-export {};
+export declare class PaymentAdjustment {
+    /**
+     * Get a Payment Adjustments from a Payment Id
+     */
+    static findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>;
+    /**
+     * Get an Etsy Payments Transaction Adjustment
+     */
+    static findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>;
+    /**
+     * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+     */
+    static findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>;
+    /**
+     * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
+     */
+    static findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>;
+}

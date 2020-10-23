@@ -46,31 +46,25 @@ export interface IDeleteUserFavoriteUsersParameters extends IStandardParameters 
     user_id: string | number;
     target_user_id: string | number;
 }
-/**
- * Retrieves a set of FavoriteUser objects associated to a User.
- */
-declare function findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFavoredByParameters, TResult>>;
-/**
- * Finds all favorite users for a user
- */
-declare function findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFavoriteUsersParameters, TResult>>;
-/**
- * Finds a favorite user for a user
- */
-declare function findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindUserFavoriteUsersParameters, TResult>>;
-/**
- * Creates a new favorite listing for a user
- */
-declare function createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserFavoriteUsersParameters, TResult>>;
-/**
- * Delete a favorite listing for a user
- */
-declare function deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserFavoriteUsersParameters, TResult>>;
-export declare const FavoriteUser: {
-    findAllUserFavoredBy: typeof findAllUserFavoredBy;
-    findAllUserFavoriteUsers: typeof findAllUserFavoriteUsers;
-    findUserFavoriteUsers: typeof findUserFavoriteUsers;
-    createUserFavoriteUsers: typeof createUserFavoriteUsers;
-    deleteUserFavoriteUsers: typeof deleteUserFavoriteUsers;
-};
-export {};
+export declare class FavoriteUser {
+    /**
+     * Retrieves a set of FavoriteUser objects associated to a User.
+     */
+    static findAllUserFavoredBy<TResult>(parameters: IFindAllUserFavoredByParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFavoredByParameters, TResult>>;
+    /**
+     * Finds all favorite users for a user
+     */
+    static findAllUserFavoriteUsers<TResult>(parameters: IFindAllUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Finds a favorite user for a user
+     */
+    static findUserFavoriteUsers<TResult>(parameters: IFindUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Creates a new favorite listing for a user
+     */
+    static createUserFavoriteUsers<TResult>(parameters: ICreateUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserFavoriteUsersParameters, TResult>>;
+    /**
+     * Delete a favorite listing for a user
+     */
+    static deleteUserFavoriteUsers<TResult>(parameters: IDeleteUserFavoriteUsersParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserFavoriteUsersParameters, TResult>>;
+}

@@ -41,4 +41,5 @@ export interface IStructuredPolicies {
      */
     privacy: any;
 }
-export declare const StructuredPolicies: {};
+export declare class StructuredPolicies {
+}

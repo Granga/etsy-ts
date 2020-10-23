@@ -43,11 +43,9 @@ export interface IFindPaymentAccountEntriesParameters extends IStandardParameter
     offset?: number;
     page?: number;
 }
-/**
- * Get a Shop Payment Account Ledger's Entries
- */
-declare function findPaymentAccountEntries<TResult>(parameters: IFindPaymentAccountEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>;
-export declare const PaymentAccountLedgerEntry: {
-    findPaymentAccountEntries: typeof findPaymentAccountEntries;
-};
-export {};
+export declare class PaymentAccountLedgerEntry {
+    /**
+     * Get a Shop Payment Account Ledger's Entries
+     */
+    static findPaymentAccountEntries<TResult>(parameters: IFindPaymentAccountEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>;
+}

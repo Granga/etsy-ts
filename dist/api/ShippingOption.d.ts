@@ -20,4 +20,5 @@ export interface IShippingOption {
      */
     currency_code: string;
 }
-export declare const ShippingOption: {};
+export declare class ShippingOption {
+}

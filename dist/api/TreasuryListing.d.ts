@@ -19,16 +19,13 @@ export interface IRemoveTreasuryListingParameters extends IStandardParameters {
     treasury_key: string;
     listing_id: number;
 }
-/**
- * Add listing to a Treasury
- */
-declare function addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
-/**
- * Remove listing from a Treasury
- */
-declare function removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
-export declare const TreasuryListing: {
-    addTreasuryListing: typeof addTreasuryListing;
-    removeTreasuryListing: typeof removeTreasuryListing;
-};
-export {};
+export declare class TreasuryListing {
+    /**
+     * Add listing to a Treasury
+     */
+    static addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>>;
+    /**
+     * Remove listing from a Treasury
+     */
+    static removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>;
+}

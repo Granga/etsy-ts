@@ -102,51 +102,50 @@ export interface IPayment {
 export interface IFindPaymentParameters extends IStandardParameters {
     payment_id: number[]
 }
+
 export interface IFindPaymentForLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindPaymentForPaymentAccountLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindShopPaymentByReceiptParameters extends IStandardParameters {
     receipt_id: number,
     shop_id: string | number
 }
 
-//methods
-/**
- * Get an Etsy Payments Transaction
- */
-function findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>> {
-    return request<IFindPaymentParameters, TResult>("/payments/:payment_id", parameters, "GET", options);
-}
+//methods class
+export class Payment {
 
-/**
- * Get a Payment from a Ledger Entry ID, if applicable
- */
-function findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>> {
-    return request<IFindPaymentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET", options);
-}
+    /**
+     * Get an Etsy Payments Transaction
+     */
+    static findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>> {
+        return request<IFindPaymentParameters, TResult>("/payments/:payment_id", parameters, "GET", options);
+    }
 
-/**
- * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
- */
-function findPaymentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>> {
-    return request<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>("/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment", parameters, "GET", options);
-}
+    /**
+     * Get a Payment from a Ledger Entry ID, if applicable
+     */
+    static findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>> {
+        return request<IFindPaymentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", parameters, "GET", options);
+    }
 
-/**
- * Get a Payment by Shop Receipt ID
- */
-function findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>> {
-    return request<IFindShopPaymentByReceiptParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET", options);
-}
+    /**
+     * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
+     */
+    static findPaymentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>> {
+        return request<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>("/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment", parameters, "GET", options);
+    }
 
-export const Payment = {
-    findPayment,
-    findPaymentForLedgerEntry,
-    findPaymentForPaymentAccountLedgerEntry,
-    findShopPaymentByReceipt
-};
+    /**
+     * Get a Payment by Shop Receipt ID
+     */
+    static findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>> {
+        return request<IFindShopPaymentByReceiptParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/payments", parameters, "GET", options);
+    }
+}

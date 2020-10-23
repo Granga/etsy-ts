@@ -56,23 +56,25 @@ export interface IUploadAvatarParameters extends IStandardParameters {
     user_id: string | number,
     image?: string
 }
+
 export interface IGetAvatarImgSrcParameters extends IStandardParameters {
     user_id: string | number
 }
 
-//methods
-/**
- * Upload a new user avatar image
- */
-function uploadAvatar<TResult>(parameters: IUploadAvatarParameters, options?: IOptions): Promise<IStandardResponse<IUploadAvatarParameters, TResult>> {
-    return request<IUploadAvatarParameters, TResult>("/users/:user_id/avatar", parameters, "POST", options);
-}
+//methods class
+export class Avatar {
 
-/**
- * Get avatar image source
- */
-function getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>> {
-    return request<IGetAvatarImgSrcParameters, TResult>("/users/:user_id/avatar/src", parameters, "GET", options);
-}
+    /**
+     * Upload a new user avatar image
+     */
+    static uploadAvatar<TResult>(parameters: IUploadAvatarParameters, options?: IOptions): Promise<IStandardResponse<IUploadAvatarParameters, TResult>> {
+        return request<IUploadAvatarParameters, TResult>("/users/:user_id/avatar", parameters, "POST", options);
+    }
 
-export const Avatar = {uploadAvatar, getAvatarImgSrc};
+    /**
+     * Get avatar image source
+     */
+    static getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>> {
+        return request<IGetAvatarImgSrcParameters, TResult>("/users/:user_id/avatar/src", parameters, "GET", options);
+    }
+}

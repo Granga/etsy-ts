@@ -20,26 +20,21 @@ export interface IDescribeWhenMadeEnumParameters extends IStandardParameters {
 }
 export interface IDescribeWhoMadeEnumParameters extends IStandardParameters {
 }
-/**
- * Describes the legal values for Listing.occasion.
- */
-declare function describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>;
-/**
- * Describes the legal values for Listing.recipient.
- */
-declare function describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>;
-/**
- * Describes the legal values for Listing.when_made.
- */
-declare function describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>;
-/**
- * Describes the legal values for Listing.who_made.
- */
-declare function describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>;
-export declare const DataType: {
-    describeOccasionEnum: typeof describeOccasionEnum;
-    describeRecipientEnum: typeof describeRecipientEnum;
-    describeWhenMadeEnum: typeof describeWhenMadeEnum;
-    describeWhoMadeEnum: typeof describeWhoMadeEnum;
-};
-export {};
+export declare class DataType {
+    /**
+     * Describes the legal values for Listing.occasion.
+     */
+    static describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>;
+    /**
+     * Describes the legal values for Listing.recipient.
+     */
+    static describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>;
+    /**
+     * Describes the legal values for Listing.when_made.
+     */
+    static describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>;
+    /**
+     * Describes the legal values for Listing.who_made.
+     */
+    static describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>;
+}

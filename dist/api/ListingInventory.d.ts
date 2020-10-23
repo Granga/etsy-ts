@@ -30,16 +30,13 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
     quantity_on_property?: number[];
     sku_on_property?: number[];
 }
-/**
- * Get the inventory for a listing
- */
-declare function getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>>;
-/**
- * Update the inventory for a listing
- */
-declare function updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>>;
-export declare const ListingInventory: {
-    getInventory: typeof getInventory;
-    updateInventory: typeof updateInventory;
-};
-export {};
+export declare class ListingInventory {
+    /**
+     * Get the inventory for a listing
+     */
+    static getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>>;
+    /**
+     * Update the inventory for a listing
+     */
+    static updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>>;
+}

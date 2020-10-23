@@ -29,7 +29,7 @@ export interface IReceiptShipment {
 //parameters types
 
 
-//methods
+//methods class
+export class ReceiptShipment {
 
-
-export const ReceiptShipment = {};
+}

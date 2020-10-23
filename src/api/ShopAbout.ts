@@ -39,12 +39,13 @@ export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number
 }
 
-//methods
-/**
- * Retrieves a ShopAbout object associated to a Shop.
- */
-function getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
-    return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET", options);
-}
+//methods class
+export class ShopAbout {
 
-export const ShopAbout = {getShopAbout};
+    /**
+     * Retrieves a ShopAbout object associated to a Shop.
+     */
+    static getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
+        return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET", options);
+    }
+}

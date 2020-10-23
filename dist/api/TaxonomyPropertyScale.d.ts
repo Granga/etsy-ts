@@ -12,4 +12,5 @@ export interface ITaxonomyPropertyScale {
      */
     description: string;
 }
-export declare const TaxonomyPropertyScale: {};
+export declare class TaxonomyPropertyScale {
+}

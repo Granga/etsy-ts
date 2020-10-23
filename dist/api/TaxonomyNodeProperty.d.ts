@@ -46,11 +46,9 @@ export interface ITaxonomyNodeProperty {
 export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
     taxonomy_id: number;
 }
-/**
- * Get the possible properties of a taxonomy node
- */
-declare function getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
-export declare const TaxonomyNodeProperty: {
-    getTaxonomyNodeProperties: typeof getTaxonomyNodeProperties;
-};
-export {};
+export declare class TaxonomyNodeProperty {
+    /**
+     * Get the possible properties of a taxonomy node
+     */
+    static getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>;
+}

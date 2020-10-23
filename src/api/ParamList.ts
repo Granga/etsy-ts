@@ -9,7 +9,7 @@ export interface IParamList {
 //parameters types
 
 
-//methods
+//methods class
+export class ParamList {
 
-
-export const ParamList = {};
+}

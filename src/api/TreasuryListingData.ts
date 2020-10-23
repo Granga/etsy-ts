@@ -45,7 +45,7 @@ export interface ITreasuryListingData {
 //parameters types
 
 
-//methods
+//methods class
+export class TreasuryListingData {
 
-
-export const TreasuryListingData = {};
+}

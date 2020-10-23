@@ -37,9 +37,11 @@ export interface IFindAllFeaturedTreasuriesParameters extends IStandardParameter
     page?: number,
     region?: string
 }
+
 export interface IGetFeaturedTreasuryByIdParameters extends IStandardParameters {
     featured_treasury_id: number
 }
+
 export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardParameters {
     limit?: number,
     offset?: number,
@@ -47,26 +49,27 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardPa
     owner_id: number
 }
 
-//methods
-/**
- * Finds all FeaturedTreasuries.
- */
-function findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>> {
-    return request<IFindAllFeaturedTreasuriesParameters, TResult>("/featured_treasuries", parameters, "GET", options);
-}
+//methods class
+export class FeaturedTreasury {
 
-/**
- * Finds FeaturedTreasury by numeric ID.
- */
-function getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters, options?: IOptions): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>> {
-    return request<IGetFeaturedTreasuryByIdParameters, TResult>("/featured_treasuries/:featured_treasury_id", parameters, "GET", options);
-}
+    /**
+     * Finds all FeaturedTreasuries.
+     */
+    static findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>> {
+        return request<IFindAllFeaturedTreasuriesParameters, TResult>("/featured_treasuries", parameters, "GET", options);
+    }
 
-/**
- * Finds all FeaturedTreasury by numeric owner_id.
- */
-function findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>> {
-    return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>("/featured_treasuries/owner/:owner_id", parameters, "GET", options);
-}
+    /**
+     * Finds FeaturedTreasury by numeric ID.
+     */
+    static getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters, options?: IOptions): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>> {
+        return request<IGetFeaturedTreasuryByIdParameters, TResult>("/featured_treasuries/:featured_treasury_id", parameters, "GET", options);
+    }
 
-export const FeaturedTreasury = {findAllFeaturedTreasuries, getFeaturedTreasuryById, findAllFeaturedTreasuriesByOwner};
+    /**
+     * Finds all FeaturedTreasury by numeric owner_id.
+     */
+    static findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>> {
+        return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>("/featured_treasuries/owner/:owner_id", parameters, "GET", options);
+    }
+}

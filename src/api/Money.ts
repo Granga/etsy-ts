@@ -40,7 +40,7 @@ export interface IMoney {
 //parameters types
 
 
-//methods
+//methods class
+export class Money {
 
-
-export const Money = {};
+}

@@ -48,12 +48,13 @@ export interface IFindPaymentAccountEntriesParameters extends IStandardParameter
     page?: number
 }
 
-//methods
-/**
- * Get a Shop Payment Account Ledger's Entries
- */
-function findPaymentAccountEntries<TResult>(parameters: IFindPaymentAccountEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>> {
-    return request<IFindPaymentAccountEntriesParameters, TResult>("/shops/:shop_id/payment_account/entries", parameters, "GET", options);
-}
+//methods class
+export class PaymentAccountLedgerEntry {
 
-export const PaymentAccountLedgerEntry = {findPaymentAccountEntries};
+    /**
+     * Get a Shop Payment Account Ledger's Entries
+     */
+    static findPaymentAccountEntries<TResult>(parameters: IFindPaymentAccountEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>> {
+        return request<IFindPaymentAccountEntriesParameters, TResult>("/shops/:shop_id/payment_account/entries", parameters, "GET", options);
+    }
+}

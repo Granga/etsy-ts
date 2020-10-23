@@ -66,36 +66,29 @@ export interface IFindAllUserShippingProfilesParameters extends IStandardParamet
     offset?: number;
     page?: number;
 }
-/**
- * Creates a new ShippingTemplate
- */
-declare function createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
-/**
- * Retrieves a ShippingTemplate by id.
- */
-declare function getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
-/**
- * Updates a ShippingTemplate
- */
-declare function updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
-/**
- * Deletes the ShippingTemplate with the given id.
- */
-declare function deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
-/**
- * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
- */
-declare function findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
-/**
- * Retrieves a set of ShippingTemplate objects associated to a User.
- */
-declare function findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
-export declare const ShippingTemplate: {
-    createShippingTemplate: typeof createShippingTemplate;
-    getShippingTemplate: typeof getShippingTemplate;
-    updateShippingTemplate: typeof updateShippingTemplate;
-    deleteShippingTemplate: typeof deleteShippingTemplate;
-    findAllShippingTemplateEntries: typeof findAllShippingTemplateEntries;
-    findAllUserShippingProfiles: typeof findAllUserShippingProfiles;
-};
-export {};
+export declare class ShippingTemplate {
+    /**
+     * Creates a new ShippingTemplate
+     */
+    static createShippingTemplate<TResult>(parameters: ICreateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateParameters, TResult>>;
+    /**
+     * Retrieves a ShippingTemplate by id.
+     */
+    static getShippingTemplate<TResult>(parameters: IGetShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateParameters, TResult>>;
+    /**
+     * Updates a ShippingTemplate
+     */
+    static updateShippingTemplate<TResult>(parameters: IUpdateShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>;
+    /**
+     * Deletes the ShippingTemplate with the given id.
+     */
+    static deleteShippingTemplate<TResult>(parameters: IDeleteShippingTemplateParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>;
+    /**
+     * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
+     */
+    static findAllShippingTemplateEntries<TResult>(parameters: IFindAllShippingTemplateEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>;
+    /**
+     * Retrieves a set of ShippingTemplate objects associated to a User.
+     */
+    static findAllUserShippingProfiles<TResult>(parameters: IFindAllUserShippingProfilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>;
+}

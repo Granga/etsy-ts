@@ -36,4 +36,5 @@ export interface ICartListing {
      */
     selected_variations: any[];
 }
-export declare const CartListing: {};
+export declare class CartListing {
+}

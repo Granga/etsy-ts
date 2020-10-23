@@ -225,9 +225,11 @@ export interface IFindAllShopsParameters extends IStandardParameters {
     lon?: number,
     distance_max?: number
 }
+
 export interface IGetShopParameters extends IStandardParameters {
     shop_id: (string | number)[]
 }
+
 export interface IUpdateShopParameters extends IStandardParameters {
     shop_id: string | number,
     title?: string,
@@ -242,16 +244,20 @@ export interface IUpdateShopParameters extends IStandardParameters {
     policy_seller_info?: string,
     digital_sale_message?: string
 }
+
 export interface IUploadShopBannerParameters extends IStandardParameters {
     shop_id: string | number,
     image: any
 }
+
 export interface IDeleteShopBannerParameters extends IStandardParameters {
     shop_id: string | number
 }
+
 export interface IGetListingShopParameters extends IStandardParameters {
     listing_id: number
 }
+
 export interface IFindAllUserShopsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
@@ -259,62 +265,55 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
     page?: number
 }
 
-//methods
-/**
- * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
- */
-function findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
-    return request<IFindAllShopsParameters, TResult>("/shops", parameters, "GET", options);
-}
+//methods class
+export class Shop {
 
-/**
- * Retrieves a Shop by id.
- */
-function getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>> {
-    return request<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET", options);
-}
+    /**
+     * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
+     */
+    static findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
+        return request<IFindAllShopsParameters, TResult>("/shops", parameters, "GET", options);
+    }
 
-/**
- * Updates a Shop
- */
-function updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
-    return request<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT", options);
-}
+    /**
+     * Retrieves a Shop by id.
+     */
+    static getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>> {
+        return request<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET", options);
+    }
 
-/**
- * Upload a new shop banner image
- */
-function uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
-    return request<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST", options);
-}
+    /**
+     * Updates a Shop
+     */
+    static updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
+        return request<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT", options);
+    }
 
-/**
- * Deletes a shop banner image
- */
-function deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
-    return request<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE", options);
-}
+    /**
+     * Upload a new shop banner image
+     */
+    static uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
+        return request<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST", options);
+    }
 
-/**
- * Retrieves a shop by a listing id.
- */
-function getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
-    return request<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET", options);
-}
+    /**
+     * Deletes a shop banner image
+     */
+    static deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
+        return request<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE", options);
+    }
 
-/**
- * Retrieves a set of Shop objects associated to a User.
- */
-function findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
-    return request<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET", options);
-}
+    /**
+     * Retrieves a shop by a listing id.
+     */
+    static getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
+        return request<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET", options);
+    }
 
-export const Shop = {
-    findAllShops,
-    getShop,
-    updateShop,
-    uploadShopBanner,
-    deleteShopBanner,
-    getListingShop,
-    findAllUserShops
-};
+    /**
+     * Retrieves a set of Shop objects associated to a User.
+     */
+    static findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
+        return request<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET", options);
+    }
+}

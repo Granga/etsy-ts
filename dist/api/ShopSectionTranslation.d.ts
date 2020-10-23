@@ -37,26 +37,21 @@ export interface IDeleteShopSectionTranslationParameters extends IStandardParame
     shop_section_id: number;
     language: string;
 }
-/**
- * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-declare function getShopSectionTranslation<TResult>(parameters: IGetShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>;
-/**
- * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-declare function createShopSectionTranslation<TResult>(parameters: ICreateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>;
-/**
- * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-declare function updateShopSectionTranslation<TResult>(parameters: IUpdateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>;
-/**
- * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
- */
-declare function deleteShopSectionTranslation<TResult>(parameters: IDeleteShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>;
-export declare const ShopSectionTranslation: {
-    getShopSectionTranslation: typeof getShopSectionTranslation;
-    createShopSectionTranslation: typeof createShopSectionTranslation;
-    updateShopSectionTranslation: typeof updateShopSectionTranslation;
-    deleteShopSectionTranslation: typeof deleteShopSectionTranslation;
-};
-export {};
+export declare class ShopSectionTranslation {
+    /**
+     * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    static getShopSectionTranslation<TResult>(parameters: IGetShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>;
+    /**
+     * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    static createShopSectionTranslation<TResult>(parameters: ICreateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>;
+    /**
+     * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    static updateShopSectionTranslation<TResult>(parameters: IUpdateShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>;
+    /**
+     * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
+     */
+    static deleteShopSectionTranslation<TResult>(parameters: IDeleteShopSectionTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>;
+}

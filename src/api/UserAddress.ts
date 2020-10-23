@@ -57,6 +57,7 @@ export interface IFindAllUserAddressesParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
+
 export interface ICreateUserAddressParameters extends IStandardParameters {
     user_id: string | number,
     name: string,
@@ -67,40 +68,43 @@ export interface ICreateUserAddressParameters extends IStandardParameters {
     zip: string,
     country_id: number
 }
+
 export interface IGetUserAddressParameters extends IStandardParameters {
     user_address_id: number[]
 }
+
 export interface IDeleteUserAddressParameters extends IStandardParameters {
     user_address_id: number
 }
 
-//methods
-/**
- * Retrieves a set of UserAddress objects associated to a User.
- */
-function findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>> {
-    return request<IFindAllUserAddressesParameters, TResult>("/users/:user_id/addresses", parameters, "GET", options);
-}
+//methods class
+export class UserAddress {
 
-/**
- * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
- */
-function createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>> {
-    return request<ICreateUserAddressParameters, TResult>("/users/:user_id/addresses/", parameters, "POST", options);
-}
+    /**
+     * Retrieves a set of UserAddress objects associated to a User.
+     */
+    static findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>> {
+        return request<IFindAllUserAddressesParameters, TResult>("/users/:user_id/addresses", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a UserAddress by id.
- */
-function getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>> {
-    return request<IGetUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "GET", options);
-}
+    /**
+     * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
+     */
+    static createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>> {
+        return request<ICreateUserAddressParameters, TResult>("/users/:user_id/addresses/", parameters, "POST", options);
+    }
 
-/**
- * Deletes the UserAddress with the given id.
- */
-function deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>> {
-    return request<IDeleteUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "DELETE", options);
-}
+    /**
+     * Retrieves a UserAddress by id.
+     */
+    static getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>> {
+        return request<IGetUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "GET", options);
+    }
 
-export const UserAddress = {findAllUserAddresses, createUserAddress, getUserAddress, deleteUserAddress};
+    /**
+     * Deletes the UserAddress with the given id.
+     */
+    static deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>> {
+        return request<IDeleteUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "DELETE", options);
+    }
+}

@@ -33,12 +33,13 @@ export interface IGetOfferingParameters extends IStandardParameters {
     offering_id: number
 }
 
-//methods
-/**
- * Get a specific offering for a listing
- */
-function getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>> {
-    return request<IGetOfferingParameters, TResult>("/listings/:listing_id/products/:product_id/offerings/:offering_id", parameters, "GET", options);
-}
+//methods class
+export class ListingOffering {
 
-export const ListingOffering = {getOffering};
+    /**
+     * Get a specific offering for a listing
+     */
+    static getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>> {
+        return request<IGetOfferingParameters, TResult>("/listings/:listing_id/products/:product_id/offerings/:offering_id", parameters, "GET", options);
+    }
+}

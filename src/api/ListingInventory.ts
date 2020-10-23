@@ -27,6 +27,7 @@ export interface IGetInventoryParameters extends IStandardParameters {
     listing_id: number,
     write_missing_inventory?: boolean
 }
+
 export interface IUpdateInventoryParameters extends IStandardParameters {
     listing_id: number,
     products: any,
@@ -35,19 +36,20 @@ export interface IUpdateInventoryParameters extends IStandardParameters {
     sku_on_property?: number[]
 }
 
-//methods
-/**
- * Get the inventory for a listing
- */
-function getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
-    return request<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET", options);
-}
+//methods class
+export class ListingInventory {
 
-/**
- * Update the inventory for a listing
- */
-function updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
-    return request<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT", options);
-}
+    /**
+     * Get the inventory for a listing
+     */
+    static getInventory<TResult>(parameters: IGetInventoryParameters, options?: IOptions): Promise<IStandardResponse<IGetInventoryParameters, TResult>> {
+        return request<IGetInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "GET", options);
+    }
 
-export const ListingInventory = {getInventory, updateInventory};
+    /**
+     * Update the inventory for a listing
+     */
+    static updateInventory<TResult>(parameters: IUpdateInventoryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateInventoryParameters, TResult>> {
+        return request<IUpdateInventoryParameters, TResult>("/listings/:listing_id/inventory", parameters, "PUT", options);
+    }
+}

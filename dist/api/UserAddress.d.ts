@@ -69,26 +69,21 @@ export interface IGetUserAddressParameters extends IStandardParameters {
 export interface IDeleteUserAddressParameters extends IStandardParameters {
     user_address_id: number;
 }
-/**
- * Retrieves a set of UserAddress objects associated to a User.
- */
-declare function findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>>;
-/**
- * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
- */
-declare function createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>>;
-/**
- * Retrieves a UserAddress by id.
- */
-declare function getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>>;
-/**
- * Deletes the UserAddress with the given id.
- */
-declare function deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>>;
-export declare const UserAddress: {
-    findAllUserAddresses: typeof findAllUserAddresses;
-    createUserAddress: typeof createUserAddress;
-    getUserAddress: typeof getUserAddress;
-    deleteUserAddress: typeof deleteUserAddress;
-};
-export {};
+export declare class UserAddress {
+    /**
+     * Retrieves a set of UserAddress objects associated to a User.
+     */
+    static findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>>;
+    /**
+     * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
+     */
+    static createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>>;
+    /**
+     * Retrieves a UserAddress by id.
+     */
+    static getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>>;
+    /**
+     * Deletes the UserAddress with the given id.
+     */
+    static deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>>;
+}

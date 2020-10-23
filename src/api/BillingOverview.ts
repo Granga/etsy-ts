@@ -42,12 +42,13 @@ export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number
 }
 
-//methods
-/**
- * Retrieves the user's current balance.
- */
-function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
-    return request<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET", options);
-}
+//methods class
+export class BillingOverview {
 
-export const BillingOverview = {getUserBillingOverview};
+    /**
+     * Retrieves the user's current balance.
+     */
+    static getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
+        return request<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET", options);
+    }
+}

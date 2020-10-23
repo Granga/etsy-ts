@@ -29,7 +29,7 @@ export interface IReceipt {
      */
     creation_tsz: number,
     /**
-     * Creation time, in epoch seconds.
+     * Whether or not a refund is allowed for this Receipt.
      */
     can_refund: boolean,
     /**
@@ -170,11 +170,13 @@ export interface IReceipt {
 export interface IGetShopReceipt2Parameters extends IStandardParameters {
     receipt_id: number[]
 }
+
 export interface IUpdateReceiptParameters extends IStandardParameters {
     receipt_id: number,
     was_paid?: boolean,
     was_shipped?: boolean
 }
+
 export interface IFindAllShopReceiptsParameters extends IStandardParameters {
     shop_id: string | number,
     min_created?: number,
@@ -187,11 +189,13 @@ export interface IFindAllShopReceiptsParameters extends IStandardParameters {
     was_paid?: boolean,
     was_shipped?: boolean
 }
+
 export interface ISubmitTrackingParameters extends IStandardParameters {
     tracking_code: string,
     carrier_name: string,
     send_bcc?: boolean
 }
+
 export interface IFindAllShopReceiptsByStatusParameters extends IStandardParameters {
     shop_id: string | number,
     status: "open" | "unshipped" | "unpaid" | "completed" | "processing" | "all",
@@ -199,6 +203,7 @@ export interface IFindAllShopReceiptsByStatusParameters extends IStandardParamet
     offset?: number,
     page?: number
 }
+
 export interface ISearchAllShopReceiptsParameters extends IStandardParameters {
     shop_id: string | number,
     search_query: string,
@@ -206,6 +211,7 @@ export interface ISearchAllShopReceiptsParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
@@ -213,62 +219,55 @@ export interface IFindAllUserBuyerReceiptsParameters extends IStandardParameters
     page?: number
 }
 
-//methods
-/**
- * Retrieves a Shop_Receipt2 by id.
- */
-function getShop_Receipt2<TResult>(parameters: IGetShopReceipt2Parameters, options?: IOptions): Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>> {
-    return request<IGetShopReceipt2Parameters, TResult>("/receipts/:receipt_id", parameters, "GET", options);
-}
+//methods class
+export class Receipt {
 
-/**
- * Updates a Shop_Receipt2
- */
-function updateReceipt<TResult>(parameters: IUpdateReceiptParameters, options?: IOptions): Promise<IStandardResponse<IUpdateReceiptParameters, TResult>> {
-    return request<IUpdateReceiptParameters, TResult>("/receipts/:receipt_id", parameters, "PUT", options);
-}
+    /**
+     * Retrieves a Shop_Receipt2 by id.
+     */
+    static getShop_Receipt2<TResult>(parameters: IGetShopReceipt2Parameters, options?: IOptions): Promise<IStandardResponse<IGetShopReceipt2Parameters, TResult>> {
+        return request<IGetShopReceipt2Parameters, TResult>("/receipts/:receipt_id", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Receipt objects associated to a Shop.
- */
-function findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>> {
-    return request<IFindAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts", parameters, "GET", options);
-}
+    /**
+     * Updates a Shop_Receipt2
+     */
+    static updateReceipt<TResult>(parameters: IUpdateReceiptParameters, options?: IOptions): Promise<IStandardResponse<IUpdateReceiptParameters, TResult>> {
+        return request<IUpdateReceiptParameters, TResult>("/receipts/:receipt_id", parameters, "PUT", options);
+    }
 
-/**
- * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
- */
-function submitTracking<TResult>(parameters: ISubmitTrackingParameters, options?: IOptions): Promise<IStandardResponse<ISubmitTrackingParameters, TResult>> {
-    return request<ISubmitTrackingParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST", options);
-}
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop.
+     */
+    static findAllShopReceipts<TResult>(parameters: IFindAllShopReceiptsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceiptsParameters, TResult>> {
+        return request<IFindAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Receipt objects associated to a Shop based on the status.
- */
-function findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>> {
-    return request<IFindAllShopReceiptsByStatusParameters, TResult>("/shops/:shop_id/receipts/:status", parameters, "GET", options);
-}
+    /**
+     * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
+     */
+    static submitTracking<TResult>(parameters: ISubmitTrackingParameters, options?: IOptions): Promise<IStandardResponse<ISubmitTrackingParameters, TResult>> {
+        return request<ISubmitTrackingParameters, TResult>("/shops/:shop_id/receipts/:receipt_id/tracking", parameters, "POST", options);
+    }
 
-/**
- * Searches the set of Receipt objects associated to a Shop by a query
- */
-function searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters, options?: IOptions): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>> {
-    return request<ISearchAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts/search", parameters, "GET", options);
-}
+    /**
+     * Retrieves a set of Receipt objects associated to a Shop based on the status.
+     */
+    static findAllShopReceiptsByStatus<TResult>(parameters: IFindAllShopReceiptsByStatusParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>> {
+        return request<IFindAllShopReceiptsByStatusParameters, TResult>("/shops/:shop_id/receipts/:status", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Receipt objects associated to a User.
- */
-function findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>> {
-    return request<IFindAllUserBuyerReceiptsParameters, TResult>("/users/:user_id/receipts", parameters, "GET", options);
-}
+    /**
+     * Searches the set of Receipt objects associated to a Shop by a query
+     */
+    static searchAllShopReceipts<TResult>(parameters: ISearchAllShopReceiptsParameters, options?: IOptions): Promise<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>> {
+        return request<ISearchAllShopReceiptsParameters, TResult>("/shops/:shop_id/receipts/search", parameters, "GET", options);
+    }
 
-export const Receipt = {
-    getShop_Receipt2,
-    updateReceipt,
-    findAllShopReceipts,
-    submitTracking,
-    findAllShopReceiptsByStatus,
-    searchAllShopReceipts,
-    findAllUserBuyerReceipts
-};
+    /**
+     * Retrieves a set of Receipt objects associated to a User.
+     */
+    static findAllUserBuyerReceipts<TResult>(parameters: IFindAllUserBuyerReceiptsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>> {
+        return request<IFindAllUserBuyerReceiptsParameters, TResult>("/users/:user_id/receipts", parameters, "GET", options);
+    }
+}

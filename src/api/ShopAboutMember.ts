@@ -45,7 +45,7 @@ export interface IShopAboutMember {
 //parameters types
 
 
-//methods
+//methods class
+export class ShopAboutMember {
 
-
-export const ShopAboutMember = {};
+}

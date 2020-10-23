@@ -1,46 +1,103 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.request = void 0;
-const axios_1 = __importDefault(require("axios"));
-const defaultOptions = {
+var axios_1 = __importDefault(require("axios"));
+var defaultOptions = {
     baseUrl: "https://www.etsy.com/api/v2/ajax",
     json: true
 };
-async function request(uri, parameters, method, options) {
-    options = Object.assign(Object.assign({}, defaultOptions), options);
-    let url = options.baseUrl + fillUriPlaceholders(uri, parameters);
-    let body;
-    switch (method.toUpperCase()) {
-        case "GET":
-        case "DELETE":
-            if (Object.keys(parameters).length > 0) {
-                let encodedParameters = encodePrameters(parameters);
-                url += "?" + encodedParameters;
+function request(uri, parameters, method, options) {
+    return __awaiter(this, void 0, void 0, function () {
+        var url, body, encodedParameters, response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    options = __assign(__assign({}, defaultOptions), options);
+                    url = options.baseUrl + fillUriPlaceholders(uri, parameters);
+                    switch (method.toUpperCase()) {
+                        case "GET":
+                        case "DELETE":
+                            if (Object.keys(parameters).length > 0) {
+                                encodedParameters = encodePrameters(parameters);
+                                url += "?" + encodedParameters;
+                            }
+                            break;
+                        default:
+                            body = JSON.stringify(parameters);
+                    }
+                    return [4 /*yield*/, axios_1.default({
+                            method: method,
+                            url: url,
+                            data: body
+                        })];
+                case 1:
+                    response = (_a.sent());
+                    if (response.status >= 200 && response.status < 300) {
+                        return [2 /*return*/, response.data];
+                    }
+                    else {
+                        throw response.statusText;
+                    }
+                    return [2 /*return*/];
             }
-            break;
-        default:
-            body = JSON.stringify(parameters);
-    }
-    let response = (await axios_1.default({
-        method: method,
-        url: url,
-        data: body
-    }));
-    if (response.status >= 200 && response.status < 300) {
-        return response.data;
-    }
-    else {
-        throw response.statusText;
-    }
+        });
+    });
 }
 exports.request = request;
 function fillUriPlaceholders(uri, parameters) {
-    let keys = Object.keys(parameters).filter(key => uri.indexOf(`/:${key}`) > -1);
-    keys.forEach(key => {
-        uri = uri.replace(`/:${key}`, `/${parameters[key]}`);
+    var keys = Object.keys(parameters).filter(function (key) { return uri.indexOf("/:" + key) > -1; });
+    keys.forEach(function (key) {
+        uri = uri.replace("/:" + key, "/" + parameters[key]);
         delete parameters[key];
     });
     return uri;
@@ -48,9 +105,8 @@ function fillUriPlaceholders(uri, parameters) {
 function encodePrameters(parameters) {
     if (Object.keys(parameters).length > 0) {
         return Object.keys(parameters)
-            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
+            .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]); })
             .join('&');
     }
     return "";
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xpZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NsaWVudC9jbGllbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUEsa0RBQXNDO0FBUXRDLE1BQU0sY0FBYyxHQUFHO0lBQ25CLE9BQU8sRUFBRSxrQ0FBa0M7SUFDM0MsSUFBSSxFQUFFLElBQUk7Q0FDYixDQUFDO0FBRUssS0FBSyxVQUFVLE9BQU8sQ0FBdUIsR0FBVyxFQUFFLFVBQXVCLEVBQUUsTUFBYyxFQUFFLE9BQWtCO0lBQ3hILE9BQU8sbUNBQU8sY0FBYyxHQUFLLE9BQU8sQ0FBQyxDQUFDO0lBQzFDLElBQUksR0FBRyxHQUFHLE9BQU8sQ0FBQyxPQUFPLEdBQUcsbUJBQW1CLENBQUMsR0FBRyxFQUFFLFVBQVUsQ0FBQyxDQUFDO0lBQ2pFLElBQUksSUFBSSxDQUFDO0lBRVQsUUFBUSxNQUFNLENBQUMsV0FBVyxFQUFFLEVBQUU7UUFDMUIsS0FBSyxLQUFLLENBQUM7UUFDWCxLQUFLLFFBQVE7WUFDVCxJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRTtnQkFDcEMsSUFBSSxpQkFBaUIsR0FBRyxlQUFlLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQ3BELEdBQUcsSUFBSSxHQUFHLEdBQUcsaUJBQWlCLENBQUM7YUFDbEM7WUFDRCxNQUFNO1FBRVY7WUFDSSxJQUFJLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsQ0FBQztLQUN6QztJQUVELElBQUksUUFBUSxHQUFHLENBQUMsTUFBTSxlQUFLLENBQUM7UUFDeEIsTUFBTSxFQUFFLE1BQU07UUFDZCxHQUFHLEVBQUUsR0FBRztRQUNSLElBQUksRUFBRSxJQUFJO0tBQ2IsQ0FBQyxDQUFDLENBQUM7SUFFSixJQUFJLFFBQVEsQ0FBQyxNQUFNLElBQUksR0FBRyxJQUFJLFFBQVEsQ0FBQyxNQUFNLEdBQUcsR0FBRyxFQUFFO1FBQ2pELE9BQU8sUUFBUSxDQUFDLElBQXdELENBQUM7S0FDNUU7U0FDSTtRQUNELE1BQU0sUUFBUSxDQUFDLFVBQVUsQ0FBQztLQUM3QjtBQUNMLENBQUM7QUE5QkQsMEJBOEJDO0FBRUQsU0FBUyxtQkFBbUIsQ0FBQyxHQUFXLEVBQUUsVUFBZTtJQUNyRCxJQUFJLElBQUksR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsS0FBSyxHQUFHLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDL0UsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsRUFBRTtRQUNmLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxDQUFDLEtBQUssR0FBRyxFQUFFLEVBQUUsSUFBSSxVQUFVLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ3JELE9BQU8sVUFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzNCLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBRUQsU0FBUyxlQUFlLENBQUMsVUFBZTtJQUNwQyxJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRTtRQUNwQyxPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDO2FBQ3pCLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLGtCQUFrQixDQUFDLENBQUMsQ0FBQyxHQUFHLEdBQUcsR0FBRyxrQkFBa0IsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUN6RSxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDbEI7SUFFRCxPQUFPLEVBQUUsQ0FBQztBQUNkLENBQUMifQ==

@@ -14,24 +14,26 @@ export interface IListingVariationImage {
 export interface IGetVariationImagesParameters extends IStandardParameters {
     listing_id: number
 }
+
 export interface IUpdateVariationImagesParameters extends IStandardParameters {
     listing_id: number,
     variation_images: any
 }
 
-//methods
-/**
- * Gets all variation images on a listing
- */
-function getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>> {
-    return request<IGetVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "GET", options);
-}
+//methods class
+export class ListingVariationImage {
 
-/**
- * Creates variation images on a listing
- */
-function updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>> {
-    return request<IUpdateVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "POST", options);
-}
+    /**
+     * Gets all variation images on a listing
+     */
+    static getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>> {
+        return request<IGetVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "GET", options);
+    }
 
-export const ListingVariationImage = {getVariationImages, updateVariationImages};
+    /**
+     * Creates variation images on a listing
+     */
+    static updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>> {
+        return request<IUpdateVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "POST", options);
+    }
+}

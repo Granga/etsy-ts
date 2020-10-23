@@ -51,12 +51,13 @@ export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameter
     taxonomy_id: number
 }
 
-//methods
-/**
- * Get the possible properties of a taxonomy node
- */
-function getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
-    return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET", options);
-}
+//methods class
+export class TaxonomyNodeProperty {
 
-export const TaxonomyNodeProperty = {getTaxonomyNodeProperties};
+    /**
+     * Get the possible properties of a taxonomy node
+     */
+    static getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
+        return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET", options);
+    }
+}

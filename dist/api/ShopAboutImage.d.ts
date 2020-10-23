@@ -32,4 +32,5 @@ export interface IShopAboutImage {
      */
     url_fullxfull: string;
 }
-export declare const ShopAboutImage: {};
+export declare class ShopAboutImage {
+}

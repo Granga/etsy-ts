@@ -8,7 +8,6 @@ export * from "./api/BillingOverview";
 export * from "./api/BillPayment";
 export * from "./api/Cart";
 export * from "./api/CartListing";
-export * from "./api/Category";
 export * from "./api/Country";
 export * from "./api/Coupon";
 export * from "./api/DataType";

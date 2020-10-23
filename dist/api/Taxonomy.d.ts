@@ -49,21 +49,17 @@ export interface IGetSellerTaxonomyParameters extends IStandardParameters {
 }
 export interface IGetSellerTaxonomyVersionParameters extends IStandardParameters {
 }
-/**
- * Retrieve the entire taxonomy as seen by buyers in search.
- */
-declare function getBuyerTaxonomy<TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>;
-/**
- * Retrieve the entire taxonomy as used by sellers in the listing process.
- */
-declare function getSellerTaxonomy<TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>;
-/**
- * Get the current version of the seller taxonomy
- */
-declare function getSellerTaxonomyVersion<TResult>(parameters: IGetSellerTaxonomyVersionParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>;
-export declare const Taxonomy: {
-    getBuyerTaxonomy: typeof getBuyerTaxonomy;
-    getSellerTaxonomy: typeof getSellerTaxonomy;
-    getSellerTaxonomyVersion: typeof getSellerTaxonomyVersion;
-};
-export {};
+export declare class Taxonomy {
+    /**
+     * Retrieve the entire taxonomy as seen by buyers in search.
+     */
+    static getBuyerTaxonomy<TResult>(parameters: IGetBuyerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>;
+    /**
+     * Retrieve the entire taxonomy as used by sellers in the listing process.
+     */
+    static getSellerTaxonomy<TResult>(parameters: IGetSellerTaxonomyParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>;
+    /**
+     * Get the current version of the seller taxonomy
+     */
+    static getSellerTaxonomyVersion<TResult>(parameters: IGetSellerTaxonomyVersionParameters, options?: IOptions): Promise<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>;
+}

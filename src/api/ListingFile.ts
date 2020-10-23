@@ -42,6 +42,7 @@ export interface IListingFile {
 export interface IFindAllListingFilesParameters extends IStandardParameters {
     listing_id: number
 }
+
 export interface IUploadListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id?: number,
@@ -49,46 +50,49 @@ export interface IUploadListingFileParameters extends IStandardParameters {
     name?: string,
     rank?: number
 }
+
 export interface IFindListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id: number
 }
+
 export interface IDeleteListingFileParameters extends IStandardParameters {
     listing_id: number,
     listing_file_id: number
 }
 
-//methods
-/**
- * Finds all ListingFiles on a Listing
- */
-function findAllListingFiles<TResult>(parameters: IFindAllListingFilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingFilesParameters, TResult>> {
-    return request<IFindAllListingFilesParameters, TResult>("/listings/:listing_id/files", parameters, "GET", options);
-}
+//methods class
+export class ListingFile {
 
-/**
- * Upload a new listing file, or attach an existing file to this listing.  You must either provide the listing_file_id
- of an existing listing file, or the name and file data of a new file that you are uploading.  If you are attaching
- a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
- cause the listing to have free shipping and will remove any variations.
- */
-function uploadListingFile<TResult>(parameters: IUploadListingFileParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingFileParameters, TResult>> {
-    return request<IUploadListingFileParameters, TResult>("/listings/:listing_id/files", parameters, "POST", options);
-}
+    /**
+     * Finds all ListingFiles on a Listing
+     */
+    static findAllListingFiles<TResult>(parameters: IFindAllListingFilesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingFilesParameters, TResult>> {
+        return request<IFindAllListingFilesParameters, TResult>("/listings/:listing_id/files", parameters, "GET", options);
+    }
 
-/**
- * Finds a ListingFile by ID
- */
-function findListingFile<TResult>(parameters: IFindListingFileParameters, options?: IOptions): Promise<IStandardResponse<IFindListingFileParameters, TResult>> {
-    return request<IFindListingFileParameters, TResult>("/listings/:listing_id/files/:listing_file_id", parameters, "GET", options);
-}
+    /**
+     * Upload a new listing file, or attach an existing file to this listing.  You must either provide the listing_file_id
+     of an existing listing file, or the name and file data of a new file that you are uploading.  If you are attaching
+     a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
+     cause the listing to have free shipping and will remove any variations.
+     */
+    static uploadListingFile<TResult>(parameters: IUploadListingFileParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingFileParameters, TResult>> {
+        return request<IUploadListingFileParameters, TResult>("/listings/:listing_id/files", parameters, "POST", options);
+    }
 
-/**
- * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
- be considered a digital listing.
- */
-function deleteListingFile<TResult>(parameters: IDeleteListingFileParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingFileParameters, TResult>> {
-    return request<IDeleteListingFileParameters, TResult>("/listings/:listing_id/files/:listing_file_id", parameters, "DELETE", options);
-}
+    /**
+     * Finds a ListingFile by ID
+     */
+    static findListingFile<TResult>(parameters: IFindListingFileParameters, options?: IOptions): Promise<IStandardResponse<IFindListingFileParameters, TResult>> {
+        return request<IFindListingFileParameters, TResult>("/listings/:listing_id/files/:listing_file_id", parameters, "GET", options);
+    }
 
-export const ListingFile = {findAllListingFiles, uploadListingFile, findListingFile, deleteListingFile};
+    /**
+     * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
+     be considered a digital listing.
+     */
+    static deleteListingFile<TResult>(parameters: IDeleteListingFileParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingFileParameters, TResult>> {
+        return request<IDeleteListingFileParameters, TResult>("/listings/:listing_id/files/:listing_file_id", parameters, "DELETE", options);
+    }
+}

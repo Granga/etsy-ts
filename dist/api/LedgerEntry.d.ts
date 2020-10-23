@@ -51,16 +51,13 @@ export interface IFindLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number;
     ledger_entry_id: number;
 }
-/**
- * Get a Shop Payment Account Ledger's Entries
- */
-declare function findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
-/**
- * Get a Shop Payment Account Ledger Entry
- */
-declare function findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
-export declare const LedgerEntry: {
-    findLedgerEntries: typeof findLedgerEntries;
-    findLedgerEntry: typeof findLedgerEntry;
-};
-export {};
+export declare class LedgerEntry {
+    /**
+     * Get a Shop Payment Account Ledger's Entries
+     */
+    static findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>>;
+    /**
+     * Get a Shop Payment Account Ledger Entry
+     */
+    static findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>>;
+}

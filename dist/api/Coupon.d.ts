@@ -75,31 +75,25 @@ export interface IDeleteCouponParameters extends IStandardParameters {
     shop_id: string | number;
     coupon_id: number;
 }
-/**
- * Retrieves all Shop_Coupons by shop_id
- */
-declare function findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
-/**
- * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
- */
-declare function createCoupon<TResult>(parameters: ICreateCouponParameters, options?: IOptions): Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
-/**
- * Retrieves a Shop_Coupon by id and shop_id
- */
-declare function findCoupon<TResult>(parameters: IFindCouponParameters, options?: IOptions): Promise<IStandardResponse<IFindCouponParameters, TResult>>;
-/**
- * Updates a coupon
- */
-declare function updateCoupon<TResult>(parameters: IUpdateCouponParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
-/**
- * Deletes a coupon
- */
-declare function deleteCoupon<TResult>(parameters: IDeleteCouponParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
-export declare const Coupon: {
-    findAllShopCoupons: typeof findAllShopCoupons;
-    createCoupon: typeof createCoupon;
-    findCoupon: typeof findCoupon;
-    updateCoupon: typeof updateCoupon;
-    deleteCoupon: typeof deleteCoupon;
-};
-export {};
+export declare class Coupon {
+    /**
+     * Retrieves all Shop_Coupons by shop_id
+     */
+    static findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>>;
+    /**
+     * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
+     */
+    static createCoupon<TResult>(parameters: ICreateCouponParameters, options?: IOptions): Promise<IStandardResponse<ICreateCouponParameters, TResult>>;
+    /**
+     * Retrieves a Shop_Coupon by id and shop_id
+     */
+    static findCoupon<TResult>(parameters: IFindCouponParameters, options?: IOptions): Promise<IStandardResponse<IFindCouponParameters, TResult>>;
+    /**
+     * Updates a coupon
+     */
+    static updateCoupon<TResult>(parameters: IUpdateCouponParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCouponParameters, TResult>>;
+    /**
+     * Deletes a coupon
+     */
+    static deleteCoupon<TResult>(parameters: IDeleteCouponParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCouponParameters, TResult>>;
+}

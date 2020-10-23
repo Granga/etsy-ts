@@ -41,7 +41,7 @@ export interface ICartListing {
 //parameters types
 
 
-//methods
+//methods class
+export class CartListing {
 
-
-export const CartListing = {};
+}

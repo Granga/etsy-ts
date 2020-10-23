@@ -40,4 +40,5 @@ export interface IShopAboutMember {
      */
     has_stale_translations: boolean;
 }
-export declare const ShopAboutMember: {};
+export declare class ShopAboutMember {
+}

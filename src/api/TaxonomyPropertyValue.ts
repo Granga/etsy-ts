@@ -25,7 +25,7 @@ export interface ITaxonomyPropertyValue {
 //parameters types
 
 
-//methods
+//methods class
+export class TaxonomyPropertyValue {
 
-
-export const TaxonomyPropertyValue = {};
+}

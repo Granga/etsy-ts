@@ -17,7 +17,7 @@ export interface ITaxonomyPropertyScale {
 //parameters types
 
 
-//methods
+//methods class
+export class TaxonomyPropertyScale {
 
-
-export const TaxonomyPropertyScale = {};
+}

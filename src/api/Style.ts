@@ -19,12 +19,13 @@ export interface IFindSuggestedStylesParameters extends IStandardParameters {
 
 }
 
-//methods
-/**
- * Retrieve all suggested styles.
- */
-function findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters, options?: IOptions): Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>> {
-    return request<IFindSuggestedStylesParameters, TResult>("/taxonomy/styles", parameters, "GET", options);
-}
+//methods class
+export class Style {
 
-export const Style = {findSuggestedStyles};
+    /**
+     * Retrieve all suggested styles.
+     */
+    static findSuggestedStyles<TResult>(parameters: IFindSuggestedStylesParameters, options?: IOptions): Promise<IStandardResponse<IFindSuggestedStylesParameters, TResult>> {
+        return request<IFindSuggestedStylesParameters, TResult>("/taxonomy/styles", parameters, "GET", options);
+    }
+}

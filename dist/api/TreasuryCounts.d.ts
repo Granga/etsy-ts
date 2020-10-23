@@ -16,4 +16,5 @@ export interface ITreasuryCounts {
      */
     reports: number;
 }
-export declare const TreasuryCounts: {};
+export declare class TreasuryCounts {
+}

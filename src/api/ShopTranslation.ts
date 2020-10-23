@@ -71,6 +71,7 @@ export interface IGetShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string
 }
+
 export interface ICreateShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string,
@@ -87,6 +88,7 @@ export interface ICreateShopTranslationParameters extends IStandardParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
+
 export interface IUpdateShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string,
@@ -103,43 +105,40 @@ export interface IUpdateShopTranslationParameters extends IStandardParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
+
 export interface IDeleteShopTranslationParameters extends IStandardParameters {
     shop_id: string | number,
     language: string
 }
 
-//methods
-/**
- * Retrieves a ShopTranslation by shop_id and language
- */
-function getShopTranslation<TResult>(parameters: IGetShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
-    return request<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET", options);
-}
+//methods class
+export class ShopTranslation {
 
-/**
- * Creates a ShopTranslation by shop_id and language
- */
-function createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
-    return request<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST", options);
-}
+    /**
+     * Retrieves a ShopTranslation by shop_id and language
+     */
+    static getShopTranslation<TResult>(parameters: IGetShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
+        return request<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET", options);
+    }
 
-/**
- * Updates a ShopTranslation by shop_id and language
- */
-function updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
-    return request<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT", options);
-}
+    /**
+     * Creates a ShopTranslation by shop_id and language
+     */
+    static createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
+        return request<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST", options);
+    }
 
-/**
- * Deletes a ShopTranslation by shop_id and language
- */
-function deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
-    return request<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE", options);
-}
+    /**
+     * Updates a ShopTranslation by shop_id and language
+     */
+    static updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
+        return request<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT", options);
+    }
 
-export const ShopTranslation = {
-    getShopTranslation,
-    createShopTranslation,
-    updateShopTranslation,
-    deleteShopTranslation
-};
+    /**
+     * Deletes a ShopTranslation by shop_id and language
+     */
+    static deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
+        return request<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE", options);
+    }
+}

@@ -28,11 +28,9 @@ export interface IGetOfferingParameters extends IStandardParameters {
     product_id: number;
     offering_id: number;
 }
-/**
- * Get a specific offering for a listing
- */
-declare function getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>>;
-export declare const ListingOffering: {
-    getOffering: typeof getOffering;
-};
-export {};
+export declare class ListingOffering {
+    /**
+     * Get a specific offering for a listing
+     */
+    static getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>>;
+}

@@ -34,11 +34,9 @@ export interface IShopAbout {
 export interface IGetShopAboutParameters extends IStandardParameters {
     shop_id: string | number;
 }
-/**
- * Retrieves a ShopAbout object associated to a Shop.
- */
-declare function getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>>;
-export declare const ShopAbout: {
-    getShopAbout: typeof getShopAbout;
-};
-export {};
+export declare class ShopAbout {
+    /**
+     * Retrieves a ShopAbout object associated to a Shop.
+     */
+    static getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>>;
+}

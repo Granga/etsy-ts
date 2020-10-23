@@ -1,4 +1,4 @@
-export {IOptions} from "./client/client";
+export { IOptions } from "./client/client";
 export * from "./client/IStandardParameters";
 export * from "./client/IStandardResponse";
 export * from "./api/ApiMethod";
@@ -8,7 +8,6 @@ export * from "./api/BillingOverview";
 export * from "./api/BillPayment";
 export * from "./api/Cart";
 export * from "./api/CartListing";
-export * from "./api/Category";
 export * from "./api/Country";
 export * from "./api/Coupon";
 export * from "./api/DataType";

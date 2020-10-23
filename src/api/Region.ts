@@ -22,33 +22,36 @@ export interface IRegion {
 export interface IFindAllRegionParameters extends IStandardParameters {
 
 }
+
 export interface IGetRegionParameters extends IStandardParameters {
     region_id: number[]
 }
+
 export interface IFindEligibleRegionsParameters extends IStandardParameters {
 
 }
 
-//methods
-/**
- * Finds all Region.
- */
-function findAllRegion<TResult>(parameters: IFindAllRegionParameters, options?: IOptions): Promise<IStandardResponse<IFindAllRegionParameters, TResult>> {
-    return request<IFindAllRegionParameters, TResult>("/regions", parameters, "GET", options);
-}
+//methods class
+export class Region {
 
-/**
- * Retrieves a Region by id.
- */
-function getRegion<TResult>(parameters: IGetRegionParameters, options?: IOptions): Promise<IStandardResponse<IGetRegionParameters, TResult>> {
-    return request<IGetRegionParameters, TResult>("/regions/:region_id", parameters, "GET", options);
-}
+    /**
+     * Finds all Region.
+     */
+    static findAllRegion<TResult>(parameters: IFindAllRegionParameters, options?: IOptions): Promise<IStandardResponse<IFindAllRegionParameters, TResult>> {
+        return request<IFindAllRegionParameters, TResult>("/regions", parameters, "GET", options);
+    }
 
-/**
- *
- */
-function findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>> {
-    return request<IFindEligibleRegionsParameters, TResult>("/regions/eligible", parameters, "GET", options);
-}
+    /**
+     * Retrieves a Region by id.
+     */
+    static getRegion<TResult>(parameters: IGetRegionParameters, options?: IOptions): Promise<IStandardResponse<IGetRegionParameters, TResult>> {
+        return request<IGetRegionParameters, TResult>("/regions/:region_id", parameters, "GET", options);
+    }
 
-export const Region = {findAllRegion, getRegion, findEligibleRegions};
+    /**
+     *
+     */
+    static findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>> {
+        return request<IFindEligibleRegionsParameters, TResult>("/regions/eligible", parameters, "GET", options);
+    }
+}

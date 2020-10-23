@@ -21,7 +21,7 @@ export interface ITreasuryCounts {
 //parameters types
 
 
-//methods
+//methods class
+export class TreasuryCounts {
 
-
-export const TreasuryCounts = {};
+}

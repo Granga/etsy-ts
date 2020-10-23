@@ -37,11 +37,9 @@ export interface IBillingOverview {
 export interface IGetUserBillingOverviewParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Retrieves the user's current balance.
- */
-declare function getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
-export declare const BillingOverview: {
-    getUserBillingOverview: typeof getUserBillingOverview;
-};
-export {};
+export declare class BillingOverview {
+    /**
+     * Retrieves the user's current balance.
+     */
+    static getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>;
+}

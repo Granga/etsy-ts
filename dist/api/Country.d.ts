@@ -42,21 +42,17 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
     page?: number;
     iso_code: string;
 }
-/**
- * Finds all Country.
- */
-declare function findAllCountry<TResult>(parameters: IFindAllCountryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
-/**
- * Retrieves a Country by id.
- */
-declare function getCountry<TResult>(parameters: IGetCountryParameters, options?: IOptions): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
-/**
- * Get the country info for the given ISO code.
- */
-declare function findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
-export declare const Country: {
-    findAllCountry: typeof findAllCountry;
-    getCountry: typeof getCountry;
-    findByIsoCode: typeof findByIsoCode;
-};
-export {};
+export declare class Country {
+    /**
+     * Finds all Country.
+     */
+    static findAllCountry<TResult>(parameters: IFindAllCountryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCountryParameters, TResult>>;
+    /**
+     * Retrieves a Country by id.
+     */
+    static getCountry<TResult>(parameters: IGetCountryParameters, options?: IOptions): Promise<IStandardResponse<IGetCountryParameters, TResult>>;
+    /**
+     * Get the country info for the given ISO code.
+     */
+    static findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>>;
+}

@@ -53,12 +53,13 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
     max_created?: number
 }
 
-//methods
-/**
- * Retrieves a set of BillPayment objects associated to a User.
- */
-function findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
-    return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET", options);
-}
+//methods class
+export class BillPayment {
 
-export const BillPayment = {findAllUserPayments};
+    /**
+     * Retrieves a set of BillPayment objects associated to a User.
+     */
+    static findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
+        return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET", options);
+    }
+}

@@ -25,7 +25,7 @@ export interface IShippingOption {
 //parameters types
 
 
-//methods
+//methods class
+export class ShippingOption {
 
-
-export const ShippingOption = {};
+}

@@ -110,26 +110,21 @@ export interface IFindShopPaymentByReceiptParameters extends IStandardParameters
     receipt_id: number;
     shop_id: string | number;
 }
-/**
- * Get an Etsy Payments Transaction
- */
-declare function findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
-/**
- * Get a Payment from a Ledger Entry ID, if applicable
- */
-declare function findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
-/**
- * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
- */
-declare function findPaymentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>;
-/**
- * Get a Payment by Shop Receipt ID
- */
-declare function findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
-export declare const Payment: {
-    findPayment: typeof findPayment;
-    findPaymentForLedgerEntry: typeof findPaymentForLedgerEntry;
-    findPaymentForPaymentAccountLedgerEntry: typeof findPaymentForPaymentAccountLedgerEntry;
-    findShopPaymentByReceipt: typeof findShopPaymentByReceipt;
-};
-export {};
+export declare class Payment {
+    /**
+     * Get an Etsy Payments Transaction
+     */
+    static findPayment<TResult>(parameters: IFindPaymentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentParameters, TResult>>;
+    /**
+     * Get a Payment from a Ledger Entry ID, if applicable
+     */
+    static findPaymentForLedgerEntry<TResult>(parameters: IFindPaymentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>;
+    /**
+     * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
+     */
+    static findPaymentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>;
+    /**
+     * Get a Payment by Shop Receipt ID
+     */
+    static findShopPaymentByReceipt<TResult>(parameters: IFindShopPaymentByReceiptParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>;
+}

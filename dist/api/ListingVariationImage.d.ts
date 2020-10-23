@@ -14,16 +14,13 @@ export interface IUpdateVariationImagesParameters extends IStandardParameters {
     listing_id: number;
     variation_images: any;
 }
-/**
- * Gets all variation images on a listing
- */
-declare function getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>>;
-/**
- * Creates variation images on a listing
- */
-declare function updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>>;
-export declare const ListingVariationImage: {
-    getVariationImages: typeof getVariationImages;
-    updateVariationImages: typeof updateVariationImages;
-};
-export {};
+export declare class ListingVariationImage {
+    /**
+     * Gets all variation images on a listing
+     */
+    static getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>>;
+    /**
+     * Creates variation images on a listing
+     */
+    static updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>>;
+}

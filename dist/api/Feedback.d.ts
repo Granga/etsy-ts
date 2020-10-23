@@ -91,40 +91,33 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
     offset?: number;
     page?: number;
 }
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-declare function findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-declare function findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-declare function findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
-/**
- * Retrieves a set of Feedback objects associated to a User.
- */
-declare function findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between the findAllUserFeedbackAsBuyer
- and findAllUserFeedbackAsSubject methods.
- */
-declare function findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
-/**
- * Returns a set of FeedBack objects associated to a User.
- This is essentially the union between
- the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
- */
-declare function findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
-export declare const Feedback: {
-    findAllUserFeedbackAsAuthor: typeof findAllUserFeedbackAsAuthor;
-    findAllUserFeedbackAsBuyer: typeof findAllUserFeedbackAsBuyer;
-    findAllUserFeedbackAsSeller: typeof findAllUserFeedbackAsSeller;
-    findAllUserFeedbackAsSubject: typeof findAllUserFeedbackAsSubject;
-    findAllFeedbackFromBuyers: typeof findAllFeedbackFromBuyers;
-    findAllFeedbackFromSellers: typeof findAllFeedbackFromSellers;
-};
-export {};
+export declare class Feedback {
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    static findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    static findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    static findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>;
+    /**
+     * Retrieves a set of Feedback objects associated to a User.
+     */
+    static findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>;
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between the findAllUserFeedbackAsBuyer
+     and findAllUserFeedbackAsSubject methods.
+     */
+    static findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>;
+    /**
+     * Returns a set of FeedBack objects associated to a User.
+     This is essentially the union between
+     the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
+     */
+    static findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>;
+}

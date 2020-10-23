@@ -54,26 +54,21 @@ export interface IUpdateShippingTemplateEntryParameters extends IStandardParamet
 export interface IDeleteShippingTemplateEntryParameters extends IStandardParameters {
     shipping_template_entry_id: number;
 }
-/**
- * Creates a new ShippingTemplateEntry
- */
-declare function createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>;
-/**
- * Retrieves a ShippingTemplateEntry by id.
- */
-declare function getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>;
-/**
- * Updates a ShippingTemplateEntry
- */
-declare function updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>;
-/**
- * Deletes the ShippingTemplateEntry
- */
-declare function deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>;
-export declare const ShippingTemplateEntry: {
-    createShippingTemplateEntry: typeof createShippingTemplateEntry;
-    getShippingTemplateEntry: typeof getShippingTemplateEntry;
-    updateShippingTemplateEntry: typeof updateShippingTemplateEntry;
-    deleteShippingTemplateEntry: typeof deleteShippingTemplateEntry;
-};
-export {};
+export declare class ShippingTemplateEntry {
+    /**
+     * Creates a new ShippingTemplateEntry
+     */
+    static createShippingTemplateEntry<TResult>(parameters: ICreateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Retrieves a ShippingTemplateEntry by id.
+     */
+    static getShippingTemplateEntry<TResult>(parameters: IGetShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Updates a ShippingTemplateEntry
+     */
+    static updateShippingTemplateEntry<TResult>(parameters: IUpdateShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>;
+    /**
+     * Deletes the ShippingTemplateEntry
+     */
+    static deleteShippingTemplateEntry<TResult>(parameters: IDeleteShippingTemplateEntryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>;
+}

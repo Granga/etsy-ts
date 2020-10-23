@@ -254,41 +254,33 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-/**
- * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
- */
-declare function findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
-/**
- * Retrieves a Shop by id.
- */
-declare function getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>>;
-/**
- * Updates a Shop
- */
-declare function updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
-/**
- * Upload a new shop banner image
- */
-declare function uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
-/**
- * Deletes a shop banner image
- */
-declare function deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
-/**
- * Retrieves a shop by a listing id.
- */
-declare function getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
-/**
- * Retrieves a set of Shop objects associated to a User.
- */
-declare function findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
-export declare const Shop: {
-    findAllShops: typeof findAllShops;
-    getShop: typeof getShop;
-    updateShop: typeof updateShop;
-    uploadShopBanner: typeof uploadShopBanner;
-    deleteShopBanner: typeof deleteShopBanner;
-    getListingShop: typeof getListingShop;
-    findAllUserShops: typeof findAllUserShops;
-};
-export {};
+export declare class Shop {
+    /**
+     * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
+     */
+    static findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>>;
+    /**
+     * Retrieves a Shop by id.
+     */
+    static getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>>;
+    /**
+     * Updates a Shop
+     */
+    static updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>>;
+    /**
+     * Upload a new shop banner image
+     */
+    static uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>>;
+    /**
+     * Deletes a shop banner image
+     */
+    static deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>>;
+    /**
+     * Retrieves a shop by a listing id.
+     */
+    static getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>>;
+    /**
+     * Retrieves a set of Shop objects associated to a User.
+     */
+    static findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>>;
+}

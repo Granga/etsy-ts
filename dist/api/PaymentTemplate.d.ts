@@ -110,26 +110,21 @@ export interface IUpdateShopPaymentTemplateParameters extends IStandardParameter
 export interface IFindAllUserPaymentTemplatesParameters extends IStandardParameters {
     user_id: string | number;
 }
-/**
- * Retrieves the PaymentTemplate associated with the Shop
- */
-declare function findShopPaymentTemplates<TResult>(parameters: IFindShopPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>;
-/**
- * Creates a new PaymentTemplate
- */
-declare function createShopPaymentTemplate<TResult>(parameters: ICreateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>;
-/**
- * Updates a PaymentTemplate
- */
-declare function updateShopPaymentTemplate<TResult>(parameters: IUpdateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>;
-/**
- * Retrieves a set of PaymentTemplate objects associated to a User.
- */
-declare function findAllUserPaymentTemplates<TResult>(parameters: IFindAllUserPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>;
-export declare const PaymentTemplate: {
-    findShopPaymentTemplates: typeof findShopPaymentTemplates;
-    createShopPaymentTemplate: typeof createShopPaymentTemplate;
-    updateShopPaymentTemplate: typeof updateShopPaymentTemplate;
-    findAllUserPaymentTemplates: typeof findAllUserPaymentTemplates;
-};
-export {};
+export declare class PaymentTemplate {
+    /**
+     * Retrieves the PaymentTemplate associated with the Shop
+     */
+    static findShopPaymentTemplates<TResult>(parameters: IFindShopPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>;
+    /**
+     * Creates a new PaymentTemplate
+     */
+    static createShopPaymentTemplate<TResult>(parameters: ICreateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>;
+    /**
+     * Updates a PaymentTemplate
+     */
+    static updateShopPaymentTemplate<TResult>(parameters: IUpdateShopPaymentTemplateParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>;
+    /**
+     * Retrieves a set of PaymentTemplate objects associated to a User.
+     */
+    static findAllUserPaymentTemplates<TResult>(parameters: IFindAllUserPaymentTemplatesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>;
+}

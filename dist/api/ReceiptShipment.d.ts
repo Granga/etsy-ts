@@ -24,4 +24,5 @@ export interface IReceiptShipment {
      */
     notification_date: number;
 }
-export declare const ReceiptShipment: {};
+export declare class ReceiptShipment {
+}

@@ -35,4 +35,5 @@ export interface IMoney {
      */
     before_conversion: any;
 }
-export declare const Money: {};
+export declare class Money {
+}

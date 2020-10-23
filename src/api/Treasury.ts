@@ -87,12 +87,15 @@ export interface IFindAllTreasuriesParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
+
 export interface IGetTreasuryParameters extends IStandardParameters {
     treasury_key: string
 }
+
 export interface IDeleteTreasuryParameters extends IStandardParameters {
 
 }
+
 export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
     user_id: string | number,
     sort_on?: "hotness" | "created",
@@ -103,33 +106,34 @@ export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
     page?: number
 }
 
-//methods
-/**
- * Search Treasuries or else List all Treasuries
- */
-function findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTreasuriesParameters, TResult>> {
-    return request<IFindAllTreasuriesParameters, TResult>("/treasuries", parameters, "GET", options);
-}
+//methods class
+export class Treasury {
 
-/**
- * Get a Treasury
- */
-function getTreasury<TResult>(parameters: IGetTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IGetTreasuryParameters, TResult>> {
-    return request<IGetTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "GET", options);
-}
+    /**
+     * Search Treasuries or else List all Treasuries
+     */
+    static findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTreasuriesParameters, TResult>> {
+        return request<IFindAllTreasuriesParameters, TResult>("/treasuries", parameters, "GET", options);
+    }
 
-/**
- * Delete a Treasury
- */
-function deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteTreasuryParameters, TResult>> {
-    return request<IDeleteTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "DELETE", options);
-}
+    /**
+     * Get a Treasury
+     */
+    static getTreasury<TResult>(parameters: IGetTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IGetTreasuryParameters, TResult>> {
+        return request<IGetTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "GET", options);
+    }
 
-/**
- * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
- */
-function findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>> {
-    return request<IFindAllUserTreasuriesParameters, TResult>("/users/:user_id/treasuries", parameters, "GET", options);
-}
+    /**
+     * Delete a Treasury
+     */
+    static deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteTreasuryParameters, TResult>> {
+        return request<IDeleteTreasuryParameters, TResult>("/treasuries/:treasury_key", parameters, "DELETE", options);
+    }
 
-export const Treasury = {findAllTreasuries, getTreasury, deleteTreasury, findAllUserTreasuries};
+    /**
+     * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
+     */
+    static findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>> {
+        return request<IFindAllUserTreasuriesParameters, TResult>("/users/:user_id/treasuries", parameters, "GET", options);
+    }
+}

@@ -32,12 +32,13 @@ export interface IGetProductParameters extends IStandardParameters {
     product_id: number
 }
 
-//methods
-/**
- * Get a specific offering for a listing
- */
-function getProduct<TResult>(parameters: IGetProductParameters, options?: IOptions): Promise<IStandardResponse<IGetProductParameters, TResult>> {
-    return request<IGetProductParameters, TResult>("/listings/:listing_id/products/:product_id", parameters, "GET", options);
-}
+//methods class
+export class ListingProduct {
 
-export const ListingProduct = {getProduct};
+    /**
+     * Get a specific offering for a listing
+     */
+    static getProduct<TResult>(parameters: IGetProductParameters, options?: IOptions): Promise<IStandardResponse<IGetProductParameters, TResult>> {
+        return request<IGetProductParameters, TResult>("/listings/:listing_id/products/:product_id", parameters, "GET", options);
+    }
+}

@@ -13,7 +13,7 @@ export interface IFeedbackInfo {
 //parameters types
 
 
-//methods
+//methods class
+export class FeedbackInfo {
 
-
-export const FeedbackInfo = {};
+}

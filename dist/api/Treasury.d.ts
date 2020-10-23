@@ -97,26 +97,21 @@ export interface IFindAllUserTreasuriesParameters extends IStandardParameters {
     offset?: number;
     page?: number;
 }
-/**
- * Search Treasuries or else List all Treasuries
- */
-declare function findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTreasuriesParameters, TResult>>;
-/**
- * Get a Treasury
- */
-declare function getTreasury<TResult>(parameters: IGetTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IGetTreasuryParameters, TResult>>;
-/**
- * Delete a Treasury
- */
-declare function deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteTreasuryParameters, TResult>>;
-/**
- * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
- */
-declare function findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>;
-export declare const Treasury: {
-    findAllTreasuries: typeof findAllTreasuries;
-    getTreasury: typeof getTreasury;
-    deleteTreasury: typeof deleteTreasury;
-    findAllUserTreasuries: typeof findAllUserTreasuries;
-};
-export {};
+export declare class Treasury {
+    /**
+     * Search Treasuries or else List all Treasuries
+     */
+    static findAllTreasuries<TResult>(parameters: IFindAllTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllTreasuriesParameters, TResult>>;
+    /**
+     * Get a Treasury
+     */
+    static getTreasury<TResult>(parameters: IGetTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IGetTreasuryParameters, TResult>>;
+    /**
+     * Delete a Treasury
+     */
+    static deleteTreasury<TResult>(parameters: IDeleteTreasuryParameters, options?: IOptions): Promise<IStandardResponse<IDeleteTreasuryParameters, TResult>>;
+    /**
+     * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
+     */
+    static findAllUserTreasuries<TResult>(parameters: IFindAllUserTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>;
+}

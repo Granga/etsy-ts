@@ -114,24 +114,28 @@ export interface ITransaction {
 export interface IGetShopTransactionParameters extends IStandardParameters {
     transaction_id: number[]
 }
+
 export interface IFindAllListingTransactionsParameters extends IStandardParameters {
     listing_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopReceipt2TransactionsParameters extends IStandardParameters {
     receipt_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopTransactionsParameters extends IStandardParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserBuyerTransactionsParameters extends IStandardParameters {
     user_id: string | number,
     limit?: number,
@@ -139,46 +143,41 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
     page?: number
 }
 
-//methods
-/**
- * Retrieves a Shop_Transaction by id.
- */
-function getShop_Transaction<TResult>(parameters: IGetShopTransactionParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>> {
-    return request<IGetShopTransactionParameters, TResult>("/transactions/:transaction_id", parameters, "GET", options);
-}
+//methods class
+export class Transaction {
 
-/**
- * Retrieves a set of Transaction objects associated to a Listing.
- */
-function findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>> {
-    return request<IFindAllListingTransactionsParameters, TResult>("/listings/:listing_id/transactions", parameters, "GET", options);
-}
+    /**
+     * Retrieves a Shop_Transaction by id.
+     */
+    static getShop_Transaction<TResult>(parameters: IGetShopTransactionParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>> {
+        return request<IGetShopTransactionParameters, TResult>("/transactions/:transaction_id", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
- */
-function findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>> {
-    return request<IFindAllShopReceipt2TransactionsParameters, TResult>("/receipts/:receipt_id/transactions", parameters, "GET", options);
-}
+    /**
+     * Retrieves a set of Transaction objects associated to a Listing.
+     */
+    static findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>> {
+        return request<IFindAllListingTransactionsParameters, TResult>("/listings/:listing_id/transactions", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Transaction objects associated to a Shop.
- */
-function findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>> {
-    return request<IFindAllShopTransactionsParameters, TResult>("/shops/:shop_id/transactions", parameters, "GET", options);
-}
+    /**
+     * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
+     */
+    static findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>> {
+        return request<IFindAllShopReceipt2TransactionsParameters, TResult>("/receipts/:receipt_id/transactions", parameters, "GET", options);
+    }
 
-/**
- * Retrieves a set of Transaction objects associated to a User.
- */
-function findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>> {
-    return request<IFindAllUserBuyerTransactionsParameters, TResult>("/users/:user_id/transactions", parameters, "GET", options);
-}
+    /**
+     * Retrieves a set of Transaction objects associated to a Shop.
+     */
+    static findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>> {
+        return request<IFindAllShopTransactionsParameters, TResult>("/shops/:shop_id/transactions", parameters, "GET", options);
+    }
 
-export const Transaction = {
-    getShop_Transaction,
-    findAllListingTransactions,
-    findAllShop_Receipt2Transactions,
-    findAllShopTransactions,
-    findAllUserBuyerTransactions
-};
+    /**
+     * Retrieves a set of Transaction objects associated to a User.
+     */
+    static findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>> {
+        return request<IFindAllUserBuyerTransactionsParameters, TResult>("/users/:user_id/transactions", parameters, "GET", options);
+    }
+}

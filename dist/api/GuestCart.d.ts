@@ -116,41 +116,33 @@ export interface IDeleteGuestCartParameters extends IStandardParameters {
     guest_id: any;
     cart_id: string | number;
 }
-/**
- * Get all guest's carts
- */
-declare function findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
-/**
- * Add a listing to guest's cart
- */
-declare function addToGuestCart<TResult>(parameters: IAddToGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
-/**
- * Update a guest's cart listing purchase quantity
- */
-declare function updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
-/**
- * Remove a listing from a guest's cart
- */
-declare function removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
-/**
- * Get a guest's cart
- */
-declare function findGuestCart<TResult>(parameters: IFindGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
-/**
- * Update a guest's cart
- */
-declare function updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
-/**
- * Delete a guest's cart
- */
-declare function deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
-export declare const GuestCart: {
-    findAllGuestCarts: typeof findAllGuestCarts;
-    addToGuestCart: typeof addToGuestCart;
-    updateGuestCartListingQuantity: typeof updateGuestCartListingQuantity;
-    removeGuestCartListing: typeof removeGuestCartListing;
-    findGuestCart: typeof findGuestCart;
-    updateGuestCart: typeof updateGuestCart;
-    deleteGuestCart: typeof deleteGuestCart;
-};
-export {};
+export declare class GuestCart {
+    /**
+     * Get all guest's carts
+     */
+    static findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>>;
+    /**
+     * Add a listing to guest's cart
+     */
+    static addToGuestCart<TResult>(parameters: IAddToGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>>;
+    /**
+     * Update a guest's cart listing purchase quantity
+     */
+    static updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>;
+    /**
+     * Remove a listing from a guest's cart
+     */
+    static removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>;
+    /**
+     * Get a guest's cart
+     */
+    static findGuestCart<TResult>(parameters: IFindGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IFindGuestCartParameters, TResult>>;
+    /**
+     * Update a guest's cart
+     */
+    static updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>>;
+    /**
+     * Delete a guest's cart
+     */
+    static deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>>;
+}

@@ -61,51 +61,50 @@ export interface IFindPaymentAdjustmentsParameters extends IStandardParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindPaymentAdjustmentParameters extends IStandardParameters {
     payment_id: number,
     payment_adjustment_id: number
 }
+
 export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters extends IStandardParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
 
-//methods
-/**
- * Get a Payment Adjustments from a Payment Id
- */
-function findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
-    return request<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET", options);
-}
+//methods class
+export class PaymentAdjustment {
 
-/**
- * Get an Etsy Payments Transaction Adjustment
- */
-function findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
-    return request<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET", options);
-}
+    /**
+     * Get a Payment Adjustments from a Payment Id
+     */
+    static findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
+        return request<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET", options);
+    }
 
-/**
- * Get a Payment Adjustment from a Ledger Entry ID, if applicable
- */
-function findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
-    return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
-}
+    /**
+     * Get an Etsy Payments Transaction Adjustment
+     */
+    static findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
+        return request<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET", options);
+    }
 
-/**
- * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
- */
-function findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>> {
-    return request<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>("/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
-}
+    /**
+     * Get a Payment Adjustment from a Ledger Entry ID, if applicable
+     */
+    static findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
+        return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
+    }
 
-export const PaymentAdjustment = {
-    findPaymentAdjustments,
-    findPaymentAdjustment,
-    findPaymentAdjustmentForLedgerEntry,
-    findPaymentAdjustmentForPaymentAccountLedgerEntry
-};
+    /**
+     * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
+     */
+    static findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>> {
+        return request<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>("/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
+    }
+}

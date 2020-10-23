@@ -40,4 +40,5 @@ export interface ITreasuryListingData {
      */
     image_url_170x135: string;
 }
-export declare const TreasuryListingData: {};
+export declare class TreasuryListingData {
+}

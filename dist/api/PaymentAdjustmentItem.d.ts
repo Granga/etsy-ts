@@ -27,18 +27,25 @@ export interface IPaymentAdjustmentItem {
      */
     create_date: number;
 }
-export interface IFindPaymentAdjustmentItemParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentItemsParameters extends IStandardParameters {
     payment_id: number;
     payment_adjustment_id: number;
     limit?: number;
     offset?: number;
     page?: number;
 }
-/**
- * Get Etsy Payments Transaction Adjustment Items
- */
-declare function findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
-export declare const PaymentAdjustmentItem: {
-    findPaymentAdjustmentItem: typeof findPaymentAdjustmentItem;
-};
-export {};
+export interface IFindPaymentAdjustmentItemParameters extends IStandardParameters {
+    payment_id: number;
+    payment_adjustment_id: number;
+    payment_adjustment_item_id: number;
+}
+export declare class PaymentAdjustmentItem {
+    /**
+     * Get Etsy Payments Transaction Adjustment Items
+     */
+    static findPaymentAdjustmentItems<TResult>(parameters: IFindPaymentAdjustmentItemsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemsParameters, TResult>>;
+    /**
+     * Get an Etsy Payments Transaction Adjustment Item
+     */
+    static findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>;
+}

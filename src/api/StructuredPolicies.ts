@@ -46,7 +46,7 @@ export interface IStructuredPolicies {
 //parameters types
 
 
-//methods
+//methods class
+export class StructuredPolicies {
 
-
-export const StructuredPolicies = {};
+}

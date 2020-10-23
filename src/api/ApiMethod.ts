@@ -39,12 +39,13 @@ export interface IGetMethodTableParameters extends IStandardParameters {
 
 }
 
-//methods
-/**
- * Get a list of all methods available.
- */
-function getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
-    return request<IGetMethodTableParameters, TResult>("/", parameters, "GET", options);
-}
+//methods class
+export class ApiMethod {
 
-export const ApiMethod = {getMethodTable};
+    /**
+     * Get a list of all methods available.
+     */
+    static getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
+        return request<IGetMethodTableParameters, TResult>("/", parameters, "GET", options);
+    }
+}

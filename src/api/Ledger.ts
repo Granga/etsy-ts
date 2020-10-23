@@ -31,12 +31,13 @@ export interface IFindLedgerParameters extends IStandardParameters {
     shop_id: string | number
 }
 
-//methods
-/**
- * Get a Shop Payment Account Ledger
- */
-function findLedger<TResult>(parameters: IFindLedgerParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
-    return request<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET", options);
-}
+//methods class
+export class Ledger {
 
-export const Ledger = {findLedger};
+    /**
+     * Get a Shop Payment Account Ledger
+     */
+    static findLedger<TResult>(parameters: IFindLedgerParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerParameters, TResult>> {
+        return request<IFindLedgerParameters, TResult>("/shops/:shop_id/ledger/", parameters, "GET", options);
+    }
+}

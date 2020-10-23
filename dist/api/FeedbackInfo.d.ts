@@ -8,4 +8,5 @@ export interface IFeedbackInfo {
      */
     score: number;
 }
-export declare const FeedbackInfo: {};
+export declare class FeedbackInfo {
+}
