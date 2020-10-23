@@ -1,35 +1,28 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentTemplate = void 0;
-var client_1 = require("../client/client");
+import { request } from "../client/client";
 //methods class
-var PaymentTemplate = /** @class */ (function () {
-    function PaymentTemplate() {
-    }
+export class PaymentTemplate {
     /**
      * Retrieves the PaymentTemplate associated with the Shop
      */
-    PaymentTemplate.findShopPaymentTemplates = function (parameters, options) {
-        return client_1.request("/shops/:shop_id/payment_templates", parameters, "GET", options);
-    };
+    static findShopPaymentTemplates(parameters, options) {
+        return request("/shops/:shop_id/payment_templates", parameters, "GET", options);
+    }
     /**
      * Creates a new PaymentTemplate
      */
-    PaymentTemplate.createShopPaymentTemplate = function (parameters, options) {
-        return client_1.request("/shops/:shop_id/payment_templates", parameters, "POST", options);
-    };
+    static createShopPaymentTemplate(parameters, options) {
+        return request("/shops/:shop_id/payment_templates", parameters, "POST", options);
+    }
     /**
      * Updates a PaymentTemplate
      */
-    PaymentTemplate.updateShopPaymentTemplate = function (parameters, options) {
-        return client_1.request("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT", options);
-    };
+    static updateShopPaymentTemplate(parameters, options) {
+        return request("/shops/:shop_id/payment_templates/:payment_template_id", parameters, "PUT", options);
+    }
     /**
      * Retrieves a set of PaymentTemplate objects associated to a User.
      */
-    PaymentTemplate.findAllUserPaymentTemplates = function (parameters, options) {
-        return client_1.request("/users/:user_id/payments/templates", parameters, "GET", options);
-    };
-    return PaymentTemplate;
-}());
-exports.PaymentTemplate = PaymentTemplate;
+    static findAllUserPaymentTemplates(parameters, options) {
+        return request("/users/:user_id/payments/templates", parameters, "GET", options);
+    }
+}

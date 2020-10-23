@@ -1,53 +1,46 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GuestCart = void 0;
-var client_1 = require("../client/client");
+import { request } from "../client/client";
 //methods class
-var GuestCart = /** @class */ (function () {
-    function GuestCart() {
-    }
+export class GuestCart {
     /**
      * Get all guest's carts
      */
-    GuestCart.findAllGuestCarts = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts", parameters, "GET", options);
-    };
+    static findAllGuestCarts(parameters, options) {
+        return request("/guests/:guest_id/carts", parameters, "GET", options);
+    }
     /**
      * Add a listing to guest's cart
      */
-    GuestCart.addToGuestCart = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts", parameters, "POST", options);
-    };
+    static addToGuestCart(parameters, options) {
+        return request("/guests/:guest_id/carts", parameters, "POST", options);
+    }
     /**
      * Update a guest's cart listing purchase quantity
      */
-    GuestCart.updateGuestCartListingQuantity = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts", parameters, "PUT", options);
-    };
+    static updateGuestCartListingQuantity(parameters, options) {
+        return request("/guests/:guest_id/carts", parameters, "PUT", options);
+    }
     /**
      * Remove a listing from a guest's cart
      */
-    GuestCart.removeGuestCartListing = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts", parameters, "DELETE", options);
-    };
+    static removeGuestCartListing(parameters, options) {
+        return request("/guests/:guest_id/carts", parameters, "DELETE", options);
+    }
     /**
      * Get a guest's cart
      */
-    GuestCart.findGuestCart = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "GET", options);
-    };
+    static findGuestCart(parameters, options) {
+        return request("/guests/:guest_id/carts/:cart_id", parameters, "GET", options);
+    }
     /**
      * Update a guest's cart
      */
-    GuestCart.updateGuestCart = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "PUT", options);
-    };
+    static updateGuestCart(parameters, options) {
+        return request("/guests/:guest_id/carts/:cart_id", parameters, "PUT", options);
+    }
     /**
      * Delete a guest's cart
      */
-    GuestCart.deleteGuestCart = function (parameters, options) {
-        return client_1.request("/guests/:guest_id/carts/:cart_id", parameters, "DELETE", options);
-    };
-    return GuestCart;
-}());
-exports.GuestCart = GuestCart;
+    static deleteGuestCart(parameters, options) {
+        return request("/guests/:guest_id/carts/:cart_id", parameters, "DELETE", options);
+    }
+}

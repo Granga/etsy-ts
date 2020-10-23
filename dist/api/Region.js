@@ -1,29 +1,22 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Region = void 0;
-var client_1 = require("../client/client");
+import { request } from "../client/client";
 //methods class
-var Region = /** @class */ (function () {
-    function Region() {
-    }
+export class Region {
     /**
      * Finds all Region.
      */
-    Region.findAllRegion = function (parameters, options) {
-        return client_1.request("/regions", parameters, "GET", options);
-    };
+    static findAllRegion(parameters, options) {
+        return request("/regions", parameters, "GET", options);
+    }
     /**
      * Retrieves a Region by id.
      */
-    Region.getRegion = function (parameters, options) {
-        return client_1.request("/regions/:region_id", parameters, "GET", options);
-    };
+    static getRegion(parameters, options) {
+        return request("/regions/:region_id", parameters, "GET", options);
+    }
     /**
      *
      */
-    Region.findEligibleRegions = function (parameters, options) {
-        return client_1.request("/regions/eligible", parameters, "GET", options);
-    };
-    return Region;
-}());
-exports.Region = Region;
+    static findEligibleRegions(parameters, options) {
+        return request("/regions/eligible", parameters, "GET", options);
+    }
+}

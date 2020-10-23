@@ -1,17 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ListingProduct = void 0;
-var client_1 = require("../client/client");
+import { request } from "../client/client";
 //methods class
-var ListingProduct = /** @class */ (function () {
-    function ListingProduct() {
-    }
+export class ListingProduct {
     /**
      * Get a specific offering for a listing
      */
-    ListingProduct.getProduct = function (parameters, options) {
-        return client_1.request("/listings/:listing_id/products/:product_id", parameters, "GET", options);
-    };
-    return ListingProduct;
-}());
-exports.ListingProduct = ListingProduct;
+    static getProduct(parameters, options) {
+        return request("/listings/:listing_id/products/:product_id", parameters, "GET", options);
+    }
+}
