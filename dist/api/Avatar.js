@@ -1,16 +1,23 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Avatar = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class Avatar {
+var Avatar = /** @class */ (function () {
+    function Avatar() {
+    }
     /**
      * Upload a new user avatar image
      */
-    static uploadAvatar(parameters, options) {
-        return request("/users/:user_id/avatar", parameters, "POST", options);
-    }
+    Avatar.uploadAvatar = function (parameters, options) {
+        return client_1.request("/users/:user_id/avatar", parameters, "POST", options);
+    };
     /**
      * Get avatar image source
      */
-    static getAvatarImgSrc(parameters, options) {
-        return request("/users/:user_id/avatar/src", parameters, "GET", options);
-    }
-}
+    Avatar.getAvatarImgSrc = function (parameters, options) {
+        return client_1.request("/users/:user_id/avatar/src", parameters, "GET", options);
+    };
+    return Avatar;
+}());
+exports.Avatar = Avatar;

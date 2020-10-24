@@ -1,10 +1,17 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApiMethod = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class ApiMethod {
+var ApiMethod = /** @class */ (function () {
+    function ApiMethod() {
+    }
     /**
      * Get a list of all methods available.
      */
-    static getMethodTable(parameters, options) {
-        return request("/", parameters, "GET", options);
-    }
-}
+    ApiMethod.getMethodTable = function (parameters, options) {
+        return client_1.request("/", parameters, "GET", options);
+    };
+    return ApiMethod;
+}());
+exports.ApiMethod = ApiMethod;

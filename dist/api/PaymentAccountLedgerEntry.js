@@ -1,10 +1,17 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaymentAccountLedgerEntry = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class PaymentAccountLedgerEntry {
+var PaymentAccountLedgerEntry = /** @class */ (function () {
+    function PaymentAccountLedgerEntry() {
+    }
     /**
      * Get a Shop Payment Account Ledger's Entries
      */
-    static findPaymentAccountEntries(parameters, options) {
-        return request("/shops/:shop_id/payment_account/entries", parameters, "GET", options);
-    }
-}
+    PaymentAccountLedgerEntry.findPaymentAccountEntries = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/payment_account/entries", parameters, "GET", options);
+    };
+    return PaymentAccountLedgerEntry;
+}());
+exports.PaymentAccountLedgerEntry = PaymentAccountLedgerEntry;

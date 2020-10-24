@@ -1,10 +1,17 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Ledger = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class Ledger {
+var Ledger = /** @class */ (function () {
+    function Ledger() {
+    }
     /**
      * Get a Shop Payment Account Ledger
      */
-    static findLedger(parameters, options) {
-        return request("/shops/:shop_id/ledger/", parameters, "GET", options);
-    }
-}
+    Ledger.findLedger = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/ledger/", parameters, "GET", options);
+    };
+    return Ledger;
+}());
+exports.Ledger = Ledger;

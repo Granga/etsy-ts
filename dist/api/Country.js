@@ -1,22 +1,29 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Country = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class Country {
+var Country = /** @class */ (function () {
+    function Country() {
+    }
     /**
      * Finds all Country.
      */
-    static findAllCountry(parameters, options) {
-        return request("/countries", parameters, "GET", options);
-    }
+    Country.findAllCountry = function (parameters, options) {
+        return client_1.request("/countries", parameters, "GET", options);
+    };
     /**
      * Retrieves a Country by id.
      */
-    static getCountry(parameters, options) {
-        return request("/countries/:country_id", parameters, "GET", options);
-    }
+    Country.getCountry = function (parameters, options) {
+        return client_1.request("/countries/:country_id", parameters, "GET", options);
+    };
     /**
      * Get the country info for the given ISO code.
      */
-    static findByIsoCode(parameters, options) {
-        return request("/countries/iso/:iso_code", parameters, "GET", options);
-    }
-}
+    Country.findByIsoCode = function (parameters, options) {
+        return client_1.request("/countries/iso/:iso_code", parameters, "GET", options);
+    };
+    return Country;
+}());
+exports.Country = Country;

@@ -1,10 +1,17 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BillPayment = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class BillPayment {
+var BillPayment = /** @class */ (function () {
+    function BillPayment() {
+    }
     /**
      * Retrieves a set of BillPayment objects associated to a User.
      */
-    static findAllUserPayments(parameters, options) {
-        return request("/users/:user_id/payments", parameters, "GET", options);
-    }
-}
+    BillPayment.findAllUserPayments = function (parameters, options) {
+        return client_1.request("/users/:user_id/payments", parameters, "GET", options);
+    };
+    return BillPayment;
+}());
+exports.BillPayment = BillPayment;

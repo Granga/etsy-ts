@@ -1,28 +1,35 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ShippingTemplateEntry = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class ShippingTemplateEntry {
+var ShippingTemplateEntry = /** @class */ (function () {
+    function ShippingTemplateEntry() {
+    }
     /**
      * Creates a new ShippingTemplateEntry
      */
-    static createShippingTemplateEntry(parameters, options) {
-        return request("/shipping/templates/entries", parameters, "POST", options);
-    }
+    ShippingTemplateEntry.createShippingTemplateEntry = function (parameters, options) {
+        return client_1.request("/shipping/templates/entries", parameters, "POST", options);
+    };
     /**
      * Retrieves a ShippingTemplateEntry by id.
      */
-    static getShippingTemplateEntry(parameters, options) {
-        return request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET", options);
-    }
+    ShippingTemplateEntry.getShippingTemplateEntry = function (parameters, options) {
+        return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "GET", options);
+    };
     /**
      * Updates a ShippingTemplateEntry
      */
-    static updateShippingTemplateEntry(parameters, options) {
-        return request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT", options);
-    }
+    ShippingTemplateEntry.updateShippingTemplateEntry = function (parameters, options) {
+        return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "PUT", options);
+    };
     /**
      * Deletes the ShippingTemplateEntry
      */
-    static deleteShippingTemplateEntry(parameters, options) {
-        return request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE", options);
-    }
-}
+    ShippingTemplateEntry.deleteShippingTemplateEntry = function (parameters, options) {
+        return client_1.request("/shipping/templates/entries/:shipping_template_entry_id", parameters, "DELETE", options);
+    };
+    return ShippingTemplateEntry;
+}());
+exports.ShippingTemplateEntry = ShippingTemplateEntry;

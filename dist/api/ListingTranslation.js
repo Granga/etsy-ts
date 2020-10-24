@@ -1,28 +1,35 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListingTranslation = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class ListingTranslation {
+var ListingTranslation = /** @class */ (function () {
+    function ListingTranslation() {
+    }
     /**
      * Retrieves a ListingTranslation by listing_id and language
      */
-    static getListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "GET", options);
-    }
+    ListingTranslation.getListingTranslation = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "GET", options);
+    };
     /**
      * Creates a ListingTranslation by listing_id and language
      */
-    static createListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "POST", options);
-    }
+    ListingTranslation.createListingTranslation = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "POST", options);
+    };
     /**
      * Updates a ListingTranslation by listing_id and language
      */
-    static updateListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "PUT", options);
-    }
+    ListingTranslation.updateListingTranslation = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "PUT", options);
+    };
     /**
      * Deletes a ListingTranslation by listing_id and language
      */
-    static deleteListingTranslation(parameters, options) {
-        return request("/listings/:listing_id/translations/:language", parameters, "DELETE", options);
-    }
-}
+    ListingTranslation.deleteListingTranslation = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/translations/:language", parameters, "DELETE", options);
+    };
+    return ListingTranslation;
+}());
+exports.ListingTranslation = ListingTranslation;

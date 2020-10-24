@@ -1,4 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReceiptShipment = void 0;
 //parameters types
 //methods class
-export class ReceiptShipment {
-}
+var ReceiptShipment = /** @class */ (function () {
+    function ReceiptShipment() {
+    }
+    return ReceiptShipment;
+}());
+exports.ReceiptShipment = ReceiptShipment;

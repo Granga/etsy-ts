@@ -1,28 +1,35 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ShopTranslation = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class ShopTranslation {
+var ShopTranslation = /** @class */ (function () {
+    function ShopTranslation() {
+    }
     /**
      * Retrieves a ShopTranslation by shop_id and language
      */
-    static getShopTranslation(parameters, options) {
-        return request("/shops/:shop_id/translations/:language", parameters, "GET", options);
-    }
+    ShopTranslation.getShopTranslation = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/translations/:language", parameters, "GET", options);
+    };
     /**
      * Creates a ShopTranslation by shop_id and language
      */
-    static createShopTranslation(parameters, options) {
-        return request("/shops/:shop_id/translations/:language", parameters, "POST", options);
-    }
+    ShopTranslation.createShopTranslation = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/translations/:language", parameters, "POST", options);
+    };
     /**
      * Updates a ShopTranslation by shop_id and language
      */
-    static updateShopTranslation(parameters, options) {
-        return request("/shops/:shop_id/translations/:language", parameters, "PUT", options);
-    }
+    ShopTranslation.updateShopTranslation = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/translations/:language", parameters, "PUT", options);
+    };
     /**
      * Deletes a ShopTranslation by shop_id and language
      */
-    static deleteShopTranslation(parameters, options) {
-        return request("/shops/:shop_id/translations/:language", parameters, "DELETE", options);
-    }
-}
+    ShopTranslation.deleteShopTranslation = function (parameters, options) {
+        return client_1.request("/shops/:shop_id/translations/:language", parameters, "DELETE", options);
+    };
+    return ShopTranslation;
+}());
+exports.ShopTranslation = ShopTranslation;

@@ -1,16 +1,23 @@
-import { request } from "../client/client";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListingVariationImage = void 0;
+var client_1 = require("../client/client");
 //methods class
-export class ListingVariationImage {
+var ListingVariationImage = /** @class */ (function () {
+    function ListingVariationImage() {
+    }
     /**
      * Gets all variation images on a listing
      */
-    static getVariationImages(parameters, options) {
-        return request("/listings/:listing_id/variation-images", parameters, "GET", options);
-    }
+    ListingVariationImage.getVariationImages = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/variation-images", parameters, "GET", options);
+    };
     /**
      * Creates variation images on a listing
      */
-    static updateVariationImages(parameters, options) {
-        return request("/listings/:listing_id/variation-images", parameters, "POST", options);
-    }
-}
+    ListingVariationImage.updateVariationImages = function (parameters, options) {
+        return client_1.request("/listings/:listing_id/variation-images", parameters, "POST", options);
+    };
+    return ListingVariationImage;
+}());
+exports.ListingVariationImage = ListingVariationImage;
