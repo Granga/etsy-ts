@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface IShippingOption {
     /**
      * The ID of the shipping option.
@@ -25,5 +25,5 @@ export interface IShippingOption {
 export declare class ShippingOption {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

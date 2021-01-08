@@ -42,7 +42,7 @@ function createClient(
     });
 
     client.interceptors.request.use((config: AxiosRequestConfig) => {
-        if (tokens?.apiKeys && tokens?.clientToken) {
+        if (tokens?.apiKeys && tokens?.token) {
             let requestData: OAuth.RequestOptions = {
                 url: combineURLs(config.baseURL as string, config.url as string),
                 method: config.method as string,
@@ -132,6 +132,6 @@ function generateOAuthHeader(
                 .update(base_string)
                 .digest('base64'),
     });
-    let authorized_data = oauth.authorize(request_data, tokens.clientToken);
+    let authorized_data = oauth.authorize(request_data, tokens.token);
     return oauth.toHeader(authorized_data);
 }

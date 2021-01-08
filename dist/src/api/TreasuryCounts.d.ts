@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface ITreasuryCounts {
     /**
      * The number of times the Treasury has been clicked on
@@ -21,5 +21,5 @@ export interface ITreasuryCounts {
 export declare class TreasuryCounts {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

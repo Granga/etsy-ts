@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface ITreasuryListingData {
     /**
      * The numeric ID of the user who posted the item
@@ -45,5 +45,5 @@ export interface ITreasuryListingData {
 export declare class TreasuryListingData {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

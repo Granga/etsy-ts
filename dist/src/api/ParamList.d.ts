@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface IParamList {
     /**
      * Each field in the record represents an Etsy API method parameter.  The value corresponds to one of the documented data or resource types.
@@ -9,5 +9,5 @@ export interface IParamList {
 export declare class ParamList {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

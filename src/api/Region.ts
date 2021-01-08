@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { Token } from "oauth-1.0a";
 import { request } from "../client/Request";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
 import { IOAuthTokens } from "../types/IOAuthTokens";
 import { IStandardParameters } from "../types/IStandardParameters";
 import { IStandardResponse } from "../types/IStandardResponse";
@@ -38,7 +38,7 @@ export interface IFindEligibleRegionsParameters {
 export class Region {
     constructor(
         private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: ApiKeyDetails
+        private readonly apiKeys: Token
     ) {
     }
 

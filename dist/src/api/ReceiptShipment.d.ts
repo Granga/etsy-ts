@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface IReceiptShipment {
     /**
      * Shipping carrier name.
@@ -29,5 +29,5 @@ export interface IReceiptShipment {
 export declare class ReceiptShipment {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 
 //fields
 export interface ITaxonomyPropertyValue {
@@ -32,7 +32,7 @@ export interface ITaxonomyPropertyValue {
 export class TaxonomyPropertyValue {
     constructor(
         private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: ApiKeyDetails
+        private readonly apiKeys: Token
     ) {
     }
 

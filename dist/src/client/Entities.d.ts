@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from "axios";
+import { Token } from "oauth-1.0a";
 import { ApiMethod } from "../api/ApiMethod";
 import { Avatar } from "../api/Avatar";
 import { BillCharge } from "../api/BillCharge";
@@ -66,11 +67,10 @@ import { TreasuryListingData } from "../api/TreasuryListingData";
 import { User } from "../api/User";
 import { UserAddress } from "../api/UserAddress";
 import { UserProfile } from "../api/UserProfile";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
 export declare class Entities {
     private axiosConfig;
     private apiKeys;
-    constructor(axiosConfig: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(axiosConfig: AxiosRequestConfig, apiKeys: Token);
     ApiMethod: ApiMethod;
     Avatar: Avatar;
     BillCharge: BillCharge;

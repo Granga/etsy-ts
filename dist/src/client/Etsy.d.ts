@@ -1,15 +1,14 @@
 import { AxiosRequestConfig } from "axios";
-import OAuth from "oauth-1.0a";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 import { Entities } from "./Entities";
 export interface IOptions {
     baseUrl?: string;
     json?: boolean;
-    token?: OAuth.Token;
+    token?: Token;
 }
 export declare class Etsy extends Entities {
     constructor(options: {
-        apiKeys: ApiKeyDetails;
+        apiKeys: Token;
         axiosConfig?: AxiosRequestConfig;
     });
 }

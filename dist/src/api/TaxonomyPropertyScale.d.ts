@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 export interface ITaxonomyPropertyScale {
     /**
      * The ID of the scale.
@@ -17,5 +17,5 @@ export interface ITaxonomyPropertyScale {
 export declare class TaxonomyPropertyScale {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
 }

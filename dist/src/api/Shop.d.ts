@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 import { IOAuthTokens } from "../types/IOAuthTokens";
 import { IStandardParameters } from "../types/IStandardParameters";
 import { IStandardResponse } from "../types/IStandardResponse";
@@ -259,7 +259,7 @@ export interface IFindAllUserShopsParameters {
 export declare class Shop {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
     /**
      * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
      */

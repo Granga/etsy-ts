@@ -2,29 +2,44 @@
 
 Most of the code in this package is _generated_ by [etsy-api-scrapper](https://github.com/Granga/etsy-api-scraper).
 
-See [Etsy API reference](https://www.etsy.com/developers/documentation/getting_started/api_basics#reference) for detailed info on methods and types you can find in this wrapper.
+See [Etsy API reference](https://www.etsy.com/developers/documentation/getting_started/api_basics#reference) for
+detailed info on methods and types you can find in this wrapper.
 
 ## Installation:
+
 `npm install etsy-ts --save`
 
 ## Usage:
+
 ```typescript
-import {User, Shop, Listing, IUser, IShop, IListing} from "etsy-ts";
+import { User, Shop, Listing, IUser, IShop, IListing } from "etsy-ts";
+import OAuth from "oauth-1.0a";
 
 (async () => {
+    let client = new Etsy({
+        apiKeys: {
+            key: "<ETSY API KEY>",
+            secret: "<ETSY API SECRET>"
+        },
+    });
+
+    let token: OAuth.Token = {
+        key: "<USER OAUTH KEY>",
+        secret: "<USER OAUTH TOKEN>"
+    };
+
     //get user, then user's shop, then shop's listings
-    let user = (await User.getUser<IUser>({
-        //add your api_key here
+    let user = (await client.User.getUser<IUser>({
         user_id: ["rptr"]
-    })).results[0];
+    }, {token})).data.results[0];
 
-    let shop = (await Shop.findAllUserShops<IShop>({
+    let shop = (await client.Shop.findAllUserShops<IShop>({
         user_id: user.login_name
-    })).results[0];
+    }, {token})).data.results[0];
 
-    let listings = (await Listing.findAllShopListingsActive<IListing>({
+    let listings = (await client.Listing.findAllShopListingsActive<IListing>({
         shop_id: shop.shop_id
-    })).results;
+    }, {token})).data.results;
 
     console.log("User:", user);
     console.log("Shop:", shop);

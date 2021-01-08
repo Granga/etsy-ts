@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { Token } from "oauth-1.0a";
 import { IOAuthTokens } from "../types/IOAuthTokens";
 import { IStandardParameters } from "../types/IStandardParameters";
 import { IStandardResponse } from "../types/IStandardResponse";
@@ -33,7 +33,7 @@ export interface IGetOfferingParameters {
 export declare class ListingOffering {
     private readonly config;
     private readonly apiKeys;
-    constructor(config: AxiosRequestConfig, apiKeys: ApiKeyDetails);
+    constructor(config: AxiosRequestConfig, apiKeys: Token);
     /**
      * Get a specific offering for a listing
      */
