@@ -7,8 +7,7 @@
     "outDir": "dist",
     "strict": false,
     "esModuleInterop": true,
-    "noImplicitAny": false,
-    "inlineSourceMap": true
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules",
