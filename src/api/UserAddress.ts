@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IUserAddress {
@@ -51,14 +54,14 @@ export interface IUserAddress {
 }
 
 //parameters types
-export interface IFindAllUserAddressesParameters extends IStandardParameters {
+export interface IFindAllUserAddressesParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface ICreateUserAddressParameters extends IStandardParameters {
+export interface ICreateUserAddressParameters {
     user_id: string | number,
     name: string,
     first_line: string,
@@ -69,42 +72,76 @@ export interface ICreateUserAddressParameters extends IStandardParameters {
     country_id: number
 }
 
-export interface IGetUserAddressParameters extends IStandardParameters {
+export interface IGetUserAddressParameters {
     user_address_id: number[]
 }
 
-export interface IDeleteUserAddressParameters extends IStandardParameters {
+export interface IDeleteUserAddressParameters {
     user_address_id: number
 }
 
 //methods class
 export class UserAddress {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a set of UserAddress objects associated to a User.
      */
-    static findAllUserAddresses<TResult>(parameters: IFindAllUserAddressesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserAddressesParameters, TResult>> {
-        return request<IFindAllUserAddressesParameters, TResult>("/users/:user_id/addresses", parameters, "GET", options);
+    async findAllUserAddresses<TResult>(
+        params: IFindAllUserAddressesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserAddressesParameters, TResult>>> {
+        return request<IFindAllUserAddressesParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/addresses",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
      */
-    static createUserAddress<TResult>(parameters: ICreateUserAddressParameters, options?: IOptions): Promise<IStandardResponse<ICreateUserAddressParameters, TResult>> {
-        return request<ICreateUserAddressParameters, TResult>("/users/:user_id/addresses/", parameters, "POST", options);
+    async createUserAddress<TResult>(
+        params: ICreateUserAddressParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ICreateUserAddressParameters, TResult>>> {
+        return request<ICreateUserAddressParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/addresses/",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a UserAddress by id.
      */
-    static getUserAddress<TResult>(parameters: IGetUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IGetUserAddressParameters, TResult>> {
-        return request<IGetUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "GET", options);
+    async getUserAddress<TResult>(
+        params: IGetUserAddressParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserAddressParameters, TResult>>> {
+        return request<IGetUserAddressParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/addresses/:user_address_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Deletes the UserAddress with the given id.
      */
-    static deleteUserAddress<TResult>(parameters: IDeleteUserAddressParameters, options?: IOptions): Promise<IStandardResponse<IDeleteUserAddressParameters, TResult>> {
-        return request<IDeleteUserAddressParameters, TResult>("/users/:user_id/addresses/:user_address_id", parameters, "DELETE", options);
+    async deleteUserAddress<TResult>(
+        params: IDeleteUserAddressParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteUserAddressParameters, TResult>>> {
+        return request<IDeleteUserAddressParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/addresses/:user_address_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

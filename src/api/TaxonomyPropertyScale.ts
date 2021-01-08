@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface ITaxonomyPropertyScale {
     /**
@@ -19,5 +22,11 @@ export interface ITaxonomyPropertyScale {
 
 //methods class
 export class TaxonomyPropertyScale {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

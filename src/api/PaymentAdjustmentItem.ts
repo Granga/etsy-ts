@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IPaymentAdjustmentItem {
@@ -31,7 +34,7 @@ export interface IPaymentAdjustmentItem {
 }
 
 //parameters types
-export interface IFindPaymentAdjustmentItemsParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentItemsParameters {
     payment_id: number,
     payment_adjustment_id: number,
     limit?: number,
@@ -39,7 +42,7 @@ export interface IFindPaymentAdjustmentItemsParameters extends IStandardParamete
     page?: number
 }
 
-export interface IFindPaymentAdjustmentItemParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentItemParameters {
     payment_id: number,
     payment_adjustment_id: number,
     payment_adjustment_item_id: number
@@ -47,18 +50,38 @@ export interface IFindPaymentAdjustmentItemParameters extends IStandardParameter
 
 //methods class
 export class PaymentAdjustmentItem {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get Etsy Payments Transaction Adjustment Items
      */
-    static findPaymentAdjustmentItems<TResult>(parameters: IFindPaymentAdjustmentItemsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemsParameters, TResult>> {
-        return request<IFindPaymentAdjustmentItemsParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id/items", parameters, "GET", options);
+    async findPaymentAdjustmentItems<TResult>(
+        params: IFindPaymentAdjustmentItemsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemsParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentItemsParameters, TResult>({
+            ...this.config,
+            url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get an Etsy Payments Transaction Adjustment Item
      */
-    static findPaymentAdjustmentItem<TResult>(parameters: IFindPaymentAdjustmentItemParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>> {
-        return request<IFindPaymentAdjustmentItemParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id/items/:payment_adjustment_item_id", parameters, "GET", options);
+    async findPaymentAdjustmentItem<TResult>(
+        params: IFindPaymentAdjustmentItemParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentItemParameters, TResult>({
+            ...this.config,
+            url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items/:payment_adjustment_item_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IPaymentAdjustment {
@@ -55,56 +58,90 @@ export interface IPaymentAdjustment {
 }
 
 //parameters types
-export interface IFindPaymentAdjustmentsParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentsParameters {
     payment_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindPaymentAdjustmentParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentParameters {
     payment_id: number,
     payment_adjustment_id: number
 }
 
-export interface IFindPaymentAdjustmentForLedgerEntryParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentForLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
 
-export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters extends IStandardParameters {
+export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
 
 //methods class
 export class PaymentAdjustment {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a Payment Adjustments from a Payment Id
      */
-    static findPaymentAdjustments<TResult>(parameters: IFindPaymentAdjustmentsParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>> {
-        return request<IFindPaymentAdjustmentsParameters, TResult>("/payments/:payment_id/adjustments", parameters, "GET", options);
+    async findPaymentAdjustments<TResult>(
+        params: IFindPaymentAdjustmentsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentsParameters, TResult>({
+            ...this.config,
+            url: "/payments/:payment_id/adjustments",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get an Etsy Payments Transaction Adjustment
      */
-    static findPaymentAdjustment<TResult>(parameters: IFindPaymentAdjustmentParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>> {
-        return request<IFindPaymentAdjustmentParameters, TResult>("/payments/:payment_id/adjustments/:payment_adjustment_id", parameters, "GET", options);
+    async findPaymentAdjustment<TResult>(
+        params: IFindPaymentAdjustmentParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentParameters, TResult>({
+            ...this.config,
+            url: "/payments/:payment_id/adjustments/:payment_adjustment_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a Payment Adjustment from a Ledger Entry ID, if applicable
      */
-    static findPaymentAdjustmentForLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>> {
-        return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
+    async findPaymentAdjustmentForLedgerEntry<TResult>(
+        params: IFindPaymentAdjustmentForLedgerEntryParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
      */
-    static findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(parameters: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>> {
-        return request<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>("/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", parameters, "GET", options);
+    async findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(
+        params: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>> {
+        return request<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

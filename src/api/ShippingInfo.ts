@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IShippingInfo {
@@ -47,11 +50,11 @@ export interface IShippingInfo {
 }
 
 //parameters types
-export interface IFindAllListingShippingProfileEntriesParameters extends IStandardParameters {
+export interface IFindAllListingShippingProfileEntriesParameters {
 
 }
 
-export interface ICreateShippingInfoParameters extends IStandardParameters {
+export interface ICreateShippingInfoParameters {
     destination_country_id?: number,
     primary_cost: number,
     secondary_cost: number,
@@ -59,11 +62,11 @@ export interface ICreateShippingInfoParameters extends IStandardParameters {
     listing_id: number
 }
 
-export interface IGetShippingInfoParameters extends IStandardParameters {
+export interface IGetShippingInfoParameters {
     shipping_info_id: number[]
 }
 
-export interface IUpdateShippingInfoParameters extends IStandardParameters {
+export interface IUpdateShippingInfoParameters {
     shipping_info_id: number,
     destination_country_id?: number,
     primary_cost?: number,
@@ -72,45 +75,86 @@ export interface IUpdateShippingInfoParameters extends IStandardParameters {
     listing_id?: number
 }
 
-export interface IDeleteShippingInfoParameters extends IStandardParameters {
+export interface IDeleteShippingInfoParameters {
     shipping_info_id: number
 }
 
 //methods class
 export class ShippingInfo {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
      */
-    static findAllListingShippingProfileEntries<TResult>(parameters: IFindAllListingShippingProfileEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>> {
-        return request<IFindAllListingShippingProfileEntriesParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "GET", options);
+    async findAllListingShippingProfileEntries<TResult>(
+        params: IFindAllListingShippingProfileEntriesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>> {
+        return request<IFindAllListingShippingProfileEntriesParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/shipping/info",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Creates a new ShippingInfo.
      */
-    static createShippingInfo<TResult>(parameters: ICreateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<ICreateShippingInfoParameters, TResult>> {
-        return request<ICreateShippingInfoParameters, TResult>("/listings/:listing_id/shipping/info", parameters, "POST", options);
+    async createShippingInfo<TResult>(
+        params: ICreateShippingInfoParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ICreateShippingInfoParameters, TResult>>> {
+        return request<ICreateShippingInfoParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/shipping/info",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a ShippingInfo by id.
      */
-    static getShippingInfo<TResult>(parameters: IGetShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IGetShippingInfoParameters, TResult>> {
-        return request<IGetShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "GET", options);
+    async getShippingInfo<TResult>(
+        params: IGetShippingInfoParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetShippingInfoParameters, TResult>>> {
+        return request<IGetShippingInfoParameters, TResult>({
+            ...this.config,
+            url: "/shipping/info/:shipping_info_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Updates a ShippingInfo with the given id.
      */
-    static updateShippingInfo<TResult>(parameters: IUpdateShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShippingInfoParameters, TResult>> {
-        return request<IUpdateShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "PUT", options);
+    async updateShippingInfo<TResult>(
+        params: IUpdateShippingInfoParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingInfoParameters, TResult>>> {
+        return request<IUpdateShippingInfoParameters, TResult>({
+            ...this.config,
+            url: "/shipping/info/:shipping_info_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Deletes the ShippingInfo with the given id.
      */
-    static deleteShippingInfo<TResult>(parameters: IDeleteShippingInfoParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShippingInfoParameters, TResult>> {
-        return request<IDeleteShippingInfoParameters, TResult>("/shipping/info/:shipping_info_id", parameters, "DELETE", options);
+    async deleteShippingInfo<TResult>(
+        params: IDeleteShippingInfoParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingInfoParameters, TResult>>> {
+        return request<IDeleteShippingInfoParameters, TResult>({
+            ...this.config,
+            url: "/shipping/info/:shipping_info_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

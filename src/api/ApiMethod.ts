@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IApiMethod {
@@ -35,17 +38,30 @@ export interface IApiMethod {
 }
 
 //parameters types
-export interface IGetMethodTableParameters extends IStandardParameters {
+export interface IGetMethodTableParameters {
 
 }
 
 //methods class
 export class ApiMethod {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a list of all methods available.
      */
-    static getMethodTable<TResult>(parameters: IGetMethodTableParameters, options?: IOptions): Promise<IStandardResponse<IGetMethodTableParameters, TResult>> {
-        return request<IGetMethodTableParameters, TResult>("/", parameters, "GET", options);
+    async getMethodTable<TResult>(
+        params: IGetMethodTableParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetMethodTableParameters, TResult>>> {
+        return request<IGetMethodTableParameters, TResult>(
+            {...this.config, url: "/", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 }

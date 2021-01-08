@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IDataType {
@@ -15,50 +18,84 @@ export interface IDataType {
 }
 
 //parameters types
-export interface IDescribeOccasionEnumParameters extends IStandardParameters {
+export interface IDescribeOccasionEnumParameters {
 
 }
 
-export interface IDescribeRecipientEnumParameters extends IStandardParameters {
+export interface IDescribeRecipientEnumParameters {
 
 }
 
-export interface IDescribeWhenMadeEnumParameters extends IStandardParameters {
+export interface IDescribeWhenMadeEnumParameters {
     include_formatted?: boolean
 }
 
-export interface IDescribeWhoMadeEnumParameters extends IStandardParameters {
+export interface IDescribeWhoMadeEnumParameters {
 
 }
 
 //methods class
 export class DataType {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Describes the legal values for Listing.occasion.
      */
-    static describeOccasionEnum<TResult>(parameters: IDescribeOccasionEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeOccasionEnumParameters, TResult>> {
-        return request<IDescribeOccasionEnumParameters, TResult>("/types/enum/occasion", parameters, "GET", options);
+    async describeOccasionEnum<TResult>(
+        params: IDescribeOccasionEnumParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>> {
+        return request<IDescribeOccasionEnumParameters, TResult>({
+            ...this.config,
+            url: "/types/enum/occasion",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Describes the legal values for Listing.recipient.
      */
-    static describeRecipientEnum<TResult>(parameters: IDescribeRecipientEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeRecipientEnumParameters, TResult>> {
-        return request<IDescribeRecipientEnumParameters, TResult>("/types/enum/recipient", parameters, "GET", options);
+    async describeRecipientEnum<TResult>(
+        params: IDescribeRecipientEnumParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>> {
+        return request<IDescribeRecipientEnumParameters, TResult>({
+            ...this.config,
+            url: "/types/enum/recipient",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Describes the legal values for Listing.when_made.
      */
-    static describeWhenMadeEnum<TResult>(parameters: IDescribeWhenMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>> {
-        return request<IDescribeWhenMadeEnumParameters, TResult>("/types/enum/when_made", parameters, "GET", options);
+    async describeWhenMadeEnum<TResult>(
+        params: IDescribeWhenMadeEnumParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>> {
+        return request<IDescribeWhenMadeEnumParameters, TResult>({
+            ...this.config,
+            url: "/types/enum/when_made",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Describes the legal values for Listing.who_made.
      */
-    static describeWhoMadeEnum<TResult>(parameters: IDescribeWhoMadeEnumParameters, options?: IOptions): Promise<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>> {
-        return request<IDescribeWhoMadeEnumParameters, TResult>("/types/enum/who_made", parameters, "GET", options);
+    async describeWhoMadeEnum<TResult>(
+        params: IDescribeWhoMadeEnumParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>> {
+        return request<IDescribeWhoMadeEnumParameters, TResult>({
+            ...this.config,
+            url: "/types/enum/who_made",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

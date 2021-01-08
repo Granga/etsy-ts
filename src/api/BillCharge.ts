@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IBillCharge {
@@ -47,11 +50,11 @@ export interface IBillCharge {
 }
 
 //parameters types
-export interface IGetUserChargesMetadataParameters extends IStandardParameters {
+export interface IGetUserChargesMetadataParameters {
     user_id: string | number
 }
 
-export interface IFindAllUserChargesParameters extends IStandardParameters {
+export interface IFindAllUserChargesParameters {
     limit?: number,
     offset?: number,
     page?: number,
@@ -63,18 +66,38 @@ export interface IFindAllUserChargesParameters extends IStandardParameters {
 
 //methods class
 export class BillCharge {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Metadata for the set of BillCharges objects associated to a User
      */
-    static getUserChargesMetadata<TResult>(parameters: IGetUserChargesMetadataParameters, options?: IOptions): Promise<IStandardResponse<IGetUserChargesMetadataParameters, TResult>> {
-        return request<IGetUserChargesMetadataParameters, TResult>("/users/:user_id/charges/meta", parameters, "GET", options);
+    async getUserChargesMetadata<TResult>(
+        params: IGetUserChargesMetadataParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>> {
+        return request<IGetUserChargesMetadataParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/charges/meta",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
      */
-    static findAllUserCharges<TResult>(parameters: IFindAllUserChargesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserChargesParameters, TResult>> {
-        return request<IFindAllUserChargesParameters, TResult>("/users/:user_id/charges", parameters, "GET", options);
+    async findAllUserCharges<TResult>(
+        params: IFindAllUserChargesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserChargesParameters, TResult>>> {
+        return request<IFindAllUserChargesParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/charges",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IBillPayment {
@@ -43,7 +46,7 @@ export interface IBillPayment {
 }
 
 //parameters types
-export interface IFindAllUserPaymentsParameters extends IStandardParameters {
+export interface IFindAllUserPaymentsParameters {
     limit?: number,
     offset?: number,
     page?: number,
@@ -55,11 +58,24 @@ export interface IFindAllUserPaymentsParameters extends IStandardParameters {
 
 //methods class
 export class BillPayment {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a set of BillPayment objects associated to a User.
      */
-    static findAllUserPayments<TResult>(parameters: IFindAllUserPaymentsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserPaymentsParameters, TResult>> {
-        return request<IFindAllUserPaymentsParameters, TResult>("/users/:user_id/payments", parameters, "GET", options);
+    async findAllUserPayments<TResult>(
+        params: IFindAllUserPaymentsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>> {
+        return request<IFindAllUserPaymentsParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/payments",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

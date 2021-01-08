@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IGuestCart {
@@ -82,11 +85,11 @@ export interface IGuestCart {
 }
 
 //parameters types
-export interface IFindAllGuestCartsParameters extends IStandardParameters {
+export interface IFindAllGuestCartsParameters {
     guest_id: any
 }
 
-export interface IAddToGuestCartParameters extends IStandardParameters {
+export interface IAddToGuestCartParameters {
     guest_id: any,
     listing_id: number,
     quantity?: number,
@@ -94,25 +97,25 @@ export interface IAddToGuestCartParameters extends IStandardParameters {
     personalization?: any
 }
 
-export interface IUpdateGuestCartListingQuantityParameters extends IStandardParameters {
+export interface IUpdateGuestCartListingQuantityParameters {
     guest_id: any,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
 
-export interface IRemoveGuestCartListingParameters extends IStandardParameters {
+export interface IRemoveGuestCartListingParameters {
     guest_id: any,
     listing_id: number,
     listing_customization_id?: number
 }
 
-export interface IFindGuestCartParameters extends IStandardParameters {
+export interface IFindGuestCartParameters {
     guest_id: any,
     cart_id: string | number
 }
 
-export interface IUpdateGuestCartParameters extends IStandardParameters {
+export interface IUpdateGuestCartParameters {
     guest_id: any,
     cart_id: string | number,
     destination_country_id?: number,
@@ -122,60 +125,115 @@ export interface IUpdateGuestCartParameters extends IStandardParameters {
     destination_zip?: string
 }
 
-export interface IDeleteGuestCartParameters extends IStandardParameters {
+export interface IDeleteGuestCartParameters {
     guest_id: any,
     cart_id: string | number
 }
 
 //methods class
 export class GuestCart {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get all guest's carts
      */
-    static findAllGuestCarts<TResult>(parameters: IFindAllGuestCartsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllGuestCartsParameters, TResult>> {
-        return request<IFindAllGuestCartsParameters, TResult>("/guests/:guest_id/carts", parameters, "GET", options);
+    async findAllGuestCarts<TResult>(
+        params: IFindAllGuestCartsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllGuestCartsParameters, TResult>>> {
+        return request<IFindAllGuestCartsParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Add a listing to guest's cart
      */
-    static addToGuestCart<TResult>(parameters: IAddToGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToGuestCartParameters, TResult>> {
-        return request<IAddToGuestCartParameters, TResult>("/guests/:guest_id/carts", parameters, "POST", options);
+    async addToGuestCart<TResult>(
+        params: IAddToGuestCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IAddToGuestCartParameters, TResult>>> {
+        return request<IAddToGuestCartParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Update a guest's cart listing purchase quantity
      */
-    static updateGuestCartListingQuantity<TResult>(parameters: IUpdateGuestCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>> {
-        return request<IUpdateGuestCartListingQuantityParameters, TResult>("/guests/:guest_id/carts", parameters, "PUT", options);
+    async updateGuestCartListingQuantity<TResult>(
+        params: IUpdateGuestCartListingQuantityParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>> {
+        return request<IUpdateGuestCartListingQuantityParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Remove a listing from a guest's cart
      */
-    static removeGuestCartListing<TResult>(parameters: IRemoveGuestCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveGuestCartListingParameters, TResult>> {
-        return request<IRemoveGuestCartListingParameters, TResult>("/guests/:guest_id/carts", parameters, "DELETE", options);
+    async removeGuestCartListing<TResult>(
+        params: IRemoveGuestCartListingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>> {
+        return request<IRemoveGuestCartListingParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a guest's cart
      */
-    static findGuestCart<TResult>(parameters: IFindGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IFindGuestCartParameters, TResult>> {
-        return request<IFindGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "GET", options);
+    async findGuestCart<TResult>(
+        params: IFindGuestCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindGuestCartParameters, TResult>>> {
+        return request<IFindGuestCartParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts/:cart_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Update a guest's cart
      */
-    static updateGuestCart<TResult>(parameters: IUpdateGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateGuestCartParameters, TResult>> {
-        return request<IUpdateGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "PUT", options);
+    async updateGuestCart<TResult>(
+        params: IUpdateGuestCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartParameters, TResult>>> {
+        return request<IUpdateGuestCartParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts/:cart_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Delete a guest's cart
      */
-    static deleteGuestCart<TResult>(parameters: IDeleteGuestCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteGuestCartParameters, TResult>> {
-        return request<IDeleteGuestCartParameters, TResult>("/guests/:guest_id/carts/:cart_id", parameters, "DELETE", options);
+    async deleteGuestCart<TResult>(
+        params: IDeleteGuestCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteGuestCartParameters, TResult>>> {
+        return request<IDeleteGuestCartParameters, TResult>({
+            ...this.config,
+            url: "/guests/:guest_id/carts/:cart_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

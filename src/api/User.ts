@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IUser {
@@ -39,18 +42,18 @@ export interface IUser {
 }
 
 //parameters types
-export interface IFindAllUsersParameters extends IStandardParameters {
+export interface IFindAllUsersParameters {
     keywords?: string,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IGetUserParameters extends IStandardParameters {
+export interface IGetUserParameters {
     user_id: (string | number)[]
 }
 
-export interface IFindAllUsersForTeamParameters extends IStandardParameters {
+export interface IFindAllUsersForTeamParameters {
     team_id: number,
     status?: "active" | "invited" | "pending",
     limit?: number,
@@ -58,14 +61,14 @@ export interface IFindAllUsersForTeamParameters extends IStandardParameters {
     page?: number
 }
 
-export interface IGetCirclesContainingUserParameters extends IStandardParameters {
+export interface IGetCirclesContainingUserParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IGetConnectedUserParameters extends IStandardParameters {
+export interface IGetConnectedUserParameters {
     user_id: string | number,
     to_user_id: string | number,
     limit?: number,
@@ -73,79 +76,141 @@ export interface IGetConnectedUserParameters extends IStandardParameters {
     page?: number
 }
 
-export interface IUnconnectUsersParameters extends IStandardParameters {
+export interface IUnconnectUsersParameters {
     user_id: string | number,
     to_user_id: string | number
 }
 
-export interface IGetConnectedUsersParameters extends IStandardParameters {
+export interface IGetConnectedUsersParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IConnectUsersParameters extends IStandardParameters {
+export interface IConnectUsersParameters {
     user_id: string | number,
     to_user_id: string | number
 }
 
 //methods class
 export class User {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Finds all Users whose name or username match the keywords parameter.
      */
-    static findAllUsers<TResult>(parameters: IFindAllUsersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersParameters, TResult>> {
-        return request<IFindAllUsersParameters, TResult>("/users", parameters, "GET", options);
+    async findAllUsers<TResult>(
+        params: IFindAllUsersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUsersParameters, TResult>>> {
+        return request<IFindAllUsersParameters, TResult>(
+            {...this.config, url: "/users", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Retrieves a User by id.
      */
-    static getUser<TResult>(parameters: IGetUserParameters, options?: IOptions): Promise<IStandardResponse<IGetUserParameters, TResult>> {
-        return request<IGetUserParameters, TResult>("/users/:user_id", parameters, "GET", options);
+    async getUser<TResult>(
+        params: IGetUserParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserParameters, TResult>>> {
+        return request<IGetUserParameters, TResult>(
+            {...this.config, url: "/users/:user_id", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Returns a list of users for a specific team
      */
-    static findAllUsersForTeam<TResult>(parameters: IFindAllUsersForTeamParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUsersForTeamParameters, TResult>> {
-        return request<IFindAllUsersForTeamParameters, TResult>("/teams/:team_id/users/", parameters, "GET", options);
+    async findAllUsersForTeam<TResult>(
+        params: IFindAllUsersForTeamParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>> {
+        return request<IFindAllUsersForTeamParameters, TResult>({
+            ...this.config,
+            url: "/teams/:team_id/users/",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Returns a list of users who have circled this user
      */
-    static getCirclesContainingUser<TResult>(parameters: IGetCirclesContainingUserParameters, options?: IOptions): Promise<IStandardResponse<IGetCirclesContainingUserParameters, TResult>> {
-        return request<IGetCirclesContainingUserParameters, TResult>("/users/:user_id/circles", parameters, "GET", options);
+    async getCirclesContainingUser<TResult>(
+        params: IGetCirclesContainingUserParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>> {
+        return request<IGetCirclesContainingUserParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/circles",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Returns details about a connection between users
      */
-    static getConnectedUser<TResult>(parameters: IGetConnectedUserParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUserParameters, TResult>> {
-        return request<IGetConnectedUserParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "GET", options);
+    async getConnectedUser<TResult>(
+        params: IGetConnectedUserParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUserParameters, TResult>>> {
+        return request<IGetConnectedUserParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/circles/:to_user_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Removes a user (to_user_id) from the logged in user's (user_id) circle
      */
-    static unconnectUsers<TResult>(parameters: IUnconnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IUnconnectUsersParameters, TResult>> {
-        return request<IUnconnectUsersParameters, TResult>("/users/:user_id/circles/:to_user_id", parameters, "DELETE", options);
+    async unconnectUsers<TResult>(
+        params: IUnconnectUsersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUnconnectUsersParameters, TResult>>> {
+        return request<IUnconnectUsersParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/circles/:to_user_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Returns a list of users that are in this user's cricle
      */
-    static getConnectedUsers<TResult>(parameters: IGetConnectedUsersParameters, options?: IOptions): Promise<IStandardResponse<IGetConnectedUsersParameters, TResult>> {
-        return request<IGetConnectedUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "GET", options);
+    async getConnectedUsers<TResult>(
+        params: IGetConnectedUsersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUsersParameters, TResult>>> {
+        return request<IGetConnectedUsersParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/connected_users",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Adds user (to_user_id) to the user's (user_id) circle
      */
-    static connectUsers<TResult>(parameters: IConnectUsersParameters, options?: IOptions): Promise<IStandardResponse<IConnectUsersParameters, TResult>> {
-        return request<IConnectUsersParameters, TResult>("/users/:user_id/connected_users", parameters, "POST", options);
+    async connectUsers<TResult>(
+        params: IConnectUsersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IConnectUsersParameters, TResult>>> {
+        return request<IConnectUsersParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/connected_users",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

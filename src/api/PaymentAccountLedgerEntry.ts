@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IPaymentAccountLedgerEntry {
@@ -39,7 +42,7 @@ export interface IPaymentAccountLedgerEntry {
 }
 
 //parameters types
-export interface IFindPaymentAccountEntriesParameters extends IStandardParameters {
+export interface IFindPaymentAccountEntriesParameters {
     shop_id: string | number,
     min_created: number,
     max_created: number,
@@ -50,11 +53,24 @@ export interface IFindPaymentAccountEntriesParameters extends IStandardParameter
 
 //methods class
 export class PaymentAccountLedgerEntry {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a Shop Payment Account Ledger's Entries
      */
-    static findPaymentAccountEntries<TResult>(parameters: IFindPaymentAccountEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>> {
-        return request<IFindPaymentAccountEntriesParameters, TResult>("/shops/:shop_id/payment_account/entries", parameters, "GET", options);
+    async findPaymentAccountEntries<TResult>(
+        params: IFindPaymentAccountEntriesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>> {
+        return request<IFindPaymentAccountEntriesParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/payment_account/entries",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

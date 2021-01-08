@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ITreasuryListing {
@@ -15,30 +18,50 @@ export interface ITreasuryListing {
 }
 
 //parameters types
-export interface IAddTreasuryListingParameters extends IStandardParameters {
+export interface IAddTreasuryListingParameters {
     treasury_key: string,
     listing_id: number
 }
 
-export interface IRemoveTreasuryListingParameters extends IStandardParameters {
+export interface IRemoveTreasuryListingParameters {
     treasury_key: string,
     listing_id: number
 }
 
 //methods class
 export class TreasuryListing {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Add listing to a Treasury
      */
-    static addTreasuryListing<TResult>(parameters: IAddTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IAddTreasuryListingParameters, TResult>> {
-        return request<IAddTreasuryListingParameters, TResult>("/treasuries/:treasury_key/listings", parameters, "POST", options);
+    async addTreasuryListing<TResult>(
+        params: IAddTreasuryListingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IAddTreasuryListingParameters, TResult>>> {
+        return request<IAddTreasuryListingParameters, TResult>({
+            ...this.config,
+            url: "/treasuries/:treasury_key/listings",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Remove listing from a Treasury
      */
-    static removeTreasuryListing<TResult>(parameters: IRemoveTreasuryListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveTreasuryListingParameters, TResult>> {
-        return request<IRemoveTreasuryListingParameters, TResult>("/treasuries/:treasury_key/listings/:listing_id", parameters, "DELETE", options);
+    async removeTreasuryListing<TResult>(
+        params: IRemoveTreasuryListingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>> {
+        return request<IRemoveTreasuryListingParameters, TResult>({
+            ...this.config,
+            url: "/treasuries/:treasury_key/listings/:listing_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

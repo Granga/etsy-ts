@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ICoupon {
@@ -51,11 +54,11 @@ export interface ICoupon {
 }
 
 //parameters types
-export interface IFindAllShopCouponsParameters extends IStandardParameters {
+export interface IFindAllShopCouponsParameters {
     shop_id: string | number
 }
 
-export interface ICreateCouponParameters extends IStandardParameters {
+export interface ICreateCouponParameters {
     shop_id: string | number,
     coupon_code: string,
     pct_discount?: number,
@@ -68,57 +71,98 @@ export interface ICreateCouponParameters extends IStandardParameters {
     expiration_date?: number
 }
 
-export interface IFindCouponParameters extends IStandardParameters {
+export interface IFindCouponParameters {
     shop_id: string | number,
     coupon_id: number
 }
 
-export interface IUpdateCouponParameters extends IStandardParameters {
+export interface IUpdateCouponParameters {
     shop_id: string | number,
     coupon_id: number,
     seller_active?: boolean
 }
 
-export interface IDeleteCouponParameters extends IStandardParameters {
+export interface IDeleteCouponParameters {
     shop_id: string | number,
     coupon_id: number
 }
 
 //methods class
 export class Coupon {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves all Shop_Coupons by shop_id
      */
-    static findAllShopCoupons<TResult>(parameters: IFindAllShopCouponsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopCouponsParameters, TResult>> {
-        return request<IFindAllShopCouponsParameters, TResult>("/shops/:shop_id/coupons", parameters, "GET", options);
+    async findAllShopCoupons<TResult>(
+        params: IFindAllShopCouponsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllShopCouponsParameters, TResult>>> {
+        return request<IFindAllShopCouponsParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/coupons",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
      */
-    static createCoupon<TResult>(parameters: ICreateCouponParameters, options?: IOptions): Promise<IStandardResponse<ICreateCouponParameters, TResult>> {
-        return request<ICreateCouponParameters, TResult>("/shops/:shop_id/coupons", parameters, "POST", options);
+    async createCoupon<TResult>(
+        params: ICreateCouponParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ICreateCouponParameters, TResult>>> {
+        return request<ICreateCouponParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/coupons",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a Shop_Coupon by id and shop_id
      */
-    static findCoupon<TResult>(parameters: IFindCouponParameters, options?: IOptions): Promise<IStandardResponse<IFindCouponParameters, TResult>> {
-        return request<IFindCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "GET", options);
+    async findCoupon<TResult>(
+        params: IFindCouponParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindCouponParameters, TResult>>> {
+        return request<IFindCouponParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/coupons/:coupon_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Updates a coupon
      */
-    static updateCoupon<TResult>(parameters: IUpdateCouponParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCouponParameters, TResult>> {
-        return request<IUpdateCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "PUT", options);
+    async updateCoupon<TResult>(
+        params: IUpdateCouponParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateCouponParameters, TResult>>> {
+        return request<IUpdateCouponParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/coupons/:coupon_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Deletes a coupon
      */
-    static deleteCoupon<TResult>(parameters: IDeleteCouponParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCouponParameters, TResult>> {
-        return request<IDeleteCouponParameters, TResult>("/shops/:shop_id/coupons/:coupon_id", parameters, "DELETE", options);
+    async deleteCoupon<TResult>(
+        params: IDeleteCouponParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteCouponParameters, TResult>>> {
+        return request<IDeleteCouponParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/coupons/:coupon_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

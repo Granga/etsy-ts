@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "es5",
+    "module": "CommonJS",
     "lib": ["es2017", "es7", "es6", "dom"],
     "declaration": true,
     "outDir": "dist",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "inlineSourceMap": true
   },
   "exclude": [
     "node_modules",

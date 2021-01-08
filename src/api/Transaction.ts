@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ITransaction {
@@ -111,32 +114,32 @@ export interface ITransaction {
 }
 
 //parameters types
-export interface IGetShopTransactionParameters extends IStandardParameters {
+export interface IGetShopTransactionParameters {
     transaction_id: number[]
 }
 
-export interface IFindAllListingTransactionsParameters extends IStandardParameters {
+export interface IFindAllListingTransactionsParameters {
     listing_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllShopReceipt2TransactionsParameters extends IStandardParameters {
+export interface IFindAllShopReceipt2TransactionsParameters {
     receipt_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllShopTransactionsParameters extends IStandardParameters {
+export interface IFindAllShopTransactionsParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllUserBuyerTransactionsParameters extends IStandardParameters {
+export interface IFindAllUserBuyerTransactionsParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
@@ -145,39 +148,80 @@ export interface IFindAllUserBuyerTransactionsParameters extends IStandardParame
 
 //methods class
 export class Transaction {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a Shop_Transaction by id.
      */
-    static getShop_Transaction<TResult>(parameters: IGetShopTransactionParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTransactionParameters, TResult>> {
-        return request<IGetShopTransactionParameters, TResult>("/transactions/:transaction_id", parameters, "GET", options);
+    async getShop_Transaction<TResult>(
+        params: IGetShopTransactionParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetShopTransactionParameters, TResult>>> {
+        return request<IGetShopTransactionParameters, TResult>({
+            ...this.config,
+            url: "/transactions/:transaction_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a Listing.
      */
-    static findAllListingTransactions<TResult>(parameters: IFindAllListingTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingTransactionsParameters, TResult>> {
-        return request<IFindAllListingTransactionsParameters, TResult>("/listings/:listing_id/transactions", parameters, "GET", options);
+    async findAllListingTransactions<TResult>(
+        params: IFindAllListingTransactionsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>> {
+        return request<IFindAllListingTransactionsParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/transactions",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
      */
-    static findAllShop_Receipt2Transactions<TResult>(parameters: IFindAllShopReceipt2TransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>> {
-        return request<IFindAllShopReceipt2TransactionsParameters, TResult>("/receipts/:receipt_id/transactions", parameters, "GET", options);
+    async findAllShop_Receipt2Transactions<TResult>(
+        params: IFindAllShopReceipt2TransactionsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>> {
+        return request<IFindAllShopReceipt2TransactionsParameters, TResult>({
+            ...this.config,
+            url: "/receipts/:receipt_id/transactions",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
-    static findAllShopTransactions<TResult>(parameters: IFindAllShopTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopTransactionsParameters, TResult>> {
-        return request<IFindAllShopTransactionsParameters, TResult>("/shops/:shop_id/transactions", parameters, "GET", options);
+    async findAllShopTransactions<TResult>(
+        params: IFindAllShopTransactionsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>> {
+        return request<IFindAllShopTransactionsParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/transactions",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */
-    static findAllUserBuyerTransactions<TResult>(parameters: IFindAllUserBuyerTransactionsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>> {
-        return request<IFindAllUserBuyerTransactionsParameters, TResult>("/users/:user_id/transactions", parameters, "GET", options);
+    async findAllUserBuyerTransactions<TResult>(
+        params: IFindAllUserBuyerTransactionsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>> {
+        return request<IFindAllUserBuyerTransactionsParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/transactions",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

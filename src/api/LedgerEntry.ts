@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ILedgerEntry {
@@ -43,7 +46,7 @@ export interface ILedgerEntry {
 }
 
 //parameters types
-export interface IFindLedgerEntriesParameters extends IStandardParameters {
+export interface IFindLedgerEntriesParameters {
     shop_id: string | number,
     min_created?: number,
     max_created?: number,
@@ -52,25 +55,45 @@ export interface IFindLedgerEntriesParameters extends IStandardParameters {
     page?: number
 }
 
-export interface IFindLedgerEntryParameters extends IStandardParameters {
+export interface IFindLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number
 }
 
 //methods class
 export class LedgerEntry {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a Shop Payment Account Ledger's Entries
      */
-    static findLedgerEntries<TResult>(parameters: IFindLedgerEntriesParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntriesParameters, TResult>> {
-        return request<IFindLedgerEntriesParameters, TResult>("/shops/:shop_id/ledger/entries", parameters, "GET", options);
+    async findLedgerEntries<TResult>(
+        params: IFindLedgerEntriesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>> {
+        return request<IFindLedgerEntriesParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/ledger/entries",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a Shop Payment Account Ledger Entry
      */
-    static findLedgerEntry<TResult>(parameters: IFindLedgerEntryParameters, options?: IOptions): Promise<IStandardResponse<IFindLedgerEntryParameters, TResult>> {
-        return request<IFindLedgerEntryParameters, TResult>("/shops/:shop_id/ledger/entries/:ledger_entry_id", parameters, "GET", options);
+    async findLedgerEntry<TResult>(
+        params: IFindLedgerEntryParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>> {
+        return request<IFindLedgerEntryParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/ledger/entries/:ledger_entry_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IAvatar {
@@ -51,30 +54,50 @@ export interface IAvatar {
 }
 
 //parameters types
-export interface IUploadAvatarParameters extends IStandardParameters {
+export interface IUploadAvatarParameters {
     src?: string,
     user_id: string | number,
     image?: string
 }
 
-export interface IGetAvatarImgSrcParameters extends IStandardParameters {
+export interface IGetAvatarImgSrcParameters {
     user_id: string | number
 }
 
 //methods class
 export class Avatar {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Upload a new user avatar image
      */
-    static uploadAvatar<TResult>(parameters: IUploadAvatarParameters, options?: IOptions): Promise<IStandardResponse<IUploadAvatarParameters, TResult>> {
-        return request<IUploadAvatarParameters, TResult>("/users/:user_id/avatar", parameters, "POST", options);
+    async uploadAvatar<TResult>(
+        params: IUploadAvatarParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUploadAvatarParameters, TResult>>> {
+        return request<IUploadAvatarParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/avatar",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get avatar image source
      */
-    static getAvatarImgSrc<TResult>(parameters: IGetAvatarImgSrcParameters, options?: IOptions): Promise<IStandardResponse<IGetAvatarImgSrcParameters, TResult>> {
-        return request<IGetAvatarImgSrcParameters, TResult>("/users/:user_id/avatar/src", parameters, "GET", options);
+    async getAvatarImgSrc<TResult>(
+        params: IGetAvatarImgSrcParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>> {
+        return request<IGetAvatarImgSrcParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/avatar/src",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }
