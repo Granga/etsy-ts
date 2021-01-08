@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface IReceiptShipment {
     /**
@@ -31,5 +34,11 @@ export interface IReceiptShipment {
 
 //methods class
 export class ReceiptShipment {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IFeedback {
@@ -59,42 +62,42 @@ export interface IFeedback {
 }
 
 //parameters types
-export interface IFindAllUserFeedbackAsAuthorParameters extends IStandardParameters {
+export interface IFindAllUserFeedbackAsAuthorParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllUserFeedbackAsBuyerParameters extends IStandardParameters {
+export interface IFindAllUserFeedbackAsBuyerParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllUserFeedbackAsSellerParameters extends IStandardParameters {
+export interface IFindAllUserFeedbackAsSellerParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllUserFeedbackAsSubjectParameters extends IStandardParameters {
+export interface IFindAllUserFeedbackAsSubjectParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllFeedbackFromBuyersParameters extends IStandardParameters {
+export interface IFindAllFeedbackFromBuyersParameters {
     user_id?: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IFindAllFeedbackFromSellersParameters extends IStandardParameters {
+export interface IFindAllFeedbackFromSellersParameters {
     user_id?: string | number,
     limit?: number,
     offset?: number,
@@ -103,33 +106,67 @@ export interface IFindAllFeedbackFromSellersParameters extends IStandardParamete
 
 //methods class
 export class Feedback {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsAuthor<TResult>(parameters: IFindAllUserFeedbackAsAuthorParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>> {
-        return request<IFindAllUserFeedbackAsAuthorParameters, TResult>("/users/:user_id/feedback/as-author", parameters, "GET", options);
+    async findAllUserFeedbackAsAuthor<TResult>(
+        params: IFindAllUserFeedbackAsAuthorParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>> {
+        return request<IFindAllUserFeedbackAsAuthorParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/as-author",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsBuyer<TResult>(parameters: IFindAllUserFeedbackAsBuyerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>> {
-        return request<IFindAllUserFeedbackAsBuyerParameters, TResult>("/users/:user_id/feedback/as-buyer", parameters, "GET", options);
+    async findAllUserFeedbackAsBuyer<TResult>(
+        params: IFindAllUserFeedbackAsBuyerParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>> {
+        return request<IFindAllUserFeedbackAsBuyerParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/as-buyer",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsSeller<TResult>(parameters: IFindAllUserFeedbackAsSellerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>> {
-        return request<IFindAllUserFeedbackAsSellerParameters, TResult>("/users/:user_id/feedback/as-seller", parameters, "GET", options);
+    async findAllUserFeedbackAsSeller<TResult>(
+        params: IFindAllUserFeedbackAsSellerParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>> {
+        return request<IFindAllUserFeedbackAsSellerParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/as-seller",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    static findAllUserFeedbackAsSubject<TResult>(parameters: IFindAllUserFeedbackAsSubjectParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>> {
-        return request<IFindAllUserFeedbackAsSubjectParameters, TResult>("/users/:user_id/feedback/as-subject", parameters, "GET", options);
+    async findAllUserFeedbackAsSubject<TResult>(
+        params: IFindAllUserFeedbackAsSubjectParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>> {
+        return request<IFindAllUserFeedbackAsSubjectParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/as-subject",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
@@ -137,8 +174,15 @@ export class Feedback {
      This is essentially the union between the findAllUserFeedbackAsBuyer
      and findAllUserFeedbackAsSubject methods.
      */
-    static findAllFeedbackFromBuyers<TResult>(parameters: IFindAllFeedbackFromBuyersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>> {
-        return request<IFindAllFeedbackFromBuyersParameters, TResult>("/users/:user_id/feedback/from-buyers", parameters, "GET", options);
+    async findAllFeedbackFromBuyers<TResult>(
+        params: IFindAllFeedbackFromBuyersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>> {
+        return request<IFindAllFeedbackFromBuyersParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/from-buyers",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
@@ -146,7 +190,14 @@ export class Feedback {
      This is essentially the union between
      the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
      */
-    static findAllFeedbackFromSellers<TResult>(parameters: IFindAllFeedbackFromSellersParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>> {
-        return request<IFindAllFeedbackFromSellersParameters, TResult>("/users/:user_id/feedback/from-sellers", parameters, "GET", options);
+    async findAllFeedbackFromSellers<TResult>(
+        params: IFindAllFeedbackFromSellersParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>> {
+        return request<IFindAllFeedbackFromSellersParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/feedback/from-sellers",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

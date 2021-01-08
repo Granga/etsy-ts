@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IRegion {
@@ -19,39 +22,66 @@ export interface IRegion {
 }
 
 //parameters types
-export interface IFindAllRegionParameters extends IStandardParameters {
+export interface IFindAllRegionParameters {
 
 }
 
-export interface IGetRegionParameters extends IStandardParameters {
+export interface IGetRegionParameters {
     region_id: number[]
 }
 
-export interface IFindEligibleRegionsParameters extends IStandardParameters {
+export interface IFindEligibleRegionsParameters {
 
 }
 
 //methods class
 export class Region {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Finds all Region.
      */
-    static findAllRegion<TResult>(parameters: IFindAllRegionParameters, options?: IOptions): Promise<IStandardResponse<IFindAllRegionParameters, TResult>> {
-        return request<IFindAllRegionParameters, TResult>("/regions", parameters, "GET", options);
+    async findAllRegion<TResult>(
+        params: IFindAllRegionParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllRegionParameters, TResult>>> {
+        return request<IFindAllRegionParameters, TResult>(
+            {...this.config, url: "/regions", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Retrieves a Region by id.
      */
-    static getRegion<TResult>(parameters: IGetRegionParameters, options?: IOptions): Promise<IStandardResponse<IGetRegionParameters, TResult>> {
-        return request<IGetRegionParameters, TResult>("/regions/:region_id", parameters, "GET", options);
+    async getRegion<TResult>(
+        params: IGetRegionParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetRegionParameters, TResult>>> {
+        return request<IGetRegionParameters, TResult>(
+            {...this.config, url: "/regions/:region_id", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      *
      */
-    static findEligibleRegions<TResult>(parameters: IFindEligibleRegionsParameters, options?: IOptions): Promise<IStandardResponse<IFindEligibleRegionsParameters, TResult>> {
-        return request<IFindEligibleRegionsParameters, TResult>("/regions/eligible", parameters, "GET", options);
+    async findEligibleRegions<TResult>(
+        params: IFindEligibleRegionsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindEligibleRegionsParameters, TResult>>> {
+        return request<IFindEligibleRegionsParameters, TResult>({
+            ...this.config,
+            url: "/regions/eligible",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

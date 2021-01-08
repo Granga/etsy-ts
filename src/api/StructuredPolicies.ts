@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface IStructuredPolicies {
     /**
@@ -48,5 +51,11 @@ export interface IStructuredPolicies {
 
 //methods class
 export class StructuredPolicies {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

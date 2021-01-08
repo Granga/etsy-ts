@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IShop {
@@ -216,7 +219,7 @@ export interface IShop {
 }
 
 //parameters types
-export interface IFindAllShopsParameters extends IStandardParameters {
+export interface IFindAllShopsParameters {
     shop_name?: string,
     limit?: number,
     offset?: number,
@@ -226,11 +229,11 @@ export interface IFindAllShopsParameters extends IStandardParameters {
     distance_max?: number
 }
 
-export interface IGetShopParameters extends IStandardParameters {
+export interface IGetShopParameters {
     shop_id: (string | number)[]
 }
 
-export interface IUpdateShopParameters extends IStandardParameters {
+export interface IUpdateShopParameters {
     shop_id: string | number,
     title?: string,
     announcement?: string,
@@ -245,20 +248,20 @@ export interface IUpdateShopParameters extends IStandardParameters {
     digital_sale_message?: string
 }
 
-export interface IUploadShopBannerParameters extends IStandardParameters {
+export interface IUploadShopBannerParameters {
     shop_id: string | number,
     image: any
 }
 
-export interface IDeleteShopBannerParameters extends IStandardParameters {
+export interface IDeleteShopBannerParameters {
     shop_id: string | number
 }
 
-export interface IGetListingShopParameters extends IStandardParameters {
+export interface IGetListingShopParameters {
     listing_id: number
 }
 
-export interface IFindAllUserShopsParameters extends IStandardParameters {
+export interface IFindAllUserShopsParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
@@ -267,53 +270,108 @@ export interface IFindAllUserShopsParameters extends IStandardParameters {
 
 //methods class
 export class Shop {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
      */
-    static findAllShops<TResult>(parameters: IFindAllShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllShopsParameters, TResult>> {
-        return request<IFindAllShopsParameters, TResult>("/shops", parameters, "GET", options);
+    async findAllShops<TResult>(
+        params: IFindAllShopsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllShopsParameters, TResult>>> {
+        return request<IFindAllShopsParameters, TResult>(
+            {...this.config, url: "/shops", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Retrieves a Shop by id.
      */
-    static getShop<TResult>(parameters: IGetShopParameters, options?: IOptions): Promise<IStandardResponse<IGetShopParameters, TResult>> {
-        return request<IGetShopParameters, TResult>("/shops/:shop_id", parameters, "GET", options);
+    async getShop<TResult>(
+        params: IGetShopParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetShopParameters, TResult>>> {
+        return request<IGetShopParameters, TResult>(
+            {...this.config, url: "/shops/:shop_id", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Updates a Shop
      */
-    static updateShop<TResult>(parameters: IUpdateShopParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopParameters, TResult>> {
-        return request<IUpdateShopParameters, TResult>("/shops/:shop_id", parameters, "PUT", options);
+    async updateShop<TResult>(
+        params: IUpdateShopParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateShopParameters, TResult>>> {
+        return request<IUpdateShopParameters, TResult>(
+            {...this.config, url: "/shops/:shop_id", method: "PUT"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Upload a new shop banner image
      */
-    static uploadShopBanner<TResult>(parameters: IUploadShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IUploadShopBannerParameters, TResult>> {
-        return request<IUploadShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "POST", options);
+    async uploadShopBanner<TResult>(
+        params: IUploadShopBannerParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUploadShopBannerParameters, TResult>>> {
+        return request<IUploadShopBannerParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/appearance/banner",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Deletes a shop banner image
      */
-    static deleteShopBanner<TResult>(parameters: IDeleteShopBannerParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopBannerParameters, TResult>> {
-        return request<IDeleteShopBannerParameters, TResult>("/shops/:shop_id/appearance/banner", parameters, "DELETE", options);
+    async deleteShopBanner<TResult>(
+        params: IDeleteShopBannerParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteShopBannerParameters, TResult>>> {
+        return request<IDeleteShopBannerParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/appearance/banner",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a shop by a listing id.
      */
-    static getListingShop<TResult>(parameters: IGetListingShopParameters, options?: IOptions): Promise<IStandardResponse<IGetListingShopParameters, TResult>> {
-        return request<IGetListingShopParameters, TResult>("/shops/listing/:listing_id", parameters, "GET", options);
+    async getListingShop<TResult>(
+        params: IGetListingShopParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetListingShopParameters, TResult>>> {
+        return request<IGetListingShopParameters, TResult>({
+            ...this.config,
+            url: "/shops/listing/:listing_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a set of Shop objects associated to a User.
      */
-    static findAllUserShops<TResult>(parameters: IFindAllUserShopsParameters, options?: IOptions): Promise<IStandardResponse<IFindAllUserShopsParameters, TResult>> {
-        return request<IFindAllUserShopsParameters, TResult>("/users/:user_id/shops", parameters, "GET", options);
+    async findAllUserShops<TResult>(
+        params: IFindAllUserShopsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllUserShopsParameters, TResult>>> {
+        return request<IFindAllUserShopsParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/shops",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

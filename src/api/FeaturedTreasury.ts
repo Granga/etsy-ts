@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IFeaturedTreasury {
@@ -31,18 +34,18 @@ export interface IFeaturedTreasury {
 }
 
 //parameters types
-export interface IFindAllFeaturedTreasuriesParameters extends IStandardParameters {
+export interface IFindAllFeaturedTreasuriesParameters {
     limit?: number,
     offset?: number,
     page?: number,
     region?: string
 }
 
-export interface IGetFeaturedTreasuryByIdParameters extends IStandardParameters {
+export interface IGetFeaturedTreasuryByIdParameters {
     featured_treasury_id: number
 }
 
-export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardParameters {
+export interface IFindAllFeaturedTreasuriesByOwnerParameters {
     limit?: number,
     offset?: number,
     page?: number,
@@ -51,25 +54,52 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters extends IStandardPa
 
 //methods class
 export class FeaturedTreasury {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Finds all FeaturedTreasuries.
      */
-    static findAllFeaturedTreasuries<TResult>(parameters: IFindAllFeaturedTreasuriesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>> {
-        return request<IFindAllFeaturedTreasuriesParameters, TResult>("/featured_treasuries", parameters, "GET", options);
+    async findAllFeaturedTreasuries<TResult>(
+        params: IFindAllFeaturedTreasuriesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>> {
+        return request<IFindAllFeaturedTreasuriesParameters, TResult>({
+            ...this.config,
+            url: "/featured_treasuries",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Finds FeaturedTreasury by numeric ID.
      */
-    static getFeaturedTreasuryById<TResult>(parameters: IGetFeaturedTreasuryByIdParameters, options?: IOptions): Promise<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>> {
-        return request<IGetFeaturedTreasuryByIdParameters, TResult>("/featured_treasuries/:featured_treasury_id", parameters, "GET", options);
+    async getFeaturedTreasuryById<TResult>(
+        params: IGetFeaturedTreasuryByIdParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>> {
+        return request<IGetFeaturedTreasuryByIdParameters, TResult>({
+            ...this.config,
+            url: "/featured_treasuries/:featured_treasury_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Finds all FeaturedTreasury by numeric owner_id.
      */
-    static findAllFeaturedTreasuriesByOwner<TResult>(parameters: IFindAllFeaturedTreasuriesByOwnerParameters, options?: IOptions): Promise<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>> {
-        return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>("/featured_treasuries/owner/:owner_id", parameters, "GET", options);
+    async findAllFeaturedTreasuriesByOwner<TResult>(
+        params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>> {
+        return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>({
+            ...this.config,
+            url: "/featured_treasuries/owner/:owner_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

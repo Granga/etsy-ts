@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IPropertyValue {
@@ -31,16 +34,16 @@ export interface IPropertyValue {
 }
 
 //parameters types
-export interface IGetAttributesParameters extends IStandardParameters {
+export interface IGetAttributesParameters {
     listing_id: number
 }
 
-export interface IGetAttributeParameters extends IStandardParameters {
+export interface IGetAttributeParameters {
     listing_id: number,
     property_id: number
 }
 
-export interface IUpdateAttributeParameters extends IStandardParameters {
+export interface IUpdateAttributeParameters {
     listing_id: number,
     property_id: number,
     value_ids?: number[],
@@ -48,39 +51,73 @@ export interface IUpdateAttributeParameters extends IStandardParameters {
     scale_id?: number
 }
 
-export interface IDeleteAttributeParameters extends IStandardParameters {
+export interface IDeleteAttributeParameters {
     listing_id: number,
     property_id: number
 }
 
 //methods class
 export class PropertyValue {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get all of the attributes for a listing
      */
-    static getAttributes<TResult>(parameters: IGetAttributesParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributesParameters, TResult>> {
-        return request<IGetAttributesParameters, TResult>("/listings/:listing_id/attributes", parameters, "GET", options);
+    async getAttributes<TResult>(
+        params: IGetAttributesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetAttributesParameters, TResult>>> {
+        return request<IGetAttributesParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/attributes",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get an attribute for a listing
      */
-    static getAttribute<TResult>(parameters: IGetAttributeParameters, options?: IOptions): Promise<IStandardResponse<IGetAttributeParameters, TResult>> {
-        return request<IGetAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "GET", options);
+    async getAttribute<TResult>(
+        params: IGetAttributeParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetAttributeParameters, TResult>>> {
+        return request<IGetAttributeParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/attributes/:property_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Update or populate an attribute for a listing
      */
-    static updateAttribute<TResult>(parameters: IUpdateAttributeParameters, options?: IOptions): Promise<IStandardResponse<IUpdateAttributeParameters, TResult>> {
-        return request<IUpdateAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "PUT", options);
+    async updateAttribute<TResult>(
+        params: IUpdateAttributeParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateAttributeParameters, TResult>>> {
+        return request<IUpdateAttributeParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/attributes/:property_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Delete an attribute for a listing
      */
-    static deleteAttribute<TResult>(parameters: IDeleteAttributeParameters, options?: IOptions): Promise<IStandardResponse<IDeleteAttributeParameters, TResult>> {
-        return request<IDeleteAttributeParameters, TResult>("/listings/:listing_id/attributes/:property_id", parameters, "DELETE", options);
+    async deleteAttribute<TResult>(
+        params: IDeleteAttributeParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteAttributeParameters, TResult>>> {
+        return request<IDeleteAttributeParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/attributes/:property_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

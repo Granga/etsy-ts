@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface ITaxonomyPropertyValue {
     /**
@@ -27,5 +30,11 @@ export interface ITaxonomyPropertyValue {
 
 //methods class
 export class TaxonomyPropertyValue {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

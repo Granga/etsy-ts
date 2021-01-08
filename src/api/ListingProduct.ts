@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IListingProduct {
@@ -27,18 +30,31 @@ export interface IListingProduct {
 }
 
 //parameters types
-export interface IGetProductParameters extends IStandardParameters {
+export interface IGetProductParameters {
     listing_id: number,
     product_id: number
 }
 
 //methods class
 export class ListingProduct {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a specific offering for a listing
      */
-    static getProduct<TResult>(parameters: IGetProductParameters, options?: IOptions): Promise<IStandardResponse<IGetProductParameters, TResult>> {
-        return request<IGetProductParameters, TResult>("/listings/:listing_id/products/:product_id", parameters, "GET", options);
+    async getProduct<TResult>(
+        params: IGetProductParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetProductParameters, TResult>>> {
+        return request<IGetProductParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/products/:product_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

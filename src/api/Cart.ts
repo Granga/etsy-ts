@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ICart {
@@ -82,14 +85,14 @@ export interface ICart {
 }
 
 //parameters types
-export interface IGetAllUserCartsParameters extends IStandardParameters {
+export interface IGetAllUserCartsParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
 
-export interface IAddToCartParameters extends IStandardParameters {
+export interface IAddToCartParameters {
     user_id: string | number,
     listing_id: number,
     quantity?: number,
@@ -97,25 +100,25 @@ export interface IAddToCartParameters extends IStandardParameters {
     personalization?: any
 }
 
-export interface IUpdateCartListingQuantityParameters extends IStandardParameters {
+export interface IUpdateCartListingQuantityParameters {
     user_id: string | number,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
 
-export interface IRemoveCartListingParameters extends IStandardParameters {
+export interface IRemoveCartListingParameters {
     user_id: string | number,
     listing_id: number,
     listing_customization_id?: number
 }
 
-export interface IGetUserCartParameters extends IStandardParameters {
+export interface IGetUserCartParameters {
     user_id: string | number,
     cart_id: string | number
 }
 
-export interface IUpdateCartParameters extends IStandardParameters {
+export interface IUpdateCartParameters {
     user_id: string | number,
     cart_id: string | number,
     destination_country_id?: number,
@@ -125,12 +128,12 @@ export interface IUpdateCartParameters extends IStandardParameters {
     destination_zip?: string
 }
 
-export interface IDeleteCartParameters extends IStandardParameters {
+export interface IDeleteCartParameters {
     user_id: string | number,
     cart_id: string | number
 }
 
-export interface IAddAndSelectShippingForApplePayParameters extends IStandardParameters {
+export interface IAddAndSelectShippingForApplePayParameters {
     user_id: string | number,
     cart_id: string | number,
     second_line?: string,
@@ -140,7 +143,7 @@ export interface IAddAndSelectShippingForApplePayParameters extends IStandardPar
     country_id: number
 }
 
-export interface ISaveListingForLaterParameters extends IStandardParameters {
+export interface ISaveListingForLaterParameters {
     user_id: string | number,
     cart_id: number,
     listing_id: number,
@@ -148,12 +151,12 @@ export interface ISaveListingForLaterParameters extends IStandardParameters {
     listing_customization_id?: number
 }
 
-export interface IGetUserCartForShopParameters extends IStandardParameters {
+export interface IGetUserCartForShopParameters {
     user_id: string | number,
     shop_id: string | number
 }
 
-export interface ICreateSingleListingCartParameters extends IStandardParameters {
+export interface ICreateSingleListingCartParameters {
     user_id: string | number,
     listing_id: number,
     quantity?: number,
@@ -163,81 +166,164 @@ export interface ICreateSingleListingCartParameters extends IStandardParameters 
 
 //methods class
 export class Cart {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a user's Carts
      */
-    static getAllUserCarts<TResult>(parameters: IGetAllUserCartsParameters, options?: IOptions): Promise<IStandardResponse<IGetAllUserCartsParameters, TResult>> {
-        return request<IGetAllUserCartsParameters, TResult>("/users/:user_id/carts", parameters, "GET", options);
+    async getAllUserCarts<TResult>(
+        params: IGetAllUserCartsParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetAllUserCartsParameters, TResult>>> {
+        return request<IGetAllUserCartsParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Add a listing to a cart
      */
-    static addToCart<TResult>(parameters: IAddToCartParameters, options?: IOptions): Promise<IStandardResponse<IAddToCartParameters, TResult>> {
-        return request<IAddToCartParameters, TResult>("/users/:user_id/carts", parameters, "POST", options);
+    async addToCart<TResult>(
+        params: IAddToCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IAddToCartParameters, TResult>>> {
+        return request<IAddToCartParameters, TResult>(
+            {...this.config, url: "/users/:user_id/carts", method: "POST"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Update a cart listing purchase quantity
      */
-    static updateCartListingQuantity<TResult>(parameters: IUpdateCartListingQuantityParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>> {
-        return request<IUpdateCartListingQuantityParameters, TResult>("/users/:user_id/carts", parameters, "PUT", options);
+    async updateCartListingQuantity<TResult>(
+        params: IUpdateCartListingQuantityParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>> {
+        return request<IUpdateCartListingQuantityParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Remove a listing from a cart
      */
-    static removeCartListing<TResult>(parameters: IRemoveCartListingParameters, options?: IOptions): Promise<IStandardResponse<IRemoveCartListingParameters, TResult>> {
-        return request<IRemoveCartListingParameters, TResult>("/users/:user_id/carts", parameters, "DELETE", options);
+    async removeCartListing<TResult>(
+        params: IRemoveCartListingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IRemoveCartListingParameters, TResult>>> {
+        return request<IRemoveCartListingParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a cart
      */
-    static getUserCart<TResult>(parameters: IGetUserCartParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartParameters, TResult>> {
-        return request<IGetUserCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "GET", options);
+    async getUserCart<TResult>(
+        params: IGetUserCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserCartParameters, TResult>>> {
+        return request<IGetUserCartParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/:cart_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Update a cart
      */
-    static updateCart<TResult>(parameters: IUpdateCartParameters, options?: IOptions): Promise<IStandardResponse<IUpdateCartParameters, TResult>> {
-        return request<IUpdateCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "PUT", options);
+    async updateCart<TResult>(
+        params: IUpdateCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateCartParameters, TResult>>> {
+        return request<IUpdateCartParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/:cart_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Delete a cart
      */
-    static deleteCart<TResult>(parameters: IDeleteCartParameters, options?: IOptions): Promise<IStandardResponse<IDeleteCartParameters, TResult>> {
-        return request<IDeleteCartParameters, TResult>("/users/:user_id/carts/:cart_id", parameters, "DELETE", options);
+    async deleteCart<TResult>(
+        params: IDeleteCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteCartParameters, TResult>>> {
+        return request<IDeleteCartParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/:cart_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Saves and selects a shipping address for apple pay
      */
-    static addAndSelectShippingForApplePay<TResult>(parameters: IAddAndSelectShippingForApplePayParameters, options?: IOptions): Promise<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>> {
-        return request<IAddAndSelectShippingForApplePayParameters, TResult>("/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple", parameters, "POST", options);
+    async addAndSelectShippingForApplePay<TResult>(
+        params: IAddAndSelectShippingForApplePayParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>> {
+        return request<IAddAndSelectShippingForApplePayParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Move a listing to Saved for Later
      */
-    static saveListingForLater<TResult>(parameters: ISaveListingForLaterParameters, options?: IOptions): Promise<IStandardResponse<ISaveListingForLaterParameters, TResult>> {
-        return request<ISaveListingForLaterParameters, TResult>("/users/:user_id/carts/save", parameters, "DELETE", options);
+    async saveListingForLater<TResult>(
+        params: ISaveListingForLaterParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ISaveListingForLaterParameters, TResult>>> {
+        return request<ISaveListingForLaterParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/save",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Get a cart from a shop ID
      */
-    static getUserCartForShop<TResult>(parameters: IGetUserCartForShopParameters, options?: IOptions): Promise<IStandardResponse<IGetUserCartForShopParameters, TResult>> {
-        return request<IGetUserCartForShopParameters, TResult>("/users/:user_id/carts/shop/:shop_id", parameters, "GET", options);
+    async getUserCartForShop<TResult>(
+        params: IGetUserCartForShopParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserCartForShopParameters, TResult>>> {
+        return request<IGetUserCartForShopParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/shop/:shop_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Create a single-listing cart from a listing
      */
-    static createSingleListingCart<TResult>(parameters: ICreateSingleListingCartParameters, options?: IOptions): Promise<IStandardResponse<ICreateSingleListingCartParameters, TResult>> {
-        return request<ICreateSingleListingCartParameters, TResult>("/users/:user_id/carts/single_listing", parameters, "POST", options);
+    async createSingleListingCart<TResult>(
+        params: ICreateSingleListingCartParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ICreateSingleListingCartParameters, TResult>>> {
+        return request<ICreateSingleListingCartParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/carts/single_listing",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

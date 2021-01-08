@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IListingImage {
@@ -79,11 +82,11 @@ export interface IListingImage {
 }
 
 //parameters types
-export interface IFindAllListingImagesParameters extends IStandardParameters {
+export interface IFindAllListingImagesParameters {
     listing_id: number
 }
 
-export interface IUploadListingImageParameters extends IStandardParameters {
+export interface IUploadListingImageParameters {
     listing_id: number,
     listing_image_id?: number,
     image?: any,
@@ -92,24 +95,37 @@ export interface IUploadListingImageParameters extends IStandardParameters {
     is_watermarked?: boolean
 }
 
-export interface IGetImageListingParameters extends IStandardParameters {
+export interface IGetImageListingParameters {
     listing_image_id: number[],
     listing_id: number
 }
 
-export interface IDeleteListingImageParameters extends IStandardParameters {
+export interface IDeleteListingImageParameters {
     listing_id: number,
     listing_image_id: number
 }
 
 //methods class
 export class ListingImage {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    static findAllListingImages<TResult>(parameters: IFindAllListingImagesParameters, options?: IOptions): Promise<IStandardResponse<IFindAllListingImagesParameters, TResult>> {
-        return request<IFindAllListingImagesParameters, TResult>("/listings/:listing_id/images", parameters, "GET", options);
+    async findAllListingImages<TResult>(
+        params: IFindAllListingImagesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllListingImagesParameters, TResult>>> {
+        return request<IFindAllListingImagesParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/images",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
@@ -123,15 +139,29 @@ export class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    static uploadListingImage<TResult>(parameters: IUploadListingImageParameters, options?: IOptions): Promise<IStandardResponse<IUploadListingImageParameters, TResult>> {
-        return request<IUploadListingImageParameters, TResult>("/listings/:listing_id/images", parameters, "POST", options);
+    async uploadListingImage<TResult>(
+        params: IUploadListingImageParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUploadListingImageParameters, TResult>>> {
+        return request<IUploadListingImageParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/images",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Retrieves a Image_Listing by id.
      */
-    static getImage_Listing<TResult>(parameters: IGetImageListingParameters, options?: IOptions): Promise<IStandardResponse<IGetImageListingParameters, TResult>> {
-        return request<IGetImageListingParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "GET", options);
+    async getImage_Listing<TResult>(
+        params: IGetImageListingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetImageListingParameters, TResult>>> {
+        return request<IGetImageListingParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/images/:listing_image_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
@@ -139,7 +169,14 @@ export class ListingImage {
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    static deleteListingImage<TResult>(parameters: IDeleteListingImageParameters, options?: IOptions): Promise<IStandardResponse<IDeleteListingImageParameters, TResult>> {
-        return request<IDeleteListingImageParameters, TResult>("/listings/:listing_id/images/:listing_image_id", parameters, "DELETE", options);
+    async deleteListingImage<TResult>(
+        params: IDeleteListingImageParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteListingImageParameters, TResult>>> {
+        return request<IDeleteListingImageParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/images/:listing_image_id",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

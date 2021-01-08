@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IBillingOverview {
@@ -38,17 +41,30 @@ export interface IBillingOverview {
 }
 
 //parameters types
-export interface IGetUserBillingOverviewParameters extends IStandardParameters {
+export interface IGetUserBillingOverviewParameters {
     user_id: string | number
 }
 
 //methods class
 export class BillingOverview {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves the user's current balance.
      */
-    static getUserBillingOverview<TResult>(parameters: IGetUserBillingOverviewParameters, options?: IOptions): Promise<IStandardResponse<IGetUserBillingOverviewParameters, TResult>> {
-        return request<IGetUserBillingOverviewParameters, TResult>("/users/:user_id/billing/overview", parameters, "GET", options);
+    async getUserBillingOverview<TResult>(
+        params: IGetUserBillingOverviewParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>> {
+        return request<IGetUserBillingOverviewParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/billing/overview",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

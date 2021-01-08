@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IListingVariationImage {
@@ -11,29 +14,49 @@ export interface IListingVariationImage {
 }
 
 //parameters types
-export interface IGetVariationImagesParameters extends IStandardParameters {
+export interface IGetVariationImagesParameters {
     listing_id: number
 }
 
-export interface IUpdateVariationImagesParameters extends IStandardParameters {
+export interface IUpdateVariationImagesParameters {
     listing_id: number,
     variation_images: any
 }
 
 //methods class
 export class ListingVariationImage {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Gets all variation images on a listing
      */
-    static getVariationImages<TResult>(parameters: IGetVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IGetVariationImagesParameters, TResult>> {
-        return request<IGetVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "GET", options);
+    async getVariationImages<TResult>(
+        params: IGetVariationImagesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetVariationImagesParameters, TResult>>> {
+        return request<IGetVariationImagesParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/variation-images",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Creates variation images on a listing
      */
-    static updateVariationImages<TResult>(parameters: IUpdateVariationImagesParameters, options?: IOptions): Promise<IStandardResponse<IUpdateVariationImagesParameters, TResult>> {
-        return request<IUpdateVariationImagesParameters, TResult>("/listings/:listing_id/variation-images", parameters, "POST", options);
+    async updateVariationImages<TResult>(
+        params: IUpdateVariationImagesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateVariationImagesParameters, TResult>>> {
+        return request<IUpdateVariationImagesParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/variation-images",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

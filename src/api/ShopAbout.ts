@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IShopAbout {
@@ -35,17 +38,30 @@ export interface IShopAbout {
 }
 
 //parameters types
-export interface IGetShopAboutParameters extends IStandardParameters {
+export interface IGetShopAboutParameters {
     shop_id: string | number
 }
 
 //methods class
 export class ShopAbout {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a ShopAbout object associated to a Shop.
      */
-    static getShopAbout<TResult>(parameters: IGetShopAboutParameters, options?: IOptions): Promise<IStandardResponse<IGetShopAboutParameters, TResult>> {
-        return request<IGetShopAboutParameters, TResult>("/shops/:shop_id/about", parameters, "GET", options);
+    async getShopAbout<TResult>(
+        params: IGetShopAboutParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetShopAboutParameters, TResult>>> {
+        return request<IGetShopAboutParameters, TResult>(
+            {...this.config, url: "/shops/:shop_id/about", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 }

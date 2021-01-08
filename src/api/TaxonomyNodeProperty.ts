@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ITaxonomyNodeProperty {
@@ -47,17 +50,30 @@ export interface ITaxonomyNodeProperty {
 }
 
 //parameters types
-export interface IGetTaxonomyNodePropertiesParameters extends IStandardParameters {
+export interface IGetTaxonomyNodePropertiesParameters {
     taxonomy_id: number
 }
 
 //methods class
 export class TaxonomyNodeProperty {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get the possible properties of a taxonomy node
      */
-    static getTaxonomyNodeProperties<TResult>(parameters: IGetTaxonomyNodePropertiesParameters, options?: IOptions): Promise<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>> {
-        return request<IGetTaxonomyNodePropertiesParameters, TResult>("/taxonomy/seller/:taxonomy_id/properties", parameters, "GET", options);
+    async getTaxonomyNodeProperties<TResult>(
+        params: IGetTaxonomyNodePropertiesParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>> {
+        return request<IGetTaxonomyNodePropertiesParameters, TResult>({
+            ...this.config,
+            url: "/taxonomy/seller/:taxonomy_id/properties",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

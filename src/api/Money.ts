@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface IMoney {
     /**
@@ -42,5 +45,11 @@ export interface IMoney {
 
 //methods class
 export class Money {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

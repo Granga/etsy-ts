@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface IParamList {
     /**
@@ -11,5 +14,11 @@ export interface IParamList {
 
 //methods class
 export class ParamList {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

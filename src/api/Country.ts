@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface ICountry {
@@ -35,15 +38,15 @@ export interface ICountry {
 }
 
 //parameters types
-export interface IFindAllCountryParameters extends IStandardParameters {
+export interface IFindAllCountryParameters {
 
 }
 
-export interface IGetCountryParameters extends IStandardParameters {
+export interface IGetCountryParameters {
     country_id: number[]
 }
 
-export interface IFindByIsoCodeParameters extends IStandardParameters {
+export interface IFindByIsoCodeParameters {
     limit?: number,
     offset?: number,
     page?: number,
@@ -52,25 +55,52 @@ export interface IFindByIsoCodeParameters extends IStandardParameters {
 
 //methods class
 export class Country {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Finds all Country.
      */
-    static findAllCountry<TResult>(parameters: IFindAllCountryParameters, options?: IOptions): Promise<IStandardResponse<IFindAllCountryParameters, TResult>> {
-        return request<IFindAllCountryParameters, TResult>("/countries", parameters, "GET", options);
+    async findAllCountry<TResult>(
+        params: IFindAllCountryParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindAllCountryParameters, TResult>>> {
+        return request<IFindAllCountryParameters, TResult>(
+            {...this.config, url: "/countries", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Retrieves a Country by id.
      */
-    static getCountry<TResult>(parameters: IGetCountryParameters, options?: IOptions): Promise<IStandardResponse<IGetCountryParameters, TResult>> {
-        return request<IGetCountryParameters, TResult>("/countries/:country_id", parameters, "GET", options);
+    async getCountry<TResult>(
+        params: IGetCountryParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetCountryParameters, TResult>>> {
+        return request<IGetCountryParameters, TResult>(
+            {...this.config, url: "/countries/:country_id", method: "GET"},
+            params,
+            {...{apiKeys: this.apiKeys}, ...oauth}
+        );
     }
 
     /**
      * Get the country info for the given ISO code.
      */
-    static findByIsoCode<TResult>(parameters: IFindByIsoCodeParameters, options?: IOptions): Promise<IStandardResponse<IFindByIsoCodeParameters, TResult>> {
-        return request<IFindByIsoCodeParameters, TResult>("/countries/iso/:iso_code", parameters, "GET", options);
+    async findByIsoCode<TResult>(
+        params: IFindByIsoCodeParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindByIsoCodeParameters, TResult>>> {
+        return request<IFindByIsoCodeParameters, TResult>({
+            ...this.config,
+            url: "/countries/iso/:iso_code",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IShopTranslation {
@@ -67,12 +70,12 @@ export interface IShopTranslation {
 }
 
 //parameters types
-export interface IGetShopTranslationParameters extends IStandardParameters {
+export interface IGetShopTranslationParameters {
     shop_id: string | number,
     language: string
 }
 
-export interface ICreateShopTranslationParameters extends IStandardParameters {
+export interface ICreateShopTranslationParameters {
     shop_id: string | number,
     language: string,
     title?: string,
@@ -89,7 +92,7 @@ export interface ICreateShopTranslationParameters extends IStandardParameters {
     vacation_message?: string
 }
 
-export interface IUpdateShopTranslationParameters extends IStandardParameters {
+export interface IUpdateShopTranslationParameters {
     shop_id: string | number,
     language: string,
     title?: string,
@@ -106,39 +109,73 @@ export interface IUpdateShopTranslationParameters extends IStandardParameters {
     vacation_message?: string
 }
 
-export interface IDeleteShopTranslationParameters extends IStandardParameters {
+export interface IDeleteShopTranslationParameters {
     shop_id: string | number,
     language: string
 }
 
 //methods class
 export class ShopTranslation {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Retrieves a ShopTranslation by shop_id and language
      */
-    static getShopTranslation<TResult>(parameters: IGetShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IGetShopTranslationParameters, TResult>> {
-        return request<IGetShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "GET", options);
+    async getShopTranslation<TResult>(
+        params: IGetShopTranslationParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetShopTranslationParameters, TResult>>> {
+        return request<IGetShopTranslationParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/translations/:language",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Creates a ShopTranslation by shop_id and language
      */
-    static createShopTranslation<TResult>(parameters: ICreateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<ICreateShopTranslationParameters, TResult>> {
-        return request<ICreateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "POST", options);
+    async createShopTranslation<TResult>(
+        params: ICreateShopTranslationParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<ICreateShopTranslationParameters, TResult>>> {
+        return request<ICreateShopTranslationParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/translations/:language",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Updates a ShopTranslation by shop_id and language
      */
-    static updateShopTranslation<TResult>(parameters: IUpdateShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IUpdateShopTranslationParameters, TResult>> {
-        return request<IUpdateShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "PUT", options);
+    async updateShopTranslation<TResult>(
+        params: IUpdateShopTranslationParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateShopTranslationParameters, TResult>>> {
+        return request<IUpdateShopTranslationParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/translations/:language",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Deletes a ShopTranslation by shop_id and language
      */
-    static deleteShopTranslation<TResult>(parameters: IDeleteShopTranslationParameters, options?: IOptions): Promise<IStandardResponse<IDeleteShopTranslationParameters, TResult>> {
-        return request<IDeleteShopTranslationParameters, TResult>("/shops/:shop_id/translations/:language", parameters, "DELETE", options);
+    async deleteShopTranslation<TResult>(
+        params: IDeleteShopTranslationParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IDeleteShopTranslationParameters, TResult>>> {
+        return request<IDeleteShopTranslationParameters, TResult>({
+            ...this.config,
+            url: "/shops/:shop_id/translations/:language",
+            method: "DELETE"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

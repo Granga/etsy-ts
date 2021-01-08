@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface IFeedbackInfo {
     /**
@@ -15,5 +18,11 @@ export interface IFeedbackInfo {
 
 //methods class
 export class FeedbackInfo {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }

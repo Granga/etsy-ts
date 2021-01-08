@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IListingOffering {
@@ -27,7 +30,7 @@ export interface IListingOffering {
 }
 
 //parameters types
-export interface IGetOfferingParameters extends IStandardParameters {
+export interface IGetOfferingParameters {
     listing_id: number,
     product_id: number,
     offering_id: number
@@ -35,11 +38,24 @@ export interface IGetOfferingParameters extends IStandardParameters {
 
 //methods class
 export class ListingOffering {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Get a specific offering for a listing
      */
-    static getOffering<TResult>(parameters: IGetOfferingParameters, options?: IOptions): Promise<IStandardResponse<IGetOfferingParameters, TResult>> {
-        return request<IGetOfferingParameters, TResult>("/listings/:listing_id/products/:product_id/offerings/:offering_id", parameters, "GET", options);
+    async getOffering<TResult>(
+        params: IGetOfferingParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IGetOfferingParameters, TResult>>> {
+        return request<IGetOfferingParameters, TResult>({
+            ...this.config,
+            url: "/listings/:listing_id/products/:product_id/offerings/:offering_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

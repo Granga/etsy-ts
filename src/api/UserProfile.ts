@@ -1,6 +1,9 @@
-import { IOptions, request } from "../client/client";
-import { IStandardParameters } from "../client/IStandardParameters";
-import { IStandardResponse } from "../client/IStandardResponse";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { request } from "../client/Request";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+import { IOAuthTokens } from "../types/IOAuthTokens";
+import { IStandardParameters } from "../types/IStandardParameters";
+import { IStandardResponse } from "../types/IStandardResponse";
 
 //fields
 export interface IUserProfile {
@@ -105,11 +108,11 @@ export interface IUserProfile {
 }
 
 //parameters types
-export interface IFindUserProfileParameters extends IStandardParameters {
+export interface IFindUserProfileParameters {
     user_id: string | number
 }
 
-export interface IUpdateUserProfileParameters extends IStandardParameters {
+export interface IUpdateUserProfileParameters {
     user_id: string | number,
     bio?: string,
     gender?: string,
@@ -124,18 +127,38 @@ export interface IUpdateUserProfileParameters extends IStandardParameters {
 
 //methods class
 export class UserProfile {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
     /**
      * Returns the UserProfile object associated with a User.
      */
-    static findUserProfile<TResult>(parameters: IFindUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IFindUserProfileParameters, TResult>> {
-        return request<IFindUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "GET", options);
+    async findUserProfile<TResult>(
+        params: IFindUserProfileParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IFindUserProfileParameters, TResult>>> {
+        return request<IFindUserProfileParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/profile",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 
     /**
      * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
      */
-    static updateUserProfile<TResult>(parameters: IUpdateUserProfileParameters, options?: IOptions): Promise<IStandardResponse<IUpdateUserProfileParameters, TResult>> {
-        return request<IUpdateUserProfileParameters, TResult>("/users/:user_id/profile", parameters, "PUT", options);
+    async updateUserProfile<TResult>(
+        params: IUpdateUserProfileParameters & IStandardParameters,
+        oauth?: IOAuthTokens
+    ): Promise<AxiosResponse<IStandardResponse<IUpdateUserProfileParameters, TResult>>> {
+        return request<IUpdateUserProfileParameters, TResult>({
+            ...this.config,
+            url: "/users/:user_id/profile",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
     }
 }

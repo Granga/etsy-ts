@@ -1,3 +1,6 @@
+import { AxiosRequestConfig } from "axios";
+import { ApiKeyDetails } from "../types/ApiKeyDetails";
+
 //fields
 export interface ITreasuryListingData {
     /**
@@ -47,5 +50,11 @@ export interface ITreasuryListingData {
 
 //methods class
 export class TreasuryListingData {
+    constructor(
+        private readonly config: AxiosRequestConfig,
+        private readonly apiKeys: ApiKeyDetails
+    ) {
+    }
+
 
 }
