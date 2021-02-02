@@ -58,40 +58,40 @@ var Guest = /** @class */ (function () {
     /**
      * Get a guest by ID.
      */
-    Guest.prototype.getGuest = function (params, oauth) {
+    Guest.prototype.getGuest = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * A helper method that generates a Guest ID to associate to this anonymous session. This method is not strictly necessary, as any sufficiently random guest ID that is 13 characters in length will suffice and automatically create a guest account on use if it does not yet exist.
      */
-    Guest.prototype.generateGuest = function (params, oauth) {
+    Guest.prototype.generateGuest = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/generator", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/generator", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Claim this guest to the associated user. Merges the GuestCart's associated with this GuestId into the logged in User's Carts. Returns the number of listings merged in meta['listings_merged'].
      */
-    Guest.prototype.claimGuest = function (params, oauth) {
+    Guest.prototype.claimGuest = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/claim", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/claim", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Merge this guest to a different guest. Merges the GuestCart's associated with this GuestId into the target guest's cart. Returns the number of listings merged in meta['listings_merged'].
      */
-    Guest.prototype.mergeGuest = function (params, oauth) {
+    Guest.prototype.mergeGuest = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/merge", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/merge", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

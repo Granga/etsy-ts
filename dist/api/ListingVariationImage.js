@@ -58,20 +58,20 @@ var ListingVariationImage = /** @class */ (function () {
     /**
      * Gets all variation images on a listing
      */
-    ListingVariationImage.prototype.getVariationImages = function (params, oauth) {
+    ListingVariationImage.prototype.getVariationImages = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/variation-images", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/variation-images", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates variation images on a listing
      */
-    ListingVariationImage.prototype.updateVariationImages = function (params, oauth) {
+    ListingVariationImage.prototype.updateVariationImages = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/variation-images", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/variation-images", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

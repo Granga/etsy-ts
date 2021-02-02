@@ -58,70 +58,70 @@ var GuestCart = /** @class */ (function () {
     /**
      * Get all guest's carts
      */
-    GuestCart.prototype.findAllGuestCarts = function (params, oauth) {
+    GuestCart.prototype.findAllGuestCarts = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Add a listing to guest's cart
      */
-    GuestCart.prototype.addToGuestCart = function (params, oauth) {
+    GuestCart.prototype.addToGuestCart = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Update a guest's cart listing purchase quantity
      */
-    GuestCart.prototype.updateGuestCartListingQuantity = function (params, oauth) {
+    GuestCart.prototype.updateGuestCartListingQuantity = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Remove a listing from a guest's cart
      */
-    GuestCart.prototype.removeGuestCartListing = function (params, oauth) {
+    GuestCart.prototype.removeGuestCartListing = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a guest's cart
      */
-    GuestCart.prototype.findGuestCart = function (params, oauth) {
+    GuestCart.prototype.findGuestCart = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts/:cart_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts/:cart_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Update a guest's cart
      */
-    GuestCart.prototype.updateGuestCart = function (params, oauth) {
+    GuestCart.prototype.updateGuestCart = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts/:cart_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts/:cart_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Delete a guest's cart
      */
-    GuestCart.prototype.deleteGuestCart = function (params, oauth) {
+    GuestCart.prototype.deleteGuestCart = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/guests/:guest_id/carts/:cart_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/guests/:guest_id/carts/:cart_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

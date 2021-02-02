@@ -58,40 +58,40 @@ var Treasury = /** @class */ (function () {
     /**
      * Search Treasuries or else List all Treasuries
      */
-    Treasury.prototype.findAllTreasuries = function (params, oauth) {
+    Treasury.prototype.findAllTreasuries = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Treasury
      */
-    Treasury.prototype.getTreasury = function (params, oauth) {
+    Treasury.prototype.getTreasury = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Delete a Treasury
      */
-    Treasury.prototype.deleteTreasury = function (params, oauth) {
+    Treasury.prototype.deleteTreasury = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
      */
-    Treasury.prototype.findAllUserTreasuries = function (params, oauth) {
+    Treasury.prototype.findAllUserTreasuries = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

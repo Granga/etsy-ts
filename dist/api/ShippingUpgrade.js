@@ -58,80 +58,80 @@ var ShippingUpgrade = /** @class */ (function () {
     /**
      * Get the shipping upgrades available for a listing.
      */
-    ShippingUpgrade.prototype.getListingShippingUpgrades = function (params, oauth) {
+    ShippingUpgrade.prototype.getListingShippingUpgrades = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/shipping/upgrades", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/shipping/upgrades", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    ShippingUpgrade.prototype.createListingShippingUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.createListingShippingUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/shipping/upgrades", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/shipping/upgrades", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    ShippingUpgrade.prototype.updateListingShippingUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.updateListingShippingUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/shipping/upgrades", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/shipping/upgrades", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    ShippingUpgrade.prototype.deleteListingShippingUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.deleteListingShippingUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/shipping/upgrades", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/shipping/upgrades", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a list of shipping upgrades for the parent ShippingTemplate
      */
-    ShippingUpgrade.prototype.findAllShippingTemplateUpgrades = function (params, oauth) {
+    ShippingUpgrade.prototype.findAllShippingTemplateUpgrades = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    ShippingUpgrade.prototype.createShippingTemplateUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.createShippingTemplateUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    ShippingUpgrade.prototype.updateShippingTemplateUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.updateShippingTemplateUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    ShippingUpgrade.prototype.deleteShippingTemplateUpgrade = function (params, oauth) {
+    ShippingUpgrade.prototype.deleteShippingTemplateUpgrade = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id/upgrades", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

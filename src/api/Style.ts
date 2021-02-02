@@ -36,12 +36,12 @@ export class Style {
      */
     async findSuggestedStyles<TResult>(
         params: IFindSuggestedStylesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindSuggestedStylesParameters, TResult>>> {
         return request<IFindSuggestedStylesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/taxonomy/styles",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

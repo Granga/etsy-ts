@@ -78,13 +78,13 @@ export class BillCharge {
      */
     async getUserChargesMetadata<TResult>(
         params: IGetUserChargesMetadataParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>> {
         return request<IGetUserChargesMetadataParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/charges/meta",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -92,12 +92,12 @@ export class BillCharge {
      */
     async findAllUserCharges<TResult>(
         params: IFindAllUserChargesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserChargesParameters, TResult>>> {
         return request<IFindAllUserChargesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/charges",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

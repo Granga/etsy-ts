@@ -58,50 +58,50 @@ var FavoriteUser = /** @class */ (function () {
     /**
      * Retrieves a set of FavoriteUser objects associated to a User.
      */
-    FavoriteUser.prototype.findAllUserFavoredBy = function (params, oauth) {
+    FavoriteUser.prototype.findAllUserFavoredBy = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/favored-by", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/favored-by", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Finds all favorite users for a user
      */
-    FavoriteUser.prototype.findAllUserFavoriteUsers = function (params, oauth) {
+    FavoriteUser.prototype.findAllUserFavoriteUsers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/favorites/users", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/favorites/users", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Finds a favorite user for a user
      */
-    FavoriteUser.prototype.findUserFavoriteUsers = function (params, oauth) {
+    FavoriteUser.prototype.findUserFavoriteUsers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/favorites/users/:target_user_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/favorites/users/:target_user_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates a new favorite listing for a user
      */
-    FavoriteUser.prototype.createUserFavoriteUsers = function (params, oauth) {
+    FavoriteUser.prototype.createUserFavoriteUsers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/favorites/users/:target_user_id", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/favorites/users/:target_user_id", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Delete a favorite listing for a user
      */
-    FavoriteUser.prototype.deleteUserFavoriteUsers = function (params, oauth) {
+    FavoriteUser.prototype.deleteUserFavoriteUsers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/favorites/users/:target_user_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/favorites/users/:target_user_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

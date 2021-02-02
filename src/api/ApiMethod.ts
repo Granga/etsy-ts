@@ -56,12 +56,12 @@ export class ApiMethod {
      */
     async getMethodTable<TResult>(
         params: IGetMethodTableParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetMethodTableParameters, TResult>>> {
-        return request<IGetMethodTableParameters, TResult>(
-            {...this.config, url: "/", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetMethodTableParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

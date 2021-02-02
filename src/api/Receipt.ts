@@ -236,13 +236,13 @@ export class Receipt {
      */
     async getShop_Receipt2<TResult>(
         params: IGetShopReceipt2Parameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShopReceipt2Parameters, TResult>>> {
         return request<IGetShopReceipt2Parameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/receipts/:receipt_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -250,13 +250,13 @@ export class Receipt {
      */
     async updateReceipt<TResult>(
         params: IUpdateReceiptParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateReceiptParameters, TResult>>> {
-        return request<IUpdateReceiptParameters, TResult>(
-            {...this.config, url: "/receipts/:receipt_id", method: "PUT"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IUpdateReceiptParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/receipts/:receipt_id",
+            method: "PUT"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -264,13 +264,13 @@ export class Receipt {
      */
     async findAllShopReceipts<TResult>(
         params: IFindAllShopReceiptsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>> {
         return request<IFindAllShopReceiptsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/receipts",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -278,13 +278,13 @@ export class Receipt {
      */
     async submitTracking<TResult>(
         params: ISubmitTrackingParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ISubmitTrackingParameters, TResult>>> {
         return request<ISubmitTrackingParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/receipts/:receipt_id/tracking",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -292,13 +292,13 @@ export class Receipt {
      */
     async findAllShopReceiptsByStatus<TResult>(
         params: IFindAllShopReceiptsByStatusParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>> {
         return request<IFindAllShopReceiptsByStatusParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/receipts/:status",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -306,13 +306,13 @@ export class Receipt {
      */
     async searchAllShopReceipts<TResult>(
         params: ISearchAllShopReceiptsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>> {
         return request<ISearchAllShopReceiptsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/receipts/search",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -320,12 +320,12 @@ export class Receipt {
      */
     async findAllUserBuyerReceipts<TResult>(
         params: IFindAllUserBuyerReceiptsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>> {
         return request<IFindAllUserBuyerReceiptsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/receipts",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

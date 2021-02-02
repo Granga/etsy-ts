@@ -123,13 +123,13 @@ export class Treasury {
      */
     async findAllTreasuries<TResult>(
         params: IFindAllTreasuriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTreasuriesParameters, TResult>>> {
-        return request<IFindAllTreasuriesParameters, TResult>(
-            {...this.config, url: "/treasuries", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindAllTreasuriesParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/treasuries",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -137,13 +137,13 @@ export class Treasury {
      */
     async getTreasury<TResult>(
         params: IGetTreasuryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetTreasuryParameters, TResult>>> {
         return request<IGetTreasuryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -151,13 +151,13 @@ export class Treasury {
      */
     async deleteTreasury<TResult>(
         params: IDeleteTreasuryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryParameters, TResult>>> {
         return request<IDeleteTreasuryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -165,12 +165,12 @@ export class Treasury {
      */
     async findAllUserTreasuries<TResult>(
         params: IFindAllUserTreasuriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>> {
         return request<IFindAllUserTreasuriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/treasuries",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

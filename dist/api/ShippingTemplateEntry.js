@@ -58,40 +58,40 @@ var ShippingTemplateEntry = /** @class */ (function () {
     /**
      * Creates a new ShippingTemplateEntry
      */
-    ShippingTemplateEntry.prototype.createShippingTemplateEntry = function (params, oauth) {
+    ShippingTemplateEntry.prototype.createShippingTemplateEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/entries", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/entries", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a ShippingTemplateEntry by id.
      */
-    ShippingTemplateEntry.prototype.getShippingTemplateEntry = function (params, oauth) {
+    ShippingTemplateEntry.prototype.getShippingTemplateEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a ShippingTemplateEntry
      */
-    ShippingTemplateEntry.prototype.updateShippingTemplateEntry = function (params, oauth) {
+    ShippingTemplateEntry.prototype.updateShippingTemplateEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Deletes the ShippingTemplateEntry
      */
-    ShippingTemplateEntry.prototype.deleteShippingTemplateEntry = function (params, oauth) {
+    ShippingTemplateEntry.prototype.deleteShippingTemplateEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/entries/:shipping_template_entry_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

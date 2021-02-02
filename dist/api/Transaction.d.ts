@@ -143,21 +143,31 @@ export declare class Transaction {
     /**
      * Retrieves a Shop_Transaction by id.
      */
-    getShop_Transaction<TResult>(params: IGetShopTransactionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopTransactionParameters, TResult>>>;
+    getShop_Transaction<TResult>(params: IGetShopTransactionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopTransactionParameters, TResult>>>;
     /**
      * Retrieves a set of Transaction objects associated to a Listing.
      */
-    findAllListingTransactions<TResult>(params: IFindAllListingTransactionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>>;
+    findAllListingTransactions<TResult>(params: IFindAllListingTransactionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>>;
     /**
      * Retrieves a set of Transaction objects associated to a Shop_Receipt2.
      */
-    findAllShop_Receipt2Transactions<TResult>(params: IFindAllShopReceipt2TransactionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>>;
+    findAllShop_Receipt2Transactions<TResult>(params: IFindAllShopReceipt2TransactionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>>;
     /**
      * Retrieves a set of Transaction objects associated to a Shop.
      */
-    findAllShopTransactions<TResult>(params: IFindAllShopTransactionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>>;
+    findAllShopTransactions<TResult>(params: IFindAllShopTransactionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>>;
     /**
      * Retrieves a set of Transaction objects associated to a User.
      */
-    findAllUserBuyerTransactions<TResult>(params: IFindAllUserBuyerTransactionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>>;
+    findAllUserBuyerTransactions<TResult>(params: IFindAllUserBuyerTransactionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>>;
 }

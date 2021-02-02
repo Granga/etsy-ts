@@ -100,29 +100,41 @@ export declare class Feedback {
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    findAllUserFeedbackAsAuthor<TResult>(params: IFindAllUserFeedbackAsAuthorParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>>;
+    findAllUserFeedbackAsAuthor<TResult>(params: IFindAllUserFeedbackAsAuthorParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    findAllUserFeedbackAsBuyer<TResult>(params: IFindAllUserFeedbackAsBuyerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>>;
+    findAllUserFeedbackAsBuyer<TResult>(params: IFindAllUserFeedbackAsBuyerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    findAllUserFeedbackAsSeller<TResult>(params: IFindAllUserFeedbackAsSellerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>>;
+    findAllUserFeedbackAsSeller<TResult>(params: IFindAllUserFeedbackAsSellerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>>;
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    findAllUserFeedbackAsSubject<TResult>(params: IFindAllUserFeedbackAsSubjectParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>>;
+    findAllUserFeedbackAsSubject<TResult>(params: IFindAllUserFeedbackAsSubjectParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>>;
     /**
      * Returns a set of FeedBack objects associated to a User.
      This is essentially the union between the findAllUserFeedbackAsBuyer
      and findAllUserFeedbackAsSubject methods.
      */
-    findAllFeedbackFromBuyers<TResult>(params: IFindAllFeedbackFromBuyersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>>;
+    findAllFeedbackFromBuyers<TResult>(params: IFindAllFeedbackFromBuyersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>>;
     /**
      * Returns a set of FeedBack objects associated to a User.
      This is essentially the union between
      the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
      */
-    findAllFeedbackFromSellers<TResult>(params: IFindAllFeedbackFromSellersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>>;
+    findAllFeedbackFromSellers<TResult>(params: IFindAllFeedbackFromSellersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>>;
 }

@@ -26,5 +26,7 @@ export declare class ImageType {
     /**
      * Lists available image types along with their supported sizes.
      */
-    listImageTypes<TResult>(params: IListImageTypesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IListImageTypesParameters, TResult>>>;
+    listImageTypes<TResult>(params: IListImageTypesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IListImageTypesParameters, TResult>>>;
 }

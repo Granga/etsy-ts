@@ -58,30 +58,30 @@ var Team = /** @class */ (function () {
     /**
      * Returns all Teams
      */
-    Team.prototype.findAllTeams = function (params, oauth) {
+    Team.prototype.findAllTeams = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/teams", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/teams", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Returns specified team by ID or team name
      */
-    Team.prototype.findTeams = function (params, oauth) {
+    Team.prototype.findTeams = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/teams/:team_ids/", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/teams/:team_ids/", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Returns a list of teams for a specific user
      */
-    Team.prototype.findAllTeamsForUser = function (params, oauth) {
+    Team.prototype.findAllTeamsForUser = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/teams", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/teams", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

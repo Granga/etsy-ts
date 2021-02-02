@@ -48,13 +48,13 @@ export class DataType {
      */
     async describeOccasionEnum<TResult>(
         params: IDescribeOccasionEnumParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>> {
         return request<IDescribeOccasionEnumParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/types/enum/occasion",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -62,13 +62,13 @@ export class DataType {
      */
     async describeRecipientEnum<TResult>(
         params: IDescribeRecipientEnumParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>> {
         return request<IDescribeRecipientEnumParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/types/enum/recipient",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -76,13 +76,13 @@ export class DataType {
      */
     async describeWhenMadeEnum<TResult>(
         params: IDescribeWhenMadeEnumParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>> {
         return request<IDescribeWhenMadeEnumParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/types/enum/when_made",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -90,12 +90,12 @@ export class DataType {
      */
     async describeWhoMadeEnum<TResult>(
         params: IDescribeWhoMadeEnumParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>> {
         return request<IDescribeWhoMadeEnumParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/types/enum/who_made",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

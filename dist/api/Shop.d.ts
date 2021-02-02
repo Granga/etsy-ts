@@ -263,29 +263,43 @@ export declare class Shop {
     /**
      * Finds all Shops.  If there is a keywords parameter, finds shops with shop_name starting with keywords.
      */
-    findAllShops<TResult>(params: IFindAllShopsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopsParameters, TResult>>>;
+    findAllShops<TResult>(params: IFindAllShopsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopsParameters, TResult>>>;
     /**
      * Retrieves a Shop by id.
      */
-    getShop<TResult>(params: IGetShopParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopParameters, TResult>>>;
+    getShop<TResult>(params: IGetShopParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopParameters, TResult>>>;
     /**
      * Updates a Shop
      */
-    updateShop<TResult>(params: IUpdateShopParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShopParameters, TResult>>>;
+    updateShop<TResult>(params: IUpdateShopParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShopParameters, TResult>>>;
     /**
      * Upload a new shop banner image
      */
-    uploadShopBanner<TResult>(params: IUploadShopBannerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUploadShopBannerParameters, TResult>>>;
+    uploadShopBanner<TResult>(params: IUploadShopBannerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUploadShopBannerParameters, TResult>>>;
     /**
      * Deletes a shop banner image
      */
-    deleteShopBanner<TResult>(params: IDeleteShopBannerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShopBannerParameters, TResult>>>;
+    deleteShopBanner<TResult>(params: IDeleteShopBannerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShopBannerParameters, TResult>>>;
     /**
      * Retrieves a shop by a listing id.
      */
-    getListingShop<TResult>(params: IGetListingShopParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetListingShopParameters, TResult>>>;
+    getListingShop<TResult>(params: IGetListingShopParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetListingShopParameters, TResult>>>;
     /**
      * Retrieves a set of Shop objects associated to a User.
      */
-    findAllUserShops<TResult>(params: IFindAllUserShopsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserShopsParameters, TResult>>>;
+    findAllUserShops<TResult>(params: IFindAllUserShopsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserShopsParameters, TResult>>>;
 }

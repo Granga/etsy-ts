@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.request = void 0;
 var axios_1 = __importDefault(require("axios"));
-var crypto_1 = require("crypto");
+var crypto_js_1 = require("crypto-js");
 var oauth_1_0a_1 = __importDefault(require("oauth-1.0a"));
 function request(axiosConfig, params, oauth) {
     var finalConfig = __assign({}, axiosConfig);
@@ -43,7 +43,6 @@ function createClient(axiosConfig, tokens) {
             var requestData = {
                 url: combineURLs(config.baseURL, config.url),
                 method: config.method,
-                data: __assign({}, (config.data ? config.data : {})),
             };
             var authHeader = generateOAuthHeader(requestData, tokens);
             config.headers = __assign(__assign({}, config.headers), authHeader);
@@ -98,11 +97,7 @@ function generateOAuthHeader(request_data, tokens) {
             secret: tokens.apiKeys.secret,
         },
         signature_method: "HMAC-SHA1",
-        hash_function: function (base_string, key) {
-            return crypto_1.createHmac('sha1', key)
-                .update(base_string)
-                .digest('base64');
-        },
+        hash_function: (function (base_string, key) { return crypto_js_1.HmacSHA1(base_string, key).toString(crypto_js_1.enc.Base64); })
     });
     var authorized_data = oauth.authorize(request_data, tokens.token);
     return oauth.toHeader(authorized_data);

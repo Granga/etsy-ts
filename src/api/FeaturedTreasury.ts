@@ -66,13 +66,13 @@ export class FeaturedTreasury {
      */
     async findAllFeaturedTreasuries<TResult>(
         params: IFindAllFeaturedTreasuriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>> {
         return request<IFindAllFeaturedTreasuriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/featured_treasuries",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -80,13 +80,13 @@ export class FeaturedTreasury {
      */
     async getFeaturedTreasuryById<TResult>(
         params: IGetFeaturedTreasuryByIdParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>> {
         return request<IGetFeaturedTreasuryByIdParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/featured_treasuries/:featured_treasury_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -94,12 +94,12 @@ export class FeaturedTreasury {
      */
     async findAllFeaturedTreasuriesByOwner<TResult>(
         params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>> {
         return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/featured_treasuries/owner/:owner_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

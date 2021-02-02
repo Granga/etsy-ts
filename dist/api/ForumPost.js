@@ -58,30 +58,30 @@ var ForumPost = /** @class */ (function () {
     /**
      * Get a Treasury's Comments
      */
-    ForumPost.prototype.findTreasuryComments = function (params, oauth) {
+    ForumPost.prototype.findTreasuryComments = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key/comments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key/comments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Leave a comment on a Treasury List
      */
-    ForumPost.prototype.postTreasuryComment = function (params, oauth) {
+    ForumPost.prototype.postTreasuryComment = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key/comments", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key/comments", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Delete a given comment on a Treasury List
      */
-    ForumPost.prototype.deleteTreasuryComment = function (params, oauth) {
+    ForumPost.prototype.deleteTreasuryComment = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key/comments/:comment_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key/comments/:comment_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

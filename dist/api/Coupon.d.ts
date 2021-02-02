@@ -84,21 +84,31 @@ export declare class Coupon {
     /**
      * Retrieves all Shop_Coupons by shop_id
      */
-    findAllShopCoupons<TResult>(params: IFindAllShopCouponsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopCouponsParameters, TResult>>>;
+    findAllShopCoupons<TResult>(params: IFindAllShopCouponsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopCouponsParameters, TResult>>>;
     /**
      * Creates a new Coupon. May only have one of free_shipping, pct_discount or fixed_discount
      */
-    createCoupon<TResult>(params: ICreateCouponParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateCouponParameters, TResult>>>;
+    createCoupon<TResult>(params: ICreateCouponParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateCouponParameters, TResult>>>;
     /**
      * Retrieves a Shop_Coupon by id and shop_id
      */
-    findCoupon<TResult>(params: IFindCouponParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindCouponParameters, TResult>>>;
+    findCoupon<TResult>(params: IFindCouponParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindCouponParameters, TResult>>>;
     /**
      * Updates a coupon
      */
-    updateCoupon<TResult>(params: IUpdateCouponParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateCouponParameters, TResult>>>;
+    updateCoupon<TResult>(params: IUpdateCouponParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateCouponParameters, TResult>>>;
     /**
      * Deletes a coupon
      */
-    deleteCoupon<TResult>(params: IDeleteCouponParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteCouponParameters, TResult>>>;
+    deleteCoupon<TResult>(params: IDeleteCouponParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteCouponParameters, TResult>>>;
 }

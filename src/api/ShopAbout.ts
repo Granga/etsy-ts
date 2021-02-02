@@ -56,12 +56,12 @@ export class ShopAbout {
      */
     async getShopAbout<TResult>(
         params: IGetShopAboutParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShopAboutParameters, TResult>>> {
-        return request<IGetShopAboutParameters, TResult>(
-            {...this.config, url: "/shops/:shop_id/about", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetShopAboutParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/shops/:shop_id/about",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

@@ -53,13 +53,13 @@ export class ListingInventory {
      */
     async getInventory<TResult>(
         params: IGetInventoryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetInventoryParameters, TResult>>> {
         return request<IGetInventoryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/inventory",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -67,12 +67,12 @@ export class ListingInventory {
      */
     async updateInventory<TResult>(
         params: IUpdateInventoryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateInventoryParameters, TResult>>> {
         return request<IUpdateInventoryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/inventory",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

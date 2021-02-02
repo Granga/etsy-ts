@@ -58,20 +58,20 @@ var Avatar = /** @class */ (function () {
     /**
      * Upload a new user avatar image
      */
-    Avatar.prototype.uploadAvatar = function (params, oauth) {
+    Avatar.prototype.uploadAvatar = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/avatar", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/avatar", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get avatar image source
      */
-    Avatar.prototype.getAvatarImgSrc = function (params, oauth) {
+    Avatar.prototype.getAvatarImgSrc = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/avatar/src", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/avatar/src", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

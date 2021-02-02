@@ -139,13 +139,13 @@ export class UserProfile {
      */
     async findUserProfile<TResult>(
         params: IFindUserProfileParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindUserProfileParameters, TResult>>> {
         return request<IFindUserProfileParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/profile",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -153,12 +153,12 @@ export class UserProfile {
      */
     async updateUserProfile<TResult>(
         params: IUpdateUserProfileParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateUserProfileParameters, TResult>>> {
         return request<IUpdateUserProfileParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/profile",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

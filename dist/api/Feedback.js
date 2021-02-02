@@ -58,40 +58,40 @@ var Feedback = /** @class */ (function () {
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    Feedback.prototype.findAllUserFeedbackAsAuthor = function (params, oauth) {
+    Feedback.prototype.findAllUserFeedbackAsAuthor = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/as-author", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/as-author", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    Feedback.prototype.findAllUserFeedbackAsBuyer = function (params, oauth) {
+    Feedback.prototype.findAllUserFeedbackAsBuyer = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/as-buyer", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/as-buyer", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    Feedback.prototype.findAllUserFeedbackAsSeller = function (params, oauth) {
+    Feedback.prototype.findAllUserFeedbackAsSeller = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/as-seller", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/as-seller", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of Feedback objects associated to a User.
      */
-    Feedback.prototype.findAllUserFeedbackAsSubject = function (params, oauth) {
+    Feedback.prototype.findAllUserFeedbackAsSubject = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/as-subject", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/as-subject", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -100,10 +100,10 @@ var Feedback = /** @class */ (function () {
      This is essentially the union between the findAllUserFeedbackAsBuyer
      and findAllUserFeedbackAsSubject methods.
      */
-    Feedback.prototype.findAllFeedbackFromBuyers = function (params, oauth) {
+    Feedback.prototype.findAllFeedbackFromBuyers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/from-buyers", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/from-buyers", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -112,10 +112,10 @@ var Feedback = /** @class */ (function () {
      This is essentially the union between
      the findAllUserFeedbackAsBuyer and findAllUserFeedbackAsSubject methods.
      */
-    Feedback.prototype.findAllFeedbackFromSellers = function (params, oauth) {
+    Feedback.prototype.findAllFeedbackFromSellers = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/feedback/from-sellers", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/feedback/from-sellers", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

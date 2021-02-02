@@ -46,5 +46,7 @@ export declare class BillingOverview {
     /**
      * Retrieves the user's current balance.
      */
-    getUserBillingOverview<TResult>(params: IGetUserBillingOverviewParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>>;
+    getUserBillingOverview<TResult>(params: IGetUserBillingOverviewParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>>;
 }

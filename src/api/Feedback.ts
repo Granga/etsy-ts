@@ -118,13 +118,13 @@ export class Feedback {
      */
     async findAllUserFeedbackAsAuthor<TResult>(
         params: IFindAllUserFeedbackAsAuthorParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>> {
         return request<IFindAllUserFeedbackAsAuthorParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/as-author",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -132,13 +132,13 @@ export class Feedback {
      */
     async findAllUserFeedbackAsBuyer<TResult>(
         params: IFindAllUserFeedbackAsBuyerParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>> {
         return request<IFindAllUserFeedbackAsBuyerParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/as-buyer",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -146,13 +146,13 @@ export class Feedback {
      */
     async findAllUserFeedbackAsSeller<TResult>(
         params: IFindAllUserFeedbackAsSellerParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>> {
         return request<IFindAllUserFeedbackAsSellerParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/as-seller",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -160,13 +160,13 @@ export class Feedback {
      */
     async findAllUserFeedbackAsSubject<TResult>(
         params: IFindAllUserFeedbackAsSubjectParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>> {
         return request<IFindAllUserFeedbackAsSubjectParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/as-subject",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -176,13 +176,13 @@ export class Feedback {
      */
     async findAllFeedbackFromBuyers<TResult>(
         params: IFindAllFeedbackFromBuyersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>> {
         return request<IFindAllFeedbackFromBuyersParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/from-buyers",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -192,12 +192,12 @@ export class Feedback {
      */
     async findAllFeedbackFromSellers<TResult>(
         params: IFindAllFeedbackFromSellersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>> {
         return request<IFindAllFeedbackFromSellersParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/feedback/from-sellers",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

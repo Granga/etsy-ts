@@ -54,17 +54,25 @@ export declare class ListingTranslation {
     /**
      * Retrieves a ListingTranslation by listing_id and language
      */
-    getListingTranslation<TResult>(params: IGetListingTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetListingTranslationParameters, TResult>>>;
+    getListingTranslation<TResult>(params: IGetListingTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetListingTranslationParameters, TResult>>>;
     /**
      * Creates a ListingTranslation by listing_id and language
      */
-    createListingTranslation<TResult>(params: ICreateListingTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateListingTranslationParameters, TResult>>>;
+    createListingTranslation<TResult>(params: ICreateListingTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateListingTranslationParameters, TResult>>>;
     /**
      * Updates a ListingTranslation by listing_id and language
      */
-    updateListingTranslation<TResult>(params: IUpdateListingTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateListingTranslationParameters, TResult>>>;
+    updateListingTranslation<TResult>(params: IUpdateListingTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateListingTranslationParameters, TResult>>>;
     /**
      * Deletes a ListingTranslation by listing_id and language
      */
-    deleteListingTranslation<TResult>(params: IDeleteListingTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteListingTranslationParameters, TResult>>>;
+    deleteListingTranslation<TResult>(params: IDeleteListingTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteListingTranslationParameters, TResult>>>;
 }

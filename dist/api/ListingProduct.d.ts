@@ -36,5 +36,7 @@ export declare class ListingProduct {
     /**
      * Get a specific offering for a listing
      */
-    getProduct<TResult>(params: IGetProductParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetProductParameters, TResult>>>;
+    getProduct<TResult>(params: IGetProductParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetProductParameters, TResult>>>;
 }

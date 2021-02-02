@@ -67,13 +67,13 @@ export class Country {
      */
     async findAllCountry<TResult>(
         params: IFindAllCountryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllCountryParameters, TResult>>> {
-        return request<IFindAllCountryParameters, TResult>(
-            {...this.config, url: "/countries", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindAllCountryParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/countries",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -81,13 +81,13 @@ export class Country {
      */
     async getCountry<TResult>(
         params: IGetCountryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetCountryParameters, TResult>>> {
-        return request<IGetCountryParameters, TResult>(
-            {...this.config, url: "/countries/:country_id", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetCountryParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/countries/:country_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -95,12 +95,12 @@ export class Country {
      */
     async findByIsoCode<TResult>(
         params: IFindByIsoCodeParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindByIsoCodeParameters, TResult>>> {
         return request<IFindByIsoCodeParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/countries/iso/:iso_code",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

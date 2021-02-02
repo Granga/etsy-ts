@@ -58,10 +58,10 @@ var BillingOverview = /** @class */ (function () {
     /**
      * Retrieves the user's current balance.
      */
-    BillingOverview.prototype.getUserBillingOverview = function (params, oauth) {
+    BillingOverview.prototype.getUserBillingOverview = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/billing/overview", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/billing/overview", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

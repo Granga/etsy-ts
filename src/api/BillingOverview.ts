@@ -59,12 +59,12 @@ export class BillingOverview {
      */
     async getUserBillingOverview<TResult>(
         params: IGetUserBillingOverviewParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>> {
         return request<IGetUserBillingOverviewParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/billing/overview",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

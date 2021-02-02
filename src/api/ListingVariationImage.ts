@@ -37,13 +37,13 @@ export class ListingVariationImage {
      */
     async getVariationImages<TResult>(
         params: IGetVariationImagesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetVariationImagesParameters, TResult>>> {
         return request<IGetVariationImagesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/variation-images",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -51,12 +51,12 @@ export class ListingVariationImage {
      */
     async updateVariationImages<TResult>(
         params: IUpdateVariationImagesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateVariationImagesParameters, TResult>>> {
         return request<IUpdateVariationImagesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/variation-images",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

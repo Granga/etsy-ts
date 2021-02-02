@@ -35,5 +35,7 @@ export declare class Ledger {
     /**
      * Get a Shop Payment Account Ledger
      */
-    findLedger<TResult>(params: IFindLedgerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindLedgerParameters, TResult>>>;
+    findLedger<TResult>(params: IFindLedgerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindLedgerParameters, TResult>>>;
 }

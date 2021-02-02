@@ -125,29 +125,43 @@ export declare class GuestCart {
     /**
      * Get all guest's carts
      */
-    findAllGuestCarts<TResult>(params: IFindAllGuestCartsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllGuestCartsParameters, TResult>>>;
+    findAllGuestCarts<TResult>(params: IFindAllGuestCartsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllGuestCartsParameters, TResult>>>;
     /**
      * Add a listing to guest's cart
      */
-    addToGuestCart<TResult>(params: IAddToGuestCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IAddToGuestCartParameters, TResult>>>;
+    addToGuestCart<TResult>(params: IAddToGuestCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IAddToGuestCartParameters, TResult>>>;
     /**
      * Update a guest's cart listing purchase quantity
      */
-    updateGuestCartListingQuantity<TResult>(params: IUpdateGuestCartListingQuantityParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>>;
+    updateGuestCartListingQuantity<TResult>(params: IUpdateGuestCartListingQuantityParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>>;
     /**
      * Remove a listing from a guest's cart
      */
-    removeGuestCartListing<TResult>(params: IRemoveGuestCartListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>>;
+    removeGuestCartListing<TResult>(params: IRemoveGuestCartListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>>;
     /**
      * Get a guest's cart
      */
-    findGuestCart<TResult>(params: IFindGuestCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindGuestCartParameters, TResult>>>;
+    findGuestCart<TResult>(params: IFindGuestCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindGuestCartParameters, TResult>>>;
     /**
      * Update a guest's cart
      */
-    updateGuestCart<TResult>(params: IUpdateGuestCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartParameters, TResult>>>;
+    updateGuestCart<TResult>(params: IUpdateGuestCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartParameters, TResult>>>;
     /**
      * Delete a guest's cart
      */
-    deleteGuestCart<TResult>(params: IDeleteGuestCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteGuestCartParameters, TResult>>>;
+    deleteGuestCart<TResult>(params: IDeleteGuestCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteGuestCartParameters, TResult>>>;
 }

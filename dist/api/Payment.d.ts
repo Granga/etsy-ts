@@ -119,17 +119,25 @@ export declare class Payment {
     /**
      * Get an Etsy Payments Transaction
      */
-    findPayment<TResult>(params: IFindPaymentParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentParameters, TResult>>>;
+    findPayment<TResult>(params: IFindPaymentParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentParameters, TResult>>>;
     /**
      * Get a Payment from a Ledger Entry ID, if applicable
      */
-    findPaymentForLedgerEntry<TResult>(params: IFindPaymentForLedgerEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>>;
+    findPaymentForLedgerEntry<TResult>(params: IFindPaymentForLedgerEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>>;
     /**
      * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
      */
-    findPaymentForPaymentAccountLedgerEntry<TResult>(params: IFindPaymentForPaymentAccountLedgerEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>>;
+    findPaymentForPaymentAccountLedgerEntry<TResult>(params: IFindPaymentForPaymentAccountLedgerEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>>;
     /**
      * Get a Payment by Shop Receipt ID
      */
-    findShopPaymentByReceipt<TResult>(params: IFindShopPaymentByReceiptParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>>;
+    findShopPaymentByReceipt<TResult>(params: IFindShopPaymentByReceiptParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>>;
 }

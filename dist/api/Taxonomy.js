@@ -58,30 +58,30 @@ var Taxonomy = /** @class */ (function () {
     /**
      * Retrieve the entire taxonomy as seen by buyers in search.
      */
-    Taxonomy.prototype.getBuyerTaxonomy = function (params, oauth) {
+    Taxonomy.prototype.getBuyerTaxonomy = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/taxonomy/buyer/get", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/taxonomy/buyer/get", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieve the entire taxonomy as used by sellers in the listing process.
      */
-    Taxonomy.prototype.getSellerTaxonomy = function (params, oauth) {
+    Taxonomy.prototype.getSellerTaxonomy = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/taxonomy/seller/get", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/taxonomy/seller/get", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get the current version of the seller taxonomy
      */
-    Taxonomy.prototype.getSellerTaxonomyVersion = function (params, oauth) {
+    Taxonomy.prototype.getSellerTaxonomyVersion = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/taxonomy/seller/version", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/taxonomy/seller/version", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

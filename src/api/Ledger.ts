@@ -48,12 +48,12 @@ export class Ledger {
      */
     async findLedger<TResult>(
         params: IFindLedgerParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerParameters, TResult>>> {
-        return request<IFindLedgerParameters, TResult>(
-            {...this.config, url: "/shops/:shop_id/ledger/", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindLedgerParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/shops/:shop_id/ledger/",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

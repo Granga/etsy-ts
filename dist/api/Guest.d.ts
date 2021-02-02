@@ -32,17 +32,25 @@ export declare class Guest {
     /**
      * Get a guest by ID.
      */
-    getGuest<TResult>(params: IGetGuestParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetGuestParameters, TResult>>>;
+    getGuest<TResult>(params: IGetGuestParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetGuestParameters, TResult>>>;
     /**
      * A helper method that generates a Guest ID to associate to this anonymous session. This method is not strictly necessary, as any sufficiently random guest ID that is 13 characters in length will suffice and automatically create a guest account on use if it does not yet exist.
      */
-    generateGuest<TResult>(params: IGenerateGuestParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGenerateGuestParameters, TResult>>>;
+    generateGuest<TResult>(params: IGenerateGuestParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGenerateGuestParameters, TResult>>>;
     /**
      * Claim this guest to the associated user. Merges the GuestCart's associated with this GuestId into the logged in User's Carts. Returns the number of listings merged in meta['listings_merged'].
      */
-    claimGuest<TResult>(params: IClaimGuestParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IClaimGuestParameters, TResult>>>;
+    claimGuest<TResult>(params: IClaimGuestParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IClaimGuestParameters, TResult>>>;
     /**
      * Merge this guest to a different guest. Merges the GuestCart's associated with this GuestId into the target guest's cart. Returns the number of listings merged in meta['listings_merged'].
      */
-    mergeGuest<TResult>(params: IMergeGuestParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IMergeGuestParameters, TResult>>>;
+    mergeGuest<TResult>(params: IMergeGuestParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IMergeGuestParameters, TResult>>>;
 }

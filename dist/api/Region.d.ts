@@ -31,13 +31,19 @@ export declare class Region {
     /**
      * Finds all Region.
      */
-    findAllRegion<TResult>(params: IFindAllRegionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllRegionParameters, TResult>>>;
+    findAllRegion<TResult>(params: IFindAllRegionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllRegionParameters, TResult>>>;
     /**
      * Retrieves a Region by id.
      */
-    getRegion<TResult>(params: IGetRegionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetRegionParameters, TResult>>>;
+    getRegion<TResult>(params: IGetRegionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetRegionParameters, TResult>>>;
     /**
      *
      */
-    findEligibleRegions<TResult>(params: IFindEligibleRegionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindEligibleRegionsParameters, TResult>>>;
+    findEligibleRegions<TResult>(params: IFindEligibleRegionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindEligibleRegionsParameters, TResult>>>;
 }

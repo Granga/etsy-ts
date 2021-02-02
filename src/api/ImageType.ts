@@ -40,12 +40,12 @@ export class ImageType {
      */
     async listImageTypes<TResult>(
         params: IListImageTypesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IListImageTypesParameters, TResult>>> {
-        return request<IListImageTypesParameters, TResult>(
-            {...this.config, url: "/image_types", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IListImageTypesParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/image_types",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

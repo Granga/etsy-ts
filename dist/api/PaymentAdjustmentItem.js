@@ -58,20 +58,20 @@ var PaymentAdjustmentItem = /** @class */ (function () {
     /**
      * Get Etsy Payments Transaction Adjustment Items
      */
-    PaymentAdjustmentItem.prototype.findPaymentAdjustmentItems = function (params, oauth) {
+    PaymentAdjustmentItem.prototype.findPaymentAdjustmentItems = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get an Etsy Payments Transaction Adjustment Item
      */
-    PaymentAdjustmentItem.prototype.findPaymentAdjustmentItem = function (params, oauth) {
+    PaymentAdjustmentItem.prototype.findPaymentAdjustmentItem = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items/:payment_adjustment_item_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id/items/:payment_adjustment_item_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

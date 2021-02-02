@@ -58,10 +58,10 @@ var ApiMethod = /** @class */ (function () {
     /**
      * Get a list of all methods available.
      */
-    ApiMethod.prototype.getMethodTable = function (params, oauth) {
+    ApiMethod.prototype.getMethodTable = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

@@ -54,21 +54,31 @@ export declare class ShopSection {
     /**
      * Retrieves a set of ShopSection objects associated to a Shop.
      */
-    findAllShopSections<TResult>(params: IFindAllShopSectionsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionsParameters, TResult>>>;
+    findAllShopSections<TResult>(params: IFindAllShopSectionsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionsParameters, TResult>>>;
     /**
      * Creates a new ShopSection.
      */
-    createShopSection<TResult>(params: ICreateShopSectionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionParameters, TResult>>>;
+    createShopSection<TResult>(params: ICreateShopSectionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionParameters, TResult>>>;
     /**
      * Retrieves a ShopSection by id and shop_id
      */
-    getShopSection<TResult>(params: IGetShopSectionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopSectionParameters, TResult>>>;
+    getShopSection<TResult>(params: IGetShopSectionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopSectionParameters, TResult>>>;
     /**
      * Updates a ShopSection with the given id.
      */
-    updateShopSection<TResult>(params: IUpdateShopSectionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionParameters, TResult>>>;
+    updateShopSection<TResult>(params: IUpdateShopSectionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionParameters, TResult>>>;
     /**
      * Deletes the ShopSection with the given id.
      */
-    deleteShopSection<TResult>(params: IDeleteShopSectionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionParameters, TResult>>>;
+    deleteShopSection<TResult>(params: IDeleteShopSectionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionParameters, TResult>>>;
 }

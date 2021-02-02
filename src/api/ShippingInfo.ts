@@ -93,13 +93,13 @@ export class ShippingInfo {
      */
     async findAllListingShippingProfileEntries<TResult>(
         params: IFindAllListingShippingProfileEntriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>> {
         return request<IFindAllListingShippingProfileEntriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/shipping/info",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -107,13 +107,13 @@ export class ShippingInfo {
      */
     async createShippingInfo<TResult>(
         params: ICreateShippingInfoParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingInfoParameters, TResult>>> {
         return request<ICreateShippingInfoParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/shipping/info",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -121,13 +121,13 @@ export class ShippingInfo {
      */
     async getShippingInfo<TResult>(
         params: IGetShippingInfoParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShippingInfoParameters, TResult>>> {
         return request<IGetShippingInfoParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/info/:shipping_info_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -135,13 +135,13 @@ export class ShippingInfo {
      */
     async updateShippingInfo<TResult>(
         params: IUpdateShippingInfoParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingInfoParameters, TResult>>> {
         return request<IUpdateShippingInfoParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/info/:shipping_info_id",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -149,12 +149,12 @@ export class ShippingInfo {
      */
     async deleteShippingInfo<TResult>(
         params: IDeleteShippingInfoParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingInfoParameters, TResult>>> {
         return request<IDeleteShippingInfoParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/info/:shipping_info_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

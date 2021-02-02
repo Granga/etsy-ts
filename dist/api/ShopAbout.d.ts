@@ -43,5 +43,7 @@ export declare class ShopAbout {
     /**
      * Retrieves a ShopAbout object associated to a Shop.
      */
-    getShopAbout<TResult>(params: IGetShopAboutParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopAboutParameters, TResult>>>;
+    getShopAbout<TResult>(params: IGetShopAboutParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopAboutParameters, TResult>>>;
 }

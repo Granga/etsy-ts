@@ -144,13 +144,13 @@ export class GuestCart {
      */
     async findAllGuestCarts<TResult>(
         params: IFindAllGuestCartsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllGuestCartsParameters, TResult>>> {
         return request<IFindAllGuestCartsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -158,13 +158,13 @@ export class GuestCart {
      */
     async addToGuestCart<TResult>(
         params: IAddToGuestCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IAddToGuestCartParameters, TResult>>> {
         return request<IAddToGuestCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -172,13 +172,13 @@ export class GuestCart {
      */
     async updateGuestCartListingQuantity<TResult>(
         params: IUpdateGuestCartListingQuantityParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>> {
         return request<IUpdateGuestCartListingQuantityParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -186,13 +186,13 @@ export class GuestCart {
      */
     async removeGuestCartListing<TResult>(
         params: IRemoveGuestCartListingParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>> {
         return request<IRemoveGuestCartListingParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -200,13 +200,13 @@ export class GuestCart {
      */
     async findGuestCart<TResult>(
         params: IFindGuestCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindGuestCartParameters, TResult>>> {
         return request<IFindGuestCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts/:cart_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -214,13 +214,13 @@ export class GuestCart {
      */
     async updateGuestCart<TResult>(
         params: IUpdateGuestCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartParameters, TResult>>> {
         return request<IUpdateGuestCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts/:cart_id",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -228,12 +228,12 @@ export class GuestCart {
      */
     async deleteGuestCart<TResult>(
         params: IDeleteGuestCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteGuestCartParameters, TResult>>> {
         return request<IDeleteGuestCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/guests/:guest_id/carts/:cart_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

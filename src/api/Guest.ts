@@ -49,13 +49,13 @@ export class Guest {
      */
     async getGuest<TResult>(
         params: IGetGuestParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetGuestParameters, TResult>>> {
-        return request<IGetGuestParameters, TResult>(
-            {...this.config, url: "/guests/:guest_id", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetGuestParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/guests/:guest_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -63,13 +63,13 @@ export class Guest {
      */
     async generateGuest<TResult>(
         params: IGenerateGuestParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGenerateGuestParameters, TResult>>> {
-        return request<IGenerateGuestParameters, TResult>(
-            {...this.config, url: "/guests/generator", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGenerateGuestParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/guests/generator",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -77,13 +77,13 @@ export class Guest {
      */
     async claimGuest<TResult>(
         params: IClaimGuestParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IClaimGuestParameters, TResult>>> {
-        return request<IClaimGuestParameters, TResult>(
-            {...this.config, url: "/guests/:guest_id/claim", method: "POST"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IClaimGuestParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/guests/:guest_id/claim",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -91,12 +91,12 @@ export class Guest {
      */
     async mergeGuest<TResult>(
         params: IMergeGuestParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IMergeGuestParameters, TResult>>> {
-        return request<IMergeGuestParameters, TResult>(
-            {...this.config, url: "/guests/:guest_id/merge", method: "POST"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IMergeGuestParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/guests/:guest_id/merge",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

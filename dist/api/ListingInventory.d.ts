@@ -39,9 +39,13 @@ export declare class ListingInventory {
     /**
      * Get the inventory for a listing
      */
-    getInventory<TResult>(params: IGetInventoryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetInventoryParameters, TResult>>>;
+    getInventory<TResult>(params: IGetInventoryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetInventoryParameters, TResult>>>;
     /**
      * Update the inventory for a listing
      */
-    updateInventory<TResult>(params: IUpdateInventoryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateInventoryParameters, TResult>>>;
+    updateInventory<TResult>(params: IUpdateInventoryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateInventoryParameters, TResult>>>;
 }

@@ -76,13 +76,13 @@ export class Taxonomy {
      */
     async getBuyerTaxonomy<TResult>(
         params: IGetBuyerTaxonomyParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>> {
         return request<IGetBuyerTaxonomyParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/taxonomy/buyer/get",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -90,13 +90,13 @@ export class Taxonomy {
      */
     async getSellerTaxonomy<TResult>(
         params: IGetSellerTaxonomyParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>> {
         return request<IGetSellerTaxonomyParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/taxonomy/seller/get",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -104,12 +104,12 @@ export class Taxonomy {
      */
     async getSellerTaxonomyVersion<TResult>(
         params: IGetSellerTaxonomyVersionParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>> {
         return request<IGetSellerTaxonomyVersionParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/taxonomy/seller/version",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

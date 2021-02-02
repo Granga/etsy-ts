@@ -68,12 +68,12 @@ export class TaxonomyNodeProperty {
      */
     async getTaxonomyNodeProperties<TResult>(
         params: IGetTaxonomyNodePropertiesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>> {
         return request<IGetTaxonomyNodePropertiesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/taxonomy/seller/:taxonomy_id/properties",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

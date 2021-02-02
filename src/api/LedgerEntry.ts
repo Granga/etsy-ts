@@ -74,13 +74,13 @@ export class LedgerEntry {
      */
     async findLedgerEntries<TResult>(
         params: IFindLedgerEntriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>> {
         return request<IFindLedgerEntriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/ledger/entries",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -88,12 +88,12 @@ export class LedgerEntry {
      */
     async findLedgerEntry<TResult>(
         params: IFindLedgerEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>> {
         return request<IFindLedgerEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/ledger/entries/:ledger_entry_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

@@ -58,20 +58,20 @@ var BillCharge = /** @class */ (function () {
     /**
      * Metadata for the set of BillCharges objects associated to a User
      */
-    BillCharge.prototype.getUserChargesMetadata = function (params, oauth) {
+    BillCharge.prototype.getUserChargesMetadata = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/charges/meta", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/charges/meta", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
      */
-    BillCharge.prototype.findAllUserCharges = function (params, oauth) {
+    BillCharge.prototype.findAllUserCharges = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/charges", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/charges", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

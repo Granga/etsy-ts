@@ -62,21 +62,29 @@ export declare class ListingFile {
     /**
      * Finds all ListingFiles on a Listing
      */
-    findAllListingFiles<TResult>(params: IFindAllListingFilesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingFilesParameters, TResult>>>;
+    findAllListingFiles<TResult>(params: IFindAllListingFilesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingFilesParameters, TResult>>>;
     /**
      * Upload a new listing file, or attach an existing file to this listing.  You must either provide the listing_file_id
      of an existing listing file, or the name and file data of a new file that you are uploading.  If you are attaching
      a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
      cause the listing to have free shipping and will remove any variations.
      */
-    uploadListingFile<TResult>(params: IUploadListingFileParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUploadListingFileParameters, TResult>>>;
+    uploadListingFile<TResult>(params: IUploadListingFileParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUploadListingFileParameters, TResult>>>;
     /**
      * Finds a ListingFile by ID
      */
-    findListingFile<TResult>(params: IFindListingFileParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindListingFileParameters, TResult>>>;
+    findListingFile<TResult>(params: IFindListingFileParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindListingFileParameters, TResult>>>;
     /**
      * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
      be considered a digital listing.
      */
-    deleteListingFile<TResult>(params: IDeleteListingFileParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteListingFileParameters, TResult>>>;
+    deleteListingFile<TResult>(params: IDeleteListingFileParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteListingFileParameters, TResult>>>;
 }

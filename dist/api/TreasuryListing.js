@@ -58,20 +58,20 @@ var TreasuryListing = /** @class */ (function () {
     /**
      * Add listing to a Treasury
      */
-    TreasuryListing.prototype.addTreasuryListing = function (params, oauth) {
+    TreasuryListing.prototype.addTreasuryListing = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key/listings", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key/listings", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Remove listing from a Treasury
      */
-    TreasuryListing.prototype.removeTreasuryListing = function (params, oauth) {
+    TreasuryListing.prototype.removeTreasuryListing = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/treasuries/:treasury_key/listings/:listing_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/treasuries/:treasury_key/listings/:listing_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

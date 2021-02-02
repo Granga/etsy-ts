@@ -119,17 +119,25 @@ export declare class PaymentTemplate {
     /**
      * Retrieves the PaymentTemplate associated with the Shop
      */
-    findShopPaymentTemplates<TResult>(params: IFindShopPaymentTemplatesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>>;
+    findShopPaymentTemplates<TResult>(params: IFindShopPaymentTemplatesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>>;
     /**
      * Creates a new PaymentTemplate
      */
-    createShopPaymentTemplate<TResult>(params: ICreateShopPaymentTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>>;
+    createShopPaymentTemplate<TResult>(params: ICreateShopPaymentTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>>;
     /**
      * Updates a PaymentTemplate
      */
-    updateShopPaymentTemplate<TResult>(params: IUpdateShopPaymentTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>>;
+    updateShopPaymentTemplate<TResult>(params: IUpdateShopPaymentTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>>;
     /**
      * Retrieves a set of PaymentTemplate objects associated to a User.
      */
-    findAllUserPaymentTemplates<TResult>(params: IFindAllUserPaymentTemplatesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>>;
+    findAllUserPaymentTemplates<TResult>(params: IFindAllUserPaymentTemplatesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>>;
 }

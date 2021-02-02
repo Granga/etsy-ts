@@ -51,13 +51,19 @@ export declare class Country {
     /**
      * Finds all Country.
      */
-    findAllCountry<TResult>(params: IFindAllCountryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllCountryParameters, TResult>>>;
+    findAllCountry<TResult>(params: IFindAllCountryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllCountryParameters, TResult>>>;
     /**
      * Retrieves a Country by id.
      */
-    getCountry<TResult>(params: IGetCountryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetCountryParameters, TResult>>>;
+    getCountry<TResult>(params: IGetCountryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetCountryParameters, TResult>>>;
     /**
      * Get the country info for the given ISO code.
      */
-    findByIsoCode<TResult>(params: IFindByIsoCodeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindByIsoCodeParameters, TResult>>>;
+    findByIsoCode<TResult>(params: IFindByIsoCodeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindByIsoCodeParameters, TResult>>>;
 }

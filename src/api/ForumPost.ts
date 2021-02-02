@@ -63,13 +63,13 @@ export class ForumPost {
      */
     async findTreasuryComments<TResult>(
         params: IFindTreasuryCommentsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>> {
         return request<IFindTreasuryCommentsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key/comments",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -77,13 +77,13 @@ export class ForumPost {
      */
     async postTreasuryComment<TResult>(
         params: IPostTreasuryCommentParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IPostTreasuryCommentParameters, TResult>>> {
         return request<IPostTreasuryCommentParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key/comments",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -91,12 +91,12 @@ export class ForumPost {
      */
     async deleteTreasuryComment<TResult>(
         params: IDeleteTreasuryCommentParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>> {
         return request<IDeleteTreasuryCommentParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key/comments/:comment_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

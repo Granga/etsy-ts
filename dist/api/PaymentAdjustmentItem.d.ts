@@ -48,9 +48,13 @@ export declare class PaymentAdjustmentItem {
     /**
      * Get Etsy Payments Transaction Adjustment Items
      */
-    findPaymentAdjustmentItems<TResult>(params: IFindPaymentAdjustmentItemsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemsParameters, TResult>>>;
+    findPaymentAdjustmentItems<TResult>(params: IFindPaymentAdjustmentItemsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemsParameters, TResult>>>;
     /**
      * Get an Etsy Payments Transaction Adjustment Item
      */
-    findPaymentAdjustmentItem<TResult>(params: IFindPaymentAdjustmentItemParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>>;
+    findPaymentAdjustmentItem<TResult>(params: IFindPaymentAdjustmentItemParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentItemParameters, TResult>>>;
 }

@@ -29,17 +29,25 @@ export declare class DataType {
     /**
      * Describes the legal values for Listing.occasion.
      */
-    describeOccasionEnum<TResult>(params: IDescribeOccasionEnumParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>>;
+    describeOccasionEnum<TResult>(params: IDescribeOccasionEnumParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>>;
     /**
      * Describes the legal values for Listing.recipient.
      */
-    describeRecipientEnum<TResult>(params: IDescribeRecipientEnumParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>>;
+    describeRecipientEnum<TResult>(params: IDescribeRecipientEnumParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>>;
     /**
      * Describes the legal values for Listing.when_made.
      */
-    describeWhenMadeEnum<TResult>(params: IDescribeWhenMadeEnumParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>>;
+    describeWhenMadeEnum<TResult>(params: IDescribeWhenMadeEnumParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>>;
     /**
      * Describes the legal values for Listing.who_made.
      */
-    describeWhoMadeEnum<TResult>(params: IDescribeWhoMadeEnumParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>>;
+    describeWhoMadeEnum<TResult>(params: IDescribeWhoMadeEnumParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>>;
 }

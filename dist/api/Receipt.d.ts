@@ -217,29 +217,43 @@ export declare class Receipt {
     /**
      * Retrieves a Shop_Receipt2 by id.
      */
-    getShop_Receipt2<TResult>(params: IGetShopReceipt2Parameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopReceipt2Parameters, TResult>>>;
+    getShop_Receipt2<TResult>(params: IGetShopReceipt2Parameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopReceipt2Parameters, TResult>>>;
     /**
      * Updates a Shop_Receipt2
      */
-    updateReceipt<TResult>(params: IUpdateReceiptParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateReceiptParameters, TResult>>>;
+    updateReceipt<TResult>(params: IUpdateReceiptParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateReceiptParameters, TResult>>>;
     /**
      * Retrieves a set of Receipt objects associated to a Shop.
      */
-    findAllShopReceipts<TResult>(params: IFindAllShopReceiptsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>>;
+    findAllShopReceipts<TResult>(params: IFindAllShopReceiptsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsParameters, TResult>>>;
     /**
      * Submits tracking information and sends a shipping notification email to the buyer. If send_bcc is true, the shipping notification will be sent to the seller as well. Refer to additional documentation.
      */
-    submitTracking<TResult>(params: ISubmitTrackingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ISubmitTrackingParameters, TResult>>>;
+    submitTracking<TResult>(params: ISubmitTrackingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ISubmitTrackingParameters, TResult>>>;
     /**
      * Retrieves a set of Receipt objects associated to a Shop based on the status.
      */
-    findAllShopReceiptsByStatus<TResult>(params: IFindAllShopReceiptsByStatusParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>>;
+    findAllShopReceiptsByStatus<TResult>(params: IFindAllShopReceiptsByStatusParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>>;
     /**
      * Searches the set of Receipt objects associated to a Shop by a query
      */
-    searchAllShopReceipts<TResult>(params: ISearchAllShopReceiptsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>>;
+    searchAllShopReceipts<TResult>(params: ISearchAllShopReceiptsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>>;
     /**
      * Retrieves a set of Receipt objects associated to a User.
      */
-    findAllUserBuyerReceipts<TResult>(params: IFindAllUserBuyerReceiptsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>>;
+    findAllUserBuyerReceipts<TResult>(params: IFindAllUserBuyerReceiptsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>>;
 }

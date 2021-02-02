@@ -79,13 +79,13 @@ export class ShippingTemplateEntry {
      */
     async createShippingTemplateEntry<TResult>(
         params: ICreateShippingTemplateEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>> {
         return request<ICreateShippingTemplateEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/entries",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -93,13 +93,13 @@ export class ShippingTemplateEntry {
      */
     async getShippingTemplateEntry<TResult>(
         params: IGetShippingTemplateEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>> {
         return request<IGetShippingTemplateEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/entries/:shipping_template_entry_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -107,13 +107,13 @@ export class ShippingTemplateEntry {
      */
     async updateShippingTemplateEntry<TResult>(
         params: IUpdateShippingTemplateEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>> {
         return request<IUpdateShippingTemplateEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/entries/:shipping_template_entry_id",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -121,12 +121,12 @@ export class ShippingTemplateEntry {
      */
     async deleteShippingTemplateEntry<TResult>(
         params: IDeleteShippingTemplateEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>> {
         return request<IDeleteShippingTemplateEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/entries/:shipping_template_entry_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

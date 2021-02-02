@@ -135,13 +135,13 @@ export class Payment {
      */
     async findPayment<TResult>(
         params: IFindPaymentParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentParameters, TResult>>> {
-        return request<IFindPaymentParameters, TResult>(
-            {...this.config, url: "/payments/:payment_id", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindPaymentParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/payments/:payment_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -149,13 +149,13 @@ export class Payment {
      */
     async findPaymentForLedgerEntry<TResult>(
         params: IFindPaymentForLedgerEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentForLedgerEntryParameters, TResult>>> {
         return request<IFindPaymentForLedgerEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/payment",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -163,13 +163,13 @@ export class Payment {
      */
     async findPaymentForPaymentAccountLedgerEntry<TResult>(
         params: IFindPaymentForPaymentAccountLedgerEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>>> {
         return request<IFindPaymentForPaymentAccountLedgerEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -177,12 +177,12 @@ export class Payment {
      */
     async findShopPaymentByReceipt<TResult>(
         params: IFindShopPaymentByReceiptParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>> {
         return request<IFindShopPaymentByReceiptParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/receipts/:receipt_id/payments",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

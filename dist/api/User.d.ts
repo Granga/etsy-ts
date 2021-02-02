@@ -87,33 +87,49 @@ export declare class User {
     /**
      * Finds all Users whose name or username match the keywords parameter.
      */
-    findAllUsers<TResult>(params: IFindAllUsersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUsersParameters, TResult>>>;
+    findAllUsers<TResult>(params: IFindAllUsersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUsersParameters, TResult>>>;
     /**
      * Retrieves a User by id.
      */
-    getUser<TResult>(params: IGetUserParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserParameters, TResult>>>;
+    getUser<TResult>(params: IGetUserParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserParameters, TResult>>>;
     /**
      * Returns a list of users for a specific team
      */
-    findAllUsersForTeam<TResult>(params: IFindAllUsersForTeamParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>>;
+    findAllUsersForTeam<TResult>(params: IFindAllUsersForTeamParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>>;
     /**
      * Returns a list of users who have circled this user
      */
-    getCirclesContainingUser<TResult>(params: IGetCirclesContainingUserParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>>;
+    getCirclesContainingUser<TResult>(params: IGetCirclesContainingUserParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>>;
     /**
      * Returns details about a connection between users
      */
-    getConnectedUser<TResult>(params: IGetConnectedUserParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetConnectedUserParameters, TResult>>>;
+    getConnectedUser<TResult>(params: IGetConnectedUserParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetConnectedUserParameters, TResult>>>;
     /**
      * Removes a user (to_user_id) from the logged in user's (user_id) circle
      */
-    unconnectUsers<TResult>(params: IUnconnectUsersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUnconnectUsersParameters, TResult>>>;
+    unconnectUsers<TResult>(params: IUnconnectUsersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUnconnectUsersParameters, TResult>>>;
     /**
      * Returns a list of users that are in this user's cricle
      */
-    getConnectedUsers<TResult>(params: IGetConnectedUsersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetConnectedUsersParameters, TResult>>>;
+    getConnectedUsers<TResult>(params: IGetConnectedUsersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetConnectedUsersParameters, TResult>>>;
     /**
      * Adds user (to_user_id) to the user's (user_id) circle
      */
-    connectUsers<TResult>(params: IConnectUsersParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IConnectUsersParameters, TResult>>>;
+    connectUsers<TResult>(params: IConnectUsersParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IConnectUsersParameters, TResult>>>;
 }

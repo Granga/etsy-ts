@@ -42,13 +42,13 @@ export class TreasuryListing {
      */
     async addTreasuryListing<TResult>(
         params: IAddTreasuryListingParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IAddTreasuryListingParameters, TResult>>> {
         return request<IAddTreasuryListingParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key/listings",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -56,12 +56,12 @@ export class TreasuryListing {
      */
     async removeTreasuryListing<TResult>(
         params: IRemoveTreasuryListingParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>> {
         return request<IRemoveTreasuryListingParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/treasuries/:treasury_key/listings/:listing_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

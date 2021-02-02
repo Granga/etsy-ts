@@ -92,33 +92,49 @@ export declare class ShippingUpgrade {
     /**
      * Get the shipping upgrades available for a listing.
      */
-    getListingShippingUpgrades<TResult>(params: IGetListingShippingUpgradesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>>>;
+    getListingShippingUpgrades<TResult>(params: IGetListingShippingUpgradesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>>>;
     /**
      * Creates a new ShippingUpgrade for the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    createListingShippingUpgrade<TResult>(params: ICreateListingShippingUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>>>;
+    createListingShippingUpgrade<TResult>(params: ICreateListingShippingUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>>>;
     /**
      * Updates a ShippingUpgrade on a listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    updateListingShippingUpgrade<TResult>(params: IUpdateListingShippingUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>>>;
+    updateListingShippingUpgrade<TResult>(params: IUpdateListingShippingUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>>>;
     /**
      * Deletes the ShippingUpgrade from the listing. Will unlink the listing if linked to a ShippingTemplate.
      */
-    deleteListingShippingUpgrade<TResult>(params: IDeleteListingShippingUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>>>;
+    deleteListingShippingUpgrade<TResult>(params: IDeleteListingShippingUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>>>;
     /**
      * Retrieves a list of shipping upgrades for the parent ShippingTemplate
      */
-    findAllShippingTemplateUpgrades<TResult>(params: IFindAllShippingTemplateUpgradesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, TResult>>>;
+    findAllShippingTemplateUpgrades<TResult>(params: IFindAllShippingTemplateUpgradesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, TResult>>>;
     /**
      * Creates a new ShippingUpgrade for the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    createShippingTemplateUpgrade<TResult>(params: ICreateShippingTemplateUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateUpgradeParameters, TResult>>>;
+    createShippingTemplateUpgrade<TResult>(params: ICreateShippingTemplateUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateUpgradeParameters, TResult>>>;
     /**
      * Updates a ShippingUpgrade of the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    updateShippingTemplateUpgrade<TResult>(params: IUpdateShippingTemplateUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, TResult>>>;
+    updateShippingTemplateUpgrade<TResult>(params: IUpdateShippingTemplateUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, TResult>>>;
     /**
      * Deletes the ShippingUpgrade from the parent ShippingTemplate. Updates any listings linked to the ShippingTemplate.
      */
-    deleteShippingTemplateUpgrade<TResult>(params: IDeleteShippingTemplateUpgradeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, TResult>>>;
+    deleteShippingTemplateUpgrade<TResult>(params: IDeleteShippingTemplateUpgradeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, TResult>>>;
 }

@@ -395,89 +395,133 @@ export declare class Listing {
     /**
      * Creates a new Listing.
      */
-    createListing<TResult>(params: ICreateListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateListingParameters, TResult>>>;
+    createListing<TResult>(params: ICreateListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateListingParameters, TResult>>>;
     /**
      * Finds all FeaturedTreasury listings.
      */
-    findAllFeaturedListings<TResult>(params: IFindAllFeaturedListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>>;
+    findAllFeaturedListings<TResult>(params: IFindAllFeaturedListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>>;
     /**
      * Retrieves a Listing by id.
      */
-    getListing<TResult>(params: IGetListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetListingParameters, TResult>>>;
+    getListing<TResult>(params: IGetListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetListingParameters, TResult>>>;
     /**
      * Updates a Listing
      */
-    updateListing<TResult>(params: IUpdateListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateListingParameters, TResult>>>;
+    updateListing<TResult>(params: IUpdateListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateListingParameters, TResult>>>;
     /**
      * Deletes a Listing
      */
-    deleteListing<TResult>(params: IDeleteListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteListingParameters, TResult>>>;
+    deleteListing<TResult>(params: IDeleteListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteListingParameters, TResult>>>;
     /**
      * Finds all active Listings. (Note: the sort_on and sort_order options only work when combined with one of the search options: keywords, color, tags, location, etc.)
      */
-    findAllListingActive<TResult>(params: IFindAllListingActiveParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingActiveParameters, TResult>>>;
+    findAllListingActive<TResult>(params: IFindAllListingActiveParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingActiveParameters, TResult>>>;
     /**
      * Collects the list of interesting listings
      */
-    getInterestingListings<TResult>(params: IGetInterestingListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetInterestingListingsParameters, TResult>>>;
+    getInterestingListings<TResult>(params: IGetInterestingListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetInterestingListingsParameters, TResult>>>;
     /**
      * Collects the list of listings used to generate the trending listing page
      */
-    getTrendingListings<TResult>(params: IGetTrendingListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetTrendingListingsParameters, TResult>>>;
+    getTrendingListings<TResult>(params: IGetTrendingListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetTrendingListingsParameters, TResult>>>;
     /**
      * Finds all listings for a certain FeaturedTreasury.
      */
-    findAllListingsForFeaturedTreasuryId<TResult>(params: IFindAllListingsForFeaturedTreasuryIdParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>>;
+    findAllListingsForFeaturedTreasuryId<TResult>(params: IFindAllListingsForFeaturedTreasuryIdParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>>;
     /**
      * Finds all active listings for a certain FeaturedTreasury.
      */
-    findAllActiveListingsForFeaturedTreasuryId<TResult>(params: IFindAllActiveListingsForFeaturedTreasuryIdParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>>;
+    findAllActiveListingsForFeaturedTreasuryId<TResult>(params: IFindAllActiveListingsForFeaturedTreasuryIdParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>>;
     /**
      * Finds FeaturedTreasury listings that are currently displayed on a regional homepage.
      */
-    findAllCurrentFeaturedListings<TResult>(params: IFindAllCurrentFeaturedListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>>;
+    findAllCurrentFeaturedListings<TResult>(params: IFindAllCurrentFeaturedListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>>;
     /**
      * Finds all listings in a receipt
      */
-    findAllReceiptListings<TResult>(params: IFindAllReceiptListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>>;
+    findAllReceiptListings<TResult>(params: IFindAllReceiptListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>>;
     /**
      * Finds all active Listings associated with a Shop.(NOTE: If calling on behalf of a shop owner in the context of listing management, be sure to include the parameter include_private = true.  This will return private listings that are not publicly visible in the shop, but which can be managed.  This is an experimental feature and may change.)
      */
-    findAllShopListingsActive<TResult>(params: IFindAllShopListingsActiveParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>>;
+    findAllShopListingsActive<TResult>(params: IFindAllShopListingsActiveParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>>;
     /**
      * Finds all of a Shop's draft listings
      */
-    findAllShopListingsDraft<TResult>(params: IFindAllShopListingsDraftParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>>;
+    findAllShopListingsDraft<TResult>(params: IFindAllShopListingsDraftParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>>;
     /**
      * Retrieves Listings associated to a Shop that are expired
      */
-    findAllShopListingsExpired<TResult>(params: IFindAllShopListingsExpiredParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>>;
+    findAllShopListingsExpired<TResult>(params: IFindAllShopListingsExpiredParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    getShopListingExpired<TResult>(params: IGetShopListingExpiredParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopListingExpiredParameters, TResult>>>;
+    getShopListingExpired<TResult>(params: IGetShopListingExpiredParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopListingExpiredParameters, TResult>>>;
     /**
      * Retrieves Listings associated to a Shop that are featured
      */
-    findAllShopListingsFeatured<TResult>(params: IFindAllShopListingsFeaturedParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>>;
+    findAllShopListingsFeatured<TResult>(params: IFindAllShopListingsFeaturedParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>>;
     /**
      * Retrieves Listings associated to a Shop that are inactive
      */
-    findAllShopListingsInactive<TResult>(params: IFindAllShopListingsInactiveParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>>;
+    findAllShopListingsInactive<TResult>(params: IFindAllShopListingsInactiveParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>>;
     /**
      * Retrieves a Listing associated to a Shop that is inactive
      */
-    getShopListingInactive<TResult>(params: IGetShopListingInactiveParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopListingInactiveParameters, TResult>>>;
+    getShopListingInactive<TResult>(params: IGetShopListingInactiveParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopListingInactiveParameters, TResult>>>;
     /**
      * Finds all listings within a shop section
      */
-    findAllShopSectionListings<TResult>(params: IFindAllShopSectionListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>>;
+    findAllShopSectionListings<TResult>(params: IFindAllShopSectionListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>>;
     /**
      * Finds all listings within a shop section
      */
-    findAllShopSectionListingsActive<TResult>(params: IFindAllShopSectionListingsActiveParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>>;
+    findAllShopSectionListingsActive<TResult>(params: IFindAllShopSectionListingsActiveParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>>;
     /**
      * Finds all listings in a given Cart
      */
-    findAllCartListings<TResult>(params: IFindAllCartListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllCartListingsParameters, TResult>>>;
+    findAllCartListings<TResult>(params: IFindAllCartListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllCartListingsParameters, TResult>>>;
 }

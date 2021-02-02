@@ -58,60 +58,60 @@ var ShippingTemplate = /** @class */ (function () {
     /**
      * Creates a new ShippingTemplate
      */
-    ShippingTemplate.prototype.createShippingTemplate = function (params, oauth) {
+    ShippingTemplate.prototype.createShippingTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a ShippingTemplate by id.
      */
-    ShippingTemplate.prototype.getShippingTemplate = function (params, oauth) {
+    ShippingTemplate.prototype.getShippingTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a ShippingTemplate
      */
-    ShippingTemplate.prototype.updateShippingTemplate = function (params, oauth) {
+    ShippingTemplate.prototype.updateShippingTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Deletes the ShippingTemplate with the given id.
      */
-    ShippingTemplate.prototype.deleteShippingTemplate = function (params, oauth) {
+    ShippingTemplate.prototype.deleteShippingTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
      */
-    ShippingTemplate.prototype.findAllShippingTemplateEntries = function (params, oauth) {
+    ShippingTemplate.prototype.findAllShippingTemplateEntries = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shipping/templates/:shipping_template_id/entries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shipping/templates/:shipping_template_id/entries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of ShippingTemplate objects associated to a User.
      */
-    ShippingTemplate.prototype.findAllUserShippingProfiles = function (params, oauth) {
+    ShippingTemplate.prototype.findAllUserShippingProfiles = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/shipping/templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/shipping/templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

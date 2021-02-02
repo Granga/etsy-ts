@@ -54,17 +54,25 @@ export declare class PropertyValue {
     /**
      * Get all of the attributes for a listing
      */
-    getAttributes<TResult>(params: IGetAttributesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetAttributesParameters, TResult>>>;
+    getAttributes<TResult>(params: IGetAttributesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetAttributesParameters, TResult>>>;
     /**
      * Get an attribute for a listing
      */
-    getAttribute<TResult>(params: IGetAttributeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetAttributeParameters, TResult>>>;
+    getAttribute<TResult>(params: IGetAttributeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetAttributeParameters, TResult>>>;
     /**
      * Update or populate an attribute for a listing
      */
-    updateAttribute<TResult>(params: IUpdateAttributeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateAttributeParameters, TResult>>>;
+    updateAttribute<TResult>(params: IUpdateAttributeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateAttributeParameters, TResult>>>;
     /**
      * Delete an attribute for a listing
      */
-    deleteAttribute<TResult>(params: IDeleteAttributeParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteAttributeParameters, TResult>>>;
+    deleteAttribute<TResult>(params: IDeleteAttributeParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteAttributeParameters, TResult>>>;
 }

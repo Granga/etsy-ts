@@ -52,21 +52,31 @@ export declare class FavoriteListing {
     /**
      * Retrieves a set of FavoriteListing objects associated to a Listing.
      */
-    findAllListingFavoredBy<TResult>(params: IFindAllListingFavoredByParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingFavoredByParameters, TResult>>>;
+    findAllListingFavoredBy<TResult>(params: IFindAllListingFavoredByParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingFavoredByParameters, TResult>>>;
     /**
      * Finds all favorite listings for a user
      */
-    findAllUserFavoriteListings<TResult>(params: IFindAllUserFavoriteListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoriteListingsParameters, TResult>>>;
+    findAllUserFavoriteListings<TResult>(params: IFindAllUserFavoriteListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoriteListingsParameters, TResult>>>;
     /**
      * Finds a favorite listing for a user
      */
-    findUserFavoriteListings<TResult>(params: IFindUserFavoriteListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindUserFavoriteListingsParameters, TResult>>>;
+    findUserFavoriteListings<TResult>(params: IFindUserFavoriteListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindUserFavoriteListingsParameters, TResult>>>;
     /**
      * Creates a new favorite listing for a user
      */
-    createUserFavoriteListings<TResult>(params: ICreateUserFavoriteListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateUserFavoriteListingsParameters, TResult>>>;
+    createUserFavoriteListings<TResult>(params: ICreateUserFavoriteListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateUserFavoriteListingsParameters, TResult>>>;
     /**
      * Delete a favorite listing for a user
      */
-    deleteUserFavoriteListings<TResult>(params: IDeleteUserFavoriteListingsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteUserFavoriteListingsParameters, TResult>>>;
+    deleteUserFavoriteListings<TResult>(params: IDeleteUserFavoriteListingsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteUserFavoriteListingsParameters, TResult>>>;
 }

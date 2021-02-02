@@ -178,13 +178,13 @@ export class Cart {
      */
     async getAllUserCarts<TResult>(
         params: IGetAllUserCartsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetAllUserCartsParameters, TResult>>> {
         return request<IGetAllUserCartsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -192,13 +192,13 @@ export class Cart {
      */
     async addToCart<TResult>(
         params: IAddToCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IAddToCartParameters, TResult>>> {
-        return request<IAddToCartParameters, TResult>(
-            {...this.config, url: "/users/:user_id/carts", method: "POST"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IAddToCartParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/users/:user_id/carts",
+            method: "POST"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -206,13 +206,13 @@ export class Cart {
      */
     async updateCartListingQuantity<TResult>(
         params: IUpdateCartListingQuantityParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>> {
         return request<IUpdateCartListingQuantityParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -220,13 +220,13 @@ export class Cart {
      */
     async removeCartListing<TResult>(
         params: IRemoveCartListingParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IRemoveCartListingParameters, TResult>>> {
         return request<IRemoveCartListingParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -234,13 +234,13 @@ export class Cart {
      */
     async getUserCart<TResult>(
         params: IGetUserCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetUserCartParameters, TResult>>> {
         return request<IGetUserCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/:cart_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -248,13 +248,13 @@ export class Cart {
      */
     async updateCart<TResult>(
         params: IUpdateCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateCartParameters, TResult>>> {
         return request<IUpdateCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/:cart_id",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -262,13 +262,13 @@ export class Cart {
      */
     async deleteCart<TResult>(
         params: IDeleteCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteCartParameters, TResult>>> {
         return request<IDeleteCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/:cart_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -276,13 +276,13 @@ export class Cart {
      */
     async addAndSelectShippingForApplePay<TResult>(
         params: IAddAndSelectShippingForApplePayParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>> {
         return request<IAddAndSelectShippingForApplePayParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/:cart_id/add_and_select_shipping_for_apple",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -290,13 +290,13 @@ export class Cart {
      */
     async saveListingForLater<TResult>(
         params: ISaveListingForLaterParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ISaveListingForLaterParameters, TResult>>> {
         return request<ISaveListingForLaterParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/save",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -304,13 +304,13 @@ export class Cart {
      */
     async getUserCartForShop<TResult>(
         params: IGetUserCartForShopParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetUserCartForShopParameters, TResult>>> {
         return request<IGetUserCartForShopParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/shop/:shop_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -318,12 +318,12 @@ export class Cart {
      */
     async createSingleListingCart<TResult>(
         params: ICreateSingleListingCartParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ICreateSingleListingCartParameters, TResult>>> {
         return request<ICreateSingleListingCartParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/carts/single_listing",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

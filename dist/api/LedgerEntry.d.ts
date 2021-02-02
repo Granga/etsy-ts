@@ -60,9 +60,13 @@ export declare class LedgerEntry {
     /**
      * Get a Shop Payment Account Ledger's Entries
      */
-    findLedgerEntries<TResult>(params: IFindLedgerEntriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>>;
+    findLedgerEntries<TResult>(params: IFindLedgerEntriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>>;
     /**
      * Get a Shop Payment Account Ledger Entry
      */
-    findLedgerEntry<TResult>(params: IFindLedgerEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>>;
+    findLedgerEntry<TResult>(params: IFindLedgerEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>>;
 }

@@ -160,13 +160,13 @@ export class Transaction {
      */
     async getShop_Transaction<TResult>(
         params: IGetShopTransactionParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShopTransactionParameters, TResult>>> {
         return request<IGetShopTransactionParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/transactions/:transaction_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -174,13 +174,13 @@ export class Transaction {
      */
     async findAllListingTransactions<TResult>(
         params: IFindAllListingTransactionsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>> {
         return request<IFindAllListingTransactionsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/listings/:listing_id/transactions",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -188,13 +188,13 @@ export class Transaction {
      */
     async findAllShop_Receipt2Transactions<TResult>(
         params: IFindAllShopReceipt2TransactionsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>> {
         return request<IFindAllShopReceipt2TransactionsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/receipts/:receipt_id/transactions",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -202,13 +202,13 @@ export class Transaction {
      */
     async findAllShopTransactions<TResult>(
         params: IFindAllShopTransactionsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>> {
         return request<IFindAllShopTransactionsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/transactions",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -216,12 +216,12 @@ export class Transaction {
      */
     async findAllUserBuyerTransactions<TResult>(
         params: IFindAllUserBuyerTransactionsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>> {
         return request<IFindAllUserBuyerTransactionsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/transactions",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

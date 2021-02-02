@@ -22,5 +22,7 @@ export declare class Style {
     /**
      * Retrieve all suggested styles.
      */
-    findSuggestedStyles<TResult>(params: IFindSuggestedStylesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindSuggestedStylesParameters, TResult>>>;
+    findSuggestedStyles<TResult>(params: IFindSuggestedStylesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindSuggestedStylesParameters, TResult>>>;
 }

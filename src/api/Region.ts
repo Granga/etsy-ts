@@ -48,13 +48,13 @@ export class Region {
      */
     async findAllRegion<TResult>(
         params: IFindAllRegionParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllRegionParameters, TResult>>> {
-        return request<IFindAllRegionParameters, TResult>(
-            {...this.config, url: "/regions", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindAllRegionParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/regions",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -62,13 +62,13 @@ export class Region {
      */
     async getRegion<TResult>(
         params: IGetRegionParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetRegionParameters, TResult>>> {
-        return request<IGetRegionParameters, TResult>(
-            {...this.config, url: "/regions/:region_id", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetRegionParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/regions/:region_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -76,12 +76,12 @@ export class Region {
      */
     async findEligibleRegions<TResult>(
         params: IFindEligibleRegionsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindEligibleRegionsParameters, TResult>>> {
         return request<IFindEligibleRegionsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/regions/eligible",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

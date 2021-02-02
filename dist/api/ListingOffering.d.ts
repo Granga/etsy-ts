@@ -37,5 +37,7 @@ export declare class ListingOffering {
     /**
      * Get a specific offering for a listing
      */
-    getOffering<TResult>(params: IGetOfferingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetOfferingParameters, TResult>>>;
+    getOffering<TResult>(params: IGetOfferingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetOfferingParameters, TResult>>>;
 }

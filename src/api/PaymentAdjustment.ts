@@ -94,13 +94,13 @@ export class PaymentAdjustment {
      */
     async findPaymentAdjustments<TResult>(
         params: IFindPaymentAdjustmentsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>> {
         return request<IFindPaymentAdjustmentsParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/payments/:payment_id/adjustments",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -108,13 +108,13 @@ export class PaymentAdjustment {
      */
     async findPaymentAdjustment<TResult>(
         params: IFindPaymentAdjustmentParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>> {
         return request<IFindPaymentAdjustmentParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/payments/:payment_id/adjustments/:payment_adjustment_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -122,13 +122,13 @@ export class PaymentAdjustment {
      */
     async findPaymentAdjustmentForLedgerEntry<TResult>(
         params: IFindPaymentAdjustmentForLedgerEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>> {
         return request<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -136,12 +136,12 @@ export class PaymentAdjustment {
      */
     async findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(
         params: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>> {
         return request<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

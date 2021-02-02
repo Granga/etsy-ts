@@ -64,9 +64,13 @@ export declare class Avatar {
     /**
      * Upload a new user avatar image
      */
-    uploadAvatar<TResult>(params: IUploadAvatarParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUploadAvatarParameters, TResult>>>;
+    uploadAvatar<TResult>(params: IUploadAvatarParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUploadAvatarParameters, TResult>>>;
     /**
      * Get avatar image source
      */
-    getAvatarImgSrc<TResult>(params: IGetAvatarImgSrcParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>>;
+    getAvatarImgSrc<TResult>(params: IGetAvatarImgSrcParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>>;
 }

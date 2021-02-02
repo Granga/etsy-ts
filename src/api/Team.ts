@@ -61,13 +61,13 @@ export class Team {
      */
     async findAllTeams<TResult>(
         params: IFindAllTeamsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsParameters, TResult>>> {
-        return request<IFindAllTeamsParameters, TResult>(
-            {...this.config, url: "/teams", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindAllTeamsParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/teams",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -75,13 +75,13 @@ export class Team {
      */
     async findTeams<TResult>(
         params: IFindTeamsParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindTeamsParameters, TResult>>> {
-        return request<IFindTeamsParameters, TResult>(
-            {...this.config, url: "/teams/:team_ids/", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindTeamsParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/teams/:team_ids/",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -89,12 +89,12 @@ export class Team {
      */
     async findAllTeamsForUser<TResult>(
         params: IFindAllTeamsForUserParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>> {
         return request<IFindAllTeamsForUserParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/teams",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

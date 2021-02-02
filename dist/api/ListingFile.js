@@ -58,10 +58,10 @@ var ListingFile = /** @class */ (function () {
     /**
      * Finds all ListingFiles on a Listing
      */
-    ListingFile.prototype.findAllListingFiles = function (params, oauth) {
+    ListingFile.prototype.findAllListingFiles = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/files", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/files", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -71,20 +71,20 @@ var ListingFile = /** @class */ (function () {
      a file to a listing that is currently not digital, the listing will be converted to a digital listing.  This will
      cause the listing to have free shipping and will remove any variations.
      */
-    ListingFile.prototype.uploadListingFile = function (params, oauth) {
+    ListingFile.prototype.uploadListingFile = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/files", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/files", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Finds a ListingFile by ID
      */
-    ListingFile.prototype.findListingFile = function (params, oauth) {
+    ListingFile.prototype.findListingFile = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/files/:listing_file_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/files/:listing_file_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -92,10 +92,10 @@ var ListingFile = /** @class */ (function () {
      * Removes the listing file from this listing.  If this is the last file on a listing, the listing will no longer
      be considered a digital listing.
      */
-    ListingFile.prototype.deleteListingFile = function (params, oauth) {
+    ListingFile.prototype.deleteListingFile = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/files/:listing_file_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/files/:listing_file_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

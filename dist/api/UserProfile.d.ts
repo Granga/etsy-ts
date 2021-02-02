@@ -125,9 +125,13 @@ export declare class UserProfile {
     /**
      * Returns the UserProfile object associated with a User.
      */
-    findUserProfile<TResult>(params: IFindUserProfileParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindUserProfileParameters, TResult>>>;
+    findUserProfile<TResult>(params: IFindUserProfileParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindUserProfileParameters, TResult>>>;
     /**
      * Updates the UserProfile object associated with a User. Notes:Name changes are subject to admin review and therefore unavailable via the API.Materials must be provided as a period-separated list of ASCII words.
      */
-    updateUserProfile<TResult>(params: IUpdateUserProfileParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateUserProfileParameters, TResult>>>;
+    updateUserProfile<TResult>(params: IUpdateUserProfileParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateUserProfileParameters, TResult>>>;
 }

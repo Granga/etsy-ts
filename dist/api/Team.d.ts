@@ -46,13 +46,19 @@ export declare class Team {
     /**
      * Returns all Teams
      */
-    findAllTeams<TResult>(params: IFindAllTeamsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsParameters, TResult>>>;
+    findAllTeams<TResult>(params: IFindAllTeamsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsParameters, TResult>>>;
     /**
      * Returns specified team by ID or team name
      */
-    findTeams<TResult>(params: IFindTeamsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindTeamsParameters, TResult>>>;
+    findTeams<TResult>(params: IFindTeamsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindTeamsParameters, TResult>>>;
     /**
      * Returns a list of teams for a specific user
      */
-    findAllTeamsForUser<TResult>(params: IFindAllTeamsForUserParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>>;
+    findAllTeamsForUser<TResult>(params: IFindAllTeamsForUserParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>>;
 }

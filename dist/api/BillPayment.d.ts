@@ -57,5 +57,7 @@ export declare class BillPayment {
     /**
      * Retrieves a set of BillPayment objects associated to a User.
      */
-    findAllUserPayments<TResult>(params: IFindAllUserPaymentsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>>;
+    findAllUserPayments<TResult>(params: IFindAllUserPaymentsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentsParameters, TResult>>>;
 }

@@ -46,17 +46,25 @@ export declare class ShopSectionTranslation {
     /**
      * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    getShopSectionTranslation<TResult>(params: IGetShopSectionTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>>;
+    getShopSectionTranslation<TResult>(params: IGetShopSectionTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>>;
     /**
      * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    createShopSectionTranslation<TResult>(params: ICreateShopSectionTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>>;
+    createShopSectionTranslation<TResult>(params: ICreateShopSectionTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>>;
     /**
      * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    updateShopSectionTranslation<TResult>(params: IUpdateShopSectionTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>>;
+    updateShopSectionTranslation<TResult>(params: IUpdateShopSectionTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>>;
     /**
      * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    deleteShopSectionTranslation<TResult>(params: IDeleteShopSectionTranslationParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>>;
+    deleteShopSectionTranslation<TResult>(params: IDeleteShopSectionTranslationParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>>;
 }

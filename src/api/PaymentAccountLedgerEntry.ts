@@ -65,12 +65,12 @@ export class PaymentAccountLedgerEntry {
      */
     async findPaymentAccountEntries<TResult>(
         params: IFindPaymentAccountEntriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>> {
         return request<IFindPaymentAccountEntriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/payment_account/entries",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

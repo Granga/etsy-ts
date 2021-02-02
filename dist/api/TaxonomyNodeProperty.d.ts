@@ -55,5 +55,7 @@ export declare class TaxonomyNodeProperty {
     /**
      * Get the possible properties of a taxonomy node
      */
-    getTaxonomyNodeProperties<TResult>(params: IGetTaxonomyNodePropertiesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>>;
+    getTaxonomyNodeProperties<TResult>(params: IGetTaxonomyNodePropertiesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>>;
 }

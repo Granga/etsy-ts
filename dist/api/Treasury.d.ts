@@ -106,17 +106,25 @@ export declare class Treasury {
     /**
      * Search Treasuries or else List all Treasuries
      */
-    findAllTreasuries<TResult>(params: IFindAllTreasuriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllTreasuriesParameters, TResult>>>;
+    findAllTreasuries<TResult>(params: IFindAllTreasuriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllTreasuriesParameters, TResult>>>;
     /**
      * Get a Treasury
      */
-    getTreasury<TResult>(params: IGetTreasuryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetTreasuryParameters, TResult>>>;
+    getTreasury<TResult>(params: IGetTreasuryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetTreasuryParameters, TResult>>>;
     /**
      * Delete a Treasury
      */
-    deleteTreasury<TResult>(params: IDeleteTreasuryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryParameters, TResult>>>;
+    deleteTreasury<TResult>(params: IDeleteTreasuryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryParameters, TResult>>>;
     /**
      * Get a user's Treasuries. Note: The treasury_r permission scope is required in order to display private Treasuries for a user when the boolean parameter include_private is true.
      */
-    findAllUserTreasuries<TResult>(params: IFindAllUserTreasuriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>>;
+    findAllUserTreasuries<TResult>(params: IFindAllUserTreasuriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>>;
 }

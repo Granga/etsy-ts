@@ -23,9 +23,13 @@ export declare class ListingVariationImage {
     /**
      * Gets all variation images on a listing
      */
-    getVariationImages<TResult>(params: IGetVariationImagesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetVariationImagesParameters, TResult>>>;
+    getVariationImages<TResult>(params: IGetVariationImagesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetVariationImagesParameters, TResult>>>;
     /**
      * Creates variation images on a listing
      */
-    updateVariationImages<TResult>(params: IUpdateVariationImagesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateVariationImagesParameters, TResult>>>;
+    updateVariationImages<TResult>(params: IUpdateVariationImagesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateVariationImagesParameters, TResult>>>;
 }

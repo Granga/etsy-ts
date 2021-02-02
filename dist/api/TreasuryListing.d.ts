@@ -28,9 +28,13 @@ export declare class TreasuryListing {
     /**
      * Add listing to a Treasury
      */
-    addTreasuryListing<TResult>(params: IAddTreasuryListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IAddTreasuryListingParameters, TResult>>>;
+    addTreasuryListing<TResult>(params: IAddTreasuryListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IAddTreasuryListingParameters, TResult>>>;
     /**
      * Remove listing from a Treasury
      */
-    removeTreasuryListing<TResult>(params: IRemoveTreasuryListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>>;
+    removeTreasuryListing<TResult>(params: IRemoveTreasuryListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>>;
 }

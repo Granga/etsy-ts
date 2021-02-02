@@ -78,17 +78,25 @@ export declare class UserAddress {
     /**
      * Retrieves a set of UserAddress objects associated to a User.
      */
-    findAllUserAddresses<TResult>(params: IFindAllUserAddressesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserAddressesParameters, TResult>>>;
+    findAllUserAddresses<TResult>(params: IFindAllUserAddressesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserAddressesParameters, TResult>>>;
     /**
      * Creates a new UserAddress. Note: state is required when the country is US, Canada, or Australia. See section above about valid codes.
      */
-    createUserAddress<TResult>(params: ICreateUserAddressParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateUserAddressParameters, TResult>>>;
+    createUserAddress<TResult>(params: ICreateUserAddressParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateUserAddressParameters, TResult>>>;
     /**
      * Retrieves a UserAddress by id.
      */
-    getUserAddress<TResult>(params: IGetUserAddressParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserAddressParameters, TResult>>>;
+    getUserAddress<TResult>(params: IGetUserAddressParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserAddressParameters, TResult>>>;
     /**
      * Deletes the UserAddress with the given id.
      */
-    deleteUserAddress<TResult>(params: IDeleteUserAddressParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteUserAddressParameters, TResult>>>;
+    deleteUserAddress<TResult>(params: IDeleteUserAddressParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteUserAddressParameters, TResult>>>;
 }

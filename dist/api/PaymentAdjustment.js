@@ -58,40 +58,40 @@ var PaymentAdjustment = /** @class */ (function () {
     /**
      * Get a Payment Adjustments from a Payment Id
      */
-    PaymentAdjustment.prototype.findPaymentAdjustments = function (params, oauth) {
+    PaymentAdjustment.prototype.findPaymentAdjustments = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/payments/:payment_id/adjustments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/payments/:payment_id/adjustments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get an Etsy Payments Transaction Adjustment
      */
-    PaymentAdjustment.prototype.findPaymentAdjustment = function (params, oauth) {
+    PaymentAdjustment.prototype.findPaymentAdjustment = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/payments/:payment_id/adjustments/:payment_adjustment_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Payment Adjustment from a Ledger Entry ID, if applicable
      */
-    PaymentAdjustment.prototype.findPaymentAdjustmentForLedgerEntry = function (params, oauth) {
+    PaymentAdjustment.prototype.findPaymentAdjustmentForLedgerEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/adjustment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
      */
-    PaymentAdjustment.prototype.findPaymentAdjustmentForPaymentAccountLedgerEntry = function (params, oauth) {
+    PaymentAdjustment.prototype.findPaymentAdjustmentForPaymentAccountLedgerEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/adjustment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

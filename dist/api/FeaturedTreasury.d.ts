@@ -51,13 +51,19 @@ export declare class FeaturedTreasury {
     /**
      * Finds all FeaturedTreasuries.
      */
-    findAllFeaturedTreasuries<TResult>(params: IFindAllFeaturedTreasuriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>>;
+    findAllFeaturedTreasuries<TResult>(params: IFindAllFeaturedTreasuriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>>;
     /**
      * Finds FeaturedTreasury by numeric ID.
      */
-    getFeaturedTreasuryById<TResult>(params: IGetFeaturedTreasuryByIdParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>>;
+    getFeaturedTreasuryById<TResult>(params: IGetFeaturedTreasuryByIdParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>>;
     /**
      * Finds all FeaturedTreasury by numeric owner_id.
      */
-    findAllFeaturedTreasuriesByOwner<TResult>(params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>>;
+    findAllFeaturedTreasuriesByOwner<TResult>(params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>>;
 }

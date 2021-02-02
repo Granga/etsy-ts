@@ -58,40 +58,40 @@ var Payment = /** @class */ (function () {
     /**
      * Get an Etsy Payments Transaction
      */
-    Payment.prototype.findPayment = function (params, oauth) {
+    Payment.prototype.findPayment = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/payments/:payment_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/payments/:payment_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Payment from a Ledger Entry ID, if applicable
      */
-    Payment.prototype.findPaymentForLedgerEntry = function (params, oauth) {
+    Payment.prototype.findPaymentForLedgerEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/ledger/entries/:ledger_entry_id/payment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Payment from a PaymentAccount Ledger Entry ID, if applicable
      */
-    Payment.prototype.findPaymentForPaymentAccountLedgerEntry = function (params, oauth) {
+    Payment.prototype.findPaymentForPaymentAccountLedgerEntry = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/payment_account/entries/:ledger_entry_id/payment", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Get a Payment by Shop Receipt ID
      */
-    Payment.prototype.findShopPaymentByReceipt = function (params, oauth) {
+    Payment.prototype.findShopPaymentByReceipt = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/receipts/:receipt_id/payments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/receipts/:receipt_id/payments", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

@@ -63,17 +63,25 @@ export declare class ShippingTemplateEntry {
     /**
      * Creates a new ShippingTemplateEntry
      */
-    createShippingTemplateEntry<TResult>(params: ICreateShippingTemplateEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>>;
+    createShippingTemplateEntry<TResult>(params: ICreateShippingTemplateEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>>;
     /**
      * Retrieves a ShippingTemplateEntry by id.
      */
-    getShippingTemplateEntry<TResult>(params: IGetShippingTemplateEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>>;
+    getShippingTemplateEntry<TResult>(params: IGetShippingTemplateEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateEntryParameters, TResult>>>;
     /**
      * Updates a ShippingTemplateEntry
      */
-    updateShippingTemplateEntry<TResult>(params: IUpdateShippingTemplateEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>>;
+    updateShippingTemplateEntry<TResult>(params: IUpdateShippingTemplateEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateEntryParameters, TResult>>>;
     /**
      * Deletes the ShippingTemplateEntry
      */
-    deleteShippingTemplateEntry<TResult>(params: IDeleteShippingTemplateEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>>;
+    deleteShippingTemplateEntry<TResult>(params: IDeleteShippingTemplateEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateEntryParameters, TResult>>>;
 }

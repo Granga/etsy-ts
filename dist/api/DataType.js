@@ -58,40 +58,40 @@ var DataType = /** @class */ (function () {
     /**
      * Describes the legal values for Listing.occasion.
      */
-    DataType.prototype.describeOccasionEnum = function (params, oauth) {
+    DataType.prototype.describeOccasionEnum = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/types/enum/occasion", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/types/enum/occasion", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Describes the legal values for Listing.recipient.
      */
-    DataType.prototype.describeRecipientEnum = function (params, oauth) {
+    DataType.prototype.describeRecipientEnum = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/types/enum/recipient", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/types/enum/recipient", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Describes the legal values for Listing.when_made.
      */
-    DataType.prototype.describeWhenMadeEnum = function (params, oauth) {
+    DataType.prototype.describeWhenMadeEnum = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/types/enum/when_made", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/types/enum/when_made", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Describes the legal values for Listing.who_made.
      */
-    DataType.prototype.describeWhoMadeEnum = function (params, oauth) {
+    DataType.prototype.describeWhoMadeEnum = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/types/enum/who_made", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/types/enum/who_made", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

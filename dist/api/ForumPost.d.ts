@@ -47,13 +47,19 @@ export declare class ForumPost {
     /**
      * Get a Treasury's Comments
      */
-    findTreasuryComments<TResult>(params: IFindTreasuryCommentsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>>;
+    findTreasuryComments<TResult>(params: IFindTreasuryCommentsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>>;
     /**
      * Leave a comment on a Treasury List
      */
-    postTreasuryComment<TResult>(params: IPostTreasuryCommentParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IPostTreasuryCommentParameters, TResult>>>;
+    postTreasuryComment<TResult>(params: IPostTreasuryCommentParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IPostTreasuryCommentParameters, TResult>>>;
     /**
      * Delete a given comment on a Treasury List
      */
-    deleteTreasuryComment<TResult>(params: IDeleteTreasuryCommentParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>>;
+    deleteTreasuryComment<TResult>(params: IDeleteTreasuryCommentParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>>;
 }

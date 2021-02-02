@@ -155,45 +155,67 @@ export declare class Cart {
     /**
      * Get a user's Carts
      */
-    getAllUserCarts<TResult>(params: IGetAllUserCartsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetAllUserCartsParameters, TResult>>>;
+    getAllUserCarts<TResult>(params: IGetAllUserCartsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetAllUserCartsParameters, TResult>>>;
     /**
      * Add a listing to a cart
      */
-    addToCart<TResult>(params: IAddToCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IAddToCartParameters, TResult>>>;
+    addToCart<TResult>(params: IAddToCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IAddToCartParameters, TResult>>>;
     /**
      * Update a cart listing purchase quantity
      */
-    updateCartListingQuantity<TResult>(params: IUpdateCartListingQuantityParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>>;
+    updateCartListingQuantity<TResult>(params: IUpdateCartListingQuantityParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>>;
     /**
      * Remove a listing from a cart
      */
-    removeCartListing<TResult>(params: IRemoveCartListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IRemoveCartListingParameters, TResult>>>;
+    removeCartListing<TResult>(params: IRemoveCartListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IRemoveCartListingParameters, TResult>>>;
     /**
      * Get a cart
      */
-    getUserCart<TResult>(params: IGetUserCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserCartParameters, TResult>>>;
+    getUserCart<TResult>(params: IGetUserCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserCartParameters, TResult>>>;
     /**
      * Update a cart
      */
-    updateCart<TResult>(params: IUpdateCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateCartParameters, TResult>>>;
+    updateCart<TResult>(params: IUpdateCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateCartParameters, TResult>>>;
     /**
      * Delete a cart
      */
-    deleteCart<TResult>(params: IDeleteCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteCartParameters, TResult>>>;
+    deleteCart<TResult>(params: IDeleteCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteCartParameters, TResult>>>;
     /**
      * Saves and selects a shipping address for apple pay
      */
-    addAndSelectShippingForApplePay<TResult>(params: IAddAndSelectShippingForApplePayParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>>;
+    addAndSelectShippingForApplePay<TResult>(params: IAddAndSelectShippingForApplePayParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IAddAndSelectShippingForApplePayParameters, TResult>>>;
     /**
      * Move a listing to Saved for Later
      */
-    saveListingForLater<TResult>(params: ISaveListingForLaterParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ISaveListingForLaterParameters, TResult>>>;
+    saveListingForLater<TResult>(params: ISaveListingForLaterParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ISaveListingForLaterParameters, TResult>>>;
     /**
      * Get a cart from a shop ID
      */
-    getUserCartForShop<TResult>(params: IGetUserCartForShopParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserCartForShopParameters, TResult>>>;
+    getUserCartForShop<TResult>(params: IGetUserCartForShopParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserCartForShopParameters, TResult>>>;
     /**
      * Create a single-listing cart from a listing
      */
-    createSingleListingCart<TResult>(params: ICreateSingleListingCartParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateSingleListingCartParameters, TResult>>>;
+    createSingleListingCart<TResult>(params: ICreateSingleListingCartParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateSingleListingCartParameters, TResult>>>;
 }

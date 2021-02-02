@@ -58,30 +58,30 @@ var FeaturedTreasury = /** @class */ (function () {
     /**
      * Finds all FeaturedTreasuries.
      */
-    FeaturedTreasury.prototype.findAllFeaturedTreasuries = function (params, oauth) {
+    FeaturedTreasury.prototype.findAllFeaturedTreasuries = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/featured_treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/featured_treasuries", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Finds FeaturedTreasury by numeric ID.
      */
-    FeaturedTreasury.prototype.getFeaturedTreasuryById = function (params, oauth) {
+    FeaturedTreasury.prototype.getFeaturedTreasuryById = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/featured_treasuries/:featured_treasury_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/featured_treasuries/:featured_treasury_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Finds all FeaturedTreasury by numeric owner_id.
      */
-    FeaturedTreasury.prototype.findAllFeaturedTreasuriesByOwner = function (params, oauth) {
+    FeaturedTreasury.prototype.findAllFeaturedTreasuriesByOwner = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/featured_treasuries/owner/:owner_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/featured_treasuries/owner/:owner_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

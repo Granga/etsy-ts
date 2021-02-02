@@ -42,5 +42,7 @@ export declare class ApiMethod {
     /**
      * Get a list of all methods available.
      */
-    getMethodTable<TResult>(params: IGetMethodTableParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetMethodTableParameters, TResult>>>;
+    getMethodTable<TResult>(params: IGetMethodTableParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetMethodTableParameters, TResult>>>;
 }

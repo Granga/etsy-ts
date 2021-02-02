@@ -75,25 +75,37 @@ export declare class ShippingTemplate {
     /**
      * Creates a new ShippingTemplate
      */
-    createShippingTemplate<TResult>(params: ICreateShippingTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateParameters, TResult>>>;
+    createShippingTemplate<TResult>(params: ICreateShippingTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateParameters, TResult>>>;
     /**
      * Retrieves a ShippingTemplate by id.
      */
-    getShippingTemplate<TResult>(params: IGetShippingTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateParameters, TResult>>>;
+    getShippingTemplate<TResult>(params: IGetShippingTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateParameters, TResult>>>;
     /**
      * Updates a ShippingTemplate
      */
-    updateShippingTemplate<TResult>(params: IUpdateShippingTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>>;
+    updateShippingTemplate<TResult>(params: IUpdateShippingTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>>;
     /**
      * Deletes the ShippingTemplate with the given id.
      */
-    deleteShippingTemplate<TResult>(params: IDeleteShippingTemplateParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>>;
+    deleteShippingTemplate<TResult>(params: IDeleteShippingTemplateParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>>;
     /**
      * Retrieves a set of ShippingTemplateEntry objects associated to a ShippingTemplate.
      */
-    findAllShippingTemplateEntries<TResult>(params: IFindAllShippingTemplateEntriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>>;
+    findAllShippingTemplateEntries<TResult>(params: IFindAllShippingTemplateEntriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>>;
     /**
      * Retrieves a set of ShippingTemplate objects associated to a User.
      */
-    findAllUserShippingProfiles<TResult>(params: IFindAllUserShippingProfilesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>>;
+    findAllUserShippingProfiles<TResult>(params: IFindAllUserShippingProfilesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>>;
 }

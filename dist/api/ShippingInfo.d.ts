@@ -75,21 +75,31 @@ export declare class ShippingInfo {
     /**
      * Retrieves a set of ShippingProfileEntries objects associated to a Listing.
      */
-    findAllListingShippingProfileEntries<TResult>(params: IFindAllListingShippingProfileEntriesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>>;
+    findAllListingShippingProfileEntries<TResult>(params: IFindAllListingShippingProfileEntriesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>>;
     /**
      * Creates a new ShippingInfo.
      */
-    createShippingInfo<TResult>(params: ICreateShippingInfoParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<ICreateShippingInfoParameters, TResult>>>;
+    createShippingInfo<TResult>(params: ICreateShippingInfoParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<ICreateShippingInfoParameters, TResult>>>;
     /**
      * Retrieves a ShippingInfo by id.
      */
-    getShippingInfo<TResult>(params: IGetShippingInfoParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetShippingInfoParameters, TResult>>>;
+    getShippingInfo<TResult>(params: IGetShippingInfoParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetShippingInfoParameters, TResult>>>;
     /**
      * Updates a ShippingInfo with the given id.
      */
-    updateShippingInfo<TResult>(params: IUpdateShippingInfoParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUpdateShippingInfoParameters, TResult>>>;
+    updateShippingInfo<TResult>(params: IUpdateShippingInfoParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUpdateShippingInfoParameters, TResult>>>;
     /**
      * Deletes the ShippingInfo with the given id.
      */
-    deleteShippingInfo<TResult>(params: IDeleteShippingInfoParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteShippingInfoParameters, TResult>>>;
+    deleteShippingInfo<TResult>(params: IDeleteShippingInfoParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteShippingInfoParameters, TResult>>>;
 }

@@ -107,13 +107,13 @@ export class User {
      */
     async findAllUsers<TResult>(
         params: IFindAllUsersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUsersParameters, TResult>>> {
-        return request<IFindAllUsersParameters, TResult>(
-            {...this.config, url: "/users", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IFindAllUsersParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/users",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -121,13 +121,13 @@ export class User {
      */
     async getUser<TResult>(
         params: IGetUserParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetUserParameters, TResult>>> {
-        return request<IGetUserParameters, TResult>(
-            {...this.config, url: "/users/:user_id", method: "GET"},
-            params,
-            {...{apiKeys: this.apiKeys}, ...oauth}
-        );
+        return request<IGetUserParameters, TResult>({
+            ...this.config, ...options?.axiosConfig,
+            url: "/users/:user_id",
+            method: "GET"
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -135,13 +135,13 @@ export class User {
      */
     async findAllUsersForTeam<TResult>(
         params: IFindAllUsersForTeamParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUsersForTeamParameters, TResult>>> {
         return request<IFindAllUsersForTeamParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/teams/:team_id/users/",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -149,13 +149,13 @@ export class User {
      */
     async getCirclesContainingUser<TResult>(
         params: IGetCirclesContainingUserParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>> {
         return request<IGetCirclesContainingUserParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/circles",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -163,13 +163,13 @@ export class User {
      */
     async getConnectedUser<TResult>(
         params: IGetConnectedUserParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUserParameters, TResult>>> {
         return request<IGetConnectedUserParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/circles/:to_user_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -177,13 +177,13 @@ export class User {
      */
     async unconnectUsers<TResult>(
         params: IUnconnectUsersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUnconnectUsersParameters, TResult>>> {
         return request<IUnconnectUsersParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/circles/:to_user_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -191,13 +191,13 @@ export class User {
      */
     async getConnectedUsers<TResult>(
         params: IGetConnectedUsersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUsersParameters, TResult>>> {
         return request<IGetConnectedUsersParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/connected_users",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -205,12 +205,12 @@ export class User {
      */
     async connectUsers<TResult>(
         params: IConnectUsersParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IConnectUsersParameters, TResult>>> {
         return request<IConnectUsersParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/connected_users",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

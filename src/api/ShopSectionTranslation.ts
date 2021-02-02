@@ -62,13 +62,13 @@ export class ShopSectionTranslation {
      */
     async getShopSectionTranslation<TResult>(
         params: IGetShopSectionTranslationParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShopSectionTranslationParameters, TResult>>> {
         return request<IGetShopSectionTranslationParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/sections/:shop_section_id/translations/:language",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -76,13 +76,13 @@ export class ShopSectionTranslation {
      */
     async createShopSectionTranslation<TResult>(
         params: ICreateShopSectionTranslationParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionTranslationParameters, TResult>>> {
         return request<ICreateShopSectionTranslationParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/sections/:shop_section_id/translations/:language",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -90,13 +90,13 @@ export class ShopSectionTranslation {
      */
     async updateShopSectionTranslation<TResult>(
         params: IUpdateShopSectionTranslationParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionTranslationParameters, TResult>>> {
         return request<IUpdateShopSectionTranslationParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/sections/:shop_section_id/translations/:language",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -104,12 +104,12 @@ export class ShopSectionTranslation {
      */
     async deleteShopSectionTranslation<TResult>(
         params: IDeleteShopSectionTranslationParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionTranslationParameters, TResult>>> {
         return request<IDeleteShopSectionTranslationParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shops/:shop_id/sections/:shop_section_id/translations/:language",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

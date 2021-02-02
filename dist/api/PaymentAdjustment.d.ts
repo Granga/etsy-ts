@@ -78,17 +78,25 @@ export declare class PaymentAdjustment {
     /**
      * Get a Payment Adjustments from a Payment Id
      */
-    findPaymentAdjustments<TResult>(params: IFindPaymentAdjustmentsParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>>;
+    findPaymentAdjustments<TResult>(params: IFindPaymentAdjustmentsParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>>;
     /**
      * Get an Etsy Payments Transaction Adjustment
      */
-    findPaymentAdjustment<TResult>(params: IFindPaymentAdjustmentParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>>;
+    findPaymentAdjustment<TResult>(params: IFindPaymentAdjustmentParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentParameters, TResult>>>;
     /**
      * Get a Payment Adjustment from a Ledger Entry ID, if applicable
      */
-    findPaymentAdjustmentForLedgerEntry<TResult>(params: IFindPaymentAdjustmentForLedgerEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>>;
+    findPaymentAdjustmentForLedgerEntry<TResult>(params: IFindPaymentAdjustmentForLedgerEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForLedgerEntryParameters, TResult>>>;
     /**
      * Get a Payment Adjustment from a Payment Account Ledger Entry ID, if applicable
      */
-    findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(params: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>>;
+    findPaymentAdjustmentForPaymentAccountLedgerEntry<TResult>(params: IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters, TResult>>>;
 }

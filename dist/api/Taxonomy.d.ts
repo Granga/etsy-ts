@@ -58,13 +58,19 @@ export declare class Taxonomy {
     /**
      * Retrieve the entire taxonomy as seen by buyers in search.
      */
-    getBuyerTaxonomy<TResult>(params: IGetBuyerTaxonomyParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>>;
+    getBuyerTaxonomy<TResult>(params: IGetBuyerTaxonomyParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>>;
     /**
      * Retrieve the entire taxonomy as used by sellers in the listing process.
      */
-    getSellerTaxonomy<TResult>(params: IGetSellerTaxonomyParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>>;
+    getSellerTaxonomy<TResult>(params: IGetSellerTaxonomyParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>>;
     /**
      * Get the current version of the seller taxonomy
      */
-    getSellerTaxonomyVersion<TResult>(params: IGetSellerTaxonomyVersionParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>>;
+    getSellerTaxonomyVersion<TResult>(params: IGetSellerTaxonomyVersionParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>>;
 }

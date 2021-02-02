@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { createHmac } from "crypto";
+import { enc, HmacSHA1 } from "crypto-js";
 import OAuth from "oauth-1.0a";
 import { IOAuthTokens } from "../types/IOAuthTokens";
 import { IStandardResponse } from "../types/IStandardResponse";
@@ -46,9 +46,7 @@ function createClient(
             let requestData: OAuth.RequestOptions = {
                 url: combineURLs(config.baseURL as string, config.url as string),
                 method: config.method as string,
-                data: {
-                    ...(config.data ? config.data : {}),
-                },
+                //...(config.data ? {data: config.data} : undefined),
             };
 
             let authHeader = generateOAuthHeader(requestData, tokens);
@@ -127,10 +125,7 @@ function generateOAuthHeader(
             secret: tokens.apiKeys.secret,
         },
         signature_method: "HMAC-SHA1",
-        hash_function: (base_string, key) =>
-            createHmac('sha1', key)
-                .update(base_string)
-                .digest('base64'),
+        hash_function: ((base_string, key) => HmacSHA1(base_string, key).toString(enc.Base64))
     });
     let authorized_data = oauth.authorize(request_data, tokens.token);
     return oauth.toHeader(authorized_data);

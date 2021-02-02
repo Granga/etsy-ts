@@ -58,40 +58,40 @@ var PaymentTemplate = /** @class */ (function () {
     /**
      * Retrieves the PaymentTemplate associated with the Shop
      */
-    PaymentTemplate.prototype.findShopPaymentTemplates = function (params, oauth) {
+    PaymentTemplate.prototype.findShopPaymentTemplates = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/payment_templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/payment_templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates a new PaymentTemplate
      */
-    PaymentTemplate.prototype.createShopPaymentTemplate = function (params, oauth) {
+    PaymentTemplate.prototype.createShopPaymentTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/payment_templates", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/payment_templates", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a PaymentTemplate
      */
-    PaymentTemplate.prototype.updateShopPaymentTemplate = function (params, oauth) {
+    PaymentTemplate.prototype.updateShopPaymentTemplate = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/payment_templates/:payment_template_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/payment_templates/:payment_template_id", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a set of PaymentTemplate objects associated to a User.
      */
-    PaymentTemplate.prototype.findAllUserPaymentTemplates = function (params, oauth) {
+    PaymentTemplate.prototype.findAllUserPaymentTemplates = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/users/:user_id/payments/templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/users/:user_id/payments/templates", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

@@ -93,13 +93,13 @@ export class ShippingTemplate {
      */
     async createShippingTemplate<TResult>(
         params: ICreateShippingTemplateParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateParameters, TResult>>> {
         return request<ICreateShippingTemplateParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates",
             method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -107,13 +107,13 @@ export class ShippingTemplate {
      */
     async getShippingTemplate<TResult>(
         params: IGetShippingTemplateParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateParameters, TResult>>> {
         return request<IGetShippingTemplateParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/:shipping_template_id",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -121,13 +121,13 @@ export class ShippingTemplate {
      */
     async updateShippingTemplate<TResult>(
         params: IUpdateShippingTemplateParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>> {
         return request<IUpdateShippingTemplateParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/:shipping_template_id",
             method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -135,13 +135,13 @@ export class ShippingTemplate {
      */
     async deleteShippingTemplate<TResult>(
         params: IDeleteShippingTemplateParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>> {
         return request<IDeleteShippingTemplateParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/:shipping_template_id",
             method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -149,13 +149,13 @@ export class ShippingTemplate {
      */
     async findAllShippingTemplateEntries<TResult>(
         params: IFindAllShippingTemplateEntriesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateEntriesParameters, TResult>>> {
         return request<IFindAllShippingTemplateEntriesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/shipping/templates/:shipping_template_id/entries",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 
     /**
@@ -163,12 +163,12 @@ export class ShippingTemplate {
      */
     async findAllUserShippingProfiles<TResult>(
         params: IFindAllUserShippingProfilesParameters & IStandardParameters,
-        oauth?: IOAuthTokens
+        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>> {
         return request<IFindAllUserShippingProfilesParameters, TResult>({
-            ...this.config,
+            ...this.config, ...options?.axiosConfig,
             url: "/users/:user_id/shipping/templates",
             method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...oauth});
+        }, params, {...{apiKeys: this.apiKeys}, ...options});
     }
 }

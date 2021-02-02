@@ -58,10 +58,10 @@ var ListingImage = /** @class */ (function () {
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    ListingImage.prototype.findAllListingImages = function (params, oauth) {
+    ListingImage.prototype.findAllListingImages = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/images", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/images", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -76,20 +76,20 @@ var ListingImage = /** @class */ (function () {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    ListingImage.prototype.uploadListingImage = function (params, oauth) {
+    ListingImage.prototype.uploadListingImage = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/images", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/images", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Retrieves a Image_Listing by id.
      */
-    ListingImage.prototype.getImage_Listing = function (params, oauth) {
+    ListingImage.prototype.getImage_Listing = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/images/:listing_image_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/images/:listing_image_id", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
@@ -98,10 +98,10 @@ var ListingImage = /** @class */ (function () {
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    ListingImage.prototype.deleteListingImage = function (params, oauth) {
+    ListingImage.prototype.deleteListingImage = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/listings/:listing_id/images/:listing_image_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/listings/:listing_id/images/:listing_image_id", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };

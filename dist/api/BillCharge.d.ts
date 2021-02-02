@@ -64,9 +64,13 @@ export declare class BillCharge {
     /**
      * Metadata for the set of BillCharges objects associated to a User
      */
-    getUserChargesMetadata<TResult>(params: IGetUserChargesMetadataParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>>;
+    getUserChargesMetadata<TResult>(params: IGetUserChargesMetadataParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>>;
     /**
      * Retrieves a set of BillCharge objects associated to a User. NOTE: from 8/8/12 the min_created and max_created arguments will be mandatory and can be no more than 31 days apart.
      */
-    findAllUserCharges<TResult>(params: IFindAllUserChargesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllUserChargesParameters, TResult>>>;
+    findAllUserCharges<TResult>(params: IFindAllUserChargesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllUserChargesParameters, TResult>>>;
 }

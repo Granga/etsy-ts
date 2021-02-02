@@ -103,7 +103,9 @@ export declare class ListingImage {
     /**
      * Retrieves a set of ListingImage objects associated to a Listing.
      */
-    findAllListingImages<TResult>(params: IFindAllListingImagesParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IFindAllListingImagesParameters, TResult>>>;
+    findAllListingImages<TResult>(params: IFindAllListingImagesParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IFindAllListingImagesParameters, TResult>>>;
     /**
      * Upload a new listing image, or re-associate a previously deleted one. You may associate an image
      to any listing within the same shop that the image's original listing belongs to.
@@ -115,15 +117,21 @@ export declare class ListingImage {
      When uploading a new listing image with a watermark, pass is_watermarked=1; existing listing images
      will not be affected by this parameter.
      */
-    uploadListingImage<TResult>(params: IUploadListingImageParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IUploadListingImageParameters, TResult>>>;
+    uploadListingImage<TResult>(params: IUploadListingImageParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IUploadListingImageParameters, TResult>>>;
     /**
      * Retrieves a Image_Listing by id.
      */
-    getImage_Listing<TResult>(params: IGetImageListingParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IGetImageListingParameters, TResult>>>;
+    getImage_Listing<TResult>(params: IGetImageListingParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IGetImageListingParameters, TResult>>>;
     /**
      * Deletes a listing image. A copy of the file remains on our servers,
      and so a deleted image may be re-associated with the listing without
      re-uploading the original image; see uploadListingImage
      */
-    deleteListingImage<TResult>(params: IDeleteListingImageParameters & IStandardParameters, oauth?: IOAuthTokens): Promise<AxiosResponse<IStandardResponse<IDeleteListingImageParameters, TResult>>>;
+    deleteListingImage<TResult>(params: IDeleteListingImageParameters & IStandardParameters, options?: (IOAuthTokens & {
+        axiosConfig?: AxiosRequestConfig;
+    })): Promise<AxiosResponse<IStandardResponse<IDeleteListingImageParameters, TResult>>>;
 }

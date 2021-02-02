@@ -58,40 +58,40 @@ var ShopSectionTranslation = /** @class */ (function () {
     /**
      * Retrieves a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    ShopSectionTranslation.prototype.getShopSectionTranslation = function (params, oauth) {
+    ShopSectionTranslation.prototype.getShopSectionTranslation = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "GET" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Creates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    ShopSectionTranslation.prototype.createShopSectionTranslation = function (params, oauth) {
+    ShopSectionTranslation.prototype.createShopSectionTranslation = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "POST" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Updates a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    ShopSectionTranslation.prototype.updateShopSectionTranslation = function (params, oauth) {
+    ShopSectionTranslation.prototype.updateShopSectionTranslation = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "PUT" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
     /**
      * Deletes a ShopSectionTranslation by shop_id, shop_section_id and language
      */
-    ShopSectionTranslation.prototype.deleteShopSectionTranslation = function (params, oauth) {
+    ShopSectionTranslation.prototype.deleteShopSectionTranslation = function (params, options) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, Request_1.request(__assign(__assign({}, this.config), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, oauth))];
+                return [2 /*return*/, Request_1.request(__assign(__assign(__assign({}, this.config), options === null || options === void 0 ? void 0 : options.axiosConfig), { url: "/shops/:shop_id/sections/:shop_section_id/translations/:language", method: "DELETE" }), params, __assign({ apiKeys: this.apiKeys }, options))];
             });
         });
     };
