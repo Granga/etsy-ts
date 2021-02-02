@@ -16,10 +16,10 @@
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.0.1.tgz#3a4bd24518b0e6c5940da4e2659eeb2ef0806963"
   integrity sha512-6+OPzqhKX/cx5xh+yO8Cqg3u3alrkhoxhE5ZOdSEv0DOzJ13lwJ6laqGU0Kv6+XDMFmlnGId04LtY22PsFLQUw==
 
-"@types/node@^14.14.0":
-  version "14.14.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
-  integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+"@types/node@^14.14.22":
+  version "14.14.22"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz#0d29f382472c4ccf3bd96ff0ce47daf5b7b84b18"
+  integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -189,13 +189,13 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-find-node-modules@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/find-node-modules/-/find-node-modules-2.1.0.tgz#d9179cd1abd517622353f766da0807f912d21b06"
-  integrity sha512-aMVxgoGzmZQFzqouGzKpc573hAB7LVe/0ADEqE9GZIOd81dgYA+FD2nmYZy2ELdoEx9nBTdQGzDidhy9R0UX4Q==
+find-node-modules@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/find-node-modules/-/find-node-modules-2.1.1.tgz#21f107e46895cd58a3ace582aadaccb402a95a6b"
+  integrity sha512-46adfFV0T5wQ00Ju+3E8LE/th+pY9PUzzC7taZfru6cYe7rjxXLo7QHv8OdN7dn/2MN12LKaRo/WcmXIVzdBtw==
   dependencies:
     findup-sync "^4.0.0"
-    merge "^1.2.1"
+    merge "^2.1.0"
 
 findup-sync@^4.0.0:
   version "4.0.0"
@@ -347,10 +347,10 @@ logform@^2.2.0:
     ms "^2.1.1"
     triple-beam "^1.3.0"
 
-merge@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
-  integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
+merge@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/merge/-/merge-2.1.0.tgz#91fff62458ba2eca378dd395fa85f1690bf87f60"
+  integrity sha512-TcuhVDV+e6X457MQAm7xIb19rWhZuEDEho7RrwxMpQ/3GhD5sDlnP188gjQQuweXHy9igdke5oUtVOXX1X8Sxg==
 
 micromatch@^4.0.2:
   version "4.0.2"
@@ -387,13 +387,13 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-npm-dts@^1.3.4:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/npm-dts/-/npm-dts-1.3.6.tgz#631c3966b0b61cc377aded2f2bd88e38410c21e7"
-  integrity sha512-eSSJ9AF+dMgh4bvatd7buuXJJxCoDx7h3vj7+exLl857+Ouc5Btrinyi/mjaw0mIbt6Z5+4IM6eGIJUfkgjVSg==
+npm-dts@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/npm-dts/-/npm-dts-1.3.7.tgz#fa87d4f080b550e5f5bfab856e53b110c9be1ac3"
+  integrity sha512-ka/uQ00yM+Z6TQT6IyCXJTeAYG5K6pNpEEqtt0gRMAcxZ59zrt5UvRlhKp6Bu7aOCEQ4x9jOofScTOvkqyqZrA==
   dependencies:
     args "5.0.1"
-    find-node-modules "2.1.0"
+    find-node-modules "2.1.1"
     mkdirp "1.0.4"
     npm-run "5.0.1"
     rimraf "3.0.2"

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, } from "axios";
+import { AxiosRequestConfig } from "axios";
 import { Token } from "oauth-1.0a";
 import { Entities } from "./Entities";
 
