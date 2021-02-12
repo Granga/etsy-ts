@@ -12,7 +12,7 @@ detailed info on methods and types you can find in this wrapper.
 ## Usage:
 
 ```typescript
-import { User, Shop, Listing, IUser, IShop, IListing } from "etsy-ts";
+import { User, Shop, Listing, IUser, IShop, IListing } from "etsy-ts/api";
 import OAuth from "oauth-1.0a";
 
 (async () => {
