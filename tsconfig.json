@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "CommonJS",
-    "lib": ["es2017", "es7", "es6", "dom"],
+    "lib": [
+      "ES2017",
+      "dom"
+    ],
     "declaration": true,
     "outDir": ".",
     "strict": false,
@@ -10,7 +13,9 @@
     "noImplicitAny": false
   },
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
+  ],
+  "include": [
+    "./src/**/*"
   ]
 }
