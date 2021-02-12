@@ -2,8 +2,8 @@
   "name": "etsy-ts",
   "version": "3.1.0",
   "description": "Etsy API wrapper written in typescript.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "dependencies": {
     "@types/node": "^14.14.22",
     "axios": "^0.21.1",
@@ -19,8 +19,8 @@
   "scripts": {
     "prepublishOnly": "tsc",
     "test": "node dist/test/test.js",
-    "build": "rimraf dist && rimraf index.d.ts && tsc",
-    "npm-dts": "npm-dts generate"
+    "build": "rimraf api && rimraf client && rimraf test && rimraf types && rimraf index.d.ts && tsc",
+    "npm-dts": "npm-dts generate -e ./src/index.ts -o ./dist/index.d.ts"
   },
   "repository": {
     "type": "git",

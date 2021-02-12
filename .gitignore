@@ -16,6 +16,12 @@ src/**/*.map
 
 src/test/
 dist/test
+/api
+/client
+/test
+/types
+/index.js
+/index.d.ts
 
 dist/**/*.map
 

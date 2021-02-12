@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "lib": ["es2017", "es7", "es6", "dom"],
     "declaration": true,
-    "outDir": "dist",
+    "outDir": ".",
     "strict": false,
     "esModuleInterop": true,
     "noImplicitAny": false
