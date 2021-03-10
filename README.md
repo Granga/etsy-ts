@@ -41,8 +41,22 @@ import OAuth from "oauth-1.0a";
         shop_id: shop.shop_id
     }, {token})).data.results;
 
+    // Uploading image (using node form-data package)
+    let formData = new FormData();
+    formData.append("listing_id", "<listing_id>");
+    formData.append("image", fs.createReadStream("test.png"));
+
+    let image = (await client.ListingImage.uploadListingImage<IListingImage>(
+        formData as any,
+        {
+            axiosConfig: {headers: formData.getHeaders()},
+            token: token
+        }
+    )).data.results[0];
+
     console.log("User:", user);
     console.log("Shop:", shop);
     console.log("Listings:", listings);
+    console.log("Image", image);
 })();
 ```
