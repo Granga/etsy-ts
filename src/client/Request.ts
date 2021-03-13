@@ -1,8 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { enc, HmacSHA1 } from "crypto-js";
 import OAuth from "oauth-1.0a";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { IOAuthTokens, IStandardResponse } from "../types";
 
 export function request<TParameters, TResult>(
     axiosConfig: AxiosRequestConfig,
@@ -18,10 +16,7 @@ export function request<TParameters, TResult>(
     switch ((finalConfig.method as string).toUpperCase()) {
         case "GET":
         case "DELETE":
-            if (Object.keys(params).length > 0) {
-                let encodedParameters = encodePrameters(params);
-                finalConfig.url += "?" + encodedParameters;
-            }
+            finalConfig.params = params;
             break;
 
         default:
@@ -43,16 +38,12 @@ function createClient(
 
     client.interceptors.request.use((config: AxiosRequestConfig) => {
         if (tokens?.apiKeys && tokens?.token) {
-            let requestData: OAuth.RequestOptions = {
-                url: combineURLs(config.baseURL as string, config.url as string),
-                method: config.method as string,
-                //...(config.data ? {data: config.data} : undefined),
-            };
-
-            let authHeader = generateOAuthHeader(requestData, tokens);
             config.headers = {
                 ...config.headers,
-                ...authHeader,
+                ...generateOAuthHeader({
+                    url: `${config.baseURL}${config.url}`,
+                    method: config.method.toUpperCase()
+                }, tokens),
             };
         }
         else if (tokens?.apiKeys) {
@@ -90,22 +81,6 @@ function captureErrorMessage(e: Error | AxiosError) {
     return e.toString();
 }
 
-function encodePrameters(parameters: any) {
-    if (Object.keys(parameters).length > 0) {
-        return Object.keys(parameters)
-            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
-            .join('&');
-    }
-
-    return "";
-}
-
-function combineURLs(baseURL: string, relativeURL: string) {
-    return relativeURL
-        ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
-        : baseURL;
-}
-
 function fillUriPlaceholders(uri: string, parameters: any) {
     let keys = Object.keys(parameters).filter(key => uri.indexOf(`/:${key}`) > -1);
     keys.forEach(key => {
@@ -124,8 +99,7 @@ function generateOAuthHeader(
             key: tokens.apiKeys.key,
             secret: tokens.apiKeys.secret,
         },
-        signature_method: "HMAC-SHA1",
-        hash_function: ((base_string, key) => HmacSHA1(base_string, key).toString(enc.Base64))
+        signature_method: "PLAINTEXT"
     });
     let authorized_data = oauth.authorize(request_data, tokens.token);
     return oauth.toHeader(authorized_data);

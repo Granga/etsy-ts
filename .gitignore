@@ -27,5 +27,6 @@ dist/**/*.map
 
 # Optional npm cache directory
 .npm
+test.png
 
 tsconfig.tsbuildinfo
