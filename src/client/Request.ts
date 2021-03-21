@@ -8,10 +8,19 @@ export function request<TParameters, TResult>(
     oauth?: IOAuthTokens,
 ): Promise<AxiosResponse<IStandardResponse<TParameters, TResult>>> {
     let finalConfig: AxiosRequestConfig = {
+        paramsSerializer: (params) => {
+            let searchParams = new URLSearchParams();
+            Object.keys(params).forEach(paramName => {
+                let paramValue = params[paramName];
+                Array.isArray(paramValue)
+                    ? paramValue.forEach(v => searchParams.append(paramName, v))
+                    : searchParams.append(paramName, paramValue);
+            });
+
+            return searchParams.toString();
+        },
         ...axiosConfig
     };
-
-    finalConfig.url = fillUriPlaceholders(axiosConfig.url as string, params);
 
     switch ((finalConfig.method as string).toUpperCase()) {
         case "GET":
@@ -79,15 +88,6 @@ function captureErrorMessage(e: Error | AxiosError) {
     }
 
     return e.toString();
-}
-
-function fillUriPlaceholders(uri: string, parameters: any) {
-    let keys = Object.keys(parameters).filter(key => uri.indexOf(`/:${key}`) > -1);
-    keys.forEach(key => {
-        uri = uri.replace(`/:${key}`, `/${parameters[key]}`);
-        delete parameters[key];
-    });
-    return uri;
 }
 
 function generateOAuthHeader(
