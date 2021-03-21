@@ -13,7 +13,7 @@ export function request<TParameters, TResult>(
             Object.keys(params).forEach(paramName => {
                 let paramValue = params[paramName];
                 Array.isArray(paramValue)
-                    ? paramValue.forEach(v => searchParams.append(paramName, v))
+                    ? searchParams.append(paramName, paramValue.join(","))
                     : searchParams.append(paramName, paramValue);
             });
 
