@@ -1,8 +1,14 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import OAuth from "oauth-1.0a";
 import { IOAuthTokens, IStandardResponse } from "../types";
+import Bottleneck from "bottleneck";
 
-export function request<TParameters, TResult>(
+const apiRateLimiter = new Bottleneck({
+    maxConcurrent: 1,
+    minTime: 1000 / 10
+  });
+  
+export async function request<TParameters, TResult>(
     axiosConfig: AxiosRequestConfig,
     params: TParameters,
     oauth?: IOAuthTokens,
@@ -32,7 +38,8 @@ export function request<TParameters, TResult>(
             finalConfig.data = params;
     }
 
-    let client = createClient(finalConfig, oauth);
+    let client = await apiRateLimiter.schedule(async () => createClient(finalConfig, oauth));
+
     return client.request(finalConfig);
 }
 
