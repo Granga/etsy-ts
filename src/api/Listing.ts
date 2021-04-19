@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IListing {
@@ -236,18 +233,15 @@ export interface ICreateListingParameters {
     occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
     style?: string[]
 }
-
 export interface IFindAllFeaturedListingsParameters {
     limit?: number,
     offset?: number,
     page?: number,
     region?: string
 }
-
 export interface IGetListingParameters {
     listing_id: number[]
 }
-
 export interface IUpdateListingParameters {
     listing_id: number,
     title?: string,
@@ -278,11 +272,9 @@ export interface IUpdateListingParameters {
     processing_max?: number,
     featured_rank?: number
 }
-
 export interface IDeleteListingParameters {
     listing_id: number
 }
-
 export interface IFindAllListingActiveParameters {
     limit?: number,
     offset?: number,
@@ -304,38 +296,31 @@ export interface IFindAllListingActiveParameters {
     accepts_gift_cards?: boolean,
     translate_keywords?: boolean
 }
-
 export interface IGetInterestingListingsParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetTrendingListingsParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllListingsForFeaturedTreasuryIdParameters {
     featured_treasury_id: number
 }
-
 export interface IFindAllActiveListingsForFeaturedTreasuryIdParameters {
     featured_treasury_id: number
 }
-
 export interface IFindAllCurrentFeaturedListingsParameters {
     region?: string
 }
-
 export interface IFindAllReceiptListingsParameters {
     limit?: number,
     offset?: number,
     page?: number,
     receipt_id: number
 }
-
 export interface IFindAllShopListingsActiveParameters {
     limit?: number,
     offset?: number,
@@ -353,45 +338,38 @@ export interface IFindAllShopListingsActiveParameters {
     translate_keywords?: boolean,
     include_private?: boolean
 }
-
 export interface IFindAllShopListingsDraftParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllShopListingsExpiredParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetShopListingExpiredParameters {
     shop_id: string | number,
     listing_id: number
 }
-
 export interface IFindAllShopListingsFeaturedParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindAllShopListingsInactiveParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IGetShopListingInactiveParameters {
     shop_id: string | number,
     listing_id: number
 }
-
 export interface IFindAllShopSectionListingsParameters {
     limit?: number,
     offset?: number,
@@ -399,7 +377,6 @@ export interface IFindAllShopSectionListingsParameters {
     shop_id: string | number,
     shop_section_id: number
 }
-
 export interface IFindAllShopSectionListingsActiveParameters {
     limit?: number,
     offset?: number,
@@ -409,18 +386,17 @@ export interface IFindAllShopSectionListingsActiveParameters {
     sort_on?: "created" | "price",
     sort_order?: "up" | "down"
 }
-
 export interface IFindAllCartListingsParameters {
     user_id: string | number,
     cart_id: string | number
 }
 
 //methods class
-export class Listing {
+export class Listing extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -429,13 +405,9 @@ export class Listing {
      */
     async createListing<TResult>(
         params: ICreateListingParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateListingParameters, TResult>>> {
-        return request<ICreateListingParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateListingParameters, TResult>("POST", "/listings", params, extra);
     }
 
     /**
@@ -443,13 +415,14 @@ export class Listing {
      */
     async findAllFeaturedListings<TResult>(
         params: IFindAllFeaturedListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>> {
-        return request<IFindAllFeaturedListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllFeaturedListingsParameters, TResult>(
+            "GET",
+            "/featured_treasuries/listings",
+            params,
+            extra
+        );
     }
 
     /**
@@ -457,13 +430,9 @@ export class Listing {
      */
     async getListing<TResult>(
         params: IGetListingParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetListingParameters, TResult>>> {
-        return request<IGetListingParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetListingParameters, TResult>("GET", "/listings/:listing_id", params, extra);
     }
 
     /**
@@ -471,13 +440,9 @@ export class Listing {
      */
     async updateListing<TResult>(
         params: IUpdateListingParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateListingParameters, TResult>>> {
-        return request<IUpdateListingParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateListingParameters, TResult>("PUT", "/listings/:listing_id", params, extra);
     }
 
     /**
@@ -485,13 +450,9 @@ export class Listing {
      */
     async deleteListing<TResult>(
         params: IDeleteListingParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingParameters, TResult>>> {
-        return request<IDeleteListingParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteListingParameters, TResult>("DELETE", "/listings/:listing_id", params, extra);
     }
 
     /**
@@ -499,13 +460,9 @@ export class Listing {
      */
     async findAllListingActive<TResult>(
         params: IFindAllListingActiveParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingActiveParameters, TResult>>> {
-        return request<IFindAllListingActiveParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/active",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllListingActiveParameters, TResult>("GET", "/listings/active", params, extra);
     }
 
     /**
@@ -513,13 +470,9 @@ export class Listing {
      */
     async getInterestingListings<TResult>(
         params: IGetInterestingListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetInterestingListingsParameters, TResult>>> {
-        return request<IGetInterestingListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/interesting",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetInterestingListingsParameters, TResult>("GET", "/listings/interesting", params, extra);
     }
 
     /**
@@ -527,13 +480,9 @@ export class Listing {
      */
     async getTrendingListings<TResult>(
         params: IGetTrendingListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetTrendingListingsParameters, TResult>>> {
-        return request<IGetTrendingListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/trending",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetTrendingListingsParameters, TResult>("GET", "/listings/trending", params, extra);
     }
 
     /**
@@ -541,13 +490,14 @@ export class Listing {
      */
     async findAllListingsForFeaturedTreasuryId<TResult>(
         params: IFindAllListingsForFeaturedTreasuryIdParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>>> {
-        return request<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/:featured_treasury_id/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllListingsForFeaturedTreasuryIdParameters, TResult>(
+            "GET",
+            "/featured_treasuries/:featured_treasury_id/listings",
+            params,
+            extra
+        );
     }
 
     /**
@@ -555,13 +505,14 @@ export class Listing {
      */
     async findAllActiveListingsForFeaturedTreasuryId<TResult>(
         params: IFindAllActiveListingsForFeaturedTreasuryIdParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>>> {
-        return request<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/:featured_treasury_id/listings/active",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllActiveListingsForFeaturedTreasuryIdParameters, TResult>(
+            "GET",
+            "/featured_treasuries/:featured_treasury_id/listings/active",
+            params,
+            extra
+        );
     }
 
     /**
@@ -569,13 +520,14 @@ export class Listing {
      */
     async findAllCurrentFeaturedListings<TResult>(
         params: IFindAllCurrentFeaturedListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllCurrentFeaturedListingsParameters, TResult>>> {
-        return request<IFindAllCurrentFeaturedListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/listings/homepage_current",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllCurrentFeaturedListingsParameters, TResult>(
+            "GET",
+            "/featured_treasuries/listings/homepage_current",
+            params,
+            extra
+        );
     }
 
     /**
@@ -583,13 +535,14 @@ export class Listing {
      */
     async findAllReceiptListings<TResult>(
         params: IFindAllReceiptListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>> {
-        return request<IFindAllReceiptListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/receipts/:receipt_id/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllReceiptListingsParameters, TResult>(
+            "GET",
+            "/receipts/:receipt_id/listings",
+            params,
+            extra
+        );
     }
 
     /**
@@ -597,13 +550,14 @@ export class Listing {
      */
     async findAllShopListingsActive<TResult>(
         params: IFindAllShopListingsActiveParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>> {
-        return request<IFindAllShopListingsActiveParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/active",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopListingsActiveParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/active",
+            params,
+            extra
+        );
     }
 
     /**
@@ -611,13 +565,14 @@ export class Listing {
      */
     async findAllShopListingsDraft<TResult>(
         params: IFindAllShopListingsDraftParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>> {
-        return request<IFindAllShopListingsDraftParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/draft",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopListingsDraftParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/draft",
+            params,
+            extra
+        );
     }
 
     /**
@@ -625,13 +580,14 @@ export class Listing {
      */
     async findAllShopListingsExpired<TResult>(
         params: IFindAllShopListingsExpiredParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>> {
-        return request<IFindAllShopListingsExpiredParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/expired",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopListingsExpiredParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/expired",
+            params,
+            extra
+        );
     }
 
     /**
@@ -639,13 +595,14 @@ export class Listing {
      */
     async getShopListingExpired<TResult>(
         params: IGetShopListingExpiredParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopListingExpiredParameters, TResult>>> {
-        return request<IGetShopListingExpiredParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/expired/:listing_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetShopListingExpiredParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/expired/:listing_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -653,13 +610,14 @@ export class Listing {
      */
     async findAllShopListingsFeatured<TResult>(
         params: IFindAllShopListingsFeaturedParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>> {
-        return request<IFindAllShopListingsFeaturedParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/featured",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopListingsFeaturedParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/featured",
+            params,
+            extra
+        );
     }
 
     /**
@@ -667,13 +625,14 @@ export class Listing {
      */
     async findAllShopListingsInactive<TResult>(
         params: IFindAllShopListingsInactiveParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>> {
-        return request<IFindAllShopListingsInactiveParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/inactive",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopListingsInactiveParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/inactive",
+            params,
+            extra
+        );
     }
 
     /**
@@ -681,13 +640,14 @@ export class Listing {
      */
     async getShopListingInactive<TResult>(
         params: IGetShopListingInactiveParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopListingInactiveParameters, TResult>>> {
-        return request<IGetShopListingInactiveParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/listings/inactive/:listing_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetShopListingInactiveParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/listings/inactive/:listing_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -695,13 +655,14 @@ export class Listing {
      */
     async findAllShopSectionListings<TResult>(
         params: IFindAllShopSectionListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsParameters, TResult>>> {
-        return request<IFindAllShopSectionListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections/:shop_section_id/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopSectionListingsParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/sections/:shop_section_id/listings",
+            params,
+            extra
+        );
     }
 
     /**
@@ -709,13 +670,14 @@ export class Listing {
      */
     async findAllShopSectionListingsActive<TResult>(
         params: IFindAllShopSectionListingsActiveParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionListingsActiveParameters, TResult>>> {
-        return request<IFindAllShopSectionListingsActiveParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections/:shop_section_id/listings/active",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopSectionListingsActiveParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/sections/:shop_section_id/listings/active",
+            params,
+            extra
+        );
     }
 
     /**
@@ -723,12 +685,13 @@ export class Listing {
      */
     async findAllCartListings<TResult>(
         params: IFindAllCartListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllCartListingsParameters, TResult>>> {
-        return request<IFindAllCartListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/carts/:cart_id/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllCartListingsParameters, TResult>(
+            "GET",
+            "/users/:user_id/carts/:cart_id/listings",
+            params,
+            extra
+        );
     }
 }

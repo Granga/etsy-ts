@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IBillingOverview {
@@ -46,11 +43,11 @@ export interface IGetUserBillingOverviewParameters {
 }
 
 //methods class
-export class BillingOverview {
+export class BillingOverview extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -59,12 +56,13 @@ export class BillingOverview {
      */
     async getUserBillingOverview<TResult>(
         params: IGetUserBillingOverviewParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>> {
-        return request<IGetUserBillingOverviewParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/billing/overview",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetUserBillingOverviewParameters, TResult>(
+            "GET",
+            "/users/:user_id/billing/overview",
+            params,
+            extra
+        );
     }
 }

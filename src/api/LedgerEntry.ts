@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ILedgerEntry {
@@ -54,18 +51,17 @@ export interface IFindLedgerEntriesParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number
 }
 
 //methods class
-export class LedgerEntry {
+export class LedgerEntry extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -74,13 +70,14 @@ export class LedgerEntry {
      */
     async findLedgerEntries<TResult>(
         params: IFindLedgerEntriesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>> {
-        return request<IFindLedgerEntriesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/ledger/entries",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindLedgerEntriesParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/ledger/entries",
+            params,
+            extra
+        );
     }
 
     /**
@@ -88,12 +85,13 @@ export class LedgerEntry {
      */
     async findLedgerEntry<TResult>(
         params: IFindLedgerEntryParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>> {
-        return request<IFindLedgerEntryParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/ledger/entries/:ledger_entry_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindLedgerEntryParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/ledger/entries/:ledger_entry_id",
+            params,
+            extra
+        );
     }
 }

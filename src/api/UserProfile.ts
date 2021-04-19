@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IUserProfile {
@@ -111,7 +108,6 @@ export interface IUserProfile {
 export interface IFindUserProfileParameters {
     user_id: string | number
 }
-
 export interface IUpdateUserProfileParameters {
     user_id: string | number,
     bio?: string,
@@ -126,11 +122,11 @@ export interface IUpdateUserProfileParameters {
 }
 
 //methods class
-export class UserProfile {
+export class UserProfile extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -139,13 +135,9 @@ export class UserProfile {
      */
     async findUserProfile<TResult>(
         params: IFindUserProfileParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindUserProfileParameters, TResult>>> {
-        return request<IFindUserProfileParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/profile",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindUserProfileParameters, TResult>("GET", "/users/:user_id/profile", params, extra);
     }
 
     /**
@@ -153,12 +145,8 @@ export class UserProfile {
      */
     async updateUserProfile<TResult>(
         params: IUpdateUserProfileParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateUserProfileParameters, TResult>>> {
-        return request<IUpdateUserProfileParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/profile",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateUserProfileParameters, TResult>("PUT", "/users/:user_id/profile", params, extra);
     }
 }

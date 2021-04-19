@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ITaxonomy {
@@ -53,21 +50,19 @@ export interface ITaxonomy {
 export interface IGetBuyerTaxonomyParameters {
 
 }
-
 export interface IGetSellerTaxonomyParameters {
 
 }
-
 export interface IGetSellerTaxonomyVersionParameters {
 
 }
 
 //methods class
-export class Taxonomy {
+export class Taxonomy extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -76,13 +71,9 @@ export class Taxonomy {
      */
     async getBuyerTaxonomy<TResult>(
         params: IGetBuyerTaxonomyParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetBuyerTaxonomyParameters, TResult>>> {
-        return request<IGetBuyerTaxonomyParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/taxonomy/buyer/get",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetBuyerTaxonomyParameters, TResult>("GET", "/taxonomy/buyer/get", params, extra);
     }
 
     /**
@@ -90,13 +81,9 @@ export class Taxonomy {
      */
     async getSellerTaxonomy<TResult>(
         params: IGetSellerTaxonomyParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyParameters, TResult>>> {
-        return request<IGetSellerTaxonomyParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/taxonomy/seller/get",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetSellerTaxonomyParameters, TResult>("GET", "/taxonomy/seller/get", params, extra);
     }
 
     /**
@@ -104,12 +91,13 @@ export class Taxonomy {
      */
     async getSellerTaxonomyVersion<TResult>(
         params: IGetSellerTaxonomyVersionParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>> {
-        return request<IGetSellerTaxonomyVersionParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/taxonomy/seller/version",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetSellerTaxonomyVersionParameters, TResult>(
+            "GET",
+            "/taxonomy/seller/version",
+            params,
+            extra
+        );
     }
 }

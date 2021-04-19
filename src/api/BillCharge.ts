@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IBillCharge {
@@ -53,7 +50,6 @@ export interface IBillCharge {
 export interface IGetUserChargesMetadataParameters {
     user_id: string | number
 }
-
 export interface IFindAllUserChargesParameters {
     limit?: number,
     offset?: number,
@@ -65,11 +61,11 @@ export interface IFindAllUserChargesParameters {
 }
 
 //methods class
-export class BillCharge {
+export class BillCharge extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -78,13 +74,14 @@ export class BillCharge {
      */
     async getUserChargesMetadata<TResult>(
         params: IGetUserChargesMetadataParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>> {
-        return request<IGetUserChargesMetadataParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/charges/meta",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetUserChargesMetadataParameters, TResult>(
+            "GET",
+            "/users/:user_id/charges/meta",
+            params,
+            extra
+        );
     }
 
     /**
@@ -92,12 +89,8 @@ export class BillCharge {
      */
     async findAllUserCharges<TResult>(
         params: IFindAllUserChargesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserChargesParameters, TResult>>> {
-        return request<IFindAllUserChargesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/charges",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllUserChargesParameters, TResult>("GET", "/users/:user_id/charges", params, extra);
     }
 }

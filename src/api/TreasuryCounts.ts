@@ -1,5 +1,6 @@
-import { AxiosRequestConfig } from "axios";
-import { Token } from "oauth-1.0a";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ITreasuryCounts {
@@ -25,11 +26,11 @@ export interface ITreasuryCounts {
 
 
 //methods class
-export class TreasuryCounts {
+export class TreasuryCounts extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 

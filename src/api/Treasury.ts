@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ITreasury {
@@ -90,15 +87,12 @@ export interface IFindAllTreasuriesParameters {
     offset?: number,
     page?: number
 }
-
 export interface IGetTreasuryParameters {
     treasury_key: string
 }
-
 export interface IDeleteTreasuryParameters {
 
 }
-
 export interface IFindAllUserTreasuriesParameters {
     user_id: string | number,
     sort_on?: "hotness" | "created",
@@ -110,11 +104,11 @@ export interface IFindAllUserTreasuriesParameters {
 }
 
 //methods class
-export class Treasury {
+export class Treasury extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -123,13 +117,9 @@ export class Treasury {
      */
     async findAllTreasuries<TResult>(
         params: IFindAllTreasuriesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTreasuriesParameters, TResult>>> {
-        return request<IFindAllTreasuriesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllTreasuriesParameters, TResult>("GET", "/treasuries", params, extra);
     }
 
     /**
@@ -137,13 +127,9 @@ export class Treasury {
      */
     async getTreasury<TResult>(
         params: IGetTreasuryParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetTreasuryParameters, TResult>>> {
-        return request<IGetTreasuryParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries/:treasury_key",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetTreasuryParameters, TResult>("GET", "/treasuries/:treasury_key", params, extra);
     }
 
     /**
@@ -151,13 +137,9 @@ export class Treasury {
      */
     async deleteTreasury<TResult>(
         params: IDeleteTreasuryParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryParameters, TResult>>> {
-        return request<IDeleteTreasuryParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries/:treasury_key",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteTreasuryParameters, TResult>("DELETE", "/treasuries/:treasury_key", params, extra);
     }
 
     /**
@@ -165,12 +147,13 @@ export class Treasury {
      */
     async findAllUserTreasuries<TResult>(
         params: IFindAllUserTreasuriesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>> {
-        return request<IFindAllUserTreasuriesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/treasuries",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllUserTreasuriesParameters, TResult>(
+            "GET",
+            "/users/:user_id/treasuries",
+            params,
+            extra
+        );
     }
 }
