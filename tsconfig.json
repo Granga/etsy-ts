@@ -10,7 +10,8 @@
     "outDir": ".",
     "strict": false,
     "esModuleInterop": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "importHelpers": true
   },
   "exclude": [
     "node_modules"
