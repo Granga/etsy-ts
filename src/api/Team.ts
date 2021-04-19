@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ITeam {
@@ -35,11 +32,9 @@ export interface IFindAllTeamsParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindTeamsParameters {
     team_ids: (string | number)[]
 }
-
 export interface IFindAllTeamsForUserParameters {
     user_id: string | number,
     limit?: number,
@@ -48,11 +43,11 @@ export interface IFindAllTeamsForUserParameters {
 }
 
 //methods class
-export class Team {
+export class Team extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -61,13 +56,9 @@ export class Team {
      */
     async findAllTeams<TResult>(
         params: IFindAllTeamsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsParameters, TResult>>> {
-        return request<IFindAllTeamsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/teams",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllTeamsParameters, TResult>("GET", "/teams", params, extra);
     }
 
     /**
@@ -75,13 +66,9 @@ export class Team {
      */
     async findTeams<TResult>(
         params: IFindTeamsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindTeamsParameters, TResult>>> {
-        return request<IFindTeamsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/teams/:team_ids/",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindTeamsParameters, TResult>("GET", "/teams/:team_ids/", params, extra);
     }
 
     /**
@@ -89,12 +76,8 @@ export class Team {
      */
     async findAllTeamsForUser<TResult>(
         params: IFindAllTeamsForUserParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllTeamsForUserParameters, TResult>>> {
-        return request<IFindAllTeamsForUserParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/teams",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllTeamsForUserParameters, TResult>("GET", "/users/:user_id/teams", params, extra);
     }
 }

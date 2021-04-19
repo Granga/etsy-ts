@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IStyle {
@@ -23,11 +20,11 @@ export interface IFindSuggestedStylesParameters {
 }
 
 //methods class
-export class Style {
+export class Style extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -36,12 +33,8 @@ export class Style {
      */
     async findSuggestedStyles<TResult>(
         params: IFindSuggestedStylesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindSuggestedStylesParameters, TResult>>> {
-        return request<IFindSuggestedStylesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/taxonomy/styles",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindSuggestedStylesParameters, TResult>("GET", "/taxonomy/styles", params, extra);
     }
 }

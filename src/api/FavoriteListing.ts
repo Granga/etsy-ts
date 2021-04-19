@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IFavoriteListing {
@@ -32,35 +29,31 @@ export interface IFindAllListingFavoredByParameters {
     offset?: number,
     page?: number
 }
-
 export interface IFindAllUserFavoriteListingsParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
-
 export interface IFindUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
 }
-
 export interface ICreateUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
 }
-
 export interface IDeleteUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
 }
 
 //methods class
-export class FavoriteListing {
+export class FavoriteListing extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -69,13 +62,14 @@ export class FavoriteListing {
      */
     async findAllListingFavoredBy<TResult>(
         params: IFindAllListingFavoredByParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingFavoredByParameters, TResult>>> {
-        return request<IFindAllListingFavoredByParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/favored-by",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllListingFavoredByParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/favored-by",
+            params,
+            extra
+        );
     }
 
     /**
@@ -83,13 +77,14 @@ export class FavoriteListing {
      */
     async findAllUserFavoriteListings<TResult>(
         params: IFindAllUserFavoriteListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoriteListingsParameters, TResult>>> {
-        return request<IFindAllUserFavoriteListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/favorites/listings",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllUserFavoriteListingsParameters, TResult>(
+            "GET",
+            "/users/:user_id/favorites/listings",
+            params,
+            extra
+        );
     }
 
     /**
@@ -97,13 +92,14 @@ export class FavoriteListing {
      */
     async findUserFavoriteListings<TResult>(
         params: IFindUserFavoriteListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindUserFavoriteListingsParameters, TResult>>> {
-        return request<IFindUserFavoriteListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/favorites/listings/:listing_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindUserFavoriteListingsParameters, TResult>(
+            "GET",
+            "/users/:user_id/favorites/listings/:listing_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -111,13 +107,14 @@ export class FavoriteListing {
      */
     async createUserFavoriteListings<TResult>(
         params: ICreateUserFavoriteListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateUserFavoriteListingsParameters, TResult>>> {
-        return request<ICreateUserFavoriteListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/favorites/listings/:listing_id",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateUserFavoriteListingsParameters, TResult>(
+            "POST",
+            "/users/:user_id/favorites/listings/:listing_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -125,12 +122,13 @@ export class FavoriteListing {
      */
     async deleteUserFavoriteListings<TResult>(
         params: IDeleteUserFavoriteListingsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteUserFavoriteListingsParameters, TResult>>> {
-        return request<IDeleteUserFavoriteListingsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/favorites/listings/:listing_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteUserFavoriteListingsParameters, TResult>(
+            "DELETE",
+            "/users/:user_id/favorites/listings/:listing_id",
+            params,
+            extra
+        );
     }
 }

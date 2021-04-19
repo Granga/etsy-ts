@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IShippingUpgrade {
@@ -49,7 +46,6 @@ export interface IShippingUpgrade {
 export interface IGetListingShippingUpgradesParameters {
     listing_id: number
 }
-
 export interface ICreateListingShippingUpgradeParameters {
     listing_id: number,
     type: number,
@@ -57,7 +53,6 @@ export interface ICreateListingShippingUpgradeParameters {
     price: number,
     secondary_price: number
 }
-
 export interface IUpdateListingShippingUpgradeParameters {
     listing_id: number,
     value_id: number,
@@ -65,17 +60,14 @@ export interface IUpdateListingShippingUpgradeParameters {
     price: number,
     secondary_price: number
 }
-
 export interface IDeleteListingShippingUpgradeParameters {
     listing_id: number,
     value_id: number,
     type: number
 }
-
 export interface IFindAllShippingTemplateUpgradesParameters {
     shipping_template_id: number
 }
-
 export interface ICreateShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     type: number,
@@ -83,7 +75,6 @@ export interface ICreateShippingTemplateUpgradeParameters {
     price: number,
     secondary_price: number
 }
-
 export interface IUpdateShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     value_id: number,
@@ -91,7 +82,6 @@ export interface IUpdateShippingTemplateUpgradeParameters {
     price: number,
     secondary_price: number
 }
-
 export interface IDeleteShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     value_id: number,
@@ -99,11 +89,11 @@ export interface IDeleteShippingTemplateUpgradeParameters {
 }
 
 //methods class
-export class ShippingUpgrade {
+export class ShippingUpgrade extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -112,13 +102,14 @@ export class ShippingUpgrade {
      */
     async getListingShippingUpgrades<TResult>(
         params: IGetListingShippingUpgradesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>>> {
-        return request<IGetListingShippingUpgradesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/shipping/upgrades",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetListingShippingUpgradesParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/shipping/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -126,13 +117,14 @@ export class ShippingUpgrade {
      */
     async createListingShippingUpgrade<TResult>(
         params: ICreateListingShippingUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>>> {
-        return request<ICreateListingShippingUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/shipping/upgrades",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateListingShippingUpgradeParameters, TResult>(
+            "POST",
+            "/listings/:listing_id/shipping/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -140,13 +132,14 @@ export class ShippingUpgrade {
      */
     async updateListingShippingUpgrade<TResult>(
         params: IUpdateListingShippingUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>>> {
-        return request<IUpdateListingShippingUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/shipping/upgrades",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateListingShippingUpgradeParameters, TResult>(
+            "PUT",
+            "/listings/:listing_id/shipping/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -154,13 +147,14 @@ export class ShippingUpgrade {
      */
     async deleteListingShippingUpgrade<TResult>(
         params: IDeleteListingShippingUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>>> {
-        return request<IDeleteListingShippingUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/shipping/upgrades",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteListingShippingUpgradeParameters, TResult>(
+            "DELETE",
+            "/listings/:listing_id/shipping/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -168,13 +162,14 @@ export class ShippingUpgrade {
      */
     async findAllShippingTemplateUpgrades<TResult>(
         params: IFindAllShippingTemplateUpgradesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShippingTemplateUpgradesParameters, TResult>>> {
-        return request<IFindAllShippingTemplateUpgradesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shipping/templates/:shipping_template_id/upgrades",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShippingTemplateUpgradesParameters, TResult>(
+            "GET",
+            "/shipping/templates/:shipping_template_id/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -182,13 +177,14 @@ export class ShippingUpgrade {
      */
     async createShippingTemplateUpgrade<TResult>(
         params: ICreateShippingTemplateUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateUpgradeParameters, TResult>>> {
-        return request<ICreateShippingTemplateUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shipping/templates/:shipping_template_id/upgrades",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateShippingTemplateUpgradeParameters, TResult>(
+            "POST",
+            "/shipping/templates/:shipping_template_id/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -196,13 +192,14 @@ export class ShippingUpgrade {
      */
     async updateShippingTemplateUpgrade<TResult>(
         params: IUpdateShippingTemplateUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateUpgradeParameters, TResult>>> {
-        return request<IUpdateShippingTemplateUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shipping/templates/:shipping_template_id/upgrades",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateShippingTemplateUpgradeParameters, TResult>(
+            "PUT",
+            "/shipping/templates/:shipping_template_id/upgrades",
+            params,
+            extra
+        );
     }
 
     /**
@@ -210,12 +207,13 @@ export class ShippingUpgrade {
      */
     async deleteShippingTemplateUpgrade<TResult>(
         params: IDeleteShippingTemplateUpgradeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateUpgradeParameters, TResult>>> {
-        return request<IDeleteShippingTemplateUpgradeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shipping/templates/:shipping_template_id/upgrades",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteShippingTemplateUpgradeParameters, TResult>(
+            "DELETE",
+            "/shipping/templates/:shipping_template_id/upgrades",
+            params,
+            extra
+        );
     }
 }

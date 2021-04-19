@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IListingTranslation {
@@ -34,7 +31,6 @@ export interface IGetListingTranslationParameters {
     listing_id: number,
     language: string
 }
-
 export interface ICreateListingTranslationParameters {
     listing_id: number,
     language: string,
@@ -42,7 +38,6 @@ export interface ICreateListingTranslationParameters {
     description?: string,
     tags?: string[]
 }
-
 export interface IUpdateListingTranslationParameters {
     listing_id: number,
     language: string,
@@ -50,18 +45,17 @@ export interface IUpdateListingTranslationParameters {
     description?: string,
     tags?: string[]
 }
-
 export interface IDeleteListingTranslationParameters {
     listing_id: number,
     language: string
 }
 
 //methods class
-export class ListingTranslation {
+export class ListingTranslation extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -70,13 +64,14 @@ export class ListingTranslation {
      */
     async getListingTranslation<TResult>(
         params: IGetListingTranslationParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetListingTranslationParameters, TResult>>> {
-        return request<IGetListingTranslationParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/translations/:language",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetListingTranslationParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/translations/:language",
+            params,
+            extra
+        );
     }
 
     /**
@@ -84,13 +79,14 @@ export class ListingTranslation {
      */
     async createListingTranslation<TResult>(
         params: ICreateListingTranslationParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateListingTranslationParameters, TResult>>> {
-        return request<ICreateListingTranslationParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/translations/:language",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateListingTranslationParameters, TResult>(
+            "POST",
+            "/listings/:listing_id/translations/:language",
+            params,
+            extra
+        );
     }
 
     /**
@@ -98,13 +94,14 @@ export class ListingTranslation {
      */
     async updateListingTranslation<TResult>(
         params: IUpdateListingTranslationParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateListingTranslationParameters, TResult>>> {
-        return request<IUpdateListingTranslationParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/translations/:language",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateListingTranslationParameters, TResult>(
+            "PUT",
+            "/listings/:listing_id/translations/:language",
+            params,
+            extra
+        );
     }
 
     /**
@@ -112,12 +109,13 @@ export class ListingTranslation {
      */
     async deleteListingTranslation<TResult>(
         params: IDeleteListingTranslationParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingTranslationParameters, TResult>>> {
-        return request<IDeleteListingTranslationParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/translations/:language",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteListingTranslationParameters, TResult>(
+            "DELETE",
+            "/listings/:listing_id/translations/:language",
+            params,
+            extra
+        );
     }
 }

@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IAvatar {
@@ -59,17 +56,16 @@ export interface IUploadAvatarParameters {
     user_id: string | number,
     image?: string
 }
-
 export interface IGetAvatarImgSrcParameters {
     user_id: string | number
 }
 
 //methods class
-export class Avatar {
+export class Avatar extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -78,13 +74,9 @@ export class Avatar {
      */
     async uploadAvatar<TResult>(
         params: IUploadAvatarParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadAvatarParameters, TResult>>> {
-        return request<IUploadAvatarParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/avatar",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUploadAvatarParameters, TResult>("POST", "/users/:user_id/avatar", params, extra);
     }
 
     /**
@@ -92,12 +84,8 @@ export class Avatar {
      */
     async getAvatarImgSrc<TResult>(
         params: IGetAvatarImgSrcParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetAvatarImgSrcParameters, TResult>>> {
-        return request<IGetAvatarImgSrcParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/avatar/src",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetAvatarImgSrcParameters, TResult>("GET", "/users/:user_id/avatar/src", params, extra);
     }
 }

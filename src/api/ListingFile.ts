@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IListingFile {
@@ -45,7 +42,6 @@ export interface IListingFile {
 export interface IFindAllListingFilesParameters {
     listing_id: number
 }
-
 export interface IUploadListingFileParameters {
     listing_id: number,
     listing_file_id?: number,
@@ -53,23 +49,21 @@ export interface IUploadListingFileParameters {
     name?: string,
     rank?: number
 }
-
 export interface IFindListingFileParameters {
     listing_id: number,
     listing_file_id: number
 }
-
 export interface IDeleteListingFileParameters {
     listing_id: number,
     listing_file_id: number
 }
 
 //methods class
-export class ListingFile {
+export class ListingFile extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -78,13 +72,14 @@ export class ListingFile {
      */
     async findAllListingFiles<TResult>(
         params: IFindAllListingFilesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingFilesParameters, TResult>>> {
-        return request<IFindAllListingFilesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/files",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllListingFilesParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/files",
+            params,
+            extra
+        );
     }
 
     /**
@@ -95,13 +90,14 @@ export class ListingFile {
      */
     async uploadListingFile<TResult>(
         params: IUploadListingFileParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadListingFileParameters, TResult>>> {
-        return request<IUploadListingFileParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/files",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUploadListingFileParameters, TResult>(
+            "POST",
+            "/listings/:listing_id/files",
+            params,
+            extra
+        );
     }
 
     /**
@@ -109,13 +105,14 @@ export class ListingFile {
      */
     async findListingFile<TResult>(
         params: IFindListingFileParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindListingFileParameters, TResult>>> {
-        return request<IFindListingFileParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/files/:listing_file_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindListingFileParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/files/:listing_file_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -124,12 +121,13 @@ export class ListingFile {
      */
     async deleteListingFile<TResult>(
         params: IDeleteListingFileParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingFileParameters, TResult>>> {
-        return request<IDeleteListingFileParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/files/:listing_file_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteListingFileParameters, TResult>(
+            "DELETE",
+            "/listings/:listing_id/files/:listing_file_id",
+            params,
+            extra
+        );
     }
 }

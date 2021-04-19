@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IApiMethod {
@@ -43,11 +40,11 @@ export interface IGetMethodTableParameters {
 }
 
 //methods class
-export class ApiMethod {
+export class ApiMethod extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -56,12 +53,8 @@ export class ApiMethod {
      */
     async getMethodTable<TResult>(
         params: IGetMethodTableParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetMethodTableParameters, TResult>>> {
-        return request<IGetMethodTableParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetMethodTableParameters, TResult>("GET", "/", params, extra);
     }
 }

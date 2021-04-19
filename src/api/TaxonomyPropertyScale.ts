@@ -1,5 +1,6 @@
-import { AxiosRequestConfig } from "axios";
-import { Token } from "oauth-1.0a";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface ITaxonomyPropertyScale {
@@ -21,11 +22,11 @@ export interface ITaxonomyPropertyScale {
 
 
 //methods class
-export class TaxonomyPropertyScale {
+export class TaxonomyPropertyScale extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 

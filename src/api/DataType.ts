@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IDataType {
@@ -21,25 +18,22 @@ export interface IDataType {
 export interface IDescribeOccasionEnumParameters {
 
 }
-
 export interface IDescribeRecipientEnumParameters {
 
 }
-
 export interface IDescribeWhenMadeEnumParameters {
     include_formatted?: boolean
 }
-
 export interface IDescribeWhoMadeEnumParameters {
 
 }
 
 //methods class
-export class DataType {
+export class DataType extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -48,13 +42,9 @@ export class DataType {
      */
     async describeOccasionEnum<TResult>(
         params: IDescribeOccasionEnumParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>> {
-        return request<IDescribeOccasionEnumParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/types/enum/occasion",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDescribeOccasionEnumParameters, TResult>("GET", "/types/enum/occasion", params, extra);
     }
 
     /**
@@ -62,13 +52,9 @@ export class DataType {
      */
     async describeRecipientEnum<TResult>(
         params: IDescribeRecipientEnumParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>> {
-        return request<IDescribeRecipientEnumParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/types/enum/recipient",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDescribeRecipientEnumParameters, TResult>("GET", "/types/enum/recipient", params, extra);
     }
 
     /**
@@ -76,13 +62,9 @@ export class DataType {
      */
     async describeWhenMadeEnum<TResult>(
         params: IDescribeWhenMadeEnumParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDescribeWhenMadeEnumParameters, TResult>>> {
-        return request<IDescribeWhenMadeEnumParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/types/enum/when_made",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDescribeWhenMadeEnumParameters, TResult>("GET", "/types/enum/when_made", params, extra);
     }
 
     /**
@@ -90,12 +72,8 @@ export class DataType {
      */
     async describeWhoMadeEnum<TResult>(
         params: IDescribeWhoMadeEnumParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDescribeWhoMadeEnumParameters, TResult>>> {
-        return request<IDescribeWhoMadeEnumParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/types/enum/who_made",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDescribeWhoMadeEnumParameters, TResult>("GET", "/types/enum/who_made", params, extra);
     }
 }

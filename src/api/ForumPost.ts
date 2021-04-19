@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IForumPost {
@@ -40,21 +37,19 @@ export interface IFindTreasuryCommentsParameters {
     offset?: number,
     page?: number
 }
-
 export interface IPostTreasuryCommentParameters {
     message: any
 }
-
 export interface IDeleteTreasuryCommentParameters {
 
 }
 
 //methods class
-export class ForumPost {
+export class ForumPost extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -63,13 +58,14 @@ export class ForumPost {
      */
     async findTreasuryComments<TResult>(
         params: IFindTreasuryCommentsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>> {
-        return request<IFindTreasuryCommentsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries/:treasury_key/comments",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindTreasuryCommentsParameters, TResult>(
+            "GET",
+            "/treasuries/:treasury_key/comments",
+            params,
+            extra
+        );
     }
 
     /**
@@ -77,13 +73,14 @@ export class ForumPost {
      */
     async postTreasuryComment<TResult>(
         params: IPostTreasuryCommentParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IPostTreasuryCommentParameters, TResult>>> {
-        return request<IPostTreasuryCommentParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries/:treasury_key/comments",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IPostTreasuryCommentParameters, TResult>(
+            "POST",
+            "/treasuries/:treasury_key/comments",
+            params,
+            extra
+        );
     }
 
     /**
@@ -91,12 +88,13 @@ export class ForumPost {
      */
     async deleteTreasuryComment<TResult>(
         params: IDeleteTreasuryCommentParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>> {
-        return request<IDeleteTreasuryCommentParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/treasuries/:treasury_key/comments/:comment_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteTreasuryCommentParameters, TResult>(
+            "DELETE",
+            "/treasuries/:treasury_key/comments/:comment_id",
+            params,
+            extra
+        );
     }
 }

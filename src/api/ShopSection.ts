@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IShopSection {
@@ -33,36 +30,32 @@ export interface IShopSection {
 export interface IFindAllShopSectionsParameters {
     shop_id: string | number
 }
-
 export interface ICreateShopSectionParameters {
     shop_id: string | number,
     title?: string,
     user_id?: number
 }
-
 export interface IGetShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number[]
 }
-
 export interface IUpdateShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number,
     title?: string,
     user_id?: number
 }
-
 export interface IDeleteShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number
 }
 
 //methods class
-export class ShopSection {
+export class ShopSection extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -71,13 +64,9 @@ export class ShopSection {
      */
     async findAllShopSections<TResult>(
         params: IFindAllShopSectionsParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopSectionsParameters, TResult>>> {
-        return request<IFindAllShopSectionsParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllShopSectionsParameters, TResult>("GET", "/shops/:shop_id/sections", params, extra);
     }
 
     /**
@@ -85,13 +74,9 @@ export class ShopSection {
      */
     async createShopSection<TResult>(
         params: ICreateShopSectionParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShopSectionParameters, TResult>>> {
-        return request<ICreateShopSectionParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateShopSectionParameters, TResult>("POST", "/shops/:shop_id/sections", params, extra);
     }
 
     /**
@@ -99,13 +84,14 @@ export class ShopSection {
      */
     async getShopSection<TResult>(
         params: IGetShopSectionParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopSectionParameters, TResult>>> {
-        return request<IGetShopSectionParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections/:shop_section_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetShopSectionParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/sections/:shop_section_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -113,13 +99,14 @@ export class ShopSection {
      */
     async updateShopSection<TResult>(
         params: IUpdateShopSectionParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionParameters, TResult>>> {
-        return request<IUpdateShopSectionParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections/:shop_section_id",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateShopSectionParameters, TResult>(
+            "PUT",
+            "/shops/:shop_id/sections/:shop_section_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -127,12 +114,13 @@ export class ShopSection {
      */
     async deleteShopSection<TResult>(
         params: IDeleteShopSectionParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionParameters, TResult>>> {
-        return request<IDeleteShopSectionParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/sections/:shop_section_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteShopSectionParameters, TResult>(
+            "DELETE",
+            "/shops/:shop_id/sections/:shop_section_id",
+            params,
+            extra
+        );
     }
 }

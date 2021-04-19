@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IFeaturedTreasury {
@@ -40,11 +37,9 @@ export interface IFindAllFeaturedTreasuriesParameters {
     page?: number,
     region?: string
 }
-
 export interface IGetFeaturedTreasuryByIdParameters {
     featured_treasury_id: number
 }
-
 export interface IFindAllFeaturedTreasuriesByOwnerParameters {
     limit?: number,
     offset?: number,
@@ -53,11 +48,11 @@ export interface IFindAllFeaturedTreasuriesByOwnerParameters {
 }
 
 //methods class
-export class FeaturedTreasury {
+export class FeaturedTreasury extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -66,13 +61,14 @@ export class FeaturedTreasury {
      */
     async findAllFeaturedTreasuries<TResult>(
         params: IFindAllFeaturedTreasuriesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>> {
-        return request<IFindAllFeaturedTreasuriesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllFeaturedTreasuriesParameters, TResult>(
+            "GET",
+            "/featured_treasuries",
+            params,
+            extra
+        );
     }
 
     /**
@@ -80,13 +76,14 @@ export class FeaturedTreasury {
      */
     async getFeaturedTreasuryById<TResult>(
         params: IGetFeaturedTreasuryByIdParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>> {
-        return request<IGetFeaturedTreasuryByIdParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/:featured_treasury_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetFeaturedTreasuryByIdParameters, TResult>(
+            "GET",
+            "/featured_treasuries/:featured_treasury_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -94,12 +91,13 @@ export class FeaturedTreasury {
      */
     async findAllFeaturedTreasuriesByOwner<TResult>(
         params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>> {
-        return request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/featured_treasuries/owner/:owner_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>(
+            "GET",
+            "/featured_treasuries/owner/:owner_id",
+            params,
+            extra
+        );
     }
 }
