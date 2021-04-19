@@ -18,6 +18,7 @@ import unescape from "lodash.unescape";
 import OAuth from "oauth-1.0a";
 import { IListing, IListingImage, IListingInventory, IShop, IUser } from "../api";
 import { Etsy } from "etsy-ts";
+import Bottleneck from "bottleneck";
 
 (async () => {
     let client = new Etsy({
@@ -25,6 +26,11 @@ import { Etsy } from "etsy-ts";
             key: "<ETSY API KEY>",
             secret: "<ETSY API SECRET>"
         },
+        // optional request rate limit
+        bottleneck: new Bottleneck({
+            maxConcurrent: 1,
+            minTime: 1000 / 10
+        })
     });
 
     let token: OAuth.Token = {
