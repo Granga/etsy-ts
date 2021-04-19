@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IListingInventory {
@@ -30,7 +27,6 @@ export interface IGetInventoryParameters {
     listing_id: number,
     write_missing_inventory?: boolean
 }
-
 export interface IUpdateInventoryParameters {
     listing_id: number,
     products: any,
@@ -40,11 +36,11 @@ export interface IUpdateInventoryParameters {
 }
 
 //methods class
-export class ListingInventory {
+export class ListingInventory extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -53,13 +49,9 @@ export class ListingInventory {
      */
     async getInventory<TResult>(
         params: IGetInventoryParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetInventoryParameters, TResult>>> {
-        return request<IGetInventoryParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/inventory",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetInventoryParameters, TResult>("GET", "/listings/:listing_id/inventory", params, extra);
     }
 
     /**
@@ -67,12 +59,13 @@ export class ListingInventory {
      */
     async updateInventory<TResult>(
         params: IUpdateInventoryParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateInventoryParameters, TResult>>> {
-        return request<IUpdateInventoryParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/inventory",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateInventoryParameters, TResult>(
+            "PUT",
+            "/listings/:listing_id/inventory",
+            params,
+            extra
+        );
     }
 }

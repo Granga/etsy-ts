@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IPaymentTemplate {
@@ -81,7 +78,6 @@ export interface IPaymentTemplate {
 export interface IFindShopPaymentTemplatesParameters {
     shop_id: string | number
 }
-
 export interface ICreateShopPaymentTemplateParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -98,7 +94,6 @@ export interface ICreateShopPaymentTemplateParameters {
     zip?: string,
     country_id?: number
 }
-
 export interface IUpdateShopPaymentTemplateParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -116,17 +111,16 @@ export interface IUpdateShopPaymentTemplateParameters {
     country_id?: number,
     payment_template_id: number
 }
-
 export interface IFindAllUserPaymentTemplatesParameters {
     user_id: string | number
 }
 
 //methods class
-export class PaymentTemplate {
+export class PaymentTemplate extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -135,13 +129,14 @@ export class PaymentTemplate {
      */
     async findShopPaymentTemplates<TResult>(
         params: IFindShopPaymentTemplatesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>> {
-        return request<IFindShopPaymentTemplatesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/payment_templates",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindShopPaymentTemplatesParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/payment_templates",
+            params,
+            extra
+        );
     }
 
     /**
@@ -149,13 +144,14 @@ export class PaymentTemplate {
      */
     async createShopPaymentTemplate<TResult>(
         params: ICreateShopPaymentTemplateParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>> {
-        return request<ICreateShopPaymentTemplateParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/payment_templates",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateShopPaymentTemplateParameters, TResult>(
+            "POST",
+            "/shops/:shop_id/payment_templates",
+            params,
+            extra
+        );
     }
 
     /**
@@ -163,13 +159,14 @@ export class PaymentTemplate {
      */
     async updateShopPaymentTemplate<TResult>(
         params: IUpdateShopPaymentTemplateParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShopPaymentTemplateParameters, TResult>>> {
-        return request<IUpdateShopPaymentTemplateParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/payment_templates/:payment_template_id",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateShopPaymentTemplateParameters, TResult>(
+            "PUT",
+            "/shops/:shop_id/payment_templates/:payment_template_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -177,12 +174,13 @@ export class PaymentTemplate {
      */
     async findAllUserPaymentTemplates<TResult>(
         params: IFindAllUserPaymentTemplatesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>> {
-        return request<IFindAllUserPaymentTemplatesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/payments/templates",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllUserPaymentTemplatesParameters, TResult>(
+            "GET",
+            "/users/:user_id/payments/templates",
+            params,
+            extra
+        );
     }
 }

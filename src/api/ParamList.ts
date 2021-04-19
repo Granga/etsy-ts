@@ -1,5 +1,6 @@
-import { AxiosRequestConfig } from "axios";
-import { Token } from "oauth-1.0a";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IParamList {
@@ -13,11 +14,11 @@ export interface IParamList {
 
 
 //methods class
-export class ParamList {
+export class ParamList extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 

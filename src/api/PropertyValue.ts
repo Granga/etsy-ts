@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IPropertyValue {
@@ -37,12 +34,10 @@ export interface IPropertyValue {
 export interface IGetAttributesParameters {
     listing_id: number
 }
-
 export interface IGetAttributeParameters {
     listing_id: number,
     property_id: number
 }
-
 export interface IUpdateAttributeParameters {
     listing_id: number,
     property_id: number,
@@ -50,18 +45,17 @@ export interface IUpdateAttributeParameters {
     values?: string[],
     scale_id?: number
 }
-
 export interface IDeleteAttributeParameters {
     listing_id: number,
     property_id: number
 }
 
 //methods class
-export class PropertyValue {
+export class PropertyValue extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -70,13 +64,14 @@ export class PropertyValue {
      */
     async getAttributes<TResult>(
         params: IGetAttributesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetAttributesParameters, TResult>>> {
-        return request<IGetAttributesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/attributes",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetAttributesParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/attributes",
+            params,
+            extra
+        );
     }
 
     /**
@@ -84,13 +79,14 @@ export class PropertyValue {
      */
     async getAttribute<TResult>(
         params: IGetAttributeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetAttributeParameters, TResult>>> {
-        return request<IGetAttributeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/attributes/:property_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetAttributeParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/attributes/:property_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -98,13 +94,14 @@ export class PropertyValue {
      */
     async updateAttribute<TResult>(
         params: IUpdateAttributeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateAttributeParameters, TResult>>> {
-        return request<IUpdateAttributeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/attributes/:property_id",
-            method: "PUT"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUpdateAttributeParameters, TResult>(
+            "PUT",
+            "/listings/:listing_id/attributes/:property_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -112,12 +109,13 @@ export class PropertyValue {
      */
     async deleteAttribute<TResult>(
         params: IDeleteAttributeParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteAttributeParameters, TResult>>> {
-        return request<IDeleteAttributeParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/attributes/:property_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteAttributeParameters, TResult>(
+            "DELETE",
+            "/listings/:listing_id/attributes/:property_id",
+            params,
+            extra
+        );
     }
 }

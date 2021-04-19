@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IListingImage {
@@ -85,7 +82,6 @@ export interface IListingImage {
 export interface IFindAllListingImagesParameters {
     listing_id: number
 }
-
 export interface IUploadListingImageParameters {
     listing_id: number,
     listing_image_id?: number,
@@ -94,23 +90,21 @@ export interface IUploadListingImageParameters {
     overwrite?: boolean,
     is_watermarked?: boolean
 }
-
 export interface IGetImageListingParameters {
     listing_image_id: number[],
     listing_id: number
 }
-
 export interface IDeleteListingImageParameters {
     listing_id: number,
     listing_image_id: number
 }
 
 //methods class
-export class ListingImage {
+export class ListingImage extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -119,13 +113,14 @@ export class ListingImage {
      */
     async findAllListingImages<TResult>(
         params: IFindAllListingImagesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingImagesParameters, TResult>>> {
-        return request<IFindAllListingImagesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/images",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllListingImagesParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/images",
+            params,
+            extra
+        );
     }
 
     /**
@@ -141,13 +136,14 @@ export class ListingImage {
      */
     async uploadListingImage<TResult>(
         params: IUploadListingImageParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadListingImageParameters, TResult>>> {
-        return request<IUploadListingImageParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/images",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IUploadListingImageParameters, TResult>(
+            "POST",
+            "/listings/:listing_id/images",
+            params,
+            extra
+        );
     }
 
     /**
@@ -155,13 +151,14 @@ export class ListingImage {
      */
     async getImage_Listing<TResult>(
         params: IGetImageListingParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetImageListingParameters, TResult>>> {
-        return request<IGetImageListingParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/images/:listing_image_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetImageListingParameters, TResult>(
+            "GET",
+            "/listings/:listing_id/images/:listing_image_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -171,12 +168,13 @@ export class ListingImage {
      */
     async deleteListingImage<TResult>(
         params: IDeleteListingImageParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingImageParameters, TResult>>> {
-        return request<IDeleteListingImageParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/listings/:listing_id/images/:listing_image_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteListingImageParameters, TResult>(
+            "DELETE",
+            "/listings/:listing_id/images/:listing_image_id",
+            params,
+            extra
+        );
     }
 }

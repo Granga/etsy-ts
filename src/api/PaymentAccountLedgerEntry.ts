@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IPaymentAccountLedgerEntry {
@@ -52,11 +49,11 @@ export interface IFindPaymentAccountEntriesParameters {
 }
 
 //methods class
-export class PaymentAccountLedgerEntry {
+export class PaymentAccountLedgerEntry extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -65,12 +62,13 @@ export class PaymentAccountLedgerEntry {
      */
     async findPaymentAccountEntries<TResult>(
         params: IFindPaymentAccountEntriesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>> {
-        return request<IFindPaymentAccountEntriesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/shops/:shop_id/payment_account/entries",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindPaymentAccountEntriesParameters, TResult>(
+            "GET",
+            "/shops/:shop_id/payment_account/entries",
+            params,
+            extra
+        );
     }
 }

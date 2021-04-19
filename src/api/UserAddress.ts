@@ -1,9 +1,6 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { Token } from "oauth-1.0a";
-import { request } from "../client/Request";
-import { IOAuthTokens } from "../types/IOAuthTokens";
-import { IStandardParameters } from "../types/IStandardParameters";
-import { IStandardResponse } from "../types/IStandardResponse";
+import { AxiosResponse } from "axios";
+import { ApiRequest } from "../client/ApiRequest";
+import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
 
 //fields
 export interface IUserAddress {
@@ -60,7 +57,6 @@ export interface IFindAllUserAddressesParameters {
     offset?: number,
     page?: number
 }
-
 export interface ICreateUserAddressParameters {
     user_id: string | number,
     name: string,
@@ -71,21 +67,19 @@ export interface ICreateUserAddressParameters {
     zip: string,
     country_id: number
 }
-
 export interface IGetUserAddressParameters {
     user_address_id: number[]
 }
-
 export interface IDeleteUserAddressParameters {
     user_address_id: number
 }
 
 //methods class
-export class UserAddress {
+export class UserAddress extends ApiRequest {
     constructor(
-        private readonly config: AxiosRequestConfig,
-        private readonly apiKeys: Token
+        options: IOptions
     ) {
+        super(options);
     }
 
 
@@ -94,13 +88,14 @@ export class UserAddress {
      */
     async findAllUserAddresses<TResult>(
         params: IFindAllUserAddressesParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserAddressesParameters, TResult>>> {
-        return request<IFindAllUserAddressesParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/addresses",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IFindAllUserAddressesParameters, TResult>(
+            "GET",
+            "/users/:user_id/addresses",
+            params,
+            extra
+        );
     }
 
     /**
@@ -108,13 +103,9 @@ export class UserAddress {
      */
     async createUserAddress<TResult>(
         params: ICreateUserAddressParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateUserAddressParameters, TResult>>> {
-        return request<ICreateUserAddressParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/addresses/",
-            method: "POST"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<ICreateUserAddressParameters, TResult>("POST", "/users/:user_id/addresses/", params, extra);
     }
 
     /**
@@ -122,13 +113,14 @@ export class UserAddress {
      */
     async getUserAddress<TResult>(
         params: IGetUserAddressParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserAddressParameters, TResult>>> {
-        return request<IGetUserAddressParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/addresses/:user_address_id",
-            method: "GET"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IGetUserAddressParameters, TResult>(
+            "GET",
+            "/users/:user_id/addresses/:user_address_id",
+            params,
+            extra
+        );
     }
 
     /**
@@ -136,12 +128,13 @@ export class UserAddress {
      */
     async deleteUserAddress<TResult>(
         params: IDeleteUserAddressParameters & IStandardParameters,
-        options ?: (IOAuthTokens & { axiosConfig?: AxiosRequestConfig })
+        extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteUserAddressParameters, TResult>>> {
-        return request<IDeleteUserAddressParameters, TResult>({
-            ...this.config, ...options?.axiosConfig,
-            url: "/users/:user_id/addresses/:user_address_id",
-            method: "DELETE"
-        }, params, {...{apiKeys: this.apiKeys}, ...options});
+        return this.request<IDeleteUserAddressParameters, TResult>(
+            "DELETE",
+            "/users/:user_id/addresses/:user_address_id",
+            params,
+            extra
+        );
     }
 }
