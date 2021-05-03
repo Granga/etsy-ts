@@ -6,13 +6,13 @@
   "types": "index.d.ts",
   "dependencies": {
     "axios": "^0.21.1",
+    "bottleneck": "^2.19.5",
     "oauth-1.0a": "^2.2.6",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@types/lodash.unescape": "^4.0.6",
     "@types/node": "^14.14.22",
-    "bottleneck": "^2.19.5",
     "form-data": "^4.0.0",
     "lodash.unescape": "^4.0.1",
     "rimraf": "^3.0.2",
