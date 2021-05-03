@@ -31,6 +31,7 @@ export class ApiRequest {
             },
             url,
             method,
+            ...this.options?.axiosConfig,
             ...extra?.axiosConfig
         };
         let oauth: IOAuthTokens = {
