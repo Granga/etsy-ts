@@ -20,6 +20,7 @@
   },
   "scripts": {
     "prepublishOnly": "tsc",
+    "watch": "tsc --watch",
     "test": "node test/test.js",
     "build": "rimraf api && rimraf client && rimraf test && rimraf types && rimraf index.d.ts && tsc"
   },

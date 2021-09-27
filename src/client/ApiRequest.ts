@@ -8,82 +8,58 @@ export class ApiRequest {
     ) {
     }
 
+    private readonly defaultAxiosConfig: AxiosRequestConfig = {
+        baseURL: `https://openapi.etsy.com/v2`,
+        paramsSerializer: (params) => {
+            let searchParams = new URLSearchParams();
+            Object.keys(params).forEach(paramName => {
+                let paramValue = params[paramName];
+                Array.isArray(paramValue)
+                    ? searchParams.append(paramName, paramValue.join(","))
+                    : searchParams.append(paramName, paramValue);
+            });
+
+            return searchParams.toString();
+        },
+        validateStatus: (status) => {
+            return status >= 200 && status < 300;
+        },
+    };
+
     protected async request<TParameters, TResult>(
         method: Method,
         url: string,
         params: TParameters,
-        extra: IRequestOptions
+        etsyRequestOptions: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<TParameters, TResult>>> {
-        let finalConfig: AxiosRequestConfig = {
-            paramsSerializer: (params) => {
-                let searchParams = new URLSearchParams();
-                Object.keys(params).forEach(paramName => {
-                    let paramValue = params[paramName];
-                    Array.isArray(paramValue)
-                        ? searchParams.append(paramName, paramValue.join(","))
-                        : searchParams.append(paramName, paramValue);
-                });
+        let client = this.options?.axiosInstance || this.createClient();
 
-                return searchParams.toString();
-            },
-            validateStatus: (status) => {
-                return status >= 200 && status < 300;
-            },
-            url,
+        let axiosRequestConfig: AxiosRequestConfig = {
+            ...this.defaultAxiosConfig,
             method,
+            url,
             ...this.options?.axiosConfig,
-            ...extra?.axiosConfig
-        };
-        let oauth: IOAuthTokens = {
-            apiKeys: extra?.apiKeys || this.options.apiKeys,
-            token: extra?.token
+            ...etsyRequestOptions?.axiosConfig
         };
 
-        switch ((finalConfig.method as string).toUpperCase()) {
+        switch ((axiosRequestConfig.method as string).toUpperCase()) {
             case "GET":
             case "DELETE":
-                finalConfig.params = params;
+                axiosRequestConfig.params = params;
                 break;
 
             default:
-                finalConfig.data = params;
+                axiosRequestConfig.data = params;
         }
-
-        let client = this.createClient(finalConfig, oauth);
+        this.addAuthConfig(etsyRequestOptions, axiosRequestConfig);
 
         return this.options?.bottleneck
-            ? this.options.bottleneck.schedule(async () => client.request(finalConfig))
-            : client.request(finalConfig);
+            ? this.options.bottleneck.schedule(async () => client.request(axiosRequestConfig))
+            : client.request(axiosRequestConfig);
     }
 
-    private createClient(
-        axiosConfig: AxiosRequestConfig,
-        tokens?: IOAuthTokens
-    ) {
-        let client = axios.create({
-            baseURL: `https://openapi.etsy.com/v2`,
-            ...axiosConfig,
-        });
-
-        client.interceptors.request.use((config: AxiosRequestConfig) => {
-            if (tokens?.apiKeys && tokens?.token) {
-                config.headers = {
-                    ...config.headers,
-                    ...this.generateOAuthHeader({
-                        url: `${config.baseURL}${config.url}`,
-                        method: config.method.toUpperCase()
-                    }, tokens),
-                };
-            }
-            else if (tokens?.apiKeys) {
-                config.params = {
-                    ...config.params,
-                    api_key: tokens.apiKeys.key
-                }
-            }
-
-            return config;
-        });
+    private createClient() {
+        let client = axios.create();
 
         client.interceptors.response.use(
             (response) => response,
@@ -97,6 +73,29 @@ export class ApiRequest {
         );
 
         return client;
+    }
+
+    private addAuthConfig(etsyReqOptions: IRequestOptions, axiosRequestConfig: AxiosRequestConfig) {
+        let oauth: IOAuthTokens = {
+            apiKeys: etsyReqOptions?.apiKeys || this.options.apiKeys,
+            token: etsyReqOptions?.token
+        };
+
+        if (oauth?.apiKeys && oauth?.token) {
+            axiosRequestConfig.headers = {
+                ...axiosRequestConfig.headers,
+                ...this.generateOAuthHeader({
+                    url: `${axiosRequestConfig.baseURL}${axiosRequestConfig.url}`,
+                    method: axiosRequestConfig.method.toUpperCase()
+                }, oauth),
+            };
+        }
+        else if (oauth?.apiKeys) {
+            axiosRequestConfig.params = {
+                ...axiosRequestConfig.params,
+                api_key: oauth.apiKeys.key
+            }
+        }
     }
 
     private captureErrorMessage(e: Error | AxiosError) {
