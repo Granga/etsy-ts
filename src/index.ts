@@ -1,1 +1,1 @@
-export * from "./client/Etsy";
+export * from "./v2/client/Etsy";
