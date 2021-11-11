@@ -13,7 +13,7 @@ import { initAuthRefresh } from "./auth-refresh";
         const client = new Etsy({apiKey});
 
         // Token expires in 1 hour, so we'll refresh it when we receive a 401
-        // initAuthRefresh(client, apiKey, tokens);
+        initAuthRefresh(client, apiKey, tokens);
 
         let {data: ping} = await client.Other.ping();
         let {data: user} = await client.User.getUser(92841371, tokens);
