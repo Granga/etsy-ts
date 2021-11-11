@@ -13,8 +13,6 @@ build/
 
 src/**/*.js
 src/**/*.map
-
-src/v2/test/
 dist/test
 /api
 /client

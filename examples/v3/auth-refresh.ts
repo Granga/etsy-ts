@@ -1,5 +1,6 @@
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
+import fs from "fs-extra";
 import { Etsy } from "../../src/v3";
 
 export const initAuthRefresh = (
@@ -13,7 +14,27 @@ export const initAuthRefresh = (
     createAuthRefreshInterceptor(
         client.httpClient.instance,
         (error) => refreshAuthLogic(apiKey, tokens),
+        {pauseInstanceWhileRefreshing: true}
     );
+
+    // Use refreshed token when retrying the failed request
+    client.httpClient.instance.interceptors.request.use(async request => {
+        if (request.headers.Authorization) {
+            let accessToken = request.headers.Authorization.replace("Bearer ", "");
+            if (accessToken !== tokens.accessToken) {
+                // Read token from the the a file
+                let credentials = await fs.readJson("./examples/credentials.json");
+
+                // Or read token from database
+                // let etsyUserId = accessToken.split(".")[0];
+                // let {accessToken} = await userRepo.findOne({etsyUserId});
+
+                request.headers.Authorization = `Bearer ${credentials.accessToken}`;
+            }
+        }
+
+        return request;
+    });
 }
 
 const refreshAuthLogic = async (
@@ -38,5 +59,14 @@ const refreshAuthLogic = async (
 
     tokens.accessToken = response.data.access_token;
     tokens.refreshToken = response.data.refresh_token;
-    // save tokens to database maybe?
+
+    // Storing refreshed tokens in file, but you should store them in cache or/and database
+    let credentials = await fs.readJson("./examples/credentials.json");
+    await fs.writeJSON(
+        "./examples/credentials.json",
+        {...credentials, ...tokens},
+        {spaces: 2}
+    );
+
+    return Promise.resolve();
 };

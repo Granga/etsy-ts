@@ -1309,6 +1309,12 @@ export interface IPaymentAccountLedgerEntry {
 
   /** The original reference type for the ledger entry. */
   ledger_type: string;
+
+  /** The object type the ledger entry refers to. */
+  reference_type: string;
+
+  /** The object id the ledger entry refers to. */
+  reference_id: string | null;
 }
 
 /**

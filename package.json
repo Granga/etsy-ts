@@ -26,10 +26,10 @@
   "scripts": {
     "prepublishOnly": "tsc",
     "watch": "tsc --watch",
-    "test": "node test/test.js",
     "build": "rimraf api && rimraf client && rimraf test && rimraf types && rimraf index.d.ts && tsc",
     "generate-api-v3": "ts-node ./generate/generate.ts",
-    "test-api-v3": "ts-node examples/v3/run.ts"
+    "run-sample-v2": "ts-node examples/v2/run.ts",
+    "run-sample-v3": "ts-node examples/v3/run.ts"
   },
   "repository": {
     "type": "git",

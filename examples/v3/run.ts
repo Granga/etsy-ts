@@ -4,7 +4,7 @@ import { initAuthRefresh } from "./auth-refresh";
 
 (async () => {
     try {
-        const credentials = await fs.readJSON("./credentials.json");
+        const credentials = await fs.readJSON("./examples/credentials.json");
         const apiKey = credentials.apiKey;
         const tokens = {
             accessToken: credentials.accessToken,
@@ -16,17 +16,11 @@ import { initAuthRefresh } from "./auth-refresh";
         initAuthRefresh(client, apiKey, tokens);
 
         let {data: ping} = await client.Other.ping();
-        let {data: user} = await client.User.getUser(
-            92841371,
-            {accessToken: tokens.accessToken}
-        );
-        let {data: shop} = await client.Shop.getShop(
-            13201425,
-            {accessToken: tokens.accessToken}
-        );
+        let {data: user} = await client.User.getUser(92841371, tokens);
+        let {data: shop} = await client.Shop.getShop(13201425, tokens);
         let {data: {results: listings}} = await client.ShopListing.findAllActiveListingsByShop(
             {shopId: 13201425},
-            {accessToken: tokens.accessToken}
+            tokens
         );
 
         console.log("Ping:", ping);
