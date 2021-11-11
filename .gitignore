@@ -14,10 +14,8 @@ build/
 src/**/*.js
 src/**/*.map
 dist/test
-/api
-/client
-/test
-/types
+/v2
+/v3
 /index.js
 /index.d.ts
 

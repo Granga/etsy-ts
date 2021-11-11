@@ -5,10 +5,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "~0.21.4",
     "bottleneck": "^2.19.5",
     "oauth-1.0a": "^2.2.6",
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -21,12 +21,12 @@
     "rimraf": "^3.0.2",
     "swagger-typescript-api": "^9.3.1",
     "ts-node": "^10.4.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.4.4"
   },
   "scripts": {
     "prepublishOnly": "tsc",
     "watch": "tsc --watch",
-    "build": "rimraf api && rimraf client && rimraf test && rimraf types && rimraf index.d.ts && tsc",
+    "build": "rimraf api && rimraf v2 && rimraf v3 && rimraf index.d.ts && tsc",
     "generate-api-v3": "ts-node ./generate/generate.ts",
     "run-sample-v2": "ts-node examples/v2/run.ts",
     "run-sample-v3": "ts-node examples/v3/run.ts"
