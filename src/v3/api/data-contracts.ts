@@ -518,6 +518,9 @@ export interface IShopListingWithAssociations {
   /** The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. */
   taxonomy_id: number | null;
 
+  /** An array of data representing the shipping profile resource. */
+  shipping_profile: IShopShippingProfile;
+
   /** Represents a single user of the site */
   user: IUser;
 
@@ -529,6 +532,176 @@ export interface IShopListingWithAssociations {
 
   /** Represents a list of production partners for a shop. */
   production_partners: IShopProductionPartner[];
+
+  /** A list of SKU strings for the listing. SKUs will only appear if the requesting user owns the shop. */
+  skus: string[] | null;
+}
+
+/**
+ * Represents a profile used to set a listing's shipping information. Please note that it's not possible to create calculated shipping templates via the API. However, you can associate calculated shipping profiles created from Shop Manager with listings using the API.
+ */
+export interface IShopShippingProfile {
+  /**
+   * The numeric ID of the shipping profile.
+   * @min 1
+   */
+  shipping_profile_id: number;
+
+  /** The name string of this shipping profile. */
+  title: string | null;
+
+  /**
+   * The numeric ID for the [user](/documentation/reference#tag/User) who owns the shipping profile.
+   * @min 1
+   */
+  user_id: number;
+
+  /**
+   * The minimum number of days for processing the listing.
+   * @min 0
+   */
+  min_processing_days: number | null;
+
+  /**
+   * The maximum number of days for processing the listing.
+   * @min 0
+   */
+  max_processing_days: number | null;
+
+  /** Translated display label string for processing days. */
+  processing_days_display_label: string;
+
+  /**
+   * The ISO code of the country from which the listing ships.
+   * @format ISO 3166-1 alpha-2
+   */
+  origin_country_iso: string;
+
+  /** When true, someone deleted this shipping profile. */
+  is_deleted: boolean;
+
+  /** A list of [shipping profile destinations](/documentation/reference#operation/createListingShippingProfileDestination) available for this shipping profile. */
+  shipping_profile_destinations: IShopShippingProfileDestination[];
+
+  /** A list of [shipping profile upgrades](/documentation/reference#operation/createListingShippingProfileUpgrade) available for this shipping profile. */
+  shipping_profile_upgrades: IShopShippingProfileUpgrade[];
+
+  /** The postal code string (not necessarily a number) for the location from which the listing ships. */
+  origin_postal_code: string | null;
+  profile_type?: "manual" | "calculated";
+}
+
+/**
+ * Represents a shipping destination assigned to a shipping profile.
+ */
+export interface IShopShippingProfileDestination {
+  /**
+   * The numeric ID of the shipping profile destination in the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing.
+   * @min 1
+   */
+  shipping_profile_destination_id: number;
+
+  /**
+   * The numeric ID of the shipping profile.
+   * @min 1
+   */
+  shipping_profile_id: number;
+
+  /**
+   * The ISO code of the country from which the listing ships.
+   * @format ISO 3166-1 alpha-2
+   */
+  origin_country_iso: string;
+
+  /** The ISO code of the country to which the listing ships. If null, request sets destination to destination_region */
+  destination_country_iso: string;
+
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If \`none\", request sets destination to destination_country_iso, or \"everywhere\" if destination_country_iso is also null */
+  destination_region: "eu" | "non_eu" | "none";
+
+  /** The cost of shipping to this country/region alone, measured in the store's default currency. */
+  primary_cost: IMoney;
+
+  /** The cost of shipping to this country/region with another item, measured in the store's default currency. */
+  secondary_cost: IMoney;
+
+  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
+  shipping_carrier_id: number | null;
+
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  mail_class: string | null;
+
+  /**
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * @min 1
+   * @max 45
+   */
+  min_delivery_days: number | null;
+
+  /**
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * @min 1
+   * @max 45
+   */
+  max_delivery_days: number | null;
+}
+
+/**
+ * A representation of a shipping profile upgrade option.
+ */
+export interface IShopShippingProfileUpgrade {
+  /**
+   * The numeric ID of the base shipping profile.
+   * @min 1
+   */
+  shipping_profile_id: number;
+
+  /**
+   * The numeric ID that is associated with a shipping upgrade
+   * @min 1
+   */
+  upgrade_id: number;
+
+  /** Name for the shipping upgrade shown to shoppers at checkout, e.g. USPS Priority. */
+  upgrade_name: string;
+
+  /** The type of the shipping upgrade. Domestic (0) or international (1). */
+  type: "0" | "1";
+
+  /**
+   * The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.
+   * @min 0
+   */
+  rank: number;
+
+  /** The IETF language tag for the language of the shipping profile. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. */
+  language: string;
+
+  /** Additional cost of adding the shipping upgrade. */
+  price: IMoney;
+
+  /** Additional cost of adding the shipping upgrade for each additional item. */
+  secondary_price: IMoney;
+
+  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
+  shipping_carrier_id: number | null;
+
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  mail_class: string | null;
+
+  /**
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * @min 1
+   * @max 45
+   */
+  min_delivery_days: number | null;
+
+  /**
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * @min 1
+   * @max 45
+   */
+  max_delivery_days: number | null;
 }
 
 /**
@@ -1064,7 +1237,7 @@ export interface IShopReceiptTransaction {
   title: string;
 
   /** The description string of the [listing](/documentation/reference#tag/ShopListing) purchased in this transaction. */
-  description: string;
+  description: string | null;
 
   /**
    * The numeric user ID for the seller in this transaction.
@@ -1122,9 +1295,9 @@ export interface IShopReceiptTransaction {
 
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
-   * @min 1
+   * @min 0
    */
-  listing_id: number;
+  listing_id: number | null;
 
   /** The type string for the transaction, usually "listing" */
   transaction_type: string;
@@ -1551,10 +1724,7 @@ export interface IShopReceipt {
    */
   buyer_user_id: number;
 
-  /**
-   * The email address string for the buyer of the listing.
-   * @format email
-   */
+  /** The email address string for the buyer of the listing. */
   buyer_email: string | null;
 
   /** The name string for the recipient in the shipping address. */
@@ -1570,7 +1740,7 @@ export interface IShopReceipt {
   city: string;
 
   /** The state string for the recipient in the shipping address. */
-  state: string;
+  state: string | null;
 
   /** The zip code string (not necessarily a number) for the recipient in the shipping address. */
   zip: string;
@@ -2011,173 +2181,6 @@ export interface IShopSections {
 }
 
 /**
- * Represents a profile used to set a listing's shipping information. Please note that it's not possible to create calculated shipping templates via the API. However, you can associate calculated shipping profiles created from Shop Manager with listings using the API.
- */
-export interface IShopShippingProfile {
-  /**
-   * The numeric ID of the shipping profile.
-   * @min 1
-   */
-  shipping_profile_id: number;
-
-  /** The name string of this shipping profile. */
-  title: string | null;
-
-  /**
-   * The numeric ID for the [user](/documentation/reference#tag/User) who owns the shipping profile.
-   * @min 1
-   */
-  user_id: number;
-
-  /**
-   * The minimum number of days for processing the listing.
-   * @min 0
-   */
-  min_processing_days: number | null;
-
-  /**
-   * The maximum number of days for processing the listing.
-   * @min 0
-   */
-  max_processing_days: number | null;
-
-  /** Translated display label string for processing days. */
-  processing_days_display_label: string;
-
-  /**
-   * The ISO code of the country from which the listing ships.
-   * @format ISO 3166-1 alpha-2
-   */
-  origin_country_iso: string;
-
-  /** When true, someone deleted this shipping profile. */
-  is_deleted: boolean;
-
-  /** A list of [shipping profile destinations](/documentation/reference#operation/createListingShippingProfileDestination) available for this shipping profile. */
-  shipping_profile_destinations: IShopShippingProfileDestination[];
-
-  /** A list of [shipping profile upgrades](/documentation/reference#operation/createListingShippingProfileUpgrade) available for this shipping profile. */
-  shipping_profile_upgrades: IShopShippingProfileUpgrade[];
-
-  /** The postal code string (not necessarily a number) for the location from which the listing ships. */
-  origin_postal_code: string | null;
-  profile_type?: "manual" | "calculated";
-}
-
-/**
- * Represents a shipping destination assigned to a shipping profile.
- */
-export interface IShopShippingProfileDestination {
-  /**
-   * The numeric ID of the shipping profile destination in the [shipping profile](/documentation/reference#tag/ShopListing-ShippingProfile) associated with the listing.
-   * @min 1
-   */
-  shipping_profile_destination_id: number;
-
-  /**
-   * The numeric ID of the shipping profile.
-   * @min 1
-   */
-  shipping_profile_id: number;
-
-  /**
-   * The ISO code of the country from which the listing ships.
-   * @format ISO 3166-1 alpha-2
-   */
-  origin_country_iso: string;
-
-  /** The ISO code of the country to which the listing ships. If null, request sets destination to destination_region */
-  destination_country_iso: string;
-
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If \`none\", request sets destination to destination_country_iso, or \"everywhere\" if destination_country_iso is also null */
-  destination_region: "eu" | "non_eu" | "none";
-
-  /** The cost of shipping to this country/region alone, measured in the store's default currency. */
-  primary_cost: IMoney;
-
-  /** The cost of shipping to this country/region with another item, measured in the store's default currency. */
-  secondary_cost: IMoney;
-
-  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
-  shipping_carrier_id: number | null;
-
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
-  mail_class: string | null;
-
-  /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
-   * @min 1
-   * @max 45
-   */
-  min_delivery_days: number | null;
-
-  /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
-   * @min 1
-   * @max 45
-   */
-  max_delivery_days: number | null;
-}
-
-/**
- * A representation of a shipping profile upgrade option.
- */
-export interface IShopShippingProfileUpgrade {
-  /**
-   * The numeric ID of the base shipping profile.
-   * @min 1
-   */
-  shipping_profile_id: number;
-
-  /**
-   * The numeric ID that is associated with a shipping upgrade
-   * @min 1
-   */
-  upgrade_id: number;
-
-  /** Name for the shipping upgrade shown to shoppers at checkout, e.g. USPS Priority. */
-  upgrade_name: string;
-
-  /** The type of the shipping upgrade. Domestic (0) or international (1). */
-  type: "0" | "1";
-
-  /**
-   * The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.
-   * @min 0
-   */
-  rank: number;
-
-  /** The IETF language tag for the language of the shipping profile. Ex: de, en, es, fr, it, ja, nl, pl, pt, ru. */
-  language: string;
-
-  /** Additional cost of adding the shipping upgrade. */
-  price: IMoney;
-
-  /** Additional cost of adding the shipping upgrade for each additional item. */
-  secondary_price: IMoney;
-
-  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
-  shipping_carrier_id: number | null;
-
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
-  mail_class: string | null;
-
-  /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
-   * @min 1
-   * @max 45
-   */
-  min_delivery_days: number | null;
-
-  /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
-   * @min 1
-   * @max 45
-   */
-  max_delivery_days: number | null;
-}
-
-/**
  * Represents a list of shipping destination objects.
  */
 export interface IShopShippingProfileDestinations {
@@ -2410,6 +2413,9 @@ export interface ICreateDraftListingPayload {
   /** When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. */
   is_customizable?: boolean;
 
+  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  should_auto_renew?: boolean;
+
   /** When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. */
   is_taxable?: boolean;
 
@@ -2449,7 +2455,7 @@ export interface IGetListingsByShopParams {
 
 export interface IGetListingParams {
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images' and 'user'. Default value is an empty array. */
-  includes?: ("Images" | "Shop" | "User")[];
+  includes?: ("Shipping" | "Images" | "Shop" | "User")[];
 
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
@@ -2616,7 +2622,7 @@ export interface IGetListingsByListingIdsParams {
   listing_ids: number[];
 
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images' and 'user'. Default value is an empty array. */
-  includes?: ("Images" | "Shop" | "User")[];
+  includes?: ("Shipping" | "Images" | "Shop" | "User")[];
 }
 
 export interface IGetFeaturedListingsByShopParams {
