@@ -23,10 +23,24 @@ import { initAuthRefresh } from "./auth-refresh";
             tokens
         );
 
+        let {data: receipt} = await client.ShopReceipt.getShopReceipt(13201425, 2332707680, tokens);
+        let shipment = await client.ShopReceipt.createReceiptShipment(
+            13201425,
+            receipt.receipt_id,
+            {
+                carrier_name: "ups",
+                send_bcc: false,
+                tracking_code: "555015043132"
+            },
+            tokens
+        );
+
         console.log("Ping:", ping);
         console.log("User:", user);
         console.log("Shop:", shop);
         console.log("Listings:", listings);
+        console.log("Receipt:", receipt);
+        console.log("Shipment:", shipment);
     }
     catch (e) {
         console.error(e);
