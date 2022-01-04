@@ -24,7 +24,7 @@ import { initAuthRefresh } from "./auth-refresh";
         );
 
         let {data: receipt} = await client.ShopReceipt.getShopReceipt(13201425, 2332707680, tokens);
-        let shipment = await client.ShopReceipt.createReceiptShipment(
+        let {data: shipment} = await client.ShopReceipt.createReceiptShipment(
             13201425,
             receipt.receipt_id,
             {

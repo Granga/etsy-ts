@@ -8,6 +8,7 @@
     "axios": "~0.21.4",
     "bottleneck": "^2.19.5",
     "oauth-1.0a": "^2.2.6",
+    "query-string": "^7.0.1",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
