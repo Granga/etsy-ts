@@ -3,6 +3,7 @@ const { apiConfig, generateResponses, config } = it;
 %>
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
+import { stringify as qsStringify } from "query-string";
 
 export type QueryParamsType = Record<string | number, any>;
 
@@ -83,6 +84,10 @@ export class HttpClient<SecurityDataType = unknown> {
       }, new FormData())
     }
 
+    private createUrlEncoded(body: Record<string, unknown>): string {
+      return qsStringify(body);
+    }
+
     public request = async <T = any, _E = any>({
         secure,
         path,
@@ -106,6 +111,9 @@ export class HttpClient<SecurityDataType = unknown> {
           requestParams.headers.put = {};
 
           body = this.createFormData(body as Record<string, unknown>);
+        }
+        else if (type === ContentType.UrlEncoded && body && body !== null && typeof body === "object") {
+          body = this.createUrlEncoded(body as Record<string, unknown>);
         }
 
         return this.instance.request({

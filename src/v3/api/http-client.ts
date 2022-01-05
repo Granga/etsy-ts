@@ -43,8 +43,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com"});
+  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
+    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com" });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -52,50 +52,6 @@ export class HttpClient<SecurityDataType = unknown> {
 
   public setSecurityData = (data: SecurityDataType | null) => {
     this.securityData = data;
-  };
-
-  public request = async <T = any, _E = any>({
-                                               secure,
-                                               path,
-                                               type,
-                                               query,
-                                               format,
-                                               body,
-                                               ...params
-                                             }: FullRequestParams): Promise<AxiosResponse<T>> => {
-    const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
-        this.securityWorker &&
-        (await this.securityWorker({
-          ...this.securityData,
-          ...(params?.accessToken ? {accessToken: params.accessToken} : {}),
-        }))) ||
-      {};
-    const requestParams = this.mergeRequestParams(params, secureParams);
-    const responseFormat = (format && this.format) || void 0;
-
-    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
-      requestParams.headers.common = {Accept: "*/*"};
-      requestParams.headers.post = {};
-      requestParams.headers.put = {};
-
-      body = this.createFormData(body as Record<string, unknown>);
-    }
-    else if (type === ContentType.UrlEncoded && body && body !== null && typeof body === "object") {
-      body = this.createUrlEncoded(body as Record<string, unknown>);
-    }
-
-    return this.instance.request({
-      ...requestParams,
-      headers: {
-        ...(type && type !== ContentType.FormData ? {"Content-Type": type} : {}),
-        ...(requestParams.headers || {}),
-      },
-      params: query,
-      responseType: responseFormat,
-      data: body,
-      url: path,
-    });
   };
 
   private mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
@@ -119,8 +75,8 @@ export class HttpClient<SecurityDataType = unknown> {
         property instanceof Blob
           ? property
           : typeof property === "object" && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+          ? JSON.stringify(property)
+          : `${property}`,
       );
       return formData;
     }, new FormData());
@@ -129,4 +85,47 @@ export class HttpClient<SecurityDataType = unknown> {
   private createUrlEncoded(body: Record<string, unknown>): string {
     return qsStringify(body);
   }
+
+  public request = async <T = any, _E = any>({
+    secure,
+    path,
+    type,
+    query,
+    format,
+    body,
+    ...params
+  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+    const secureParams =
+      ((typeof secure === "boolean" ? secure : this.secure) &&
+        this.securityWorker &&
+        (await this.securityWorker({
+          ...this.securityData,
+          ...(params?.accessToken ? { accessToken: params.accessToken } : {}),
+        }))) ||
+      {};
+    const requestParams = this.mergeRequestParams(params, secureParams);
+    const responseFormat = (format && this.format) || void 0;
+
+    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
+      requestParams.headers.common = { Accept: "*/*" };
+      requestParams.headers.post = {};
+      requestParams.headers.put = {};
+
+      body = this.createFormData(body as Record<string, unknown>);
+    } else if (type === ContentType.UrlEncoded && body && body !== null && typeof body === "object") {
+      body = this.createUrlEncoded(body as Record<string, unknown>);
+    }
+
+    return this.instance.request({
+      ...requestParams,
+      headers: {
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(requestParams.headers || {}),
+      },
+      params: query,
+      responseType: responseFormat,
+      data: body,
+      url: path,
+    });
+  };
 }
