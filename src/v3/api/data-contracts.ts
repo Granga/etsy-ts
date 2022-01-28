@@ -102,7 +102,7 @@ export interface IShopListing {
   personalization_instructions: string | null;
 
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
-  listing_type: boolean;
+  listing_type: "physical" | "download" | "both";
 
   /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
   tags: string[];
@@ -409,7 +409,7 @@ export interface IShopListingWithAssociations {
   personalization_instructions: string | null;
 
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
-  listing_type: boolean;
+  listing_type: "physical" | "download" | "both";
 
   /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
   tags: string[];
@@ -2288,8 +2288,6 @@ export interface ICreateDraftListingPayload {
   /**
    * The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.
    * @format float
-   * @min 0.2
-   * @max 50000
    */
   price: number;
 
@@ -2710,14 +2708,15 @@ export interface IUpdateListingTranslationPayload {
 }
 
 export interface IUpdateListingPayload {
+  /** An array of numeric image IDs of the images in a listing, which can include up to 10 images. */
+  image_ids?: number[];
+
   /** The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint. */
   quantity?: number;
 
   /**
    * The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings.
    * @format float
-   * @min 0.2
-   * @max 50000
    */
   price?: number;
 
