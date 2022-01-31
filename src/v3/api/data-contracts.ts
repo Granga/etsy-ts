@@ -1,4 +1,146 @@
 /**
+ * A list of taxonomy nodes from the buyer taxonomy tree.
+ */
+export interface IBuyerTaxonomyNodes {
+  /**
+   * The number of results.
+   * @min 0
+   */
+  count: number;
+
+  /** The list of requested resources. */
+  results: IBuyerTaxonomyNode[];
+}
+
+/**
+ * A taxonomy node in the buyer taxonomy tree.
+ */
+export interface IBuyerTaxonomyNode {
+  /**
+   * The unique numeric ID of an Etsy taxonomy node, which is a metadata category for listings organized into the seller taxonomy hierarchy tree. For example, the \"shoes\" taxonomy node (ID: 1429, level: 1) is higher in the hierarchy than \"girls' shoes\" (ID: 1440, level: 2). The taxonomy nodes assigned to a listing support access to specific standardized product scales and properties. For example, listings assigned the taxonomy nodes \"shoes\" or \"girls' shoes\" support access to the \"EU\" shoe size scale with its associated property names and IDs for EU shoe sizes, such as property `value_id`:\"1394\", and `name`:\"38\".
+   * @min 1
+   */
+  id: number;
+
+  /**
+   * The integer depth of this taxonomy node in the seller taxonomy tree, with roots at level 0.
+   * @min 0
+   */
+  level: number;
+
+  /** The name string for this taxonomy node. */
+  name: string;
+
+  /**
+   * The numeric taxonomy ID of the parent of this node.
+   * @min 1
+   */
+  parent_id?: number | null;
+
+  /** An array of taxonomy nodes for all the direct children of this taxonomy node in the seller taxanomy tree. */
+  children: IBuyerTaxonomyNode[];
+
+  /** An array of `taxonomy_id`s including this node and all of its direct parents in the seller taxonomy tree up to a root node. They are listed in order from root to leaf. */
+  full_path_taxonomy_ids: number[];
+}
+
+export interface IErrorSchema {
+  error: string;
+}
+
+/**
+ * A list of product property definitions.
+ */
+export interface IBuyerTaxonomyNodeProperties {
+  /**
+   * The number of results.
+   * @min 0
+   */
+  count: number;
+
+  /** The list of requested resources. */
+  results: IBuyerTaxonomyNodeProperty[];
+}
+
+/**
+ * A product property definition.
+ */
+export interface IBuyerTaxonomyNodeProperty {
+  /**
+   * The unique numeric ID of this product property.
+   * @min 1
+   */
+  property_id: number;
+
+  /** The name string for this taxonomy node. */
+  name: string;
+
+  /** The human-readable product property name string. */
+  display_name: string;
+
+  /** A list of available scales. */
+  scales: IBuyerTaxonomyPropertyScale[];
+
+  /** When true, listings assigned eligible taxonomy IDs require this property. */
+  is_required: boolean;
+
+  /** When true, you can use this property in listing attributes. */
+  supports_attributes: boolean;
+
+  /** When true, you can use this property in listing variations. */
+  supports_variations: boolean;
+
+  /** When true, you can assign multiple property values to this property */
+  is_multivalued: boolean;
+
+  /** A list of supported property value strings for this property. */
+  possible_values: IBuyerTaxonomyPropertyValue[];
+
+  /** A list of property value strings automatically and always selected for the given property. */
+  selected_values: IBuyerTaxonomyPropertyValue[];
+}
+
+/**
+ * A scale defnining the assignable increments for the property values available to specific product properties.
+ */
+export interface IBuyerTaxonomyPropertyScale {
+  /**
+   * The unique numeric ID of a scale.
+   * @min 1
+   */
+  scale_id: number;
+
+  /** The name string for a scale. */
+  display_name: string;
+
+  /** The description string for a scale. */
+  description: string;
+}
+
+/**
+ * A property value for a specific product property, which may also employ a specific scale.
+ */
+export interface IBuyerTaxonomyPropertyValue {
+  /**
+   * The numeric ID of this property value.
+   * @min 1
+   */
+  value_id: number | null;
+
+  /** The name string of this property value. */
+  name: string;
+
+  /**
+   * The numeric scale ID of the scale to which this property value belongs.
+   * @min 1
+   */
+  scale_id: number | null;
+
+  /** A list of numeric property value IDs this property value is equal to (if any). */
+  equal_to: number[];
+}
+
+/**
  * A listing from a shop, which contains a product quantity, title, description, price, etc.
  */
 export interface IShopListing {
@@ -208,7 +350,7 @@ export interface IShopListing {
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. */
   price: IMoney;
 
-  /** The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. */
+  /** The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id: number | null;
 }
 
@@ -227,10 +369,6 @@ export interface IMoney {
 
   /** The ISO currency code for this data. */
   currency_code: string;
-}
-
-export interface IErrorSchema {
-  error: string;
 }
 
 /**
@@ -515,7 +653,7 @@ export interface IShopListingWithAssociations {
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The getInventory method requests exact prices for available offerings. */
   price: IMoney;
 
-  /** The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information. */
+  /** The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id: number | null;
 
   /** An array of data representing the shipping profile resource. */
@@ -2317,7 +2455,7 @@ export interface ICreateDraftListingPayload {
     | "before_1700";
 
   /**
-   * The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information.
+   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id: number;
@@ -2521,7 +2659,7 @@ export interface IFindAllListingsActiveParams {
   max_price?: number;
 
   /**
-   * The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information.
+   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id?: number;
@@ -2537,6 +2675,12 @@ export interface IFindAllActiveListingsByShopParams {
    * @max 100
    */
   limit?: number;
+
+  /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
+  sort_on?: "created" | "price" | "updated";
+
+  /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
+  sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
 
   /**
    * The number of records to skip before selecting the first result.
@@ -2783,7 +2927,7 @@ export interface IUpdateListingPayload {
   is_taxable?: boolean;
 
   /**
-   * The numeric taxonomy ID of the listing. The seller manages listing taxonomy IDs for their shop.  [See SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) for more information.
+   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id?: number;
