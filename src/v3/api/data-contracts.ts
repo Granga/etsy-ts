@@ -673,6 +673,9 @@ export interface IShopListingWithAssociations {
 
   /** A list of SKU strings for the listing. SKUs will only appear if the requesting user owns the shop. */
   skus: string[] | null;
+
+  /** An array of translations for the listing. Default value is an empty array. */
+  translations: IListingTranslation[];
 }
 
 /**
@@ -1199,6 +1202,29 @@ export interface IShopProductionPartner {
 }
 
 /**
+ * Represents the translation data for a Listing.
+ */
+export interface IListingTranslation {
+  /**
+   * The numeric ID for the Listing.
+   * @min 1
+   */
+  listing_id: number;
+
+  /** The IETF language tag (e.g. 'fr') for the language of this translation. */
+  language: string;
+
+  /** The title of the Listing of this Translation. */
+  title: string | null;
+
+  /** The description of the Listing of this Translation. */
+  description: string | null;
+
+  /** The tags of the Listing of this Translation. */
+  tags: string[];
+}
+
+/**
  * Represents a list of listing image resources, each of which contains the reference URLs and metadata for an image.
  */
 export interface IListingImages {
@@ -1507,29 +1533,6 @@ export interface ITransactionVariations {
 }
 
 /**
- * Represents the translation data for a Listing.
- */
-export interface IListingTranslation {
-  /**
-   * The numeric ID for the Listing.
-   * @min 1
-   */
-  listing_id: number;
-
-  /** The IETF language tag (e.g. 'fr') for the language of this translation. */
-  language: string;
-
-  /** The title of the Listing of this Translation. */
-  title: string | null;
-
-  /** The description of the Listing of this Translation. */
-  description: string | null;
-
-  /** The tags of the Listing of this Translation. */
-  tags: string[];
-}
-
-/**
  * Represents several ListingVariationImages.
  */
 export interface IListingVariationImages {
@@ -1720,7 +1723,8 @@ export interface IPayment {
 
   /**
    * The numeric ID identifying the billing address of the buyer.
-   * @min 1
+   * @min 0
+   * @max 9223372036854776000
    */
   billing_address_id: number;
 
@@ -2044,8 +2048,8 @@ export interface ITransactionReview {
    */
   rating: number;
 
-  /** A message left by the author, explaining the feedback. */
-  review: string;
+  /** A message left by the author, explaining the feedback, if provided. */
+  review: string | null;
 
   /** The language of the TransactionReview */
   language: string;
@@ -2590,8 +2594,8 @@ export interface IGetListingsByShopParams {
 }
 
 export interface IGetListingParams {
-  /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images' and 'user'. Default value is an empty array. */
-  includes?: ("Shipping" | "Images" | "Shop" | "User")[];
+  /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images', 'user' and 'translations'. Default value is an empty array. */
+  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations")[];
 
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
@@ -2763,8 +2767,8 @@ export interface IGetListingsByListingIdsParams {
   /** The list of numeric IDS for the listings in a specific Etsy shop. */
   listing_ids: number[];
 
-  /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images' and 'user'. Default value is an empty array. */
-  includes?: ("Shipping" | "Images" | "Shop" | "User")[];
+  /** An enumerated string that attaches a valid association. Acceptable inputs are 'shop', 'images', 'user' and 'translations'. Default value is an empty array. */
+  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations")[];
 }
 
 export interface IGetFeaturedListingsByShopParams {
