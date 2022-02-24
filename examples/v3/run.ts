@@ -17,7 +17,7 @@ import { initAuthRefresh } from "./auth-refresh";
 
         let {data: ping} = await client.Other.ping();
         let {data: user} = await client.User.getUser(92841371, tokens);
-        let {data: shop} = await client.Shop.getShop(13201425, tokens);
+        let {data: shop} = await client.Shop.getShopByOwnerUserId(user.user_id, tokens);
         let {data: {results: listings}} = await client.ShopListing.findAllActiveListingsByShop(
             {shopId: 13201425},
             tokens

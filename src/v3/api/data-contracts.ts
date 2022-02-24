@@ -730,6 +730,20 @@ export interface IShopShippingProfile {
   /** The postal code string (not necessarily a number) for the location from which the listing ships. */
   origin_postal_code: string | null;
   profile_type?: "manual" | "calculated";
+
+  /**
+   * The domestic handling fee added to buyer's shipping total - only available for calculated shipping profiles.
+   * @format float
+   * @min 0
+   */
+  domestic_handling_fee?: number;
+
+  /**
+   * The international handling fee added to buyer's shipping total - only available for calculated shipping profiles.
+   * @format float
+   * @min 0
+   */
+  international_handling_fee?: number;
 }
 
 /**

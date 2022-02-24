@@ -88,7 +88,7 @@ export class HttpClient<SecurityDataType = unknown> {
       return qsStringify(body);
     }
 
-    public request = async <T = any, _E = any>({
+    public request = async <T, _E>({
         secure,
         path,
         type,
@@ -116,7 +116,7 @@ export class HttpClient<SecurityDataType = unknown> {
           body = this.createUrlEncoded(body as Record<string, unknown>);
         }
 
-        return this.instance.request({
+        return this.instance.request<T>({
             ...requestParams,
             headers: {
                 ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
