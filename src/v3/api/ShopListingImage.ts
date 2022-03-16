@@ -29,10 +29,10 @@ export class ShopListingImage<SecurityDataType = unknown> {
       ...params,
     });
   /**
-   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Retrieves the references and metadata for a listing image with a specific image ID.
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> NOTE: This endpoint is being deprecated in favor of not requiring the shops/:shop_id as part of the URL. Retrieves the references and metadata for a listing image with a specific image ID.
    *
    * @tags ShopListing Image
-   * @name GetListingImage
+   * @name GetListingImageDeprecated
    * @request GET:/v3/application/shops/{shop_id}/listings/{listing_id}/images/{listing_image_id}
    * @secure
    * @response `200` `IListingImage` A single ListingImage
@@ -41,9 +41,30 @@ export class ShopListingImage<SecurityDataType = unknown> {
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
-  getListingImage = (shopId: number, listingId: number, listingImageId: number, params: RequestParams = {}) =>
+  getListingImageDeprecated = (shopId: number, listingId: number, listingImageId: number, params: RequestParams = {}) =>
     this.http.request<IListingImage, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings/${listingId}/images/${listingImageId}`,
+      method: "GET",
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Retrieves the references and metadata for a listing image with a specific image ID.
+   *
+   * @tags ShopListing Image
+   * @name GetListingImage
+   * @request GET:/v3/application/listings/{listing_id}/images/{listing_image_id}
+   * @secure
+   * @response `200` `IListingImage` A single ListingImage
+   * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
+   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
+   * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   */
+  getListingImage = (listingId: number, listingImageId: number, params: RequestParams = {}) =>
+    this.http.request<IListingImage, IErrorSchema>({
+      path: `/v3/application/listings/${listingId}/images/${listingImageId}`,
       method: "GET",
       secure: true,
       format: "json",
@@ -54,6 +75,27 @@ export class ShopListingImage<SecurityDataType = unknown> {
    *
    * @tags ShopListing Image
    * @name GetListingImages
+   * @request GET:/v3/application/listings/{listing_id}/images
+   * @secure
+   * @response `200` `IListingImages` A single ListingImage
+   * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
+   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
+   * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   */
+  getListingImages = (listingId: number, params: RequestParams = {}) =>
+    this.http.request<IListingImages, IErrorSchema>({
+      path: `/v3/application/listings/${listingId}/images`,
+      method: "GET",
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> NOTE: This endpoint is being deprecated in favor of not requiring the shops/:shop_id as part of the URL. Retrieves all listing image resources for a listing with a specific listing ID.
+   *
+   * @tags ShopListing Image
+   * @name GetListingImagesDeprecated
    * @request GET:/v3/application/shops/{shop_id}/listings/{listing_id}/images
    * @secure
    * @response `200` `IListingImages` A single ListingImage
@@ -62,7 +104,7 @@ export class ShopListingImage<SecurityDataType = unknown> {
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
-  getListingImages = (shopId: number, listingId: number, params: RequestParams = {}) =>
+  getListingImagesDeprecated = (shopId: number, listingId: number, params: RequestParams = {}) =>
     this.http.request<IListingImages, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings/${listingId}/images`,
       method: "GET",

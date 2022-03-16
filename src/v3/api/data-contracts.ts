@@ -246,7 +246,7 @@ export interface IShopListing {
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type: "physical" | "download" | "both";
 
-  /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
   tags: string[];
 
   /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
@@ -549,7 +549,7 @@ export interface IShopListingWithAssociations {
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type: "physical" | "download" | "both";
 
-  /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
   tags: string[];
 
   /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
@@ -727,7 +727,7 @@ export interface IShopShippingProfile {
   /** A list of [shipping profile upgrades](/documentation/reference#operation/createListingShippingProfileUpgrade) available for this shipping profile. */
   shipping_profile_upgrades: IShopShippingProfileUpgrade[];
 
-  /** The postal code string (not necessarily a number) for the location from which the listing ships. */
+  /** The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`. */
   origin_postal_code: string | null;
   profile_type?: "manual" | "calculated";
 
@@ -768,10 +768,10 @@ export interface IShopShippingProfileDestination {
    */
   origin_country_iso: string;
 
-  /** The ISO code of the country to which the listing ships. If null, request sets destination to destination_region */
+  /** The ISO code of the country to which the listing ships. If null, request sets destination to destination_region. Required if destination_region is null or not provided. */
   destination_country_iso: string;
 
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If \`none\", request sets destination to destination_country_iso, or \"everywhere\" if destination_country_iso is also null */
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If \`none\`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
   destination_region: "eu" | "non_eu" | "none";
 
   /** The cost of shipping to this country/region alone, measured in the store's default currency. */
@@ -2058,7 +2058,8 @@ export interface ITransactionReview {
 
   /**
    * Rating value on scale from 1 to 5
-   * @min 0
+   * @min 1
+   * @max 5
    */
   rating: number;
 
@@ -2499,7 +2500,7 @@ export interface ICreateDraftListingPayload {
   /** The maximum number of days required to process this listing. Default value is null. */
   processing_max?: number | null;
 
-  /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[] | null;
 
   /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". A Listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
@@ -2950,7 +2951,7 @@ export interface IUpdateListingPayload {
    */
   taxonomy_id?: number;
 
-  /** A list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. Valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[] | null;
 
   /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
@@ -3292,15 +3293,15 @@ export interface ICreateShopShippingProfilePayload {
   processing_time_unit?: "business_days" | "weeks";
 
   /**
-   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region
+   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region. Required if destination_region is null or not provided.
    * @format ISO 3166-1 alpha-2
    */
   destination_country_iso?: string;
 
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none", request sets destination to destination_country_iso, or "everywhere" if destination_country_iso is also null */
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
   destination_region?: "eu" | "non_eu" | "none";
 
-  /** The postal code string (not necessarily a number) for the location from which the listing ships. */
+  /** The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`. */
   origin_postal_code?: string;
 
   /**
@@ -3354,7 +3355,7 @@ export interface IUpdateShopShippingProfilePayload {
   /** The unit used to represent how long a processing time is. A week is equivalent to 5 business days. If none is provided, the unit is set to "business_days". */
   processing_time_unit?: "business_days" | "weeks";
 
-  /** The postal code string (not necessarily a number) for the location from which the listing ships. */
+  /** The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`. */
   origin_postal_code?: string;
 }
 
@@ -3374,12 +3375,12 @@ export interface ICreateShopShippingProfileDestinationPayload {
   secondary_cost: number;
 
   /**
-   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region
+   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region. Required if destination_region is null or not provided.
    * @format ISO 3166-1 alpha-2
    */
   destination_country_iso?: string;
 
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none", request sets destination to destination_country_iso, or "everywhere" if destination_country_iso is also null */
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
   destination_region?: "eu" | "non_eu" | "none";
 
   /**
@@ -3449,12 +3450,12 @@ export interface IUpdateShopShippingProfileDestinationPayload {
   secondary_cost?: number;
 
   /**
-   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region
+   * The ISO code of the country to which the listing ships. If null, request sets destination to destination_region. Required if destination_region is null or not provided.
    * @format ISO 3166-1 alpha-2
    */
   destination_country_iso?: string;
 
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none", request sets destination to destination_country_iso, or "everywhere" if destination_country_iso is also null */
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
   destination_region?: "eu" | "non_eu" | "none";
 
   /**
