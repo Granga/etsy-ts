@@ -17,6 +17,7 @@ export class ShopListingImage<SecurityDataType = unknown> {
    * @secure
    * @response `204` `void` The ListingImage resource was correctly deleted
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -121,6 +122,7 @@ export class ShopListingImage<SecurityDataType = unknown> {
    * @secure
    * @response `201` `IListingImage` A single ListingImage
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.

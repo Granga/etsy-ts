@@ -234,13 +234,13 @@ export interface IShopListing {
   /** When true, this listing is personalizable. The default value is null. */
   is_personalizable: boolean;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. */
+  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max: number | null;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_instructions: string | null;
 
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
@@ -537,13 +537,13 @@ export interface IShopListingWithAssociations {
   /** When true, this listing is personalizable. The default value is null. */
   is_personalizable: boolean;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. */
+  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max: number | null;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_instructions: string | null;
 
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
@@ -780,21 +780,21 @@ export interface IShopShippingProfileDestination {
   /** The cost of shipping to this country/region with another item, measured in the store's default currency. */
   secondary_cost: IMoney;
 
-  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
+  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null. */
   shipping_carrier_id: number | null;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class: string | null;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days: number | null;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -838,21 +838,21 @@ export interface IShopShippingProfileUpgrade {
   /** Additional cost of adding the shipping upgrade for each additional item. */
   secondary_price: IMoney;
 
-  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. */
+  /** The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null. */
   shipping_carrier_id: number | null;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class: string | null;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days: number | null;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -2547,13 +2547,13 @@ export interface ICreateDraftListingPayload {
   /** When true, this listing is personalizable. The default value is null. */
   is_personalizable?: boolean;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. */
+  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number;
 
-  /** A string representing instructions for the buyer to enter the personalization. */
+  /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
   personalization_instructions?: string;
 
   /** An array of unique IDs of production partner ids. */
@@ -2596,7 +2596,7 @@ export interface IGetListingsByShopParams {
   offset?: number;
 
   /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
-  sort_on?: "created" | "price" | "updated";
+  sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
@@ -2660,7 +2660,7 @@ export interface IFindAllListingsActiveParams {
   keywords?: string;
 
   /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
-  sort_on?: "created" | "price" | "updated";
+  sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
@@ -2696,7 +2696,7 @@ export interface IFindAllActiveListingsByShopParams {
   limit?: number;
 
   /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
-  sort_on?: "created" | "price" | "updated";
+  sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
@@ -2985,13 +2985,13 @@ export interface IUpdateListingPayload {
   /** When true, this listing is personalizable. The default value is null. */
   is_personalizable?: boolean;
 
-  /** When true, this listing requires personalization. The default value is null. */
+  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. */
+  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number;
 
-  /** A string representing instructions for the buyer to enter the personalization. */
+  /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
   personalization_instructions?: string;
 
   /** An enumerated string from any of: active or inactive. Note: Setting a draft listing to active will also publish the listing on etsy.com. Setting a sold out listing to active will update the quantity to 1 and renew the listing on etsy.com. */
@@ -3109,6 +3109,9 @@ export interface IGetShopReceiptsParams {
 
   /** When true, the seller shipped the product(s) in this receipt. */
   was_shipped?: boolean | null;
+
+  /** When true, returns receipts that have been delivered. */
+  was_delivered?: boolean | null;
 
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
@@ -3239,7 +3242,7 @@ export interface IGetListingsByShopSectionIdParams {
   offset?: number;
 
   /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
-  sort_on?: "created" | "price" | "updated";
+  sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
@@ -3305,23 +3308,23 @@ export interface ICreateShopShippingProfilePayload {
   origin_postal_code?: string;
 
   /**
-   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date.
+   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null.
    * @min 0
    */
   shipping_carrier_id?: number;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class?: string;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days?: number;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -3384,23 +3387,23 @@ export interface ICreateShopShippingProfileDestinationPayload {
   destination_region?: "eu" | "non_eu" | "none";
 
   /**
-   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date.
+   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null.
    * @min 0
    */
   shipping_carrier_id?: number;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class?: string;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days?: number;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -3459,23 +3462,23 @@ export interface IUpdateShopShippingProfileDestinationPayload {
   destination_region?: "eu" | "non_eu" | "none";
 
   /**
-   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date.
+   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null.
    * @min 0
    */
   shipping_carrier_id?: number;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class?: string;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days?: number;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -3504,23 +3507,23 @@ export interface ICreateShopShippingProfileUpgradePayload {
   secondary_price: number;
 
   /**
-   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date.
+   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null.
    * @min 0
    */
   shipping_carrier_id?: number;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class?: string;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days?: number;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
@@ -3549,23 +3552,23 @@ export interface IUpdateShopShippingProfileUpgradePayload {
   secondary_price?: number;
 
   /**
-   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date.
+   * The unique ID of a supported shipping carrier, which is used to calculate an Estimated Delivery Date. **Required with `mail_class`** if `min_delivery_days` and `max_delivery_days` are null.
    * @min 0
    */
   shipping_carrier_id?: number;
 
-  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. */
+  /** The unique ID string of a shipping carrier's mail class, which is used to calculate an estimated delivery date. **Required with `shipping_carrier_id`** if `min_delivery_days` and `max_delivery_days` are null. */
   mail_class?: string;
 
   /**
-   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The minimum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `max_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */
   min_delivery_days?: number;
 
   /**
-   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped.
+   * The maximum number of business days a buyer can expect to wait to receive their purchased item once it has shipped. **Required with `min_delivery_days`** if `mail_class` is null.
    * @min 1
    * @max 45
    */

@@ -54,6 +54,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfile` A single ShippingProfile
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
@@ -96,6 +97,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `204` `void` The ShopShippingProfile resource was correctly deleted
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -116,6 +118,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfile` A single ShippingProfile
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -137,6 +140,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfile` The updated shipping profile.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -165,6 +169,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `201` `IShopShippingProfileDestination` A single shipping destination.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
@@ -192,6 +197,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfileDestinations` A list of shipping destination objects.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -217,6 +223,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `204` `void` Etsy deleted the shipping profile destination.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -242,6 +249,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfileDestination` A single shipping destination.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -271,6 +279,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfileUpgrade` A single shipping profile upgrade.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -299,6 +308,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfileUpgrades` A list of shipping profile upgrades.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -320,6 +330,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `204` `void` Etsy deleted the shipping profile upgrade.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
@@ -345,6 +356,7 @@ export class ShopShippingProfile<SecurityDataType = unknown> {
    * @secure
    * @response `200` `IShopShippingProfileUpgrade` A single shipping profile upgrade.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
