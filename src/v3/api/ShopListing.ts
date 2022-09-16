@@ -15,6 +15,7 @@ import {
   IShopListings,
   IShopListingsWithAssociations,
   IShopListingWithAssociations,
+  IUpdateListingDeprecatedPayload,
   IUpdateListingPayload,
   IUpdateListingPropertyPayload,
 } from "./data-contracts";
@@ -58,14 +59,14 @@ export class ShopListing<SecurityDataType = unknown> {
    * @name GetListingsByShop
    * @request GET:/v3/application/shops/{shop_id}/listings
    * @secure
-   * @response `200` `IShopListings` A list of Listings
+   * @response `200` `IShopListingsWithAssociations` A list of Listings
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   getListingsByShop = ({ shopId, ...query }: IGetListingsByShopParams, params: RequestParams = {}) =>
-    this.http.request<IShopListings, IErrorSchema>({
+    this.http.request<IShopListingsWithAssociations, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings`,
       method: "GET",
       query: query,
@@ -295,11 +296,11 @@ export class ShopListing<SecurityDataType = unknown> {
       ...params,
     });
   /**
-   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Updates a listing, identified by a listing ID, for a specific shop identified by a shop ID.
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Updates a listing, identified by a listing ID, for a specific shop identified by a shop ID. Note that this is a PATCH method type.
    *
    * @tags ShopListing
    * @name UpdateListing
-   * @request PUT:/v3/application/shops/{shop_id}/listings/{listing_id}
+   * @request PATCH:/v3/application/shops/{shop_id}/listings/{listing_id}
    * @secure
    * @response `200` `IShopListing` A single ShopListing
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
@@ -310,6 +311,36 @@ export class ShopListing<SecurityDataType = unknown> {
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   updateListing = (shopId: number, listingId: number, data: IUpdateListingPayload, params: RequestParams = {}) =>
+    this.http.request<IShopListing, IErrorSchema>({
+      path: `/v3/application/shops/${shopId}/listings/${listingId}`,
+      method: "PATCH",
+      body: data,
+      secure: true,
+      type: ContentType.UrlEncoded,
+      format: "json",
+      ...params,
+    });
+  /**
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Updates a listing, identified by a listing ID, for a specific shop identified by a shop ID. This endpoint will be removed in the near future in favor of `updateListing` PATCH version.
+   *
+   * @tags ShopListing
+   * @name UpdateListingDeprecated
+   * @request PUT:/v3/application/shops/{shop_id}/listings/{listing_id}
+   * @secure
+   * @response `200` `IShopListing` A single ShopListing
+   * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
+   * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
+   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
+   * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.
+   * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   */
+  updateListingDeprecated = (
+    shopId: number,
+    listingId: number,
+    data: IUpdateListingDeprecatedPayload,
+    params: RequestParams = {},
+  ) =>
     this.http.request<IShopListing, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings/${listingId}`,
       method: "PUT",

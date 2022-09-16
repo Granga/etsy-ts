@@ -98,9 +98,9 @@ export class ApiRequest {
         }
     }
 
-    private captureErrorMessage(e: Error | AxiosError) {
+    private captureErrorMessage(e: Error | AxiosError<string>) {
         if (e["isAxiosError"] === true) {
-            let error = e as AxiosError;
+            let error = e as AxiosError<string>;
             if (error.response) {
                 return error.response.data || e.toString();
             }

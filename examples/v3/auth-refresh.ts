@@ -1,6 +1,6 @@
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import fs from "fs-extra";
+import * as fs from "fs-extra";
 import { Etsy } from "../../src/v3";
 
 export const initAuthRefresh = (

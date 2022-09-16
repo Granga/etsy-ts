@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
-import { generateApi, GenerateApiParams } from "swagger-typescript-api";
+import { generateApi, GenerateApiParamsFromUrl } from "swagger-typescript-api";
 
-const config: Omit<GenerateApiParams, "input" | "spec"> & { typePrefix?: string } = {
+const config: Omit<GenerateApiParamsFromUrl, "input" | "spec"> & { typePrefix?: string } = {
     output: path.resolve(process.cwd(), "./src/v3/api"),
     url: "https://www.etsy.com/openapi/generated/oas/3.0.0.json",
     modular: true,

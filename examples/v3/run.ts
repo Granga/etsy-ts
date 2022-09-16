@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import * as fs from "fs-extra";
 import { Etsy } from "../../src/v3";
 import { initAuthRefresh } from "./auth-refresh";
 
