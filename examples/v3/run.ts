@@ -15,22 +15,29 @@ import { initAuthRefresh } from "./auth-refresh";
         // Token expires in 1 hour, so we'll refresh it when we receive a 401
         initAuthRefresh(client, apiKey, tokens);
 
+        const myData = {
+            user_id: 92841371,
+            receipt_id: 2332707680,
+            carrier_name: "ups",
+            tracking_code: "555015043133"
+        };
+
         let {data: ping} = await client.Other.ping();
-        let {data: user} = await client.User.getUser(92841371, tokens);
+        let {data: user} = await client.User.getUser(myData.user_id, tokens);
         let {data: shop} = await client.Shop.getShopByOwnerUserId(user.user_id, tokens);
         let {data: {results: listings}} = await client.ShopListing.findAllActiveListingsByShop(
-            {shopId: 13201425},
+            {shopId: shop.shop_id},
             tokens
         );
 
-        let {data: receipt} = await client.ShopReceipt.getShopReceipt(13201425, 2332707680, tokens);
+        let {data: receipt} = await client.ShopReceipt.getShopReceipt(shop.shop_id, myData.receipt_id, tokens);
         let {data: shipment} = await client.ShopReceipt.createReceiptShipment(
-            13201425,
+            shop.shop_id,
             receipt.receipt_id,
             {
-                carrier_name: "ups",
+                carrier_name: myData.carrier_name,
+                tracking_code: myData.tracking_code,
                 send_bcc: false,
-                tracking_code: "555015043133"
             },
             tokens
         );
