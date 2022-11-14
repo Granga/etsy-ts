@@ -17,6 +17,7 @@ export class SellerTaxonomy<SecurityDataType = unknown> {
    * @secure
    * @response `200` `ISellerTaxonomyNodes` List the full hierarchy tree of seller taxonomy nodes.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   * @response `503` `IErrorSchema` The service is unavailable
    */
   getSellerTaxonomyNodes = (params: RequestParams = {}) =>
     this.http.request<ISellerTaxonomyNodes, IErrorSchema>({

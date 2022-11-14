@@ -78,7 +78,7 @@ export class ShopListingImage<SecurityDataType = unknown> {
    * @name GetListingImages
    * @request GET:/v3/application/listings/{listing_id}/images
    * @secure
-   * @response `200` `IListingImages` A single ListingImage
+   * @response `200` `IListingImages` An array of ListingImage
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.

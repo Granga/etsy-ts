@@ -707,6 +707,9 @@ export interface IShopListingWithAssociations {
   /** Represents a list of listing image resources, each of which contains the reference URLs and metadata for an image */
   images?: IListingImage[];
 
+  /** The single video associated with a listing. */
+  videos?: IListingVideo[];
+
   /** An enumerated string that attaches a valid association. Default value is null. */
   inventory?: IListingInventory;
 
@@ -911,9 +914,6 @@ export interface IUser {
    */
   user_id?: number;
 
-  /** The user\'s login name string. */
-  login_name?: string;
-
   /**
    * An email address string for the user\'s primary email address.
    * @format email
@@ -925,54 +925,6 @@ export interface IUser {
 
   /** The user\'s last name. */
   last_name?: string | null;
-
-  /**
-   * The date and time the user created their account, in epoch seconds.
-   * @min 946684800
-   */
-  create_timestamp?: number;
-
-  /**
-   * The date and time the user created their account, in epoch seconds.
-   * @min 946684800
-   */
-  created_timestamp?: number;
-
-  /**
-   * The numeric ID of the user who referred this user.
-   * @min 1
-   */
-  referred_by_user_id?: number | null;
-
-  /** Deprecated. Always true. */
-  use_new_inventory_endpoints?: boolean;
-
-  /** True if the user is seller. */
-  is_seller?: boolean;
-
-  /** The user\'s biography. */
-  bio?: string | null;
-
-  /** The user\'s gender. */
-  gender?: string | null;
-
-  /** The user\'s month of birth. */
-  birth_month?: string | null;
-
-  /** The user\'s day of birth. */
-  birth_day?: string | null;
-
-  /**
-   * The number of transactions where the user has bought.
-   * @min 0
-   */
-  transaction_buy_count?: number | null;
-
-  /**
-   * The number of transactions where the user has sold.
-   * @min 0
-   */
-  transaction_sold_count?: number | null;
 
   /** The user\'s avatar URL. */
   image_url_75x75?: string | null;
@@ -1268,6 +1220,32 @@ export interface IListingImage {
 
   /** Alt text for the listing image. */
   alt_text?: string | null;
+}
+
+/**
+ * Reference urls and metadata for a video associated with a specific listing.
+ */
+export interface IListingVideo {
+  /**
+   * The unique ID of a video associated with a listing.
+   * @min 1
+   */
+  video_id?: number;
+
+  /** The video height dimension in pixels. */
+  height?: number;
+
+  /** The video width dimension in pixels. */
+  width?: number;
+
+  /** The url of the video thumbnail. */
+  thumbnail_url?: string;
+
+  /** The url of the video file. */
+  video_url?: string;
+
+  /** The current state of a given video. Value is one of `active`, `inactive`, `deleted` or `flagged`. */
+  video_state?: "0" | "1" | "2" | "3";
 }
 
 /**
@@ -1672,6 +1650,20 @@ export interface IListingVariationImage {
    * @min 1
    */
   image_id?: number;
+}
+
+/**
+ * Represents a list of listing video resources, each of which contains the reference URLs for the videos.
+ */
+export interface IListingVideos {
+  /**
+   * The number of results.
+   * @min 0
+   */
+  count?: number;
+
+  /** The list of requested resources. */
+  results?: IListingVideo[];
 }
 
 /**
@@ -2581,6 +2573,41 @@ export interface IShops {
 }
 
 /**
+ * Represents a listing-level return policy.
+ */
+export interface IShopReturnPolicy {
+  /**
+   * return_policy_id
+   * @min 1
+   */
+  return_policy_id?: number;
+
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @min 1
+   */
+  shop_id?: number;
+
+  /** return_policy_accepts_returns */
+  accepts_returns?: boolean;
+
+  /** return_policy_accepts_exchanges */
+  accepts_exchanges?: boolean;
+
+  /** return_policy_return_deadline */
+  return_deadline?: number | null;
+}
+
+/**
+ * Represents a shop's listing-level return policies list.
+ */
+export interface IShopReturnPolicies {
+  /** @min 0 */
+  count?: number;
+  results?: IShopReturnPolicy[];
+}
+
+/**
  * Represents a list of shop production partners.
  */
 export interface IShopProductionPartners {
@@ -2738,6 +2765,23 @@ export interface IUserAddresses {
 
   /** An array of UserAddress resources. */
   results?: IUserAddress[];
+}
+
+/**
+ * Represents a single user of the site
+ */
+export interface ISelf {
+  /**
+   * The numeric ID of a user. This number is also a valid shop ID for the user\'s shop.
+   * @min 1
+   */
+  user_id?: number;
+
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @min 1
+   */
+  shop_id?: number;
 }
 
 export interface ICreateDraftListingPayload {
@@ -2903,14 +2947,14 @@ export interface IGetListingsByShopParams {
    */
   offset?: number;
 
-  /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
+  /** The value to sort a search result of listings on. NOTES: a) `sort_on` only works when combined with one of the search options (keywords, region, etc.). b) when using `score` the returned results will always be in _descending_ order, regardless of the `sort_order` parameter. */
   sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
 
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory")[];
+  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
@@ -2921,7 +2965,7 @@ export interface IGetListingsByShopParams {
 
 export interface IGetListingParams {
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory")[];
+  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
@@ -2970,7 +3014,7 @@ export interface IFindAllListingsActiveParams {
   /** Search term or phrase that must appear in all results. */
   keywords?: string;
 
-  /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
+  /** The value to sort a search result of listings on. NOTES: a) `sort_on` only works when combined with one of the search options (keywords, region, etc.). b) when using `score` the returned results will always be in _descending_ order, regardless of the `sort_order` parameter. */
   sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
@@ -3006,7 +3050,7 @@ export interface IFindAllActiveListingsByShopParams {
    */
   limit?: number;
 
-  /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
+  /** The value to sort a search result of listings on. NOTES: a) `sort_on` only works when combined with one of the search options (keywords, region, etc.). b) when using `score` the returned results will always be in _descending_ order, regardless of the `sort_order` parameter. */
   sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
@@ -3058,6 +3102,9 @@ export interface IUploadListingImagePayload {
 }
 
 export interface IGetListingInventoryParams {
+  /** A boolean value for inventory whether to include deleted products and their offerings. Default value is false. */
+  show_deleted?: boolean;
+
   /** An enumerated string that attaches a valid association. Default value is null. */
   includes?: "Listing";
 
@@ -3097,7 +3144,7 @@ export interface IGetListingsByListingIdsParams {
   listing_ids: number[];
 
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory")[];
+  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 }
 
 export interface IGetFeaturedListingsByShopParams {
@@ -3445,6 +3492,23 @@ export interface IUpdateVariationImagesPayload {
   variation_images: { property_id: number; value_id: number; image_id: number }[];
 }
 
+export interface IUploadListingVideoPayload {
+  /**
+   * The unique ID of a video associated with a listing.
+   * @min 1
+   */
+  video_id?: number;
+
+  /**
+   * A video file to upload.
+   * @format binary
+   */
+  video?: File | null;
+
+  /** The file name string for the video to upload. */
+  name?: string;
+}
+
 export interface IGetShopPaymentAccountLedgerEntriesParams {
   /**
    * The earliest unix timestamp for when a record was created.
@@ -3544,6 +3608,12 @@ export interface IGetShopReceiptsParams {
    * @min 0
    */
   offset?: number;
+
+  /** The value to sort a search result of listings on. */
+  sort_on?: "created" | "updated" | "receipt_id";
+
+  /** The ascending(up) or descending(down) order to sort receipts by. */
+  sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
 
   /** When `true`, returns receipts where the seller recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
   was_paid?: boolean | null;
@@ -3684,6 +3754,18 @@ export interface IFindShopsParams {
   offset?: number;
 }
 
+export interface ICreateShopReturnPolicyPayload {
+  accepts_returns: boolean;
+  accepts_exchanges: boolean;
+  return_deadline: number | null;
+}
+
+export interface IUpdateShopReturnPolicyPayload {
+  accepts_returns: boolean;
+  accepts_exchanges: boolean;
+  return_deadline: number | null;
+}
+
 export interface ICreateShopSectionPayload {
   /** The title string for a shop section. */
   title: string;
@@ -3711,7 +3793,7 @@ export interface IGetListingsByShopSectionIdParams {
    */
   offset?: number;
 
-  /** The value to sort a search result of listings on. NOTE: sort_on only works when combined with one of the search options (keywords, region, etc.).  */
+  /** The value to sort a search result of listings on. NOTES: a) `sort_on` only works when combined with one of the search options (keywords, region, etc.). b) when using `score` the returned results will always be in _descending_ order, regardless of the `sort_order` parameter. */
   sort_on?: "created" | "price" | "updated" | "score";
 
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
