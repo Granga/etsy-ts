@@ -37,7 +37,7 @@ export interface IBuyerTaxonomyNode {
    */
   parent_id?: number | null;
 
-  /** An array of taxonomy nodes for all the direct children of this taxonomy node in the seller taxanomy tree. */
+  /** An array of taxonomy nodes for all the direct children of this taxonomy node in the seller taxonomy tree. */
   children?: IBuyerTaxonomyNode[];
 
   /** An array of `taxonomy_id`s including this node and all of its direct parents in the seller taxonomy tree up to a root node. They are listed in order from root to leaf. */
@@ -255,7 +255,7 @@ export interface IShopListing {
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number | null;
 
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
@@ -277,6 +277,12 @@ export interface IShopListing {
   shipping_profile_id?: number | null;
 
   /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  return_policy_id?: number | null;
+
+  /**
    * The minimum number of days required to process this listing. Default value is null.
    * @min 0
    */
@@ -288,7 +294,7 @@ export interface IShopListing {
    */
   processing_max?: number | null;
 
-  /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
+  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
   who_made?: "i_did" | "someone_else" | "collective" | null;
 
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
@@ -347,7 +353,7 @@ export interface IShopListing {
   /** A string defining the units used to measure the dimensions of the product. Default value is null. */
   item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
 
-  /** When true, this is a private listing intendend for a specific buyer and hidden from shop view. */
+  /** When true, this is a private listing intended for a specific buyer and hidden from shop view. */
   is_private?: boolean;
 
   /** An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
@@ -359,7 +365,7 @@ export interface IShopListing {
   /** When true, the listing has variations. */
   has_variations?: boolean;
 
-  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  /** When true, renews a listing for four months upon expiration. */
   should_auto_renew?: boolean;
 
   /** The IETF language tag for the default language of the listing. Ex: `de`, `en`, `es`, `fr`, `it`, `ja`, `nl`, `pl`, `pt`, `ru`. */
@@ -368,7 +374,7 @@ export interface IShopListing {
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The [`getListingInventory`](/documentation/reference/#operation/getListingInventory) method requests exact prices for available offerings. */
   price?: IMoney;
 
-  /** The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
+  /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
 }
 
@@ -579,7 +585,7 @@ export interface IShopListingWithAssociations {
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number | null;
 
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
@@ -601,6 +607,12 @@ export interface IShopListingWithAssociations {
   shipping_profile_id?: number | null;
 
   /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  return_policy_id?: number | null;
+
+  /**
    * The minimum number of days required to process this listing. Default value is null.
    * @min 0
    */
@@ -612,7 +624,7 @@ export interface IShopListingWithAssociations {
    */
   processing_max?: number | null;
 
-  /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
+  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
   who_made?: "i_did" | "someone_else" | "collective" | null;
 
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
@@ -671,7 +683,7 @@ export interface IShopListingWithAssociations {
   /** A string defining the units used to measure the dimensions of the product. Default value is null. */
   item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
 
-  /** When true, this is a private listing intendend for a specific buyer and hidden from shop view. */
+  /** When true, this is a private listing intended for a specific buyer and hidden from shop view. */
   is_private?: boolean;
 
   /** An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
@@ -683,7 +695,7 @@ export interface IShopListingWithAssociations {
   /** When true, the listing has variations. */
   has_variations?: boolean;
 
-  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  /** When true, renews a listing for four months upon expiration. */
   should_auto_renew?: boolean;
 
   /** The IETF language tag for the default language of the listing. Ex: `de`, `en`, `es`, `fr`, `it`, `ja`, `nl`, `pl`, `pt`, `ru`. */
@@ -692,7 +704,7 @@ export interface IShopListingWithAssociations {
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The [`getListingInventory`](/documentation/reference/#operation/getListingInventory) method requests exact prices for available offerings. */
   price?: IMoney;
 
-  /** The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
+  /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
 
   /** An array of data representing the shipping profile resource. */
@@ -721,6 +733,9 @@ export interface IShopListingWithAssociations {
 
   /** An array of translations for the listing. Default value is an empty array. */
   translations?: IListingTranslation[];
+
+  /** The number of times the listing has been viewed. This value is tabulated once per day and **only for active listings**, so the value is not real-time. If `0`, the listing has either not been viewed, not yet tabulated, was not active during the last tabulation or there was an error fetching the value. If a value is expected, call `getListing` to confirm the value. */
+  views?: number;
 }
 
 /**
@@ -1027,7 +1042,7 @@ export interface IShop {
   /** The shop's additional policies string (may be blank). */
   policy_additional?: string | null;
 
-  /** The shop's seller infomation string (may be blank). */
+  /** The shop's seller information string (may be blank). */
   policy_seller_info?: string | null;
 
   /**
@@ -1081,7 +1096,7 @@ export interface IShop {
   /** When true, the shop has onboarded onto Etsy Payments. */
   is_etsy_payments_onboarded?: boolean;
 
-  /** When true, the shop is elegible for calculated shipping profiles. (Only available in the US and Canada) */
+  /** When true, the shop is eligible for calculated shipping profiles. (Only available in the US and Canada) */
   is_calculated_eligible?: boolean;
 
   /** When true, the shop opted in to buyer promise. */
@@ -1245,7 +1260,7 @@ export interface IListingVideo {
   video_url?: string;
 
   /** The current state of a given video. Value is one of `active`, `inactive`, `deleted` or `flagged`. */
-  video_state?: "0" | "1" | "2" | "3";
+  video_state?: "active" | "inactive" | "deleted" | "flagged";
 }
 
 /**
@@ -1284,7 +1299,7 @@ export interface IListingInventoryProduct {
   /** A list of product offering entries for this product. */
   offerings?: IListingInventoryProductOffering[];
 
-  /** A list of property value entries for this product. */
+  /** A list of property value entries for this product. Note: parenthesis characters (`(` and `)`) are not allowed. */
   property_values?: IListingPropertyValue[];
 }
 
@@ -1554,7 +1569,7 @@ export interface IShopReceiptTransaction {
   /** Array of variations and personalizations the buyer chose. */
   variations?: ITransactionVariations[];
 
-  /** A list of property value entries for this product. */
+  /** A list of property value entries for this product. Note: parenthesis characters (`(` and `)`) are not allowed. */
   product_data?: IListingPropertyValue[];
 
   /**
@@ -1923,7 +1938,7 @@ export interface IPayment {
   /** An integer equal to the payment value, in pennies, less fees (`amount_gross` - `amount_fees`). */
   amount_net?: IMoney;
 
-  /** The total gross value of the payment posted once the purchase ships. This is equal to the `amount_gross` UNLESS the seller issues a refund prior to shipping. We consider "shipping" to the event which "posts" to the ledger. Therefore, if the seller refunds first, we reduce the `amount_gross` first and post then that amount. The seller never sees the refunded amount in their ledger. This is equal to the "Credit" amount in the ledger entry. */
+  /** The total gross value of the payment posted once the purchase ships. This is equal to the `amount_gross` UNLESS the seller issues a refund prior to shipping. We consider "shipping" to be the event which "posts" to the ledger. Therefore, if the seller refunds first, we reduce the `amount_gross` first and post then that amount. The seller never sees the refunded amount in their ledger. This is equal to the "Credit" amount in the ledger entry. */
   posted_gross?: IMoney;
 
   /** The total value of the fees posted once the purchase ships. Etsy refunds a proportional amount of the fees when a seller refunds a buyer. When the seller issues a refund prior to shipping, the posted amount is less then the original. */
@@ -2416,7 +2431,7 @@ export interface ISellerTaxonomyNode {
    */
   parent_id?: number | null;
 
-  /** An array of taxonomy nodes for all the direct children of this taxonomy node in the seller taxanomy tree. */
+  /** An array of taxonomy nodes for all the direct children of this taxonomy node in the seller taxonomy tree. */
   children?: ISellerTaxonomyNode[];
 
   /** An array of `taxonomy_id`s including this node and all of its direct parents in the seller taxonomy tree up to a root node. They are listed in order from root to leaf. */
@@ -2577,7 +2592,7 @@ export interface IShops {
  */
 export interface IShopReturnPolicy {
   /**
-   * return_policy_id
+   * The numeric ID of the Return Policy.
    * @min 1
    */
   return_policy_id?: number;
@@ -2800,7 +2815,7 @@ export interface ICreateDraftListingPayload {
    */
   price: number;
 
-  /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
+  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
   who_made: "i_did" | "someone_else" | "collective";
 
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
@@ -2826,7 +2841,7 @@ export interface ICreateDraftListingPayload {
     | "before_1700";
 
   /**
-   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id: number;
@@ -2836,6 +2851,12 @@ export interface ICreateDraftListingPayload {
    * @min 1
    */
   shipping_profile_id?: number | null;
+
+  /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  return_policy_id?: number | null;
 
   /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   materials?: string[] | null;
@@ -2902,7 +2923,7 @@ export interface ICreateDraftListingPayload {
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number;
 
   /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
@@ -2920,7 +2941,7 @@ export interface ICreateDraftListingPayload {
   /** When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. */
   is_customizable?: boolean;
 
-  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  /** When true, renews a listing for four months upon expiration. */
   should_auto_renew?: boolean;
 
   /** When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. */
@@ -2953,7 +2974,7 @@ export interface IGetListingsByShopParams {
   /** The ascending(up) or descending(down) order to sort listings by. NOTE: sort_order only works when combined with one of the search options (keywords, region, etc.). */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
 
-  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
+  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 
   /**
@@ -2964,7 +2985,7 @@ export interface IGetListingsByShopParams {
 }
 
 export interface IGetListingParams {
-  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
+  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 
   /**
@@ -3033,7 +3054,7 @@ export interface IFindAllListingsActiveParams {
   max_price?: number;
 
   /**
-   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id?: number;
@@ -3143,7 +3164,7 @@ export interface IGetListingsByListingIdsParams {
   /** The list of numeric IDS for the listings in a specific Etsy shop. */
   listing_ids: number[];
 
-  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. Default value is an empty array. */
+  /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
 }
 
@@ -3172,7 +3193,7 @@ export interface IUpdateListingPropertyPayload {
   /** An array of unique IDs of multiple Etsy [listing property](/documentation/reference#operation/getListingProperties) values. For example, if your listing offers different sizes of a product, then the value ID list contains value IDs for each size. */
   value_ids: number[];
 
-  /** An array of value strings for multiple Etsy [listing property](/documentation/reference#operation/getListingProperties) values. For example, if your listing offers different colored products, then the values array contains the color strings for each color. */
+  /** An array of value strings for multiple Etsy [listing property](/documentation/reference#operation/getListingProperties) values. For example, if your listing offers different colored products, then the values array contains the color strings for each color. Note: parenthesis characters (`(` and `)`) are not allowed. */
   values: string[];
 
   /**
@@ -3244,7 +3265,7 @@ export interface IUpdateListingPayload {
   /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   materials?: string[] | null;
 
-  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  /** When true, renews a listing for four months upon expiration. */
   should_auto_renew?: boolean;
 
   /**
@@ -3252,6 +3273,12 @@ export interface IUpdateListingPayload {
    * @min 1
    */
   shipping_profile_id?: number | null;
+
+  /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  return_policy_id?: number | null;
 
   /** The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. */
   shop_section_id?: number | null;
@@ -3298,7 +3325,7 @@ export interface IUpdateListingPayload {
   is_taxable?: boolean;
 
   /**
-   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id?: number;
@@ -3306,7 +3333,7 @@ export interface IUpdateListingPayload {
   /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[] | null;
 
-  /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
+  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
   who_made?: "i_did" | "someone_else" | "collective";
 
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
@@ -3340,7 +3367,7 @@ export interface IUpdateListingPayload {
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number;
 
   /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
@@ -3372,7 +3399,7 @@ export interface IUpdateListingDeprecatedPayload {
   /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   materials?: string[] | null;
 
-  /** When true, renews a listing for four months upon expriation. If set to true when previously false, etsy.com renews the listing before it expires, but the renewal period starts immidiately rather than extending the listing's expiration date. Any unused time remaining on the listing is lost. Renewals result in charges to a user's bill. */
+  /** When true, renews a listing for four months upon expiration. */
   should_auto_renew?: boolean;
 
   /**
@@ -3426,7 +3453,7 @@ export interface IUpdateListingDeprecatedPayload {
   is_taxable?: boolean;
 
   /**
-   * The numeric taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
    * @min 1
    */
   taxonomy_id?: number;
@@ -3434,7 +3461,7 @@ export interface IUpdateListingDeprecatedPayload {
   /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[] | null;
 
-  /** An enumerated string inidcated who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
+  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
   who_made?: "i_did" | "someone_else" | "collective";
 
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
@@ -3468,7 +3495,7 @@ export interface IUpdateListingDeprecatedPayload {
   /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
   personalization_is_required?: boolean;
 
-  /** This an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
   personalization_char_count_max?: number;
 
   /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
@@ -3567,7 +3594,7 @@ export interface IUpdateShopReceiptPayload {
   /** When `true`, returns receipts where the seller shipped the product(s) in this receipt. When `false`, returns receipts where shipment has not been set. */
   was_shipped?: boolean | null;
 
-  /** When `true`, returns receipts where the seller recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
+  /** When `true`, returns receipts where the seller has recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
   was_paid?: boolean | null;
 }
 
@@ -3615,7 +3642,7 @@ export interface IGetShopReceiptsParams {
   /** The ascending(up) or descending(down) order to sort receipts by. */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
 
-  /** When `true`, returns receipts where the seller recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
+  /** When `true`, returns receipts where the seller has recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
   was_paid?: boolean | null;
 
   /** When `true`, returns receipts where the seller shipped the product(s) in this receipt. When `false`, returns receipts where shipment has not been set. */
@@ -3687,6 +3714,18 @@ export interface IGetReviewsByListingParams {
   offset?: number;
 
   /**
+   * The earliest unix timestamp for when a record was created.
+   * @min 946684800
+   */
+  min_created?: number | null;
+
+  /**
+   * The latest unix timestamp for when a record was created.
+   * @min 946684800
+   */
+  max_created?: number | null;
+
+  /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
    * @min 1
    */
@@ -3706,6 +3745,18 @@ export interface IGetReviewsByShopParams {
    * @min 0
    */
   offset?: number;
+
+  /**
+   * The earliest unix timestamp for when a record was created.
+   * @min 946684800
+   */
+  min_created?: number | null;
+
+  /**
+   * The latest unix timestamp for when a record was created.
+   * @min 946684800
+   */
+  max_created?: number | null;
 
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
@@ -3752,6 +3803,20 @@ export interface IFindShopsParams {
    * @min 0
    */
   offset?: number;
+}
+
+export interface IConsolidateShopReturnPoliciesPayload {
+  /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  source_return_policy_id: number;
+
+  /**
+   * The numeric ID of the Return Policy.
+   * @min 1
+   */
+  destination_return_policy_id: number;
 }
 
 export interface ICreateShopReturnPolicyPayload {

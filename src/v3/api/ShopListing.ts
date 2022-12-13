@@ -86,7 +86,7 @@ export class ShopListing<SecurityDataType = unknown> {
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
-   * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.
+   * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   deleteListing = (listingId: number, params: RequestParams = {}) =>
@@ -307,7 +307,7 @@ export class ShopListing<SecurityDataType = unknown> {
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
-   * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.
+   * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   updateListing = (shopId: number, listingId: number, data: IUpdateListingPayload, params: RequestParams = {}) =>
@@ -332,7 +332,7 @@ export class ShopListing<SecurityDataType = unknown> {
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
-   * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.
+   * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   updateListingDeprecated = (
@@ -372,6 +372,28 @@ export class ShopListing<SecurityDataType = unknown> {
       path: `/v3/application/shops/${shopId}/receipts/${receiptId}/listings`,
       method: "GET",
       query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notification-03 wt-bg-denim-tint wt-mr-xs-2">Beta</span><a class="wt-text-link" href="https://github.com/etsy/open-api/issues/new/choose" target="_blank" rel="noopener noreferrer">Give feedback</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready to use as defined below. Changes may occur before launch, but we received satisfactory feedback on the interface and don’t expect any breaking changes.</p></div> Gets all listings associated with a Return Policy.
+   *
+   * @tags ShopListing
+   * @name GetListingsByShopReturnPolicy
+   * @request GET:/v3/application/shops/{shop_id}/policies/return/{return_policy_id}/listings
+   * @secure
+   * @response `200` `IShopListings` A set of ShopListing resources.
+   * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
+   * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
+   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
+   * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   */
+  getListingsByShopReturnPolicy = (returnPolicyId: number, shopId: number, params: RequestParams = {}) =>
+    this.http.request<IShopListings, IErrorSchema>({
+      path: `/v3/application/shops/${shopId}/policies/return/${returnPolicyId}/listings`,
+      method: "GET",
       secure: true,
       format: "json",
       ...params,

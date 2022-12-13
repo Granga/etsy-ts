@@ -41,7 +41,7 @@ export class ShopListingVariationImage<SecurityDataType = unknown> {
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
-   * @response `409` `IErrorSchema` There was a request conflict with current state of the target resource. See the error message for details.
+   * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
   updateVariationImages = (
