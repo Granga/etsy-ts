@@ -2609,7 +2609,7 @@ export interface IShopReturnPolicy {
   /** return_policy_accepts_exchanges */
   accepts_exchanges?: boolean;
 
-  /** return_policy_return_deadline */
+  /** The deadline for the Return Policy, measured in days. The value must be one of the following: [7, 14, 21, 30, 45, 60, 90]. */
   return_deadline?: number | null;
 }
 
@@ -2853,7 +2853,7 @@ export interface ICreateDraftListingPayload {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the Return Policy. Note: As of January 31, 2023 this will be required. This requirement does not apply to listings of EU-based shops.
    * @min 1
    */
   return_policy_id?: number | null;
@@ -3275,7 +3275,7 @@ export interface IUpdateListingPayload {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the Return Policy. Note: As of January 31, 2023 this will be required. This requirement does not apply to listings of EU-based shops.
    * @min 1
    */
   return_policy_id?: number | null;
@@ -3822,13 +3822,17 @@ export interface IConsolidateShopReturnPoliciesPayload {
 export interface ICreateShopReturnPolicyPayload {
   accepts_returns: boolean;
   accepts_exchanges: boolean;
-  return_deadline: number | null;
+
+  /** The deadline for the Return Policy, measured in days. The value must be one of the following: [7, 14, 21, 30, 45, 60, 90]. */
+  return_deadline?: number | null;
 }
 
 export interface IUpdateShopReturnPolicyPayload {
   accepts_returns: boolean;
   accepts_exchanges: boolean;
-  return_deadline: number | null;
+
+  /** The deadline for the Return Policy, measured in days. The value must be one of the following: [7, 14, 21, 30, 45, 60, 90]. */
+  return_deadline?: number | null;
 }
 
 export interface ICreateShopSectionPayload {

@@ -31,6 +31,10 @@ import { initAuthRefresh } from "./auth-refresh";
         );
 
         let {data: receipt} = await client.ShopReceipt.getShopReceipt(shop.shop_id, myData.receipt_id, tokens);
+        let {data: listing} = await client.ShopListing.updateListing(shop.shop_id, 400041807, {
+            tags: ["First", "Second", "Third"].join(",") as any
+        }, tokens);
+
         let {data: shipment} = await client.ShopReceipt.createReceiptShipment(
             shop.shop_id,
             receipt.receipt_id,
