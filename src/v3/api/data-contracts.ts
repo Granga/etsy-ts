@@ -171,7 +171,7 @@ export interface IShopListing {
   /** A description string of the product for sale in the listing. */
   description?: string;
 
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
+  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive" | "sold_out" | "draft" | "expired";
 
   /**
@@ -277,7 +277,7 @@ export interface IShopListing {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   return_policy_id?: number | null;
@@ -501,7 +501,7 @@ export interface IShopListingWithAssociations {
   /** A description string of the product for sale in the listing. */
   description?: string;
 
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
+  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive" | "sold_out" | "draft" | "expired";
 
   /**
@@ -607,7 +607,7 @@ export interface IShopListingWithAssociations {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   return_policy_id?: number | null;
@@ -2592,7 +2592,7 @@ export interface IShops {
  */
 export interface IShopReturnPolicy {
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   return_policy_id?: number;
@@ -2853,7 +2853,7 @@ export interface ICreateDraftListingPayload {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy. Note: As of January 31, 2023 this will be required. This requirement does not apply to listings of EU-based shops.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   return_policy_id?: number | null;
@@ -2952,7 +2952,7 @@ export interface ICreateDraftListingPayload {
 }
 
 export interface IGetListingsByShopParams {
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
+  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive" | "sold_out" | "draft" | "expired";
 
   /**
@@ -3275,7 +3275,7 @@ export interface IUpdateListingPayload {
   shipping_profile_id?: number | null;
 
   /**
-   * The numeric ID of the Return Policy. Note: As of January 31, 2023 this will be required. This requirement does not apply to listings of EU-based shops.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies). Required for active physical listings. This requirement does not apply to listings of EU-based shops.
    * @min 1
    */
   return_policy_id?: number | null;
@@ -3373,7 +3373,7 @@ export interface IUpdateListingPayload {
   /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
   personalization_instructions?: string;
 
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
+  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive";
 
   /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
@@ -3501,7 +3501,7 @@ export interface IUpdateListingDeprecatedPayload {
   /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
   personalization_instructions?: string;
 
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
+  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive";
 
   /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
@@ -3807,13 +3807,13 @@ export interface IFindShopsParams {
 
 export interface IConsolidateShopReturnPoliciesPayload {
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   source_return_policy_id: number;
 
   /**
-   * The numeric ID of the Return Policy.
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
    * @min 1
    */
   destination_return_policy_id: number;
