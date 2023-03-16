@@ -1075,7 +1075,7 @@ export interface IShop {
    */
   num_favorers?: number;
 
-  /** A list of language strings for the shop's enrolled languages. */
+  /** A list of language strings for the shop's enrolled languages where the default shop language is the first element in the array. */
   languages?: string[];
 
   /** The URL string for this shop's icon image. */
@@ -1477,7 +1477,7 @@ export interface IShopReceiptTransaction {
   transaction_id?: number;
 
   /** The title string of the [listing](/documentation/reference#tag/ShopListing) purchased in this transaction. */
-  title?: string;
+  title?: string | null;
 
   /** The description string of the [listing](/documentation/reference#tag/ShopListing) purchased in this transaction. */
   description?: string | null;
@@ -2987,6 +2987,9 @@ export interface IGetListingsByShopParams {
 export interface IGetListingParams {
   /** An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'. */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+
+  /** The IETF language tag for the language of this translation. Ex: `de`, `en`, `es`, `fr`, `it`, `ja`, `nl`, `pl`, `pt`. */
+  language?: string;
 
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
