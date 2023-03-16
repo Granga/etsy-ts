@@ -133,7 +133,7 @@ export interface IListing {
     /**
      * When was the item made.
      */
-    when_made: "made_to_order" | "2020_2021" | "2010_2019" | "2002_2009" | "before_2002" | "2000_2001" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
+    when_made: "made_to_order" | "2020_2023" | "2010_2019" | "2004_2009" | "before_2004" | "2000_2003" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     /**
      * How much the item weighs.
      */
@@ -162,14 +162,6 @@ export interface IListing {
      * Is this listing a private listing that is intendend for a specific buyer and hidden from shop view.Note: This field is experimental and may change at any time.
      */
     is_private: boolean,
-    /**
-     * Who is this listing for.
-     */
-    recipient: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified",
-    /**
-     * What is the occasion for this listing.
-     */
-    occasion: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
     /**
      * Style of this listing. Each style is a free-form text string such as "Formal", or "Steampunk". A Listing may have up to two styles. A style is valid if it does not match the pattern: /[^\p{L}\p{Nd}\p{Zs}]/u
      */
@@ -228,20 +220,21 @@ export interface ICreateListingParameters {
     tags?: string[],
     who_made: "i_did" | "collective" | "someone_else",
     is_supply: boolean,
-    when_made: "made_to_order" | "2020_2021" | "2010_2019" | "2002_2009" | "before_2002" | "2000_2001" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
-    recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified",
-    occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
+    when_made: "made_to_order" | "2020_2023" | "2010_2019" | "2004_2009" | "before_2004" | "2000_2003" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     style?: string[]
 }
+
 export interface IFindAllFeaturedListingsParameters {
     limit?: number,
     offset?: number,
     page?: number,
     region?: string
 }
+
 export interface IGetListingParameters {
     listing_id: number[]
 }
+
 export interface IUpdateListingParameters {
     listing_id: number,
     title?: string,
@@ -264,17 +257,17 @@ export interface IUpdateListingParameters {
     tags?: string[],
     who_made?: "i_did" | "collective" | "someone_else",
     is_supply?: boolean,
-    when_made?: "made_to_order" | "2020_2021" | "2010_2019" | "2002_2009" | "before_2002" | "2000_2001" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
-    recipient?: "men" | "women" | "unisex_adults" | "teen_boys" | "teen_girls" | "teens" | "boys" | "girls" | "children" | "baby_boys" | "baby_girls" | "babies" | "birds" | "cats" | "dogs" | "pets" | "not_specified",
-    occasion?: "anniversary" | "baptism" | "bar_or_bat_mitzvah" | "birthday" | "canada_day" | "chinese_new_year" | "cinco_de_mayo" | "confirmation" | "christmas" | "day_of_the_dead" | "easter" | "eid" | "engagement" | "fathers_day" | "get_well" | "graduation" | "halloween" | "hanukkah" | "housewarming" | "kwanzaa" | "prom" | "july_4th" | "mothers_day" | "new_baby" | "new_years" | "quinceanera" | "retirement" | "st_patricks_day" | "sweet_16" | "sympathy" | "thanksgiving" | "valentines" | "wedding",
+    when_made?: "made_to_order" | "2020_2023" | "2010_2019" | "2004_2009" | "before_2004" | "2000_2003" | "1990s" | "1980s" | "1970s" | "1960s" | "1950s" | "1940s" | "1930s" | "1920s" | "1910s" | "1900s" | "1800s" | "1700s" | "before_1700",
     style?: string[],
     processing_min?: number,
     processing_max?: number,
     featured_rank?: number
 }
+
 export interface IDeleteListingParameters {
     listing_id: number
 }
+
 export interface IFindAllListingActiveParameters {
     limit?: number,
     offset?: number,
@@ -296,31 +289,38 @@ export interface IFindAllListingActiveParameters {
     accepts_gift_cards?: boolean,
     translate_keywords?: boolean
 }
+
 export interface IGetInterestingListingsParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IGetTrendingListingsParameters {
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllListingsForFeaturedTreasuryIdParameters {
     featured_treasury_id: number
 }
+
 export interface IFindAllActiveListingsForFeaturedTreasuryIdParameters {
     featured_treasury_id: number
 }
+
 export interface IFindAllCurrentFeaturedListingsParameters {
     region?: string
 }
+
 export interface IFindAllReceiptListingsParameters {
     limit?: number,
     offset?: number,
     page?: number,
     receipt_id: number
 }
+
 export interface IFindAllShopListingsActiveParameters {
     limit?: number,
     offset?: number,
@@ -338,38 +338,45 @@ export interface IFindAllShopListingsActiveParameters {
     translate_keywords?: boolean,
     include_private?: boolean
 }
+
 export interface IFindAllShopListingsDraftParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopListingsExpiredParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IGetShopListingExpiredParameters {
     shop_id: string | number,
     listing_id: number
 }
+
 export interface IFindAllShopListingsFeaturedParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopListingsInactiveParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IGetShopListingInactiveParameters {
     shop_id: string | number,
     listing_id: number
 }
+
 export interface IFindAllShopSectionListingsParameters {
     limit?: number,
     offset?: number,
@@ -377,6 +384,7 @@ export interface IFindAllShopSectionListingsParameters {
     shop_id: string | number,
     shop_section_id: number
 }
+
 export interface IFindAllShopSectionListingsActiveParameters {
     limit?: number,
     offset?: number,
@@ -386,6 +394,7 @@ export interface IFindAllShopSectionListingsActiveParameters {
     sort_on?: "created" | "price",
     sort_order?: "up" | "down"
 }
+
 export interface IFindAllCartListingsParameters {
     user_id: string | number,
     cart_id: string | number
@@ -417,12 +426,7 @@ export class Listing extends ApiRequest {
         params: IFindAllFeaturedListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedListingsParameters, TResult>>> {
-        return this.request<IFindAllFeaturedListingsParameters, TResult>(
-            "GET",
-            "/featured_treasuries/listings",
-            params,
-            extra
-        );
+        return this.request<IFindAllFeaturedListingsParameters, TResult>("GET", "/featured_treasuries/listings", params, extra);
     }
 
     /**
@@ -537,12 +541,7 @@ export class Listing extends ApiRequest {
         params: IFindAllReceiptListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllReceiptListingsParameters, TResult>>> {
-        return this.request<IFindAllReceiptListingsParameters, TResult>(
-            "GET",
-            "/receipts/:receipt_id/listings",
-            params,
-            extra
-        );
+        return this.request<IFindAllReceiptListingsParameters, TResult>("GET", "/receipts/:receipt_id/listings", params, extra);
     }
 
     /**
@@ -552,12 +551,7 @@ export class Listing extends ApiRequest {
         params: IFindAllShopListingsActiveParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsActiveParameters, TResult>>> {
-        return this.request<IFindAllShopListingsActiveParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/active",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopListingsActiveParameters, TResult>("GET", "/shops/:shop_id/listings/active", params, extra);
     }
 
     /**
@@ -567,12 +561,7 @@ export class Listing extends ApiRequest {
         params: IFindAllShopListingsDraftParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsDraftParameters, TResult>>> {
-        return this.request<IFindAllShopListingsDraftParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/draft",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopListingsDraftParameters, TResult>("GET", "/shops/:shop_id/listings/draft", params, extra);
     }
 
     /**
@@ -582,12 +571,7 @@ export class Listing extends ApiRequest {
         params: IFindAllShopListingsExpiredParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsExpiredParameters, TResult>>> {
-        return this.request<IFindAllShopListingsExpiredParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/expired",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopListingsExpiredParameters, TResult>("GET", "/shops/:shop_id/listings/expired", params, extra);
     }
 
     /**
@@ -597,12 +581,7 @@ export class Listing extends ApiRequest {
         params: IGetShopListingExpiredParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopListingExpiredParameters, TResult>>> {
-        return this.request<IGetShopListingExpiredParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/expired/:listing_id",
-            params,
-            extra
-        );
+        return this.request<IGetShopListingExpiredParameters, TResult>("GET", "/shops/:shop_id/listings/expired/:listing_id", params, extra);
     }
 
     /**
@@ -612,12 +591,7 @@ export class Listing extends ApiRequest {
         params: IFindAllShopListingsFeaturedParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsFeaturedParameters, TResult>>> {
-        return this.request<IFindAllShopListingsFeaturedParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/featured",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopListingsFeaturedParameters, TResult>("GET", "/shops/:shop_id/listings/featured", params, extra);
     }
 
     /**
@@ -627,12 +601,7 @@ export class Listing extends ApiRequest {
         params: IFindAllShopListingsInactiveParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopListingsInactiveParameters, TResult>>> {
-        return this.request<IFindAllShopListingsInactiveParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/inactive",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopListingsInactiveParameters, TResult>("GET", "/shops/:shop_id/listings/inactive", params, extra);
     }
 
     /**
@@ -642,12 +611,7 @@ export class Listing extends ApiRequest {
         params: IGetShopListingInactiveParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopListingInactiveParameters, TResult>>> {
-        return this.request<IGetShopListingInactiveParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/listings/inactive/:listing_id",
-            params,
-            extra
-        );
+        return this.request<IGetShopListingInactiveParameters, TResult>("GET", "/shops/:shop_id/listings/inactive/:listing_id", params, extra);
     }
 
     /**
@@ -687,11 +651,6 @@ export class Listing extends ApiRequest {
         params: IFindAllCartListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllCartListingsParameters, TResult>>> {
-        return this.request<IFindAllCartListingsParameters, TResult>(
-            "GET",
-            "/users/:user_id/carts/:cart_id/listings",
-            params,
-            extra
-        );
+        return this.request<IFindAllCartListingsParameters, TResult>("GET", "/users/:user_id/carts/:cart_id/listings", params, extra);
     }
 }

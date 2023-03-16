@@ -225,9 +225,11 @@ export interface IFindAllShopsParameters {
     lon?: number,
     distance_max?: number
 }
+
 export interface IGetShopParameters {
     shop_id: (string | number)[]
 }
+
 export interface IUpdateShopParameters {
     shop_id: string | number,
     title?: string,
@@ -242,16 +244,20 @@ export interface IUpdateShopParameters {
     policy_seller_info?: string,
     digital_sale_message?: string
 }
+
 export interface IUploadShopBannerParameters {
     shop_id: string | number,
     image: any
 }
+
 export interface IDeleteShopBannerParameters {
     shop_id: string | number
 }
+
 export interface IGetListingShopParameters {
     listing_id: number
 }
+
 export interface IFindAllUserShopsParameters {
     user_id: string | number,
     limit?: number,
@@ -305,12 +311,7 @@ export class Shop extends ApiRequest {
         params: IUploadShopBannerParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadShopBannerParameters, TResult>>> {
-        return this.request<IUploadShopBannerParameters, TResult>(
-            "POST",
-            "/shops/:shop_id/appearance/banner",
-            params,
-            extra
-        );
+        return this.request<IUploadShopBannerParameters, TResult>("POST", "/shops/:shop_id/appearance/banner", params, extra);
     }
 
     /**
@@ -320,12 +321,7 @@ export class Shop extends ApiRequest {
         params: IDeleteShopBannerParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShopBannerParameters, TResult>>> {
-        return this.request<IDeleteShopBannerParameters, TResult>(
-            "DELETE",
-            "/shops/:shop_id/appearance/banner",
-            params,
-            extra
-        );
+        return this.request<IDeleteShopBannerParameters, TResult>("DELETE", "/shops/:shop_id/appearance/banner", params, extra);
     }
 
     /**

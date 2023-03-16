@@ -57,6 +57,7 @@ export interface IFindAllUserAddressesParameters {
     offset?: number,
     page?: number
 }
+
 export interface ICreateUserAddressParameters {
     user_id: string | number,
     name: string,
@@ -67,9 +68,11 @@ export interface ICreateUserAddressParameters {
     zip: string,
     country_id: number
 }
+
 export interface IGetUserAddressParameters {
     user_address_id: number[]
 }
+
 export interface IDeleteUserAddressParameters {
     user_address_id: number
 }
@@ -90,12 +93,7 @@ export class UserAddress extends ApiRequest {
         params: IFindAllUserAddressesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserAddressesParameters, TResult>>> {
-        return this.request<IFindAllUserAddressesParameters, TResult>(
-            "GET",
-            "/users/:user_id/addresses",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserAddressesParameters, TResult>("GET", "/users/:user_id/addresses", params, extra);
     }
 
     /**
@@ -115,12 +113,7 @@ export class UserAddress extends ApiRequest {
         params: IGetUserAddressParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserAddressParameters, TResult>>> {
-        return this.request<IGetUserAddressParameters, TResult>(
-            "GET",
-            "/users/:user_id/addresses/:user_address_id",
-            params,
-            extra
-        );
+        return this.request<IGetUserAddressParameters, TResult>("GET", "/users/:user_id/addresses/:user_address_id", params, extra);
     }
 
     /**
@@ -130,11 +123,6 @@ export class UserAddress extends ApiRequest {
         params: IDeleteUserAddressParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteUserAddressParameters, TResult>>> {
-        return this.request<IDeleteUserAddressParameters, TResult>(
-            "DELETE",
-            "/users/:user_id/addresses/:user_address_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteUserAddressParameters, TResult>("DELETE", "/users/:user_id/addresses/:user_address_id", params, extra);
     }
 }

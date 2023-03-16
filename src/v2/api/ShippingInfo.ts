@@ -37,6 +37,22 @@ export interface IShippingInfo {
      */
     region_id: number,
     /**
+     * The numeric ID of the shipping carrier.
+     */
+    shipping_carrier_id: number,
+    /**
+     * The string representation of a shipping carrier's mail class.
+     */
+    mail_class: string,
+    /**
+     * The minimum delivery time that a shipment will take, in days.
+     */
+    min_delivery_time: number,
+    /**
+     * The maximum delivery time that a shipment will take, in days.
+     */
+    max_delivery_time: number,
+    /**
      * The name of the country from which this item ships.
      */
     origin_country_name: string,
@@ -50,24 +66,42 @@ export interface IShippingInfo {
 export interface IFindAllListingShippingProfileEntriesParameters {
 
 }
+
 export interface ICreateShippingInfoParameters {
     destination_country_id?: number,
     primary_cost: number,
     secondary_cost: number,
     region_id?: number,
-    listing_id: number
+    listing_id: number,
+    origin_postal_code?: string,
+    min_processing_days?: number,
+    max_processing_days?: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IGetShippingInfoParameters {
     shipping_info_id: number[]
 }
+
 export interface IUpdateShippingInfoParameters {
     shipping_info_id: number,
     destination_country_id?: number,
     primary_cost?: number,
     secondary_cost?: number,
     region_id?: number,
-    listing_id?: number
+    listing_id?: number,
+    origin_postal_code?: string,
+    min_processing_days?: number,
+    max_processing_days?: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IDeleteShippingInfoParameters {
     shipping_info_id: number
 }
@@ -88,12 +122,7 @@ export class ShippingInfo extends ApiRequest {
         params: IFindAllListingShippingProfileEntriesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingShippingProfileEntriesParameters, TResult>>> {
-        return this.request<IFindAllListingShippingProfileEntriesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/shipping/info",
-            params,
-            extra
-        );
+        return this.request<IFindAllListingShippingProfileEntriesParameters, TResult>("GET", "/listings/:listing_id/shipping/info", params, extra);
     }
 
     /**
@@ -103,12 +132,7 @@ export class ShippingInfo extends ApiRequest {
         params: ICreateShippingInfoParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingInfoParameters, TResult>>> {
-        return this.request<ICreateShippingInfoParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/shipping/info",
-            params,
-            extra
-        );
+        return this.request<ICreateShippingInfoParameters, TResult>("POST", "/listings/:listing_id/shipping/info", params, extra);
     }
 
     /**
@@ -118,12 +142,7 @@ export class ShippingInfo extends ApiRequest {
         params: IGetShippingInfoParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShippingInfoParameters, TResult>>> {
-        return this.request<IGetShippingInfoParameters, TResult>(
-            "GET",
-            "/shipping/info/:shipping_info_id",
-            params,
-            extra
-        );
+        return this.request<IGetShippingInfoParameters, TResult>("GET", "/shipping/info/:shipping_info_id", params, extra);
     }
 
     /**
@@ -133,12 +152,7 @@ export class ShippingInfo extends ApiRequest {
         params: IUpdateShippingInfoParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingInfoParameters, TResult>>> {
-        return this.request<IUpdateShippingInfoParameters, TResult>(
-            "PUT",
-            "/shipping/info/:shipping_info_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateShippingInfoParameters, TResult>("PUT", "/shipping/info/:shipping_info_id", params, extra);
     }
 
     /**
@@ -148,11 +162,6 @@ export class ShippingInfo extends ApiRequest {
         params: IDeleteShippingInfoParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingInfoParameters, TResult>>> {
-        return this.request<IDeleteShippingInfoParameters, TResult>(
-            "DELETE",
-            "/shipping/info/:shipping_info_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteShippingInfoParameters, TResult>("DELETE", "/shipping/info/:shipping_info_id", params, extra);
     }
 }

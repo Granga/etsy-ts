@@ -42,6 +42,7 @@ export interface IListingFile {
 export interface IFindAllListingFilesParameters {
     listing_id: number
 }
+
 export interface IUploadListingFileParameters {
     listing_id: number,
     listing_file_id?: number,
@@ -49,10 +50,12 @@ export interface IUploadListingFileParameters {
     name?: string,
     rank?: number
 }
+
 export interface IFindListingFileParameters {
     listing_id: number,
     listing_file_id: number
 }
+
 export interface IDeleteListingFileParameters {
     listing_id: number,
     listing_file_id: number
@@ -74,12 +77,7 @@ export class ListingFile extends ApiRequest {
         params: IFindAllListingFilesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingFilesParameters, TResult>>> {
-        return this.request<IFindAllListingFilesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/files",
-            params,
-            extra
-        );
+        return this.request<IFindAllListingFilesParameters, TResult>("GET", "/listings/:listing_id/files", params, extra);
     }
 
     /**
@@ -92,12 +90,7 @@ export class ListingFile extends ApiRequest {
         params: IUploadListingFileParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadListingFileParameters, TResult>>> {
-        return this.request<IUploadListingFileParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/files",
-            params,
-            extra
-        );
+        return this.request<IUploadListingFileParameters, TResult>("POST", "/listings/:listing_id/files", params, extra);
     }
 
     /**
@@ -107,12 +100,7 @@ export class ListingFile extends ApiRequest {
         params: IFindListingFileParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindListingFileParameters, TResult>>> {
-        return this.request<IFindListingFileParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/files/:listing_file_id",
-            params,
-            extra
-        );
+        return this.request<IFindListingFileParameters, TResult>("GET", "/listings/:listing_id/files/:listing_file_id", params, extra);
     }
 
     /**
@@ -123,11 +111,6 @@ export class ListingFile extends ApiRequest {
         params: IDeleteListingFileParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingFileParameters, TResult>>> {
-        return this.request<IDeleteListingFileParameters, TResult>(
-            "DELETE",
-            "/listings/:listing_id/files/:listing_file_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteListingFileParameters, TResult>("DELETE", "/listings/:listing_id/files/:listing_file_id", params, extra);
     }
 }

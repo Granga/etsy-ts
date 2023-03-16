@@ -85,6 +85,7 @@ export interface IGuestCart {
 export interface IFindAllGuestCartsParameters {
     guest_id: any
 }
+
 export interface IAddToGuestCartParameters {
     guest_id: any,
     listing_id: number,
@@ -92,21 +93,25 @@ export interface IAddToGuestCartParameters {
     selected_variations?: [any, any],
     personalization?: any
 }
+
 export interface IUpdateGuestCartListingQuantityParameters {
     guest_id: any,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
+
 export interface IRemoveGuestCartListingParameters {
     guest_id: any,
     listing_id: number,
     listing_customization_id?: number
 }
+
 export interface IFindGuestCartParameters {
     guest_id: any,
     cart_id: string | number
 }
+
 export interface IUpdateGuestCartParameters {
     guest_id: any,
     cart_id: string | number,
@@ -116,6 +121,7 @@ export interface IUpdateGuestCartParameters {
     shipping_option_id?: string,
     destination_zip?: string
 }
+
 export interface IDeleteGuestCartParameters {
     guest_id: any,
     cart_id: string | number
@@ -157,12 +163,7 @@ export class GuestCart extends ApiRequest {
         params: IUpdateGuestCartListingQuantityParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartListingQuantityParameters, TResult>>> {
-        return this.request<IUpdateGuestCartListingQuantityParameters, TResult>(
-            "PUT",
-            "/guests/:guest_id/carts",
-            params,
-            extra
-        );
+        return this.request<IUpdateGuestCartListingQuantityParameters, TResult>("PUT", "/guests/:guest_id/carts", params, extra);
     }
 
     /**
@@ -172,12 +173,7 @@ export class GuestCart extends ApiRequest {
         params: IRemoveGuestCartListingParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IRemoveGuestCartListingParameters, TResult>>> {
-        return this.request<IRemoveGuestCartListingParameters, TResult>(
-            "DELETE",
-            "/guests/:guest_id/carts",
-            params,
-            extra
-        );
+        return this.request<IRemoveGuestCartListingParameters, TResult>("DELETE", "/guests/:guest_id/carts", params, extra);
     }
 
     /**
@@ -187,12 +183,7 @@ export class GuestCart extends ApiRequest {
         params: IFindGuestCartParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindGuestCartParameters, TResult>>> {
-        return this.request<IFindGuestCartParameters, TResult>(
-            "GET",
-            "/guests/:guest_id/carts/:cart_id",
-            params,
-            extra
-        );
+        return this.request<IFindGuestCartParameters, TResult>("GET", "/guests/:guest_id/carts/:cart_id", params, extra);
     }
 
     /**
@@ -202,12 +193,7 @@ export class GuestCart extends ApiRequest {
         params: IUpdateGuestCartParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateGuestCartParameters, TResult>>> {
-        return this.request<IUpdateGuestCartParameters, TResult>(
-            "PUT",
-            "/guests/:guest_id/carts/:cart_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateGuestCartParameters, TResult>("PUT", "/guests/:guest_id/carts/:cart_id", params, extra);
     }
 
     /**
@@ -217,11 +203,6 @@ export class GuestCart extends ApiRequest {
         params: IDeleteGuestCartParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteGuestCartParameters, TResult>>> {
-        return this.request<IDeleteGuestCartParameters, TResult>(
-            "DELETE",
-            "/guests/:guest_id/carts/:cart_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteGuestCartParameters, TResult>("DELETE", "/guests/:guest_id/carts/:cart_id", params, extra);
     }
 }

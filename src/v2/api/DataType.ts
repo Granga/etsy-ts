@@ -15,15 +15,10 @@ export interface IDataType {
 }
 
 //parameters types
-export interface IDescribeOccasionEnumParameters {
-
-}
-export interface IDescribeRecipientEnumParameters {
-
-}
 export interface IDescribeWhenMadeEnumParameters {
     include_formatted?: boolean
 }
+
 export interface IDescribeWhoMadeEnumParameters {
 
 }
@@ -36,26 +31,6 @@ export class DataType extends ApiRequest {
         super(options);
     }
 
-
-    /**
-     * Describes the legal values for Listing.occasion.
-     */
-    async describeOccasionEnum<TResult>(
-        params: IDescribeOccasionEnumParameters & IStandardParameters,
-        extra?: IRequestOptions
-    ): Promise<AxiosResponse<IStandardResponse<IDescribeOccasionEnumParameters, TResult>>> {
-        return this.request<IDescribeOccasionEnumParameters, TResult>("GET", "/types/enum/occasion", params, extra);
-    }
-
-    /**
-     * Describes the legal values for Listing.recipient.
-     */
-    async describeRecipientEnum<TResult>(
-        params: IDescribeRecipientEnumParameters & IStandardParameters,
-        extra?: IRequestOptions
-    ): Promise<AxiosResponse<IStandardResponse<IDescribeRecipientEnumParameters, TResult>>> {
-        return this.request<IDescribeRecipientEnumParameters, TResult>("GET", "/types/enum/recipient", params, extra);
-    }
 
     /**
      * Describes the legal values for Listing.when_made.

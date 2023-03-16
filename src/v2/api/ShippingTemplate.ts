@@ -31,7 +31,11 @@ export interface IShippingTemplate {
     /**
      * The numeric ID of the country from which the listing ships.
      */
-    origin_country_id: number
+    origin_country_id: number,
+    /**
+     * The postal code string (not necessarily a number) for the location from which the listing ships.
+     */
+    origin_postal_code: string
 }
 
 //parameters types
@@ -43,27 +47,46 @@ export interface ICreateShippingTemplateParameters {
     secondary_cost: number,
     destination_region_id?: number,
     min_processing_days?: number,
-    max_processing_days?: number
+    max_processing_days?: number,
+    origin_postal_code?: string,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IGetShippingTemplateParameters {
     shipping_template_id: number[]
 }
+
 export interface IUpdateShippingTemplateParameters {
     shipping_template_id: number,
     title?: string,
     origin_country_id?: number,
+    origin_postal_code?: string,
+    destination_country_id?: number,
+    primary_cost?: number,
+    secondary_cost?: number,
+    destination_region_id?: number,
     min_processing_days?: number,
-    max_processing_days?: number
+    max_processing_days?: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IDeleteShippingTemplateParameters {
     shipping_template_id: number
 }
+
 export interface IFindAllShippingTemplateEntriesParameters {
     shipping_template_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserShippingProfilesParameters {
     user_id: string | number,
     limit?: number,
@@ -97,12 +120,7 @@ export class ShippingTemplate extends ApiRequest {
         params: IGetShippingTemplateParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShippingTemplateParameters, TResult>>> {
-        return this.request<IGetShippingTemplateParameters, TResult>(
-            "GET",
-            "/shipping/templates/:shipping_template_id",
-            params,
-            extra
-        );
+        return this.request<IGetShippingTemplateParameters, TResult>("GET", "/shipping/templates/:shipping_template_id", params, extra);
     }
 
     /**
@@ -112,12 +130,7 @@ export class ShippingTemplate extends ApiRequest {
         params: IUpdateShippingTemplateParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShippingTemplateParameters, TResult>>> {
-        return this.request<IUpdateShippingTemplateParameters, TResult>(
-            "PUT",
-            "/shipping/templates/:shipping_template_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateShippingTemplateParameters, TResult>("PUT", "/shipping/templates/:shipping_template_id", params, extra);
     }
 
     /**
@@ -127,12 +140,7 @@ export class ShippingTemplate extends ApiRequest {
         params: IDeleteShippingTemplateParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShippingTemplateParameters, TResult>>> {
-        return this.request<IDeleteShippingTemplateParameters, TResult>(
-            "DELETE",
-            "/shipping/templates/:shipping_template_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteShippingTemplateParameters, TResult>("DELETE", "/shipping/templates/:shipping_template_id", params, extra);
     }
 
     /**
@@ -157,11 +165,6 @@ export class ShippingTemplate extends ApiRequest {
         params: IFindAllUserShippingProfilesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserShippingProfilesParameters, TResult>>> {
-        return this.request<IFindAllUserShippingProfilesParameters, TResult>(
-            "GET",
-            "/users/:user_id/shipping/templates",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserShippingProfilesParameters, TResult>("GET", "/users/:user_id/shipping/templates", params, extra);
     }
 }

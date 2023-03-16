@@ -19,6 +19,7 @@ export interface IAddTreasuryListingParameters {
     treasury_key: string,
     listing_id: number
 }
+
 export interface IRemoveTreasuryListingParameters {
     treasury_key: string,
     listing_id: number
@@ -40,12 +41,7 @@ export class TreasuryListing extends ApiRequest {
         params: IAddTreasuryListingParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IAddTreasuryListingParameters, TResult>>> {
-        return this.request<IAddTreasuryListingParameters, TResult>(
-            "POST",
-            "/treasuries/:treasury_key/listings",
-            params,
-            extra
-        );
+        return this.request<IAddTreasuryListingParameters, TResult>("POST", "/treasuries/:treasury_key/listings", params, extra);
     }
 
     /**
@@ -55,11 +51,6 @@ export class TreasuryListing extends ApiRequest {
         params: IRemoveTreasuryListingParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IRemoveTreasuryListingParameters, TResult>>> {
-        return this.request<IRemoveTreasuryListingParameters, TResult>(
-            "DELETE",
-            "/treasuries/:treasury_key/listings/:listing_id",
-            params,
-            extra
-        );
+        return this.request<IRemoveTreasuryListingParameters, TResult>("DELETE", "/treasuries/:treasury_key/listings/:listing_id", params, extra);
     }
 }

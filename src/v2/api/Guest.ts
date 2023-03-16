@@ -18,12 +18,15 @@ export interface IGuest {
 export interface IGetGuestParameters {
     guest_id: any
 }
+
 export interface IGenerateGuestParameters {
 
 }
+
 export interface IClaimGuestParameters {
     guest_id: any
 }
+
 export interface IMergeGuestParameters {
     guest_id: any,
     target_guest_id: any

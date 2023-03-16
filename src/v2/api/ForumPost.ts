@@ -37,9 +37,11 @@ export interface IFindTreasuryCommentsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IPostTreasuryCommentParameters {
     message: any
 }
+
 export interface IDeleteTreasuryCommentParameters {
 
 }
@@ -60,12 +62,7 @@ export class ForumPost extends ApiRequest {
         params: IFindTreasuryCommentsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindTreasuryCommentsParameters, TResult>>> {
-        return this.request<IFindTreasuryCommentsParameters, TResult>(
-            "GET",
-            "/treasuries/:treasury_key/comments",
-            params,
-            extra
-        );
+        return this.request<IFindTreasuryCommentsParameters, TResult>("GET", "/treasuries/:treasury_key/comments", params, extra);
     }
 
     /**
@@ -75,12 +72,7 @@ export class ForumPost extends ApiRequest {
         params: IPostTreasuryCommentParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IPostTreasuryCommentParameters, TResult>>> {
-        return this.request<IPostTreasuryCommentParameters, TResult>(
-            "POST",
-            "/treasuries/:treasury_key/comments",
-            params,
-            extra
-        );
+        return this.request<IPostTreasuryCommentParameters, TResult>("POST", "/treasuries/:treasury_key/comments", params, extra);
     }
 
     /**
@@ -90,11 +82,6 @@ export class ForumPost extends ApiRequest {
         params: IDeleteTreasuryCommentParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteTreasuryCommentParameters, TResult>>> {
-        return this.request<IDeleteTreasuryCommentParameters, TResult>(
-            "DELETE",
-            "/treasuries/:treasury_key/comments/:comment_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteTreasuryCommentParameters, TResult>("DELETE", "/treasuries/:treasury_key/comments/:comment_id", params, extra);
     }
 }

@@ -88,6 +88,7 @@ export interface IGetAllUserCartsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IAddToCartParameters {
     user_id: string | number,
     listing_id: number,
@@ -95,21 +96,25 @@ export interface IAddToCartParameters {
     selected_variations?: [any, any],
     personalization?: any
 }
+
 export interface IUpdateCartListingQuantityParameters {
     user_id: string | number,
     listing_id: number,
     quantity: number,
     listing_customization_id?: number
 }
+
 export interface IRemoveCartListingParameters {
     user_id: string | number,
     listing_id: number,
     listing_customization_id?: number
 }
+
 export interface IGetUserCartParameters {
     user_id: string | number,
     cart_id: string | number
 }
+
 export interface IUpdateCartParameters {
     user_id: string | number,
     cart_id: string | number,
@@ -119,10 +124,12 @@ export interface IUpdateCartParameters {
     shipping_option_id?: string,
     destination_zip?: string
 }
+
 export interface IDeleteCartParameters {
     user_id: string | number,
     cart_id: string | number
 }
+
 export interface IAddAndSelectShippingForApplePayParameters {
     user_id: string | number,
     cart_id: string | number,
@@ -132,6 +139,7 @@ export interface IAddAndSelectShippingForApplePayParameters {
     zip: string,
     country_id: number
 }
+
 export interface ISaveListingForLaterParameters {
     user_id: string | number,
     cart_id: number,
@@ -139,10 +147,12 @@ export interface ISaveListingForLaterParameters {
     listing_inventory_id?: number,
     listing_customization_id?: number
 }
+
 export interface IGetUserCartForShopParameters {
     user_id: string | number,
     shop_id: string | number
 }
+
 export interface ICreateSingleListingCartParameters {
     user_id: string | number,
     listing_id: number,
@@ -187,12 +197,7 @@ export class Cart extends ApiRequest {
         params: IUpdateCartListingQuantityParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateCartListingQuantityParameters, TResult>>> {
-        return this.request<IUpdateCartListingQuantityParameters, TResult>(
-            "PUT",
-            "/users/:user_id/carts",
-            params,
-            extra
-        );
+        return this.request<IUpdateCartListingQuantityParameters, TResult>("PUT", "/users/:user_id/carts", params, extra);
     }
 
     /**
@@ -257,12 +262,7 @@ export class Cart extends ApiRequest {
         params: ISaveListingForLaterParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ISaveListingForLaterParameters, TResult>>> {
-        return this.request<ISaveListingForLaterParameters, TResult>(
-            "DELETE",
-            "/users/:user_id/carts/save",
-            params,
-            extra
-        );
+        return this.request<ISaveListingForLaterParameters, TResult>("DELETE", "/users/:user_id/carts/save", params, extra);
     }
 
     /**
@@ -272,12 +272,7 @@ export class Cart extends ApiRequest {
         params: IGetUserCartForShopParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserCartForShopParameters, TResult>>> {
-        return this.request<IGetUserCartForShopParameters, TResult>(
-            "GET",
-            "/users/:user_id/carts/shop/:shop_id",
-            params,
-            extra
-        );
+        return this.request<IGetUserCartForShopParameters, TResult>("GET", "/users/:user_id/carts/shop/:shop_id", params, extra);
     }
 
     /**
@@ -287,11 +282,6 @@ export class Cart extends ApiRequest {
         params: ICreateSingleListingCartParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateSingleListingCartParameters, TResult>>> {
-        return this.request<ICreateSingleListingCartParameters, TResult>(
-            "POST",
-            "/users/:user_id/carts/single_listing",
-            params,
-            extra
-        );
+        return this.request<ICreateSingleListingCartParameters, TResult>("POST", "/users/:user_id/carts/single_listing", params, extra);
     }
 }

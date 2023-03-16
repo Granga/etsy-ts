@@ -38,9 +38,11 @@ export interface ICountry {
 export interface IFindAllCountryParameters {
 
 }
+
 export interface IGetCountryParameters {
     country_id: number[]
 }
+
 export interface IFindByIsoCodeParameters {
     limit?: number,
     offset?: number,

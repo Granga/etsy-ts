@@ -32,9 +32,11 @@ export interface IFindAllTeamsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindTeamsParameters {
     team_ids: (string | number)[]
 }
+
 export interface IFindAllTeamsForUserParameters {
     user_id: string | number,
     limit?: number,

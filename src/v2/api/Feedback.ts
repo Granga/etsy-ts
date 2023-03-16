@@ -65,30 +65,35 @@ export interface IFindAllUserFeedbackAsAuthorParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserFeedbackAsBuyerParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserFeedbackAsSellerParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserFeedbackAsSubjectParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllFeedbackFromBuyersParameters {
     user_id?: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllFeedbackFromSellersParameters {
     user_id?: string | number,
     limit?: number,
@@ -112,12 +117,7 @@ export class Feedback extends ApiRequest {
         params: IFindAllUserFeedbackAsAuthorParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsAuthorParameters, TResult>>> {
-        return this.request<IFindAllUserFeedbackAsAuthorParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/as-author",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFeedbackAsAuthorParameters, TResult>("GET", "/users/:user_id/feedback/as-author", params, extra);
     }
 
     /**
@@ -127,12 +127,7 @@ export class Feedback extends ApiRequest {
         params: IFindAllUserFeedbackAsBuyerParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsBuyerParameters, TResult>>> {
-        return this.request<IFindAllUserFeedbackAsBuyerParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/as-buyer",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFeedbackAsBuyerParameters, TResult>("GET", "/users/:user_id/feedback/as-buyer", params, extra);
     }
 
     /**
@@ -142,12 +137,7 @@ export class Feedback extends ApiRequest {
         params: IFindAllUserFeedbackAsSellerParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSellerParameters, TResult>>> {
-        return this.request<IFindAllUserFeedbackAsSellerParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/as-seller",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFeedbackAsSellerParameters, TResult>("GET", "/users/:user_id/feedback/as-seller", params, extra);
     }
 
     /**
@@ -157,12 +147,7 @@ export class Feedback extends ApiRequest {
         params: IFindAllUserFeedbackAsSubjectParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFeedbackAsSubjectParameters, TResult>>> {
-        return this.request<IFindAllUserFeedbackAsSubjectParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/as-subject",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFeedbackAsSubjectParameters, TResult>("GET", "/users/:user_id/feedback/as-subject", params, extra);
     }
 
     /**
@@ -174,12 +159,7 @@ export class Feedback extends ApiRequest {
         params: IFindAllFeedbackFromBuyersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromBuyersParameters, TResult>>> {
-        return this.request<IFindAllFeedbackFromBuyersParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/from-buyers",
-            params,
-            extra
-        );
+        return this.request<IFindAllFeedbackFromBuyersParameters, TResult>("GET", "/users/:user_id/feedback/from-buyers", params, extra);
     }
 
     /**
@@ -191,11 +171,6 @@ export class Feedback extends ApiRequest {
         params: IFindAllFeedbackFromSellersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeedbackFromSellersParameters, TResult>>> {
-        return this.request<IFindAllFeedbackFromSellersParameters, TResult>(
-            "GET",
-            "/users/:user_id/feedback/from-sellers",
-            params,
-            extra
-        );
+        return this.request<IFindAllFeedbackFromSellersParameters, TResult>("GET", "/users/:user_id/feedback/from-sellers", params, extra);
     }
 }

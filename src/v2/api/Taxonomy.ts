@@ -50,9 +50,11 @@ export interface ITaxonomy {
 export interface IGetBuyerTaxonomyParameters {
 
 }
+
 export interface IGetSellerTaxonomyParameters {
 
 }
+
 export interface IGetSellerTaxonomyVersionParameters {
 
 }
@@ -93,11 +95,6 @@ export class Taxonomy extends ApiRequest {
         params: IGetSellerTaxonomyVersionParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetSellerTaxonomyVersionParameters, TResult>>> {
-        return this.request<IGetSellerTaxonomyVersionParameters, TResult>(
-            "GET",
-            "/taxonomy/seller/version",
-            params,
-            extra
-        );
+        return this.request<IGetSellerTaxonomyVersionParameters, TResult>("GET", "/taxonomy/seller/version", params, extra);
     }
 }

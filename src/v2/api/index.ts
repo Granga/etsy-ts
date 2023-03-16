@@ -20,20 +20,9 @@ export {
 export { ICartListing } from "./CartListing"
 export { ICountry, IFindAllCountryParameters, IGetCountryParameters, IFindByIsoCodeParameters } from "./Country"
 export {
-    ICoupon,
-    IFindAllShopCouponsParameters,
-    ICreateCouponParameters,
-    IFindCouponParameters,
-    IUpdateCouponParameters,
-    IDeleteCouponParameters
+    ICoupon, IFindAllShopCouponsParameters, ICreateCouponParameters, IFindCouponParameters, IUpdateCouponParameters, IDeleteCouponParameters
 } from "./Coupon"
-export {
-    IDataType,
-    IDescribeOccasionEnumParameters,
-    IDescribeRecipientEnumParameters,
-    IDescribeWhenMadeEnumParameters,
-    IDescribeWhoMadeEnumParameters
-} from "./DataType"
+export { IDataType, IDescribeWhenMadeEnumParameters, IDescribeWhoMadeEnumParameters } from "./DataType"
 export {
     IFavoriteListing,
     IFindAllListingFavoredByParameters,
@@ -51,10 +40,7 @@ export {
     IDeleteUserFavoriteUsersParameters
 } from "./FavoriteUser"
 export {
-    IFeaturedTreasury,
-    IFindAllFeaturedTreasuriesParameters,
-    IGetFeaturedTreasuryByIdParameters,
-    IFindAllFeaturedTreasuriesByOwnerParameters
+    IFeaturedTreasury, IFindAllFeaturedTreasuriesParameters, IGetFeaturedTreasuryByIdParameters, IFindAllFeaturedTreasuriesByOwnerParameters
 } from "./FeaturedTreasury"
 export {
     IFeedback,
@@ -66,12 +52,8 @@ export {
     IFindAllFeedbackFromSellersParameters
 } from "./Feedback"
 export { IFeedbackInfo } from "./FeedbackInfo"
-export {
-    IForumPost, IFindTreasuryCommentsParameters, IPostTreasuryCommentParameters, IDeleteTreasuryCommentParameters
-} from "./ForumPost"
-export {
-    IGuest, IGetGuestParameters, IGenerateGuestParameters, IClaimGuestParameters, IMergeGuestParameters
-} from "./Guest"
+export { IForumPost, IFindTreasuryCommentsParameters, IPostTreasuryCommentParameters, IDeleteTreasuryCommentParameters } from "./ForumPost"
+export { IGuest, IGetGuestParameters, IGenerateGuestParameters, IClaimGuestParameters, IMergeGuestParameters } from "./Guest"
 export {
     IGuestCart,
     IFindAllGuestCartsParameters,
@@ -111,18 +93,10 @@ export {
     IFindAllCartListingsParameters
 } from "./Listing"
 export {
-    IListingFile,
-    IFindAllListingFilesParameters,
-    IUploadListingFileParameters,
-    IFindListingFileParameters,
-    IDeleteListingFileParameters
+    IListingFile, IFindAllListingFilesParameters, IUploadListingFileParameters, IFindListingFileParameters, IDeleteListingFileParameters
 } from "./ListingFile"
 export {
-    IListingImage,
-    IFindAllListingImagesParameters,
-    IUploadListingImageParameters,
-    IGetImageListingParameters,
-    IDeleteListingImageParameters
+    IListingImage, IFindAllListingImagesParameters, IUploadListingImageParameters, IGetImageListingParameters, IDeleteListingImageParameters
 } from "./ListingImage"
 export { IListingInventory, IGetInventoryParameters, IUpdateInventoryParameters } from "./ListingInventory"
 export { IListingOffering, IGetOfferingParameters } from "./ListingOffering"
@@ -134,9 +108,7 @@ export {
     IUpdateListingTranslationParameters,
     IDeleteListingTranslationParameters
 } from "./ListingTranslation"
-export {
-    IListingVariationImage, IGetVariationImagesParameters, IUpdateVariationImagesParameters
-} from "./ListingVariationImage"
+export { IListingVariationImage, IGetVariationImagesParameters, IUpdateVariationImagesParameters } from "./ListingVariationImage"
 export { IMoney } from "./Money"
 export { IParamList } from "./ParamList"
 export {
@@ -154,9 +126,7 @@ export {
     IFindPaymentAdjustmentForLedgerEntryParameters,
     IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters
 } from "./PaymentAdjustment"
-export {
-    IPaymentAdjustmentItem, IFindPaymentAdjustmentItemsParameters, IFindPaymentAdjustmentItemParameters
-} from "./PaymentAdjustmentItem"
+export { IPaymentAdjustmentItem, IFindPaymentAdjustmentItemsParameters, IFindPaymentAdjustmentItemParameters } from "./PaymentAdjustmentItem"
 export {
     IPaymentTemplate,
     IFindShopPaymentTemplatesParameters,
@@ -165,11 +135,7 @@ export {
     IFindAllUserPaymentTemplatesParameters
 } from "./PaymentTemplate"
 export {
-    IPropertyValue,
-    IGetAttributesParameters,
-    IGetAttributeParameters,
-    IUpdateAttributeParameters,
-    IDeleteAttributeParameters
+    IPropertyValue, IGetAttributesParameters, IGetAttributeParameters, IUpdateAttributeParameters, IDeleteAttributeParameters
 } from "./PropertyValue"
 export {
     IReceipt,
@@ -203,6 +169,7 @@ export {
 } from "./ShippingTemplate"
 export {
     IShippingTemplateEntry,
+    IGetShippingCarriersParameters,
     ICreateShippingTemplateEntryParameters,
     IGetShippingTemplateEntryParameters,
     IUpdateShippingTemplateEntryParameters,
@@ -256,9 +223,7 @@ export {
 } from "./ShopTranslation"
 export { IStructuredPolicies } from "./StructuredPolicies"
 export { IStyle, IFindSuggestedStylesParameters } from "./Style"
-export {
-    ITaxonomy, IGetBuyerTaxonomyParameters, IGetSellerTaxonomyParameters, IGetSellerTaxonomyVersionParameters
-} from "./Taxonomy"
+export { ITaxonomy, IGetBuyerTaxonomyParameters, IGetSellerTaxonomyParameters, IGetSellerTaxonomyVersionParameters } from "./Taxonomy"
 export { ITaxonomyNodeProperty, IGetTaxonomyNodePropertiesParameters } from "./TaxonomyNodeProperty"
 export { ITaxonomyPropertyScale } from "./TaxonomyPropertyScale"
 export { ITaxonomyPropertyValue } from "./TaxonomyPropertyValue"
@@ -272,11 +237,7 @@ export {
     IFindAllUserBuyerTransactionsParameters
 } from "./Transaction"
 export {
-    ITreasury,
-    IFindAllTreasuriesParameters,
-    IGetTreasuryParameters,
-    IDeleteTreasuryParameters,
-    IFindAllUserTreasuriesParameters
+    ITreasury, IFindAllTreasuriesParameters, IGetTreasuryParameters, IDeleteTreasuryParameters, IFindAllUserTreasuriesParameters
 } from "./Treasury"
 export { ITreasuryCounts } from "./TreasuryCounts"
 export { ITreasuryListing, IAddTreasuryListingParameters, IRemoveTreasuryListingParameters } from "./TreasuryListing"
@@ -293,10 +254,6 @@ export {
     IConnectUsersParameters
 } from "./User"
 export {
-    IUserAddress,
-    IFindAllUserAddressesParameters,
-    ICreateUserAddressParameters,
-    IGetUserAddressParameters,
-    IDeleteUserAddressParameters
+    IUserAddress, IFindAllUserAddressesParameters, ICreateUserAddressParameters, IGetUserAddressParameters, IDeleteUserAddressParameters
 } from "./UserAddress"
 export { IUserProfile, IFindUserProfileParameters, IUpdateUserProfileParameters } from "./UserProfile"

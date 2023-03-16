@@ -14,6 +14,7 @@ export interface IListingVariationImage {
 export interface IGetVariationImagesParameters {
     listing_id: number
 }
+
 export interface IUpdateVariationImagesParameters {
     listing_id: number,
     variation_images: any
@@ -35,12 +36,7 @@ export class ListingVariationImage extends ApiRequest {
         params: IGetVariationImagesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetVariationImagesParameters, TResult>>> {
-        return this.request<IGetVariationImagesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/variation-images",
-            params,
-            extra
-        );
+        return this.request<IGetVariationImagesParameters, TResult>("GET", "/listings/:listing_id/variation-images", params, extra);
     }
 
     /**
@@ -50,11 +46,6 @@ export class ListingVariationImage extends ApiRequest {
         params: IUpdateVariationImagesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateVariationImagesParameters, TResult>>> {
-        return this.request<IUpdateVariationImagesParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/variation-images",
-            params,
-            extra
-        );
+        return this.request<IUpdateVariationImagesParameters, TResult>("POST", "/listings/:listing_id/variation-images", params, extra);
     }
 }

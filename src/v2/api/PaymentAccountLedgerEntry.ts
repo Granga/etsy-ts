@@ -64,11 +64,6 @@ export class PaymentAccountLedgerEntry extends ApiRequest {
         params: IFindPaymentAccountEntriesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAccountEntriesParameters, TResult>>> {
-        return this.request<IFindPaymentAccountEntriesParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/payment_account/entries",
-            params,
-            extra
-        );
+        return this.request<IFindPaymentAccountEntriesParameters, TResult>("GET", "/shops/:shop_id/payment_account/entries", params, extra);
     }
 }

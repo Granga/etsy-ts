@@ -31,6 +31,7 @@ export interface IGetListingTranslationParameters {
     listing_id: number,
     language: string
 }
+
 export interface ICreateListingTranslationParameters {
     listing_id: number,
     language: string,
@@ -38,6 +39,7 @@ export interface ICreateListingTranslationParameters {
     description?: string,
     tags?: string[]
 }
+
 export interface IUpdateListingTranslationParameters {
     listing_id: number,
     language: string,
@@ -45,6 +47,7 @@ export interface IUpdateListingTranslationParameters {
     description?: string,
     tags?: string[]
 }
+
 export interface IDeleteListingTranslationParameters {
     listing_id: number,
     language: string
@@ -66,12 +69,7 @@ export class ListingTranslation extends ApiRequest {
         params: IGetListingTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetListingTranslationParameters, TResult>>> {
-        return this.request<IGetListingTranslationParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IGetListingTranslationParameters, TResult>("GET", "/listings/:listing_id/translations/:language", params, extra);
     }
 
     /**
@@ -81,12 +79,7 @@ export class ListingTranslation extends ApiRequest {
         params: ICreateListingTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateListingTranslationParameters, TResult>>> {
-        return this.request<ICreateListingTranslationParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<ICreateListingTranslationParameters, TResult>("POST", "/listings/:listing_id/translations/:language", params, extra);
     }
 
     /**
@@ -96,12 +89,7 @@ export class ListingTranslation extends ApiRequest {
         params: IUpdateListingTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateListingTranslationParameters, TResult>>> {
-        return this.request<IUpdateListingTranslationParameters, TResult>(
-            "PUT",
-            "/listings/:listing_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IUpdateListingTranslationParameters, TResult>("PUT", "/listings/:listing_id/translations/:language", params, extra);
     }
 
     /**
@@ -111,11 +99,6 @@ export class ListingTranslation extends ApiRequest {
         params: IDeleteListingTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingTranslationParameters, TResult>>> {
-        return this.request<IDeleteListingTranslationParameters, TResult>(
-            "DELETE",
-            "/listings/:listing_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IDeleteListingTranslationParameters, TResult>("DELETE", "/listings/:listing_id/translations/:language", params, extra);
     }
 }

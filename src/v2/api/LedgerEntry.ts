@@ -51,6 +51,7 @@ export interface IFindLedgerEntriesParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number
@@ -72,12 +73,7 @@ export class LedgerEntry extends ApiRequest {
         params: IFindLedgerEntriesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntriesParameters, TResult>>> {
-        return this.request<IFindLedgerEntriesParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/ledger/entries",
-            params,
-            extra
-        );
+        return this.request<IFindLedgerEntriesParameters, TResult>("GET", "/shops/:shop_id/ledger/entries", params, extra);
     }
 
     /**
@@ -87,11 +83,6 @@ export class LedgerEntry extends ApiRequest {
         params: IFindLedgerEntryParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindLedgerEntryParameters, TResult>>> {
-        return this.request<IFindLedgerEntryParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/ledger/entries/:ledger_entry_id",
-            params,
-            extra
-        );
+        return this.request<IFindLedgerEntryParameters, TResult>("GET", "/shops/:shop_id/ledger/entries/:ledger_entry_id", params, extra);
     }
 }

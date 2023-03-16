@@ -78,6 +78,7 @@ export interface IPaymentTemplate {
 export interface IFindShopPaymentTemplatesParameters {
     shop_id: string | number
 }
+
 export interface ICreateShopPaymentTemplateParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -94,6 +95,7 @@ export interface ICreateShopPaymentTemplateParameters {
     zip?: string,
     country_id?: number
 }
+
 export interface IUpdateShopPaymentTemplateParameters {
     shop_id: string | number,
     allow_check?: boolean,
@@ -111,6 +113,7 @@ export interface IUpdateShopPaymentTemplateParameters {
     country_id?: number,
     payment_template_id: number
 }
+
 export interface IFindAllUserPaymentTemplatesParameters {
     user_id: string | number
 }
@@ -131,12 +134,7 @@ export class PaymentTemplate extends ApiRequest {
         params: IFindShopPaymentTemplatesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentTemplatesParameters, TResult>>> {
-        return this.request<IFindShopPaymentTemplatesParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/payment_templates",
-            params,
-            extra
-        );
+        return this.request<IFindShopPaymentTemplatesParameters, TResult>("GET", "/shops/:shop_id/payment_templates", params, extra);
     }
 
     /**
@@ -146,12 +144,7 @@ export class PaymentTemplate extends ApiRequest {
         params: ICreateShopPaymentTemplateParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShopPaymentTemplateParameters, TResult>>> {
-        return this.request<ICreateShopPaymentTemplateParameters, TResult>(
-            "POST",
-            "/shops/:shop_id/payment_templates",
-            params,
-            extra
-        );
+        return this.request<ICreateShopPaymentTemplateParameters, TResult>("POST", "/shops/:shop_id/payment_templates", params, extra);
     }
 
     /**
@@ -176,11 +169,6 @@ export class PaymentTemplate extends ApiRequest {
         params: IFindAllUserPaymentTemplatesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserPaymentTemplatesParameters, TResult>>> {
-        return this.request<IFindAllUserPaymentTemplatesParameters, TResult>(
-            "GET",
-            "/users/:user_id/payments/templates",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserPaymentTemplatesParameters, TResult>("GET", "/users/:user_id/payments/templates", params, extra);
     }
 }

@@ -56,6 +56,7 @@ export interface IUploadAvatarParameters {
     user_id: string | number,
     image?: string
 }
+
 export interface IGetAvatarImgSrcParameters {
     user_id: string | number
 }

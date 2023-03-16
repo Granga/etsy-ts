@@ -22,9 +22,11 @@ export interface IRegion {
 export interface IFindAllRegionParameters {
 
 }
+
 export interface IGetRegionParameters {
     region_id: number[]
 }
+
 export interface IFindEligibleRegionsParameters {
 
 }

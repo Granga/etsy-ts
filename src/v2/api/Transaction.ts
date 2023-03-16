@@ -114,24 +114,28 @@ export interface ITransaction {
 export interface IGetShopTransactionParameters {
     transaction_id: number[]
 }
+
 export interface IFindAllListingTransactionsParameters {
     listing_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopReceipt2TransactionsParameters {
     receipt_id: number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllShopTransactionsParameters {
     shop_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserBuyerTransactionsParameters {
     user_id: string | number,
     limit?: number,
@@ -155,12 +159,7 @@ export class Transaction extends ApiRequest {
         params: IGetShopTransactionParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopTransactionParameters, TResult>>> {
-        return this.request<IGetShopTransactionParameters, TResult>(
-            "GET",
-            "/transactions/:transaction_id",
-            params,
-            extra
-        );
+        return this.request<IGetShopTransactionParameters, TResult>("GET", "/transactions/:transaction_id", params, extra);
     }
 
     /**
@@ -170,12 +169,7 @@ export class Transaction extends ApiRequest {
         params: IFindAllListingTransactionsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingTransactionsParameters, TResult>>> {
-        return this.request<IFindAllListingTransactionsParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/transactions",
-            params,
-            extra
-        );
+        return this.request<IFindAllListingTransactionsParameters, TResult>("GET", "/listings/:listing_id/transactions", params, extra);
     }
 
     /**
@@ -185,12 +179,7 @@ export class Transaction extends ApiRequest {
         params: IFindAllShopReceipt2TransactionsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceipt2TransactionsParameters, TResult>>> {
-        return this.request<IFindAllShopReceipt2TransactionsParameters, TResult>(
-            "GET",
-            "/receipts/:receipt_id/transactions",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopReceipt2TransactionsParameters, TResult>("GET", "/receipts/:receipt_id/transactions", params, extra);
     }
 
     /**
@@ -200,12 +189,7 @@ export class Transaction extends ApiRequest {
         params: IFindAllShopTransactionsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopTransactionsParameters, TResult>>> {
-        return this.request<IFindAllShopTransactionsParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/transactions",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopTransactionsParameters, TResult>("GET", "/shops/:shop_id/transactions", params, extra);
     }
 
     /**
@@ -215,11 +199,6 @@ export class Transaction extends ApiRequest {
         params: IFindAllUserBuyerTransactionsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerTransactionsParameters, TResult>>> {
-        return this.request<IFindAllUserBuyerTransactionsParameters, TResult>(
-            "GET",
-            "/users/:user_id/transactions",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserBuyerTransactionsParameters, TResult>("GET", "/users/:user_id/transactions", params, extra);
     }
 }

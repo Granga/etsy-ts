@@ -71,6 +71,7 @@ export interface IGetShopTranslationParameters {
     shop_id: string | number,
     language: string
 }
+
 export interface ICreateShopTranslationParameters {
     shop_id: string | number,
     language: string,
@@ -87,6 +88,7 @@ export interface ICreateShopTranslationParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
+
 export interface IUpdateShopTranslationParameters {
     shop_id: string | number,
     language: string,
@@ -103,6 +105,7 @@ export interface IUpdateShopTranslationParameters {
     vacation_autoreply?: string,
     vacation_message?: string
 }
+
 export interface IDeleteShopTranslationParameters {
     shop_id: string | number,
     language: string
@@ -124,12 +127,7 @@ export class ShopTranslation extends ApiRequest {
         params: IGetShopTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopTranslationParameters, TResult>>> {
-        return this.request<IGetShopTranslationParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IGetShopTranslationParameters, TResult>("GET", "/shops/:shop_id/translations/:language", params, extra);
     }
 
     /**
@@ -139,12 +137,7 @@ export class ShopTranslation extends ApiRequest {
         params: ICreateShopTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShopTranslationParameters, TResult>>> {
-        return this.request<ICreateShopTranslationParameters, TResult>(
-            "POST",
-            "/shops/:shop_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<ICreateShopTranslationParameters, TResult>("POST", "/shops/:shop_id/translations/:language", params, extra);
     }
 
     /**
@@ -154,12 +147,7 @@ export class ShopTranslation extends ApiRequest {
         params: IUpdateShopTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShopTranslationParameters, TResult>>> {
-        return this.request<IUpdateShopTranslationParameters, TResult>(
-            "PUT",
-            "/shops/:shop_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IUpdateShopTranslationParameters, TResult>("PUT", "/shops/:shop_id/translations/:language", params, extra);
     }
 
     /**
@@ -169,11 +157,6 @@ export class ShopTranslation extends ApiRequest {
         params: IDeleteShopTranslationParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShopTranslationParameters, TResult>>> {
-        return this.request<IDeleteShopTranslationParameters, TResult>(
-            "DELETE",
-            "/shops/:shop_id/translations/:language",
-            params,
-            extra
-        );
+        return this.request<IDeleteShopTranslationParameters, TResult>("DELETE", "/shops/:shop_id/translations/:language", params, extra);
     }
 }

@@ -102,14 +102,17 @@ export interface IPayment {
 export interface IFindPaymentParameters {
     payment_id: number[]
 }
+
 export interface IFindPaymentForLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindPaymentForPaymentAccountLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindShopPaymentByReceiptParameters {
     receipt_id: number,
     shop_id: string | number
@@ -171,11 +174,6 @@ export class Payment extends ApiRequest {
         params: IFindShopPaymentByReceiptParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindShopPaymentByReceiptParameters, TResult>>> {
-        return this.request<IFindShopPaymentByReceiptParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/receipts/:receipt_id/payments",
-            params,
-            extra
-        );
+        return this.request<IFindShopPaymentByReceiptParameters, TResult>("GET", "/shops/:shop_id/receipts/:receipt_id/payments", params, extra);
     }
 }

@@ -39,49 +39,88 @@ export interface IShippingUpgrade {
     /**
      * Language code
      */
-    language: number
+    language: number,
+    /**
+     * The minimum delivery time that a shipment will take, in days.
+     */
+    min_delivery_time: number,
+    /**
+     * The maximum delivery time that a shipment will take, in days.
+     */
+    max_delivery_time: number,
+    /**
+     * The numeric ID of the shipping carrier.
+     */
+    shipping_carrier_id: number,
+    /**
+     * The string representation of a shipping carrier's mail class.
+     */
+    mail_class: string
 }
 
 //parameters types
 export interface IGetListingShippingUpgradesParameters {
     listing_id: number
 }
+
 export interface ICreateListingShippingUpgradeParameters {
     listing_id: number,
     type: number,
     value: string,
     price: number,
-    secondary_price: number
+    secondary_price: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IUpdateListingShippingUpgradeParameters {
     listing_id: number,
     value_id: number,
     type: number,
     price: number,
-    secondary_price: number
+    secondary_price: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IDeleteListingShippingUpgradeParameters {
     listing_id: number,
     value_id: number,
     type: number
 }
+
 export interface IFindAllShippingTemplateUpgradesParameters {
     shipping_template_id: number
 }
+
 export interface ICreateShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     type: number,
     value: string,
     price: number,
-    secondary_price: number
+    secondary_price: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IUpdateShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     value_id: number,
     type: number,
     price: number,
-    secondary_price: number
+    secondary_price: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IDeleteShippingTemplateUpgradeParameters {
     shipping_template_id: number,
     value_id: number,
@@ -104,12 +143,7 @@ export class ShippingUpgrade extends ApiRequest {
         params: IGetListingShippingUpgradesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetListingShippingUpgradesParameters, TResult>>> {
-        return this.request<IGetListingShippingUpgradesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/shipping/upgrades",
-            params,
-            extra
-        );
+        return this.request<IGetListingShippingUpgradesParameters, TResult>("GET", "/listings/:listing_id/shipping/upgrades", params, extra);
     }
 
     /**
@@ -119,12 +153,7 @@ export class ShippingUpgrade extends ApiRequest {
         params: ICreateListingShippingUpgradeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateListingShippingUpgradeParameters, TResult>>> {
-        return this.request<ICreateListingShippingUpgradeParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/shipping/upgrades",
-            params,
-            extra
-        );
+        return this.request<ICreateListingShippingUpgradeParameters, TResult>("POST", "/listings/:listing_id/shipping/upgrades", params, extra);
     }
 
     /**
@@ -134,12 +163,7 @@ export class ShippingUpgrade extends ApiRequest {
         params: IUpdateListingShippingUpgradeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateListingShippingUpgradeParameters, TResult>>> {
-        return this.request<IUpdateListingShippingUpgradeParameters, TResult>(
-            "PUT",
-            "/listings/:listing_id/shipping/upgrades",
-            params,
-            extra
-        );
+        return this.request<IUpdateListingShippingUpgradeParameters, TResult>("PUT", "/listings/:listing_id/shipping/upgrades", params, extra);
     }
 
     /**
@@ -149,12 +173,7 @@ export class ShippingUpgrade extends ApiRequest {
         params: IDeleteListingShippingUpgradeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingShippingUpgradeParameters, TResult>>> {
-        return this.request<IDeleteListingShippingUpgradeParameters, TResult>(
-            "DELETE",
-            "/listings/:listing_id/shipping/upgrades",
-            params,
-            extra
-        );
+        return this.request<IDeleteListingShippingUpgradeParameters, TResult>("DELETE", "/listings/:listing_id/shipping/upgrades", params, extra);
     }
 
     /**

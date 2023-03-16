@@ -48,11 +48,6 @@ export class ListingProduct extends ApiRequest {
         params: IGetProductParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetProductParameters, TResult>>> {
-        return this.request<IGetProductParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/products/:product_id",
-            params,
-            extra
-        );
+        return this.request<IGetProductParameters, TResult>("GET", "/listings/:listing_id/products/:product_id", params, extra);
     }
 }

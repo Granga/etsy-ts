@@ -24,18 +24,21 @@ export interface IGetShopSectionTranslationParameters {
     shop_section_id: number,
     language: string
 }
+
 export interface ICreateShopSectionTranslationParameters {
     shop_id: string | number,
     shop_section_id: number,
     language: string,
     title?: string
 }
+
 export interface IUpdateShopSectionTranslationParameters {
     shop_id: string | number,
     shop_section_id: number,
     language: string,
     title?: string
 }
+
 export interface IDeleteShopSectionTranslationParameters {
     shop_id: string | number,
     shop_section_id: number,

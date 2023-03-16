@@ -30,21 +30,25 @@ export interface IShopSection {
 export interface IFindAllShopSectionsParameters {
     shop_id: string | number
 }
+
 export interface ICreateShopSectionParameters {
     shop_id: string | number,
     title?: string,
     user_id?: number
 }
+
 export interface IGetShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number[]
 }
+
 export interface IUpdateShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number,
     title?: string,
     user_id?: number
 }
+
 export interface IDeleteShopSectionParameters {
     shop_id: string | number,
     shop_section_id: number
@@ -86,12 +90,7 @@ export class ShopSection extends ApiRequest {
         params: IGetShopSectionParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetShopSectionParameters, TResult>>> {
-        return this.request<IGetShopSectionParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/sections/:shop_section_id",
-            params,
-            extra
-        );
+        return this.request<IGetShopSectionParameters, TResult>("GET", "/shops/:shop_id/sections/:shop_section_id", params, extra);
     }
 
     /**
@@ -101,12 +100,7 @@ export class ShopSection extends ApiRequest {
         params: IUpdateShopSectionParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateShopSectionParameters, TResult>>> {
-        return this.request<IUpdateShopSectionParameters, TResult>(
-            "PUT",
-            "/shops/:shop_id/sections/:shop_section_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateShopSectionParameters, TResult>("PUT", "/shops/:shop_id/sections/:shop_section_id", params, extra);
     }
 
     /**
@@ -116,11 +110,6 @@ export class ShopSection extends ApiRequest {
         params: IDeleteShopSectionParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteShopSectionParameters, TResult>>> {
-        return this.request<IDeleteShopSectionParameters, TResult>(
-            "DELETE",
-            "/shops/:shop_id/sections/:shop_section_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteShopSectionParameters, TResult>("DELETE", "/shops/:shop_id/sections/:shop_section_id", params, extra);
     }
 }

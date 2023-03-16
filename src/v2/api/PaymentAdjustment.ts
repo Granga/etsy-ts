@@ -61,14 +61,17 @@ export interface IFindPaymentAdjustmentsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindPaymentAdjustmentParameters {
     payment_id: number,
     payment_adjustment_id: number
 }
+
 export interface IFindPaymentAdjustmentForLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
 }
+
 export interface IFindPaymentAdjustmentForPaymentAccountLedgerEntryParameters {
     shop_id: string | number,
     ledger_entry_id: number[]
@@ -90,12 +93,7 @@ export class PaymentAdjustment extends ApiRequest {
         params: IFindPaymentAdjustmentsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindPaymentAdjustmentsParameters, TResult>>> {
-        return this.request<IFindPaymentAdjustmentsParameters, TResult>(
-            "GET",
-            "/payments/:payment_id/adjustments",
-            params,
-            extra
-        );
+        return this.request<IFindPaymentAdjustmentsParameters, TResult>("GET", "/payments/:payment_id/adjustments", params, extra);
     }
 
     /**

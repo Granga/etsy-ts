@@ -108,6 +108,7 @@ export interface IUserProfile {
 export interface IFindUserProfileParameters {
     user_id: string | number
 }
+
 export interface IUpdateUserProfileParameters {
     user_id: string | number,
     bio?: string,

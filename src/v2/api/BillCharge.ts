@@ -50,6 +50,7 @@ export interface IBillCharge {
 export interface IGetUserChargesMetadataParameters {
     user_id: string | number
 }
+
 export interface IFindAllUserChargesParameters {
     limit?: number,
     offset?: number,
@@ -76,12 +77,7 @@ export class BillCharge extends ApiRequest {
         params: IGetUserChargesMetadataParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserChargesMetadataParameters, TResult>>> {
-        return this.request<IGetUserChargesMetadataParameters, TResult>(
-            "GET",
-            "/users/:user_id/charges/meta",
-            params,
-            extra
-        );
+        return this.request<IGetUserChargesMetadataParameters, TResult>("GET", "/users/:user_id/charges/meta", params, extra);
     }
 
     /**

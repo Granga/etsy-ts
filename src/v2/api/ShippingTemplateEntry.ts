@@ -29,6 +29,22 @@ export interface IShippingTemplateEntry {
      */
     destination_region_id: number,
     /**
+     * The numeric ID of the shipping carrier.
+     */
+    shipping_carrier_id: number,
+    /**
+     * The string representation of a shipping carrier's mail class.
+     */
+    mail_class: string,
+    /**
+     * The minimum delivery time that a shipment will take, in days.
+     */
+    min_delivery_time: number,
+    /**
+     * The maximum delivery time that a shipment will take, in days.
+     */
+    max_delivery_time: number,
+    /**
      * The shipping fee for this item, if shipped alone.
      */
     primary_cost: number,
@@ -39,22 +55,37 @@ export interface IShippingTemplateEntry {
 }
 
 //parameters types
+export interface IGetShippingCarriersParameters {
+    origin_country_iso: string
+}
+
 export interface ICreateShippingTemplateEntryParameters {
     shipping_template_id: number,
     destination_country_id?: number,
     primary_cost: number,
     secondary_cost: number,
-    destination_region_id?: number
+    destination_region_id?: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IGetShippingTemplateEntryParameters {
     shipping_template_entry_id: number[]
 }
+
 export interface IUpdateShippingTemplateEntryParameters {
     shipping_template_entry_id: number,
     destination_country_id?: number,
     primary_cost?: number,
-    secondary_cost?: number
+    secondary_cost?: number,
+    shipping_carrier_id?: number,
+    mail_class?: string,
+    min_delivery_time?: number,
+    max_delivery_time?: number
 }
+
 export interface IDeleteShippingTemplateEntryParameters {
     shipping_template_entry_id: number
 }
@@ -69,18 +100,23 @@ export class ShippingTemplateEntry extends ApiRequest {
 
 
     /**
+     * Retrieves a list of available shipping carriers and the mail classes associated with them for a given country
+     */
+    async getShippingCarriers<TResult>(
+        params: IGetShippingCarriersParameters & IStandardParameters,
+        extra?: IRequestOptions
+    ): Promise<AxiosResponse<IStandardResponse<IGetShippingCarriersParameters, TResult>>> {
+        return this.request<IGetShippingCarriersParameters, TResult>("GET", "/shipping/shipping-carriers", params, extra);
+    }
+
+    /**
      * Creates a new ShippingTemplateEntry
      */
     async createShippingTemplateEntry<TResult>(
         params: ICreateShippingTemplateEntryParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateShippingTemplateEntryParameters, TResult>>> {
-        return this.request<ICreateShippingTemplateEntryParameters, TResult>(
-            "POST",
-            "/shipping/templates/entries",
-            params,
-            extra
-        );
+        return this.request<ICreateShippingTemplateEntryParameters, TResult>("POST", "/shipping/templates/entries", params, extra);
     }
 
     /**

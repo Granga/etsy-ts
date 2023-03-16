@@ -82,6 +82,7 @@ export interface IListingImage {
 export interface IFindAllListingImagesParameters {
     listing_id: number
 }
+
 export interface IUploadListingImageParameters {
     listing_id: number,
     listing_image_id?: number,
@@ -90,10 +91,12 @@ export interface IUploadListingImageParameters {
     overwrite?: boolean,
     is_watermarked?: boolean
 }
+
 export interface IGetImageListingParameters {
     listing_image_id: number[],
     listing_id: number
 }
+
 export interface IDeleteListingImageParameters {
     listing_id: number,
     listing_image_id: number
@@ -115,12 +118,7 @@ export class ListingImage extends ApiRequest {
         params: IFindAllListingImagesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingImagesParameters, TResult>>> {
-        return this.request<IFindAllListingImagesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/images",
-            params,
-            extra
-        );
+        return this.request<IFindAllListingImagesParameters, TResult>("GET", "/listings/:listing_id/images", params, extra);
     }
 
     /**
@@ -138,12 +136,7 @@ export class ListingImage extends ApiRequest {
         params: IUploadListingImageParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUploadListingImageParameters, TResult>>> {
-        return this.request<IUploadListingImageParameters, TResult>(
-            "POST",
-            "/listings/:listing_id/images",
-            params,
-            extra
-        );
+        return this.request<IUploadListingImageParameters, TResult>("POST", "/listings/:listing_id/images", params, extra);
     }
 
     /**
@@ -153,12 +146,7 @@ export class ListingImage extends ApiRequest {
         params: IGetImageListingParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetImageListingParameters, TResult>>> {
-        return this.request<IGetImageListingParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/images/:listing_image_id",
-            params,
-            extra
-        );
+        return this.request<IGetImageListingParameters, TResult>("GET", "/listings/:listing_id/images/:listing_image_id", params, extra);
     }
 
     /**
@@ -170,11 +158,6 @@ export class ListingImage extends ApiRequest {
         params: IDeleteListingImageParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteListingImageParameters, TResult>>> {
-        return this.request<IDeleteListingImageParameters, TResult>(
-            "DELETE",
-            "/listings/:listing_id/images/:listing_image_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteListingImageParameters, TResult>("DELETE", "/listings/:listing_id/images/:listing_image_id", params, extra);
     }
 }

@@ -32,20 +32,24 @@ export interface IFindAllUserFavoredByParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserFavoriteUsersParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindUserFavoriteUsersParameters {
     user_id: string | number,
     target_user_id: string | number
 }
+
 export interface ICreateUserFavoriteUsersParameters {
     user_id: string | number,
     target_user_id: string | number
 }
+
 export interface IDeleteUserFavoriteUsersParameters {
     user_id: string | number,
     target_user_id: string | number
@@ -67,12 +71,7 @@ export class FavoriteUser extends ApiRequest {
         params: IFindAllUserFavoredByParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoredByParameters, TResult>>> {
-        return this.request<IFindAllUserFavoredByParameters, TResult>(
-            "GET",
-            "/users/:user_id/favored-by",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFavoredByParameters, TResult>("GET", "/users/:user_id/favored-by", params, extra);
     }
 
     /**
@@ -82,12 +81,7 @@ export class FavoriteUser extends ApiRequest {
         params: IFindAllUserFavoriteUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoriteUsersParameters, TResult>>> {
-        return this.request<IFindAllUserFavoriteUsersParameters, TResult>(
-            "GET",
-            "/users/:user_id/favorites/users",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFavoriteUsersParameters, TResult>("GET", "/users/:user_id/favorites/users", params, extra);
     }
 
     /**
@@ -97,12 +91,7 @@ export class FavoriteUser extends ApiRequest {
         params: IFindUserFavoriteUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindUserFavoriteUsersParameters, TResult>>> {
-        return this.request<IFindUserFavoriteUsersParameters, TResult>(
-            "GET",
-            "/users/:user_id/favorites/users/:target_user_id",
-            params,
-            extra
-        );
+        return this.request<IFindUserFavoriteUsersParameters, TResult>("GET", "/users/:user_id/favorites/users/:target_user_id", params, extra);
     }
 
     /**
@@ -112,12 +101,7 @@ export class FavoriteUser extends ApiRequest {
         params: ICreateUserFavoriteUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateUserFavoriteUsersParameters, TResult>>> {
-        return this.request<ICreateUserFavoriteUsersParameters, TResult>(
-            "POST",
-            "/users/:user_id/favorites/users/:target_user_id",
-            params,
-            extra
-        );
+        return this.request<ICreateUserFavoriteUsersParameters, TResult>("POST", "/users/:user_id/favorites/users/:target_user_id", params, extra);
     }
 
     /**
@@ -127,11 +111,6 @@ export class FavoriteUser extends ApiRequest {
         params: IDeleteUserFavoriteUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteUserFavoriteUsersParameters, TResult>>> {
-        return this.request<IDeleteUserFavoriteUsersParameters, TResult>(
-            "DELETE",
-            "/users/:user_id/favorites/users/:target_user_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteUserFavoriteUsersParameters, TResult>("DELETE", "/users/:user_id/favorites/users/:target_user_id", params, extra);
     }
 }

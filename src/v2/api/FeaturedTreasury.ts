@@ -37,9 +37,11 @@ export interface IFindAllFeaturedTreasuriesParameters {
     page?: number,
     region?: string
 }
+
 export interface IGetFeaturedTreasuryByIdParameters {
     featured_treasury_id: number
 }
+
 export interface IFindAllFeaturedTreasuriesByOwnerParameters {
     limit?: number,
     offset?: number,
@@ -63,12 +65,7 @@ export class FeaturedTreasury extends ApiRequest {
         params: IFindAllFeaturedTreasuriesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesParameters, TResult>>> {
-        return this.request<IFindAllFeaturedTreasuriesParameters, TResult>(
-            "GET",
-            "/featured_treasuries",
-            params,
-            extra
-        );
+        return this.request<IFindAllFeaturedTreasuriesParameters, TResult>("GET", "/featured_treasuries", params, extra);
     }
 
     /**
@@ -78,12 +75,7 @@ export class FeaturedTreasury extends ApiRequest {
         params: IGetFeaturedTreasuryByIdParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetFeaturedTreasuryByIdParameters, TResult>>> {
-        return this.request<IGetFeaturedTreasuryByIdParameters, TResult>(
-            "GET",
-            "/featured_treasuries/:featured_treasury_id",
-            params,
-            extra
-        );
+        return this.request<IGetFeaturedTreasuryByIdParameters, TResult>("GET", "/featured_treasuries/:featured_treasury_id", params, extra);
     }
 
     /**
@@ -93,11 +85,6 @@ export class FeaturedTreasury extends ApiRequest {
         params: IFindAllFeaturedTreasuriesByOwnerParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>>> {
-        return this.request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>(
-            "GET",
-            "/featured_treasuries/owner/:owner_id",
-            params,
-            extra
-        );
+        return this.request<IFindAllFeaturedTreasuriesByOwnerParameters, TResult>("GET", "/featured_treasuries/owner/:owner_id", params, extra);
     }
 }

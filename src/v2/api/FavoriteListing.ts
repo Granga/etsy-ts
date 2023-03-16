@@ -29,20 +29,24 @@ export interface IFindAllListingFavoredByParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserFavoriteListingsParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IFindUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
 }
+
 export interface ICreateUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
 }
+
 export interface IDeleteUserFavoriteListingsParameters {
     user_id: string | number,
     listing_id: number
@@ -64,12 +68,7 @@ export class FavoriteListing extends ApiRequest {
         params: IFindAllListingFavoredByParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllListingFavoredByParameters, TResult>>> {
-        return this.request<IFindAllListingFavoredByParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/favored-by",
-            params,
-            extra
-        );
+        return this.request<IFindAllListingFavoredByParameters, TResult>("GET", "/listings/:listing_id/favored-by", params, extra);
     }
 
     /**
@@ -79,12 +78,7 @@ export class FavoriteListing extends ApiRequest {
         params: IFindAllUserFavoriteListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserFavoriteListingsParameters, TResult>>> {
-        return this.request<IFindAllUserFavoriteListingsParameters, TResult>(
-            "GET",
-            "/users/:user_id/favorites/listings",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserFavoriteListingsParameters, TResult>("GET", "/users/:user_id/favorites/listings", params, extra);
     }
 
     /**
@@ -94,12 +88,7 @@ export class FavoriteListing extends ApiRequest {
         params: IFindUserFavoriteListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindUserFavoriteListingsParameters, TResult>>> {
-        return this.request<IFindUserFavoriteListingsParameters, TResult>(
-            "GET",
-            "/users/:user_id/favorites/listings/:listing_id",
-            params,
-            extra
-        );
+        return this.request<IFindUserFavoriteListingsParameters, TResult>("GET", "/users/:user_id/favorites/listings/:listing_id", params, extra);
     }
 
     /**
@@ -109,12 +98,7 @@ export class FavoriteListing extends ApiRequest {
         params: ICreateUserFavoriteListingsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ICreateUserFavoriteListingsParameters, TResult>>> {
-        return this.request<ICreateUserFavoriteListingsParameters, TResult>(
-            "POST",
-            "/users/:user_id/favorites/listings/:listing_id",
-            params,
-            extra
-        );
+        return this.request<ICreateUserFavoriteListingsParameters, TResult>("POST", "/users/:user_id/favorites/listings/:listing_id", params, extra);
     }
 
     /**

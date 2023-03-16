@@ -145,6 +145,10 @@ export interface IReceipt {
      */
     discount_amt: number,
     /**
+     * The total discount for the receipt, if using an Etsy-funded coupon.
+     */
+    etsy_coupon_discount_amt: number,
+    /**
      * total_price minus coupon discounts. Does not included tax or shipping costs.
      */
     subtotal: number,
@@ -170,11 +174,13 @@ export interface IReceipt {
 export interface IGetShopReceipt2Parameters {
     receipt_id: number[]
 }
+
 export interface IUpdateReceiptParameters {
     receipt_id: number,
     was_paid?: boolean,
     was_shipped?: boolean
 }
+
 export interface IFindAllShopReceiptsParameters {
     shop_id: string | number,
     min_created?: number,
@@ -187,11 +193,13 @@ export interface IFindAllShopReceiptsParameters {
     was_paid?: boolean,
     was_shipped?: boolean
 }
+
 export interface ISubmitTrackingParameters {
     tracking_code: string,
     carrier_name: string,
     send_bcc?: boolean
 }
+
 export interface IFindAllShopReceiptsByStatusParameters {
     shop_id: string | number,
     status: "open" | "unshipped" | "unpaid" | "completed" | "processing" | "all",
@@ -199,6 +207,7 @@ export interface IFindAllShopReceiptsByStatusParameters {
     offset?: number,
     page?: number
 }
+
 export interface ISearchAllShopReceiptsParameters {
     shop_id: string | number,
     search_query: string,
@@ -206,6 +215,7 @@ export interface ISearchAllShopReceiptsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindAllUserBuyerReceiptsParameters {
     user_id: string | number,
     limit?: number,
@@ -259,12 +269,7 @@ export class Receipt extends ApiRequest {
         params: ISubmitTrackingParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ISubmitTrackingParameters, TResult>>> {
-        return this.request<ISubmitTrackingParameters, TResult>(
-            "POST",
-            "/shops/:shop_id/receipts/:receipt_id/tracking",
-            params,
-            extra
-        );
+        return this.request<ISubmitTrackingParameters, TResult>("POST", "/shops/:shop_id/receipts/:receipt_id/tracking", params, extra);
     }
 
     /**
@@ -274,12 +279,7 @@ export class Receipt extends ApiRequest {
         params: IFindAllShopReceiptsByStatusParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllShopReceiptsByStatusParameters, TResult>>> {
-        return this.request<IFindAllShopReceiptsByStatusParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/receipts/:status",
-            params,
-            extra
-        );
+        return this.request<IFindAllShopReceiptsByStatusParameters, TResult>("GET", "/shops/:shop_id/receipts/:status", params, extra);
     }
 
     /**
@@ -289,12 +289,7 @@ export class Receipt extends ApiRequest {
         params: ISearchAllShopReceiptsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<ISearchAllShopReceiptsParameters, TResult>>> {
-        return this.request<ISearchAllShopReceiptsParameters, TResult>(
-            "GET",
-            "/shops/:shop_id/receipts/search",
-            params,
-            extra
-        );
+        return this.request<ISearchAllShopReceiptsParameters, TResult>("GET", "/shops/:shop_id/receipts/search", params, extra);
     }
 
     /**
@@ -304,11 +299,6 @@ export class Receipt extends ApiRequest {
         params: IFindAllUserBuyerReceiptsParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserBuyerReceiptsParameters, TResult>>> {
-        return this.request<IFindAllUserBuyerReceiptsParameters, TResult>(
-            "GET",
-            "/users/:user_id/receipts",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserBuyerReceiptsParameters, TResult>("GET", "/users/:user_id/receipts", params, extra);
     }
 }

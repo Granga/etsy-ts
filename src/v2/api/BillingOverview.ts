@@ -58,11 +58,6 @@ export class BillingOverview extends ApiRequest {
         params: IGetUserBillingOverviewParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetUserBillingOverviewParameters, TResult>>> {
-        return this.request<IGetUserBillingOverviewParameters, TResult>(
-            "GET",
-            "/users/:user_id/billing/overview",
-            params,
-            extra
-        );
+        return this.request<IGetUserBillingOverviewParameters, TResult>("GET", "/users/:user_id/billing/overview", params, extra);
     }
 }

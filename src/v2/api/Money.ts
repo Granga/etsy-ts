@@ -1,6 +1,5 @@
-import { AxiosResponse } from "axios";
 import { ApiRequest } from "../client/ApiRequest";
-import { IOptions, IRequestOptions, IStandardParameters, IStandardResponse } from "../types";
+import { IOptions } from "../types";
 
 //fields
 export interface IMoney {

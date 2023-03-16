@@ -54,6 +54,7 @@ export interface ICoupon {
 export interface IFindAllShopCouponsParameters {
     shop_id: string | number
 }
+
 export interface ICreateCouponParameters {
     shop_id: string | number,
     coupon_code: string,
@@ -66,15 +67,18 @@ export interface ICreateCouponParameters {
     minimum_purchase_price?: string,
     expiration_date?: number
 }
+
 export interface IFindCouponParameters {
     shop_id: string | number,
     coupon_id: number
 }
+
 export interface IUpdateCouponParameters {
     shop_id: string | number,
     coupon_id: number,
     seller_active?: boolean
 }
+
 export interface IDeleteCouponParameters {
     shop_id: string | number,
     coupon_id: number
@@ -126,12 +130,7 @@ export class Coupon extends ApiRequest {
         params: IUpdateCouponParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateCouponParameters, TResult>>> {
-        return this.request<IUpdateCouponParameters, TResult>(
-            "PUT",
-            "/shops/:shop_id/coupons/:coupon_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateCouponParameters, TResult>("PUT", "/shops/:shop_id/coupons/:coupon_id", params, extra);
     }
 
     /**
@@ -141,11 +140,6 @@ export class Coupon extends ApiRequest {
         params: IDeleteCouponParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteCouponParameters, TResult>>> {
-        return this.request<IDeleteCouponParameters, TResult>(
-            "DELETE",
-            "/shops/:shop_id/coupons/:coupon_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteCouponParameters, TResult>("DELETE", "/shops/:shop_id/coupons/:coupon_id", params, extra);
     }
 }

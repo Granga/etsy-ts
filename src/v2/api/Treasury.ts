@@ -87,12 +87,15 @@ export interface IFindAllTreasuriesParameters {
     offset?: number,
     page?: number
 }
+
 export interface IGetTreasuryParameters {
     treasury_key: string
 }
+
 export interface IDeleteTreasuryParameters {
 
 }
+
 export interface IFindAllUserTreasuriesParameters {
     user_id: string | number,
     sort_on?: "hotness" | "created",
@@ -149,11 +152,6 @@ export class Treasury extends ApiRequest {
         params: IFindAllUserTreasuriesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IFindAllUserTreasuriesParameters, TResult>>> {
-        return this.request<IFindAllUserTreasuriesParameters, TResult>(
-            "GET",
-            "/users/:user_id/treasuries",
-            params,
-            extra
-        );
+        return this.request<IFindAllUserTreasuriesParameters, TResult>("GET", "/users/:user_id/treasuries", params, extra);
     }
 }

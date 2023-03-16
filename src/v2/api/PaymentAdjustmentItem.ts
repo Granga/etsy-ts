@@ -38,6 +38,7 @@ export interface IFindPaymentAdjustmentItemsParameters {
     offset?: number,
     page?: number
 }
+
 export interface IFindPaymentAdjustmentItemParameters {
     payment_id: number,
     payment_adjustment_id: number,

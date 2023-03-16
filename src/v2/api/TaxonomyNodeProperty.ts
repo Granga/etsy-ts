@@ -67,11 +67,6 @@ export class TaxonomyNodeProperty extends ApiRequest {
         params: IGetTaxonomyNodePropertiesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetTaxonomyNodePropertiesParameters, TResult>>> {
-        return this.request<IGetTaxonomyNodePropertiesParameters, TResult>(
-            "GET",
-            "/taxonomy/seller/:taxonomy_id/properties",
-            params,
-            extra
-        );
+        return this.request<IGetTaxonomyNodePropertiesParameters, TResult>("GET", "/taxonomy/seller/:taxonomy_id/properties", params, extra);
     }
 }

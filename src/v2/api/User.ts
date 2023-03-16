@@ -45,9 +45,11 @@ export interface IFindAllUsersParameters {
     offset?: number,
     page?: number
 }
+
 export interface IGetUserParameters {
-    user_id: (string | number)[]
+    user_id: string | number
 }
+
 export interface IFindAllUsersForTeamParameters {
     team_id: number,
     status?: "active" | "invited" | "pending",
@@ -55,12 +57,14 @@ export interface IFindAllUsersForTeamParameters {
     offset?: number,
     page?: number
 }
+
 export interface IGetCirclesContainingUserParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IGetConnectedUserParameters {
     user_id: string | number,
     to_user_id: string | number,
@@ -68,16 +72,19 @@ export interface IGetConnectedUserParameters {
     offset?: number,
     page?: number
 }
+
 export interface IUnconnectUsersParameters {
     user_id: string | number,
     to_user_id: string | number
 }
+
 export interface IGetConnectedUsersParameters {
     user_id: string | number,
     limit?: number,
     offset?: number,
     page?: number
 }
+
 export interface IConnectUsersParameters {
     user_id: string | number,
     to_user_id: string | number
@@ -103,7 +110,7 @@ export class User extends ApiRequest {
     }
 
     /**
-     * Retrieves a User by id.
+     * Retrieves a User model object.
      */
     async getUser<TResult>(
         params: IGetUserParameters & IStandardParameters,
@@ -129,12 +136,7 @@ export class User extends ApiRequest {
         params: IGetCirclesContainingUserParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetCirclesContainingUserParameters, TResult>>> {
-        return this.request<IGetCirclesContainingUserParameters, TResult>(
-            "GET",
-            "/users/:user_id/circles",
-            params,
-            extra
-        );
+        return this.request<IGetCirclesContainingUserParameters, TResult>("GET", "/users/:user_id/circles", params, extra);
     }
 
     /**
@@ -144,12 +146,7 @@ export class User extends ApiRequest {
         params: IGetConnectedUserParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUserParameters, TResult>>> {
-        return this.request<IGetConnectedUserParameters, TResult>(
-            "GET",
-            "/users/:user_id/circles/:to_user_id",
-            params,
-            extra
-        );
+        return this.request<IGetConnectedUserParameters, TResult>("GET", "/users/:user_id/circles/:to_user_id", params, extra);
     }
 
     /**
@@ -159,12 +156,7 @@ export class User extends ApiRequest {
         params: IUnconnectUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUnconnectUsersParameters, TResult>>> {
-        return this.request<IUnconnectUsersParameters, TResult>(
-            "DELETE",
-            "/users/:user_id/circles/:to_user_id",
-            params,
-            extra
-        );
+        return this.request<IUnconnectUsersParameters, TResult>("DELETE", "/users/:user_id/circles/:to_user_id", params, extra);
     }
 
     /**
@@ -174,12 +166,7 @@ export class User extends ApiRequest {
         params: IGetConnectedUsersParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetConnectedUsersParameters, TResult>>> {
-        return this.request<IGetConnectedUsersParameters, TResult>(
-            "GET",
-            "/users/:user_id/connected_users",
-            params,
-            extra
-        );
+        return this.request<IGetConnectedUsersParameters, TResult>("GET", "/users/:user_id/connected_users", params, extra);
     }
 
     /**

@@ -34,10 +34,12 @@ export interface IPropertyValue {
 export interface IGetAttributesParameters {
     listing_id: number
 }
+
 export interface IGetAttributeParameters {
     listing_id: number,
     property_id: number
 }
+
 export interface IUpdateAttributeParameters {
     listing_id: number,
     property_id: number,
@@ -45,6 +47,7 @@ export interface IUpdateAttributeParameters {
     values?: string[],
     scale_id?: number
 }
+
 export interface IDeleteAttributeParameters {
     listing_id: number,
     property_id: number
@@ -66,12 +69,7 @@ export class PropertyValue extends ApiRequest {
         params: IGetAttributesParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetAttributesParameters, TResult>>> {
-        return this.request<IGetAttributesParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/attributes",
-            params,
-            extra
-        );
+        return this.request<IGetAttributesParameters, TResult>("GET", "/listings/:listing_id/attributes", params, extra);
     }
 
     /**
@@ -81,12 +79,7 @@ export class PropertyValue extends ApiRequest {
         params: IGetAttributeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IGetAttributeParameters, TResult>>> {
-        return this.request<IGetAttributeParameters, TResult>(
-            "GET",
-            "/listings/:listing_id/attributes/:property_id",
-            params,
-            extra
-        );
+        return this.request<IGetAttributeParameters, TResult>("GET", "/listings/:listing_id/attributes/:property_id", params, extra);
     }
 
     /**
@@ -96,12 +89,7 @@ export class PropertyValue extends ApiRequest {
         params: IUpdateAttributeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateAttributeParameters, TResult>>> {
-        return this.request<IUpdateAttributeParameters, TResult>(
-            "PUT",
-            "/listings/:listing_id/attributes/:property_id",
-            params,
-            extra
-        );
+        return this.request<IUpdateAttributeParameters, TResult>("PUT", "/listings/:listing_id/attributes/:property_id", params, extra);
     }
 
     /**
@@ -111,11 +99,6 @@ export class PropertyValue extends ApiRequest {
         params: IDeleteAttributeParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IDeleteAttributeParameters, TResult>>> {
-        return this.request<IDeleteAttributeParameters, TResult>(
-            "DELETE",
-            "/listings/:listing_id/attributes/:property_id",
-            params,
-            extra
-        );
+        return this.request<IDeleteAttributeParameters, TResult>("DELETE", "/listings/:listing_id/attributes/:property_id", params, extra);
     }
 }

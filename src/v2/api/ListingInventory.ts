@@ -27,6 +27,7 @@ export interface IGetInventoryParameters {
     listing_id: number,
     write_missing_inventory?: boolean
 }
+
 export interface IUpdateInventoryParameters {
     listing_id: number,
     products: any,
@@ -61,11 +62,6 @@ export class ListingInventory extends ApiRequest {
         params: IUpdateInventoryParameters & IStandardParameters,
         extra?: IRequestOptions
     ): Promise<AxiosResponse<IStandardResponse<IUpdateInventoryParameters, TResult>>> {
-        return this.request<IUpdateInventoryParameters, TResult>(
-            "PUT",
-            "/listings/:listing_id/inventory",
-            params,
-            extra
-        );
+        return this.request<IUpdateInventoryParameters, TResult>("PUT", "/listings/:listing_id/inventory", params, extra);
     }
 }
