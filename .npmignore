@@ -1,4 +1,5 @@
 node_modules/
 .idea/
-examples/credentials.json
+examples/security-data.json
+examples/api-credentials.json
 src/

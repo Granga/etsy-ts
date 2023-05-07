@@ -7,7 +7,7 @@
       "dom"
     ],
     "declaration": true,
-    "outDir": ".",
+    "outDir": "./dist",
     "strict": false,
     "esModuleInterop": true,
     "noImplicitAny": false,

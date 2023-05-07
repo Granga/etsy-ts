@@ -1,36 +1,32 @@
 {
   "name": "etsy-ts",
-  "version": "3.12.0",
+  "version": "4.0.0",
   "description": "Etsy API wrapper written in typescript.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
-    "axios": "~0.21.4",
-    "bottleneck": "^2.19.5",
-    "oauth-1.0a": "^2.2.6",
-    "query-string": "^7.0.1",
-    "tslib": "^2.3.1"
+    "axios": "^1.4.0",
+    "axios-auth-refresh": "^3.3.6",
+    "form-data": "^4.0.0",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/lodash.unescape": "^4.0.6",
+    "@types/lodash.unescape": "^4.0.7",
     "@types/node": "^14.14.22",
-    "axios-auth-refresh": "^3.2.1",
-    "form-data": "^4.0.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "lodash.unescape": "^4.0.1",
     "rimraf": "^3.0.2",
-    "swagger-typescript-api": "^9.3.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "swagger-typescript-api": "^12.0.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "prepublishOnly": "tsc",
     "watch": "tsc --watch",
-    "build": "rimraf api && rimraf v2 && rimraf v3 && rimraf index.d.ts && tsc",
-    "generate-api-v3": "ts-node ./generate/generate.ts",
-    "run-sample-v2": "ts-node examples/v2/run.ts",
-    "run-sample-v3": "ts-node examples/v3/run.ts"
+    "build": "rimraf dist && tsc",
+    "generate-api": "ts-node ./generate/generate.ts",
+    "run-sample": "ts-node examples/example.ts"
   },
   "repository": {
     "type": "git",
