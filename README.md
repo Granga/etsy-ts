@@ -19,6 +19,7 @@ Find full [API v3 documentation](https://developer.etsy.com) on Etsy.
 - `Etsy` class constructor now requires `SecurityDataStorage` instance that
   implements [`ISecurityDataStorage`](src/types/ISecurityDataStorage.ts) interface. See a sample implementation
   in [examples/v3/SecurityDataStorage.ts](examples/SecurityDataStorage.ts).
+- Remove the refresh token logic from your code - now that's included within this client
 - For methods that require oauth, now you need to pass `etsyUserId` instead of `accessToken`. This client will
   use `SecurityDataStorage` instance to get, refresh and save `accessToken` for the given `etsyUserId`.
 
