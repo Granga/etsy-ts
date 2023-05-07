@@ -9,7 +9,7 @@ Etsy API wrapper written in TypeScript. Includes types for all Etsy API endpoint
 
 ## Etsy API v3
 
-See example in [examples/v3/run.ts](examples/v3/run.ts)  
+See example in [examples/v3/run.ts](examples/example.ts)  
 Find full [API v3 documentation](https://developer.etsy.com) on Etsy.  
 Most of the API v3 code is _generated_ with [swagger-typescript-api](https://github.com/acacode/swagger-typescript-api).
 

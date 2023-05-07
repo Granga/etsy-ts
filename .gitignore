@@ -19,7 +19,7 @@ dist/test
 /index.js
 /index.d.ts
 
-dist/**/*.map
+dist/
 
 # Optional npm cache directory
 .npm

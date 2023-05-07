@@ -1,6 +1,6 @@
 import fs from "fs-extra";
-import { ISecurityDataStorage, Tokens } from "../../src";
-import { SecurityDataFilter } from "../../src/types/SecurityDataFilter";
+import { ISecurityDataStorage, Tokens } from "../src";
+import { SecurityDataFilter } from "../src/types/SecurityDataFilter";
 
 /**
  * A SecurityData model. This can be a record in a database or a file.
