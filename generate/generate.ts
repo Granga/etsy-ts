@@ -20,6 +20,11 @@ const config: Omit<GenerateApiParamsFromUrl, "input" | "spec"> & { typePrefix?: 
   generateUnionEnums: false,
   typePrefix: "I",
   templates: path.resolve(process.cwd(), `./generate/templates/`),
+  codeGenConstructs: (struct) => ({
+    Keyword: {
+      File: "Readable",
+    } as any
+  })
 };
 
 generateApi({

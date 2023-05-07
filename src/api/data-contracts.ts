@@ -1,3 +1,5 @@
+import { Readable } from "stream";
+
 /** A list of taxonomy nodes from the buyer taxonomy tree. */
 export interface IBuyerTaxonomyNodes {
   /**
@@ -2368,7 +2370,7 @@ export interface IUploadListingFilePayload {
    * A binary file to upload.
    * @format binary
    */
-  file?: File | null;
+  file?: Readable | null;
   /** The file name string of a file to upload */
   name?: string;
   /**
@@ -2474,7 +2476,7 @@ export interface IUploadListingImagePayload {
    * The file name string of a file to upload
    * @format binary
    */
-  image?: File | null;
+  image?: Readable | Buffer | null;
   /**
    * The numeric ID of the primary [listing image](/documentation/reference#tag/ShopListing-Image) for this transaction.
    * @min 1
@@ -2878,7 +2880,7 @@ export interface IUploadListingVideoPayload {
    * A video file to upload.
    * @format binary
    */
-  video?: File | null;
+  video?: Readable | null;
   /** The file name string for the video to upload. */
   name?: string;
 }

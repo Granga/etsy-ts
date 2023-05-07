@@ -18,16 +18,12 @@ import { SecurityDataStorage } from "./SecurityDataStorage";
     let {data: {results: listings}} = await client.ShopListing.getListingsByShop({shopId: shop.shop_id}, {etsyUserId});
 
     // Upload image
-    const listing = listings[0];
     await client.ShopListingImage.uploadListingImage(
       13201425,
-      listing.listing_id,
-      {
-        image: fs.createReadStream("./examples/image.png") as any,
-        overwrite: true
-      }
+      listings[0].listing_id,
+      {image: fs.createReadStream("./examples/image.png")},
+      {etsyUserId}
     );
-
 
     // let {data: receipt} = await client.ShopReceipt.getShopReceipt(13201425, 2332707680, tokens);
     // let {data: shipment} = await client.ShopReceipt.createReceiptShipment(

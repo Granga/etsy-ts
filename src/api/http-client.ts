@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
+import FormData from "form-data";
 import { SecurityDataFilter } from "../types/SecurityDataFilter";
 
 export type QueryParamsType = Record<string | number, any>;
@@ -41,8 +42,8 @@ export class HttpClient {
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com" });
+  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig) {
+    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com"});
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -63,26 +64,24 @@ export class HttpClient {
     };
   }
 
-  protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === "object" && formItem !== null) {
-      return JSON.stringify(formItem);
-    } else {
-      return `${formItem}`;
-    }
-  }
-
   protected createFormData(input: Record<string, unknown>): FormData {
-    return Object.keys(input || {}).reduce((formData, key) => {
-      const property = input[key];
-      const propertyContent: any[] = property instanceof Array ? property : [property];
+    const formData = new FormData();
 
-      for (const formItem of propertyContent) {
-        const isFileType = formItem instanceof Blob || formItem instanceof File;
-        formData.append(key, isFileType ? formItem : this.stringifyFormItem(formItem));
+    for (const key of Object.keys(input || {})) {
+      const value = input[key];
+
+      if (value instanceof Array) {
+        formData.append(key, JSON.stringify(value));
       }
+      else if (typeof value === "boolean") {
+        formData.append(key, value ? "true" : "false");
+      }
+      else {
+        formData.append(key, value);
+      }
+    }
 
-      return formData;
-    }, new FormData());
+    return formData;
   }
 
   public request = async <T = any, _E = any>({
@@ -98,7 +97,7 @@ export class HttpClient {
     const secureParams =
       ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
-        (await this.securityWorker({ etsyUserId }))) ||
+        (await this.securityWorker({etsyUserId}))) ||
       {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
@@ -116,6 +115,7 @@ export class HttpClient {
       headers: {
         ...(requestParams.headers || {}),
         ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(body instanceof FormData ? body.getHeaders() : {}),
       },
       params: query,
       responseType: responseFormat,
