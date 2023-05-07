@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.3.5",
     "bottleneck": "^2.19.5",
     "oauth-1.0a": "^2.2.6",
     "query-string": "^7.1.1",
