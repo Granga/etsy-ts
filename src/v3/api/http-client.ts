@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
-import { stringify as qsStringify } from "query-string";
+import { SecurityDataFilter } from "../types/SecurityDataFilter";
 
 export type QueryParamsType = Record<string | number, any>;
 
@@ -16,16 +16,14 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "pa
   format?: ResponseType;
   /** request body */
   body?: unknown;
-  /** oAuth2 token */
-  accessToken?: string;
+
+  etsyUserId?: number;
 }
 
 export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
-  securityWorker?: (
-    securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
+export interface ApiConfig extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
+  securityWorker?: (params: SecurityDataFilter) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
   secure?: boolean;
   format?: ResponseType;
 }
@@ -34,25 +32,21 @@ export enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
-export class HttpClient<SecurityDataType = unknown> {
+export class HttpClient {
   public instance: AxiosInstance;
-  private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
+  private securityWorker?: ApiConfig["securityWorker"];
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com" });
+  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig) {
+    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com"});
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
   }
-
-  public setSecurityData = (data: SecurityDataType | null) => {
-    this.securityData = data;
-  };
 
   protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
     const method = params1.method || (params2 && params2.method);
@@ -72,7 +66,8 @@ export class HttpClient<SecurityDataType = unknown> {
   protected stringifyFormItem(formItem: unknown) {
     if (typeof formItem === "object" && formItem !== null) {
       return JSON.stringify(formItem);
-    } else {
+    }
+    else {
       return `${formItem}`;
     }
   }
@@ -80,7 +75,7 @@ export class HttpClient<SecurityDataType = unknown> {
   protected createFormData(input: Record<string, unknown>): FormData {
     return Object.keys(input || {}).reduce((formData, key) => {
       const property = input[key];
-      const propertyContent: Iterable<any> = property instanceof Array ? property : [property];
+      const propertyContent: any[] = property instanceof Array ? property : [property];
 
       for (const formItem of propertyContent) {
         const isFileType = formItem instanceof Blob || formItem instanceof File;
@@ -89,52 +84,36 @@ export class HttpClient<SecurityDataType = unknown> {
 
       return formData;
     }, new FormData());
-    return Object.keys(input || {}).reduce((formData, key) => {
-      const property = input[key];
-      formData.append(
-        key,
-        property instanceof Blob
-          ? property
-          : typeof property === "object" && property !== null
-          ? JSON.stringify(property)
-          : `${property}`,
-      );
-      return formData;
-    }, new FormData());
   }
 
-  private createUrlEncoded(body: Record<string, unknown>): string {
-    return qsStringify(body);
-  }
-
-  public request = async <T = any, _E = any>({
-    secure,
-    path,
-    type,
-    query,
-    format,
-    body,
-    ...params
-  }: FullRequestParams): Promise<AxiosResponse<T>> => {
-    const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
-        this.securityWorker &&
-        (await this.securityWorker(this.securityData))) ||
-      {};
+  public request = async <T = any, _E = any>(
+    {
+      secure,
+      path,
+      type,
+      query,
+      format,
+      body,
+      etsyUserId,
+      ...params
+    }: FullRequestParams): Promise<AxiosResponse<T>> => {
+    const secureParams = ((typeof secure === "boolean" ? secure : this.secure) && this.securityWorker && (await this.securityWorker({etsyUserId}))) || {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
 
     if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
       body = this.createFormData(body as Record<string, unknown>);
-    } else if (type === ContentType.UrlEncoded && body && body !== null && typeof body === "object") {
-      body = this.createUrlEncoded(body as Record<string, unknown>);
+    }
+
+    if (type === ContentType.Text && body && body !== null && typeof body !== "string") {
+      body = JSON.stringify(body);
     }
 
     return this.instance.request({
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
+        ...(type && type !== ContentType.FormData ? {"Content-Type": type} : {}),
       },
       params: query,
       responseType: responseFormat,

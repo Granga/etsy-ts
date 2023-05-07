@@ -7,7 +7,6 @@
   "dependencies": {
     "axios": "^1.3.5",
     "bottleneck": "^2.19.5",
-    "oauth-1.0a": "^2.2.6",
     "query-string": "^7.1.1",
     "tslib": "^2.4.0"
   },
@@ -20,12 +19,12 @@
     "fs-extra": "^10.1.0",
     "lodash.unescape": "^4.0.1",
     "rimraf": "^3.0.2",
-    "swagger-typescript-api": "^10.0.1",
+    "swagger-typescript-api": "^12.0.4",
     "ts-node": "^10.9.1",
-    "typescript": "~4.4.4"
+    "typescript": "^4.9.5"
   },
   "resolutions": {
-    "typescript": "~4.4.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "prepublishOnly": "tsc",

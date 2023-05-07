@@ -1,7 +1,7 @@
 <%
 const { utils, route, config, modelTypes } = it;
-const { _, classNameCase, require } = utils;
-const apiClassName = classNameCase(route.moduleName);
+const { _, pascalCase, require } = utils;
+const apiClassName = pascalCase(route.moduleName);
 const routes = route.routes;
 const dataContracts = _.map(modelTypes, "name");
 %>
@@ -13,16 +13,16 @@ import { HttpClient, RequestParams, ContentType, HttpResponse } from "./<%~ conf
 import { <%~ dataContracts.join(", ") %> } from "./<%~ config.fileNames.dataContracts %>"
 <% } %>
 
-export class <%= apiClassName %><SecurityDataType = unknown><% if (!config.singleHttpClient) { %> extends HttpClient<SecurityDataType> <% } %> {
+export class <%= apiClassName %><% if (!config.singleHttpClient) { %> extends HttpClient <% } %> {
 <% if(config.singleHttpClient) { %>
-  protected http: HttpClient<SecurityDataType>;
+  http: HttpClient;
 
-  constructor (http: HttpClient<SecurityDataType>) {
+  constructor (http: HttpClient) {
     this.http = http;
   }
 <% } %>
 
     <% routes.forEach((route) => { %>
-        <%~ includeFile('./procedure-call.eta', { ...it, route }) %>
+        <%~ includeFile('./procedure-call.ejs', { ...it, route }) %>
     <% }) %>
 }
