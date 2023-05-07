@@ -1,5 +1,5 @@
 import * as fs from "fs-extra";
-import { Etsy } from "../../src/v3";
+import { Etsy } from "../../src";
 import { initAuthRefresh } from "./auth-refresh";
 
 (async () => {

@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import { SecurityData, ISecurityDataStorage } from "../../src/v3";
+import { SecurityData, ISecurityDataStorage } from "../../src";
 
 export type AccessTokenModel = SecurityData & {
   etsyUserId: number;

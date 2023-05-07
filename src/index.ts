@@ -1,2 +1,4 @@
-export * from "./v3/client/Etsy";
-export * from "./v3/api/data-contracts";
+export * from "./client/Etsy";
+export * from "./api/data-contracts";
+export * from "./types/SecurityData";
+export * from "./types/ISecurityDataStorage";
