@@ -2476,7 +2476,7 @@ export interface IUploadListingImagePayload {
    * The file name string of a file to upload
    * @format binary
    */
-  image?: Readable | Buffer | null;
+  image?: Readable | null;
   /**
    * The numeric ID of the primary [listing image](/documentation/reference#tag/ShopListing-Image) for this transaction.
    * @min 1

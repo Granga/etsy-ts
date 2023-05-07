@@ -42,8 +42,8 @@ export class HttpClient {
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig) {
-    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com"});
+  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig) {
+    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com" });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -72,11 +72,9 @@ export class HttpClient {
 
       if (value instanceof Array) {
         formData.append(key, JSON.stringify(value));
-      }
-      else if (typeof value === "boolean") {
+      } else if (typeof value === "boolean") {
         formData.append(key, value ? "true" : "false");
-      }
-      else {
+      } else {
         formData.append(key, value);
       }
     }
@@ -97,7 +95,7 @@ export class HttpClient {
     const secureParams =
       ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
-        (await this.securityWorker({etsyUserId}))) ||
+        (await this.securityWorker({ etsyUserId }))) ||
       {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
