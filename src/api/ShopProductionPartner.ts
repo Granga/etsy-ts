@@ -1,10 +1,10 @@
 import { IErrorSchema, IShopProductionPartners } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class ShopProductionPartner<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class ShopProductionPartner {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

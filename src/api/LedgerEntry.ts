@@ -6,10 +6,10 @@ import {
 } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class LedgerEntry<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class LedgerEntry {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

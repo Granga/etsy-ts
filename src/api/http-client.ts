@@ -16,7 +16,7 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "pa
   format?: ResponseType;
   /** request body */
   body?: unknown;
-
+  /** Etsy user id will be passed to the SecurityDataStorage functions */
   etsyUserId?: number;
 }
 
@@ -41,8 +41,8 @@ export class HttpClient {
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig) {
-    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com"});
+  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig) {
+    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "https://openapi.etsy.com" });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -66,8 +66,7 @@ export class HttpClient {
   protected stringifyFormItem(formItem: unknown) {
     if (typeof formItem === "object" && formItem !== null) {
       return JSON.stringify(formItem);
-    }
-    else {
+    } else {
       return `${formItem}`;
     }
   }
@@ -86,18 +85,21 @@ export class HttpClient {
     }, new FormData());
   }
 
-  public request = async <T = any, _E = any>(
-    {
-      secure,
-      path,
-      type,
-      query,
-      format,
-      body,
-      etsyUserId,
-      ...params
-    }: FullRequestParams): Promise<AxiosResponse<T>> => {
-    const secureParams = ((typeof secure === "boolean" ? secure : this.secure) && this.securityWorker && (await this.securityWorker({etsyUserId}))) || {};
+  public request = async <T = any, _E = any>({
+    secure,
+    path,
+    type,
+    query,
+    format,
+    body,
+    etsyUserId,
+    ...params
+  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+    const secureParams =
+      ((typeof secure === "boolean" ? secure : this.secure) &&
+        this.securityWorker &&
+        (await this.securityWorker({ etsyUserId }))) ||
+      {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
 
@@ -113,7 +115,7 @@ export class HttpClient {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? {"Content-Type": type} : {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
       params: query,
       responseType: responseFormat,

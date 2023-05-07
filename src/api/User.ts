@@ -1,10 +1,10 @@
 import { IErrorSchema, ISelf, IUser } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class User<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class User {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

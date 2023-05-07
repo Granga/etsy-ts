@@ -1,27 +1,21 @@
 import * as fs from "fs-extra";
 import { Etsy } from "../../src";
-import { initAuthRefresh } from "./auth-refresh";
+import { SecurityDataStorage } from "./SecurityDataStorage";
 
 (async () => {
   try {
-    const credentials = await fs.readJSON("./examples/credentials.json");
-    const apiKey = credentials.apiKey;
-    const tokens = {
-      accessToken: credentials.accessToken,
-      refreshToken: credentials.refreshToken
-    };
-    const client = new Etsy({apiKey});
+    const apiCredentials = await fs.readJSON("./examples/api-credentials.json");
+    const client = new Etsy({
+      apiKey: apiCredentials.apiKey,
+      securityDataStorage: new SecurityDataStorage()
+    });
 
-    // Token expires in 1 hour, so we'll refresh it when we receive a 401
-    initAuthRefresh(client, apiKey, tokens);
+    const etsyUserId = 92841371;
 
     let {data: ping} = await client.Other.ping();
-    let {data: user} = await client.User.getUser(92841371, tokens);
-    let {data: shop} = await client.Shop.getShopByOwnerUserId(user.user_id, tokens);
-    let {data: {results: listings}} = await client.ShopListing.findAllActiveListingsByShop({
-      shopId: shop.shop_id,
-      limit: 10
-    });
+    let {data: user} = await client.User.getUser(92841371, {etsyUserId});
+    let {data: shop} = await client.Shop.getShopByOwnerUserId(user.user_id, {etsyUserId});
+    let {data: {results: listings}} = await client.ShopListing.getListingsByShop({shopId: shop.shop_id}, {etsyUserId});
 
     // Upload image
     const listing = listings[0];

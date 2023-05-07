@@ -3,7 +3,7 @@ import * as path from "path";
 import { generateApi, GenerateApiParamsFromUrl } from "swagger-typescript-api";
 
 const config: Omit<GenerateApiParamsFromUrl, "input" | "spec"> & { typePrefix?: string } = {
-  output: path.resolve(process.cwd(), "./src/v3/api"),
+  output: path.resolve(process.cwd(), "./src/api"),
   url: "https://www.etsy.com/openapi/generated/oas/3.0.0.json",
   modular: true,
   httpClientType: "axios",
@@ -19,7 +19,7 @@ const config: Omit<GenerateApiParamsFromUrl, "input" | "spec"> & { typePrefix?: 
   moduleNameFirstTag: true,
   generateUnionEnums: false,
   typePrefix: "I",
-  templates: path.resolve(process.cwd(), `./generate/templates/`)
+  templates: path.resolve(process.cwd(), `./generate/templates/`),
 };
 
 generateApi({
@@ -27,7 +27,7 @@ generateApi({
 })
   .then(({files, configuration}) => {
     files.forEach(({content, name}) => {
-      fs.writeFileSync(path.resolve(process.cwd(), `./src/v3/api/${name}`), content);
+      fs.writeFileSync(path.resolve(process.cwd(), `./src/api/${name}`), content);
     });
   })
   .catch(e => console.error(e))

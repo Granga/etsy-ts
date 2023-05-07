@@ -7,10 +7,10 @@ import {
 } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class ShopReceiptTransactions<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class ShopReceiptTransactions {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

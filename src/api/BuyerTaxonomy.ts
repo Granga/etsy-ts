@@ -1,10 +1,10 @@
 import { IBuyerTaxonomyNodeProperties, IBuyerTaxonomyNodes, IErrorSchema } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class BuyerTaxonomy<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class BuyerTaxonomy {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

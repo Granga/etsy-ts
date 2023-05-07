@@ -1,10 +1,8 @@
-import { SecurityData } from "./SecurityData";
 import { SecurityDataFilter } from "./SecurityDataFilter";
+import { Tokens } from "./Tokens";
 
 export interface ISecurityDataStorage {
-  storeAccessToken(securityData: SecurityData): Promise<void>;
+  storeAccessToken(filter: SecurityDataFilter, securityData: Tokens): Promise<void>;
 
-  findAccessToken(params: SecurityDataFilter): Promise<SecurityData>;
-
-  getApiKey?(params: SecurityDataFilter): Promise<string>;
+  findAccessToken(params: SecurityDataFilter): Promise<Tokens>;
 }

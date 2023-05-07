@@ -1,10 +1,10 @@
 import { IErrorSchema, IPong, IScopes, ITokenScopesPayload } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Other<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class Other {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

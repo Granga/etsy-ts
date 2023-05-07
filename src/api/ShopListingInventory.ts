@@ -7,10 +7,10 @@ import {
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class ShopListingInventory<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class ShopListingInventory {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 

@@ -1,10 +1,10 @@
 import { IErrorSchema, IShopListingFile, IShopListingFiles, IUploadListingFilePayload } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class ShopListingFile<SecurityDataType = unknown> {
-  http: HttpClient<SecurityDataType>;
+export class ShopListingFile {
+  http: HttpClient;
 
-  constructor(http: HttpClient<SecurityDataType>) {
+  constructor(http: HttpClient) {
     this.http = http;
   }
 
