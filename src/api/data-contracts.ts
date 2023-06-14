@@ -960,7 +960,7 @@ export interface IListingImage {
    * @min 0
    */
   full_width?: number | null;
-  /** Alt text for the listing image. */
+  /** Alt text for the listing image. Max length 250 characters. */
   alt_text?: string | null;
 }
 
@@ -2499,7 +2499,7 @@ export interface IUploadListingImagePayload {
    */
   is_watermarked?: boolean;
   /**
-   * Alt text for the listing image.
+   * Alt text for the listing image. Max length 250 characters.
    * @default ""
    */
   alt_text?: string;
@@ -2996,7 +2996,8 @@ export interface IGetShopReceiptsParams {
   was_shipped?: boolean | null;
   /** When `true`, returns receipts that have been marked as delivered. When `false`, returns receipts where shipment has not been marked as delivered. */
   was_delivered?: boolean | null;
-  was_canceled?: "true" | "false" | "null";
+  /** When `true`, the endpoint will only return the canceled receipts. When `false`, the endpoint will only return non-canceled receipts. */
+  was_canceled?: boolean | null;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
    * @min 1
