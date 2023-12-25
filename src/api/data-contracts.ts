@@ -1318,10 +1318,7 @@ export interface IPaymentAccountLedgerEntry {
    * @min 1
    */
   ledger_id?: number;
-  /**
-   * The sequence allows ledger entries to be sorted chronologically. The higher the sequence, the more recent the entry.
-   * @min 0
-   */
+  /** The sequence allows ledger entries to be sorted chronologically. The higher the sequence, the more recent the entry. */
   sequence_number?: number;
   /** The amount of money credited to the ledger. */
   amount?: number;
