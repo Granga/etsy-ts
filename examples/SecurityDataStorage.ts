@@ -40,6 +40,7 @@ export class SecurityDataStorage implements ISecurityDataStorage {
   async findAccessToken(
     filter: SecurityDataFilter
   ): Promise<Tokens | undefined> {
+    if (!fs.existsSync(this.filepath)) return undefined;
 
     const all =
       ((await fs.readJson(this.filepath)) as SecurityDataItem[]) || [];
