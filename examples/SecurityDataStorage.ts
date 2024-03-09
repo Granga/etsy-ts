@@ -14,31 +14,37 @@ export type SecurityDataItem = Tokens & {
  * You can use this class to store security data in a file or in a database.
  */
 export class SecurityDataStorage implements ISecurityDataStorage {
+  filepath = "./examples/security-data.json";
+
   async storeAccessToken(filter: SecurityDataFilter, accessToken: Tokens) {
-    const all = await fs.readJson("./examples/security-data.json") as SecurityDataItem[];
+    const all = (await fs.readJson(this.filepath)) as SecurityDataItem[];
     const etsyUserId = parseInt(accessToken.accessToken.split(".")[0]);
 
-    const index = all.findIndex(item => item.etsyUserId === etsyUserId);
+    const index = all.findIndex((item) => item.etsyUserId === etsyUserId);
 
     if (index === -1) {
       all.push({
         etsyUserId,
-        ...accessToken
+        ...accessToken,
       });
-    }
-    else {
+    } else {
       all[index] = {
         etsyUserId,
-        ...accessToken
+        ...accessToken,
       };
     }
 
-    await fs.writeJSON("./examples/security-data.json", all, {spaces: 2});
+    await fs.writeJSON(this.filepath, all, { spaces: 2 });
   }
 
-  async findAccessToken(filter: SecurityDataFilter): Promise<Tokens> {
-    const all = await fs.readJson("./examples/security-data.json") as SecurityDataItem[] || [];
+  async findAccessToken(
+    filter: SecurityDataFilter
+  ): Promise<Tokens | undefined> {
+    if (!fs.existsSync(this.filepath)) return undefined;
 
-    return all.find(item => item.etsyUserId === filter.etsyUserId);
+    const all =
+      ((await fs.readJson(this.filepath)) as SecurityDataItem[]) || [];
+
+    return all.find((item) => item.etsyUserId === filter.etsyUserId);
   }
 }
