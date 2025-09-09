@@ -1,5 +1,10 @@
 import { Readable } from "stream";
 
+export interface ITypeDiscriminator {
+  /** field used to determine the type of the object when deserializing union type responses */
+  __type: string;
+}
+
 /** A list of taxonomy nodes from the buyer taxonomy tree. */
 export interface IBuyerTaxonomyNodes {
   /**
@@ -14,7 +19,8 @@ export interface IBuyerTaxonomyNodes {
 /** A taxonomy node in the buyer taxonomy tree. */
 export interface IBuyerTaxonomyNode {
   /**
-   * The unique numeric ID of an Etsy taxonomy node, which is a metadata category for listings organized into the seller taxonomy hierarchy tree. For example, the \"shoes\" taxonomy node (ID: 1429, level: 1) is higher in the hierarchy than \"girls' shoes\" (ID: 1440, level: 2). The taxonomy nodes assigned to a listing support access to specific standardized product scales and properties. For example, listings assigned the taxonomy nodes \"shoes\" or \"girls' shoes\" support access to the \"EU\" shoe size scale with its associated property names and IDs for EU shoe sizes, such as property `value_id`:\"1394\", and `name`:\"38\".
+   * The unique numeric ID of an Etsy taxonomy node, which is a metadata category for listings organized into the seller taxonomy hierarchy tree. For example, the "shoes" taxonomy node (ID: 1429, level: 1) is higher in the hierarchy than "girls' shoes" (ID: 1440, level: 2). The taxonomy nodes assigned to a listing support access to specific standardized product scales and properties. For example, listings assigned the taxonomy nodes "shoes" or "girls' shoes" support access to the "EU" shoe size scale with its associated property names and IDs for EU shoe sizes, such as property `value_id`:"1394", and `name`:"38".
+   * @format int64
    * @min 1
    */
   id?: number;
@@ -27,6 +33,7 @@ export interface IBuyerTaxonomyNode {
   name?: string;
   /**
    * The numeric taxonomy ID of the parent of this node.
+   * @format int64
    * @min 1
    * @default null
    */
@@ -56,6 +63,7 @@ export interface IBuyerTaxonomyNodeProperties {
 export interface IBuyerTaxonomyNodeProperty {
   /**
    * The unique numeric ID of this product property.
+   * @format int64
    * @min 1
    */
   property_id?: number;
@@ -85,6 +93,7 @@ export interface IBuyerTaxonomyNodeProperty {
 export interface IBuyerTaxonomyPropertyScale {
   /**
    * The unique numeric ID of a scale.
+   * @format int64
    * @min 1
    */
   scale_id?: number;
@@ -98,6 +107,7 @@ export interface IBuyerTaxonomyPropertyScale {
 export interface IBuyerTaxonomyPropertyValue {
   /**
    * The numeric ID of this property value.
+   * @format int64
    * @min 1
    */
   value_id?: number | null;
@@ -105,6 +115,7 @@ export interface IBuyerTaxonomyPropertyValue {
   name?: string;
   /**
    * The numeric scale ID of the scale to which this property value belongs.
+   * @format int64
    * @min 1
    */
   scale_id?: number | null;
@@ -116,42 +127,45 @@ export interface IBuyerTaxonomyPropertyValue {
 export interface IShopListing {
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) posting the listing.
+   * @format int64
    * @min 1
    */
   user_id?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
-  /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{P}\\p{Sm}\\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
+  /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{P}\p{Sm}\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
   title?: string;
   /** A description string of the product for sale in the listing. */
   description?: string;
   /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive" | "sold_out" | "draft" | "expired";
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   creation_timestamp?: number;
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
   /**
-   * The listing\'s expiration time, in epoch seconds.
+   * The listing's expiration time, in epoch seconds.
    * @min 946684800
    */
   ending_timestamp?: number;
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   original_creation_timestamp?: number;
@@ -169,7 +183,7 @@ export interface IShopListing {
    * The date and time of the last state change of this listing.
    * @min 946684800
    */
-  state_timestamp?: number;
+  state_timestamp?: number | null;
   /**
    * The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint.
    * @min 0
@@ -177,10 +191,11 @@ export interface IShopListing {
   quantity?: number;
   /**
    * The numeric ID of a section in a specific Etsy shop.
+   * @format int64
    * @min 1
    */
   shop_section_id?: number | null;
-  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. */
+  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop's home page. */
   featured_rank?: number;
   /** The full URL to the listing's page on Etsy. */
   url?: string;
@@ -205,17 +220,19 @@ export interface IShopListing {
   personalization_instructions?: string | null;
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type?: "physical" | "download" | "both";
-  /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[];
-  /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
+  /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   materials?: string[];
   /**
    * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number | null;
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   return_policy_id?: number | null;
@@ -234,11 +251,11 @@ export interface IShopListing {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2023"
+    | "2020_2025"
     | "2010_2019"
-    | "2004_2009"
-    | "before_2004"
-    | "2000_2003"
+    | "2006_2009"
+    | "before_2006"
+    | "2000_2005"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -256,24 +273,24 @@ export interface IShopListing {
   /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
   is_supply?: boolean | null;
   /**
-   * The numeric weight of the product measured in units set in \'item_weight_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric weight of the product measured in units set in 'item_weight_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_weight?: number | null;
   /** A string defining the units used to measure the weight of the product. Default value is null. */
   item_weight_unit?: "oz" | "lb" | "g" | "kg" | null;
   /**
-   * The numeric length of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_length?: number | null;
   /**
-   * The numeric width of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric width of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_width?: number | null;
   /**
-   * The numeric length of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_height?: number | null;
@@ -281,7 +298,7 @@ export interface IShopListing {
   item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
   /** When true, this is a private listing intended for a specific buyer and hidden from shop view. */
   is_private?: boolean;
-  /** An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
+  /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   style?: string[];
   /** A string describing the files attached to a digital listing. */
   file_data?: string;
@@ -295,6 +312,14 @@ export interface IShopListing {
   price?: IMoney;
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
+  /**
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * @format int64
+   * @min 1
+   */
+  readiness_state_id?: number | null;
+  /** A title string suggested by Etsy. Only available for a user's own listings, when allow_suggested_title param is present, and when a shop's language setting is English. Not all listings will have suggestions. */
+  suggested_title?: string | null;
 }
 
 /** A representation of an amount of money. */
@@ -314,11 +339,13 @@ export interface IMoney {
 export interface IShopListingFile {
   /**
    * The unique numeric ID of a file associated with a digital listing.
+   * @format int64
    * @min 1
    */
   listing_file_id?: number;
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
@@ -376,42 +403,45 @@ export interface IShopListings {
 export interface IShopListingWithAssociations {
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) posting the listing.
+   * @format int64
    * @min 1
    */
   user_id?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
-  /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{P}\\p{Sm}\\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
+  /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{P}\p{Sm}\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
   title?: string;
   /** A description string of the product for sale in the listing. */
   description?: string;
   /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive" | "sold_out" | "draft" | "expired";
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   creation_timestamp?: number;
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
   /**
-   * The listing\'s expiration time, in epoch seconds.
+   * The listing's expiration time, in epoch seconds.
    * @min 946684800
    */
   ending_timestamp?: number;
   /**
-   * The listing\'s creation time, in epoch seconds.
+   * The listing's creation time, in epoch seconds.
    * @min 946684800
    */
   original_creation_timestamp?: number;
@@ -429,7 +459,7 @@ export interface IShopListingWithAssociations {
    * The date and time of the last state change of this listing.
    * @min 946684800
    */
-  state_timestamp?: number;
+  state_timestamp?: number | null;
   /**
    * The positive non-zero number of products available for purchase in the listing. Note: The listing quantity is the sum of available offering quantities. You can request the quantities for individual offerings from the ListingInventory resource using the [getListingInventory](/documentation/reference#operation/getListingInventory) endpoint.
    * @min 0
@@ -437,10 +467,11 @@ export interface IShopListingWithAssociations {
   quantity?: number;
   /**
    * The numeric ID of a section in a specific Etsy shop.
+   * @format int64
    * @min 1
    */
   shop_section_id?: number | null;
-  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. */
+  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop's home page. */
   featured_rank?: number;
   /** The full URL to the listing's page on Etsy. */
   url?: string;
@@ -465,17 +496,19 @@ export interface IShopListingWithAssociations {
   personalization_instructions?: string | null;
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type?: "physical" | "download" | "both";
-  /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}\\-'™©®]/u) Default value is null. */
+  /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[];
-  /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
+  /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   materials?: string[];
   /**
    * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number | null;
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   return_policy_id?: number | null;
@@ -494,11 +527,11 @@ export interface IShopListingWithAssociations {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2023"
+    | "2020_2025"
     | "2010_2019"
-    | "2004_2009"
-    | "before_2004"
-    | "2000_2003"
+    | "2006_2009"
+    | "before_2006"
+    | "2000_2005"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -516,24 +549,24 @@ export interface IShopListingWithAssociations {
   /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
   is_supply?: boolean | null;
   /**
-   * The numeric weight of the product measured in units set in \'item_weight_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric weight of the product measured in units set in 'item_weight_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_weight?: number | null;
   /** A string defining the units used to measure the weight of the product. Default value is null. */
   item_weight_unit?: "oz" | "lb" | "g" | "kg" | null;
   /**
-   * The numeric length of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_length?: number | null;
   /**
-   * The numeric width of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric width of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_width?: number | null;
   /**
-   * The numeric length of the product measured in units set in \'item_dimensions_unit\'. Default value is null. If set, the value must be greater than 0.
+   * The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
    * @format float
    */
   item_height?: number | null;
@@ -541,7 +574,7 @@ export interface IShopListingWithAssociations {
   item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
   /** When true, this is a private listing intended for a specific buyer and hidden from shop view. */
   is_private?: boolean;
-  /** An array of style strings for this listing, each of which is free-form text string such as \"Formal\", or \"Steampunk\". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\\p{L}\\p{Nd}\\p{Zs}]/u) Default value is null. */
+  /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   style?: string[];
   /** A string describing the files attached to a digital listing. */
   file_data?: string;
@@ -555,24 +588,32 @@ export interface IShopListingWithAssociations {
   price?: IMoney;
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
+  /**
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * @format int64
+   * @min 1
+   */
+  readiness_state_id?: number | null;
+  /** A title string suggested by Etsy. Only available for a user's own listings, when allow_suggested_title param is present, and when a shop's language setting is English. Not all listings will have suggestions. */
+  suggested_title?: string | null;
   /** An array of data representing the shipping profile resource. */
-  shipping_profile?: IShopShippingProfile;
+  shipping_profile?: IShopShippingProfile | null;
   /** Represents a single user of the site */
-  user?: IUser;
+  user?: IUser | null;
   /** A shop created by an Etsy user. */
-  shop?: IShop;
+  shop?: IShop | null;
   /** Represents a list of listing image resources, each of which contains the reference URLs and metadata for an image */
   images?: IListingImage[];
   /** The single video associated with a listing. */
   videos?: IListingVideo[];
   /** An enumerated string that attaches a valid association. Default value is null. */
-  inventory?: IListingInventory;
+  inventory?: IListingInventory | null;
   /** Represents a list of production partners for a shop. */
   production_partners?: IShopProductionPartner[];
   /** A list of SKU strings for the listing. SKUs will only appear if the requesting user owns the shop and a valid matching OAuth 2 token is provided. When requested without the token it will be an empty array. */
   skus?: string[];
-  /** An array of translations for the listing. Default value is an empty array. */
-  translations?: IListingTranslation[];
+  /** A map of translations for the listing. Default value is a map of all supported languages keyed to null. */
+  translations?: IListingTranslations | null;
   /** The number of times the listing has been viewed. This value is tabulated once per day and **only for active listings**, so the value is not real-time. If `0`, the listing has either not been viewed, not yet tabulated, was not active during the last tabulation or there was an error fetching the value. If a value is expected, call `getListing` to confirm the value. */
   views?: number;
 }
@@ -581,6 +622,7 @@ export interface IShopListingWithAssociations {
 export interface IShopShippingProfile {
   /**
    * The numeric ID of the shipping profile.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number;
@@ -588,6 +630,7 @@ export interface IShopShippingProfile {
   title?: string | null;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) who owns the shipping profile.
+   * @format int64
    * @min 1
    */
   user_id?: number;
@@ -614,8 +657,9 @@ export interface IShopShippingProfile {
   shipping_profile_destinations?: IShopShippingProfileDestination[];
   /** A list of [shipping profile upgrades](/documentation/reference/#operation/createShopShippingProfileUpgrade) available for this shipping profile. */
   shipping_profile_upgrades?: IShopShippingProfileUpgrade[];
-  /** The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`. */
+  /** The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` supports postal codes. See the [Fulfillment Tutorial docs](https://developer.etsy.com/documentation/tutorials/fulfillment/#countries-requiring-postal-codes) for more info */
   origin_postal_code?: string | null;
+  /** @default "manual" */
   profile_type?: "manual" | "calculated";
   /**
    * The domestic handling fee added to buyer's shipping total - only available for calculated shipping profiles.
@@ -637,11 +681,13 @@ export interface IShopShippingProfile {
 export interface IShopShippingProfileDestination {
   /**
    * The numeric ID of the shipping profile destination in the [shipping profile](/documentation/reference#tag/Shop-ShippingProfile) associated with the listing.
+   * @format int64
    * @min 1
    */
   shipping_profile_destination_id?: number;
   /**
    * The numeric ID of the shipping profile.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number;
@@ -652,7 +698,7 @@ export interface IShopShippingProfileDestination {
   origin_country_iso?: string;
   /** The ISO code of the country to which the listing ships. If null, request sets destination to destination_region. Required if destination_region is null or not provided. */
   destination_country_iso?: string;
-  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If \`none\`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
+  /** The code of the region to which the listing ships. A region represents a set of countries. Supported regions are Europe Union and Non-Europe Union (countries in Europe not in EU). If `none`, request sets destination to destination_country_iso. Required if destination_country_iso is null or not provided. */
   destination_region?: "eu" | "non_eu" | "none";
   /** The cost of shipping to this country/region alone, measured in the store's default currency. */
   primary_cost?: IMoney;
@@ -680,11 +726,13 @@ export interface IShopShippingProfileDestination {
 export interface IShopShippingProfileUpgrade {
   /**
    * The numeric ID of the base shipping profile.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number;
   /**
    * The numeric ID that is associated with a shipping upgrade
+   * @format int64
    * @min 1
    */
   upgrade_id?: number;
@@ -724,20 +772,21 @@ export interface IShopShippingProfileUpgrade {
 /** Represents a single user of the site */
 export interface IUser {
   /**
-   * The numeric ID of a user. This number is also a valid shop ID for the user\'s shop.
+   * The numeric ID of a user. This number is also a valid shop ID for the user's shop.
+   * @format int64
    * @min 1
    */
   user_id?: number;
   /**
-   * An email address string for the user\'s primary email address.
+   * An email address string for the user's primary email address. Access to this field is granted on a case by case basis for third-party integrations that require full access
    * @format email
    */
   primary_email?: string | null;
-  /** The user\'s first name. */
+  /** The user's first name. */
   first_name?: string | null;
-  /** The user\'s last name. */
+  /** The user's last name. */
   last_name?: string | null;
-  /** The user\'s avatar URL. */
+  /** The user's avatar URL. */
   image_url_75x75?: string | null;
 }
 
@@ -745,11 +794,13 @@ export interface IUser {
 export interface IShop {
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
   /**
    * The numeric user ID of the [user](/documentation/reference#tag/User) who owns this shop.
+   * @format int64
    * @min 1
    */
   user_id?: number;
@@ -765,7 +816,7 @@ export interface IShop {
    * @min 0
    */
   created_timestamp?: number;
-  /** A brief heading string for the shop\'s main page. */
+  /** A brief heading string for the shop's main page. */
   title?: string | null;
   /** An announcement string to buyers that displays on the shop's homepage. */
   announcement?: string | null;
@@ -799,7 +850,7 @@ export interface IShop {
    * @min 0
    */
   digital_listing_count?: number;
-  /** The shop owner\'s login name string. */
+  /** The shop owner's login name string. */
   login_name?: string;
   /** When true, the shop accepts customization requests. */
   accepts_custom_requests?: boolean;
@@ -845,7 +896,7 @@ export interface IShop {
   is_using_structured_policies?: boolean;
   /** When true, the shop accepted OR declined after viewing structured policies onboarding. */
   has_onboarded_structured_policies?: boolean;
-  /** When true, this shop\'s policies include a link to an EU online dispute form. */
+  /** When true, this shop's policies include a link to an EU online dispute form. */
   include_dispute_form_link?: boolean;
   /** (**DEPRECATED: Replaced by _is_etsy_payments_onboarded_.) When true, the shop has onboarded onto Etsy Payments. */
   is_direct_checkout_onboarded?: boolean;
@@ -885,11 +936,13 @@ export interface IShop {
 export interface IListingImage {
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
   /**
    * The numeric ID of the primary [listing image](/documentation/reference#tag/ShopListing-Image) for this transaction.
+   * @format int64
    * @min 1
    */
   listing_image_id?: number;
@@ -928,12 +981,12 @@ export interface IListingImage {
   /** When true, the image is in black & white. */
   is_black_and_white?: boolean | null;
   /**
-   * The listing image\'s creation time, in epoch seconds.
+   * The listing image's creation time, in epoch seconds.
    * @min 0
    */
   creation_tsz?: number;
   /**
-   * The listing image\'s creation time, in epoch seconds.
+   * The listing image's creation time, in epoch seconds.
    * @min 0
    */
   created_timestamp?: number;
@@ -960,7 +1013,7 @@ export interface IListingImage {
    * @min 0
    */
   full_width?: number | null;
-  /** Alt text for the listing image. Max length 250 characters. */
+  /** Alt text for the listing image. Max length 500 characters. */
   alt_text?: string | null;
 }
 
@@ -968,6 +1021,7 @@ export interface IListingImage {
 export interface IListingVideo {
   /**
    * The unique ID of a video associated with a listing.
+   * @format int64
    * @min 1
    */
   video_id?: number;
@@ -993,12 +1047,15 @@ export interface IListingInventory {
   quantity_on_property?: number[];
   /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color. */
   sku_on_property?: number[];
+  /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change processing profile, if any. For example, if you need specific processing profiles for different colored products in the same listing, then this array contains the property ID for color. */
+  readiness_state_on_property?: number[];
 }
 
 /** A representation of a product for a listing. */
 export interface IListingInventoryProduct {
   /**
    * The numeric ID for a specific [product](/documentation/reference#tag/ShopListing-Product) purchased from a listing.
+   * @format int64
    * @min 1
    */
   product_id?: number;
@@ -1016,6 +1073,7 @@ export interface IListingInventoryProduct {
 export interface IListingInventoryProductOffering {
   /**
    * The ID for the ProductOffering
+   * @format int64
    * @min 1
    */
   offering_id?: number;
@@ -1030,12 +1088,19 @@ export interface IListingInventoryProductOffering {
   is_deleted?: boolean;
   /** Price data for this ProductOffering */
   price?: IMoney;
+  /**
+   * Processing Profile for this ProductOffering
+   * @format int64
+   * @min 1
+   */
+  readiness_state_id?: number | null;
 }
 
 /** A representation of structured data values. */
 export interface IListingPropertyValue {
   /**
    * The numeric ID of the Property.
+   * @format int64
    * @min 1
    */
   property_id?: number;
@@ -1043,6 +1108,7 @@ export interface IListingPropertyValue {
   property_name?: string | null;
   /**
    * The numeric ID of the scale (if any).
+   * @format int64
    * @min 1
    */
   scale_id?: number | null;
@@ -1058,6 +1124,7 @@ export interface IListingPropertyValue {
 export interface IShopProductionPartner {
   /**
    * The numeric ID of a production partner.
+   * @format int64
    * @min 1
    */
   production_partner_id?: number;
@@ -1067,10 +1134,27 @@ export interface IShopProductionPartner {
   location?: string;
 }
 
+/** Container for all current supported translations of a listing. Note that Etsy periodically adds/removes languages, so this list may change in the future. */
+export interface IListingTranslations {
+  de?: IListingTranslation | null;
+  "en-GB"?: IListingTranslation | null;
+  "en-IN"?: IListingTranslation | null;
+  "en-US"?: IListingTranslation | null;
+  es?: IListingTranslation | null;
+  fr?: IListingTranslation | null;
+  it?: IListingTranslation | null;
+  ja?: IListingTranslation | null;
+  nl?: IListingTranslation | null;
+  pl?: IListingTranslation | null;
+  pt?: IListingTranslation | null;
+  ru?: IListingTranslation | null;
+}
+
 /** Represents the translation data for a Listing. */
 export interface IListingTranslation {
   /**
    * The numeric ID for the Listing.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
@@ -1105,6 +1189,8 @@ export interface IListingInventoryWithAssociations {
   quantity_on_property?: number[];
   /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color. */
   sku_on_property?: number[];
+  /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change processing profile, if any. For example, if you need specific processing profiles for different colored products in the same listing, then this array contains the property ID for color. */
+  readiness_state_on_property?: number[];
   /** An enumerated string that attaches a valid association. Default value is null. */
   listing?: IShopListing;
 }
@@ -1139,6 +1225,7 @@ export interface IShopReceiptTransactions {
 export interface IShopReceiptTransaction {
   /**
    * The unique numeric ID for a transaction.
+   * @format int64
    * @min 1
    */
   transaction_id?: number;
@@ -1148,31 +1235,33 @@ export interface IShopReceiptTransaction {
   description?: string | null;
   /**
    * The numeric user ID for the seller in this transaction.
+   * @format int64
    * @min 1
    */
   seller_user_id?: number;
   /**
    * The numeric user ID for the buyer in this transaction.
+   * @format int64
    * @min 1
    */
   buyer_user_id?: number;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   create_timestamp?: number;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
   /**
-   * The transaction\'s paid date and time, in epoch seconds.
+   * The transaction's paid date and time, in epoch seconds.
    * @min 946684800
    */
   paid_timestamp?: number | null;
   /**
-   * The transaction\'s shipping date and time, in epoch seconds.
+   * The transaction's shipping date and time, in epoch seconds.
    * @min 946684800
    */
   shipped_timestamp?: number | null;
@@ -1183,11 +1272,13 @@ export interface IShopReceiptTransaction {
   quantity?: number;
   /**
    * The numeric ID of the primary [listing image](/documentation/reference#tag/ShopListing-Image) for this transaction.
+   * @format int64
    * @min 1
    */
   listing_image_id?: number | null;
   /**
    * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
    * @min 1
    */
   receipt_id?: number;
@@ -1204,6 +1295,7 @@ export interface IShopReceiptTransaction {
   transaction_type?: string;
   /**
    * The numeric ID for a specific [product](/documentation/reference#tag/ShopListing-Product) purchased from a listing.
+   * @format int64
    * @min 1
    */
   product_id?: number | null;
@@ -1219,16 +1311,19 @@ export interface IShopReceiptTransaction {
   product_data?: IListingPropertyValue[];
   /**
    * The ID of the shipping profile selected for this listing.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number | null;
   /**
    * The minimum number of days for processing the listing.
+   * @format int64
    * @min 1
    */
   min_processing_days?: number | null;
   /**
    * The maximum number of days for processing the listing.
+   * @format int64
    * @min 1
    */
   max_processing_days?: number | null;
@@ -1278,11 +1373,13 @@ export interface IListingVariationImages {
 export interface IListingVariationImage {
   /**
    * The numeric ID of the Property.
+   * @format int64
    * @min 1
    */
   property_id?: number;
   /**
    * The numeric ID of the Value.
+   * @format int64
    * @min 1
    */
   value_id?: number;
@@ -1290,6 +1387,7 @@ export interface IListingVariationImage {
   value?: string | null;
   /**
    * The numeric ID of the Image.
+   * @format int64
    * @min 1
    */
   image_id?: number;
@@ -1310,18 +1408,17 @@ export interface IListingVideos {
 export interface IPaymentAccountLedgerEntry {
   /**
    * The ledger entry's numeric ID.
+   * @format int64
    * @min 1
    */
   entry_id?: number;
   /**
    * The ledger's numeric ID.
+   * @format int64
    * @min 1
    */
   ledger_id?: number;
-  /**
-   * The sequence allows ledger entries to be sorted chronologically. The higher the sequence, the more recent the entry.
-   * @min 0
-   */
+  /** The sequence allows ledger entries to be sorted chronologically. The higher the sequence, the more recent the entry. */
   sequence_number?: number;
   /** The amount of money credited to the ledger. */
   amount?: number;
@@ -1355,11 +1452,13 @@ export interface IPaymentAccountLedgerEntry {
 export interface IPaymentAdjustment {
   /**
    * The numeric ID for a payment adjustment.
+   * @format int64
    * @min 1
    */
   payment_adjustment_id?: number;
   /**
    * A unique numeric ID for a payment to a specific Etsy [shop](/documentation/reference#tag/Shop).
+   * @format int64
    * @min 1
    */
   payment_id?: number;
@@ -1369,6 +1468,7 @@ export interface IPaymentAdjustment {
   is_success?: boolean;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) (seller) fulfilling the purchase.
+   * @format int64
    * @min 1
    */
   user_id?: number;
@@ -1395,12 +1495,12 @@ export interface IPaymentAdjustment {
    */
   total_fee_adjustment_amount?: number | null;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   create_timestamp?: number;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
@@ -1422,11 +1522,13 @@ export interface IPaymentAdjustment {
 export interface IPaymentAdjustmentItem {
   /**
    * The numeric ID for a payment adjustment.
+   * @format int64
    * @min 1
    */
   payment_adjustment_id?: number;
   /**
    * Unique ID for the adjustment line item.
+   * @format int64
    * @min 1
    */
   payment_adjustment_item_id?: number;
@@ -1444,16 +1546,18 @@ export interface IPaymentAdjustmentItem {
   shop_amount?: number;
   /**
    * The unique numeric ID for a transaction.
+   * @format int64
    * @min 1
    */
   transaction_id?: number | null;
   /**
    * Unique ID for the bill payment adjustment.
+   * @format int64
    * @min 1
    */
   bill_payment_id?: number | null;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
@@ -1490,21 +1594,25 @@ export interface IPayments {
 export interface IPayment {
   /**
    * A unique numeric ID for a payment to a specific Etsy [shop](/documentation/reference#tag/Shop).
+   * @format int64
    * @min 1
    */
   payment_id?: number;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) who paid the purchase.
+   * @format int64
    * @min 1
    */
   buyer_user_id?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
   /**
    * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
    * @min 1
    */
   receipt_id?: number;
@@ -1515,17 +1623,17 @@ export interface IPayment {
   /** An integer equal to the payment value, in pennies, less fees (`amount_gross` - `amount_fees`). */
   amount_net?: IMoney;
   /** The total gross value of the payment posted once the purchase ships. This is equal to the `amount_gross` UNLESS the seller issues a refund prior to shipping. We consider "shipping" to be the event which "posts" to the ledger. Therefore, if the seller refunds first, we reduce the `amount_gross` first and post then that amount. The seller never sees the refunded amount in their ledger. This is equal to the "Credit" amount in the ledger entry. */
-  posted_gross?: IMoney;
+  posted_gross?: IMoney | null;
   /** The total value of the fees posted once the purchase ships. Etsy refunds a proportional amount of the fees when a seller refunds a buyer. When the seller issues a refund prior to shipping, the posted amount is less then the original. */
-  posted_fees?: IMoney;
+  posted_fees?: IMoney | null;
   /** The total value of the payment at the time of posting, less fees. (`posted_gross` - `posted_fees`) */
-  posted_net?: IMoney;
+  posted_net?: IMoney | null;
   /** The gross payment amount after the seller refunds a payment, partially or fully. */
-  adjusted_gross?: IMoney;
+  adjusted_gross?: IMoney | null;
   /** The new fee amount after a seller refunds a payment, partially or fully. */
-  adjusted_fees?: IMoney;
+  adjusted_fees?: IMoney | null;
   /** The total value of the payment after refunds, less fees (`adjusted_gross` - `adjusted_fees`). */
-  adjusted_net?: IMoney;
+  adjusted_net?: IMoney | null;
   /** The ISO (alphabetic) code string for the payment's currency. */
   currency?: string;
   /** The ISO (alphabetic) code for the shop's currency. The shop displays all prices in this currency by default. */
@@ -1534,11 +1642,13 @@ export interface IPayment {
   buyer_currency?: string | null;
   /**
    * The numeric ID of the user to which the seller ships the order.
+   * @format int64
    * @min 1
    */
   shipping_user_id?: number | null;
   /**
    * The numeric id identifying the shipping address.
+   * @format int64
    * @min 1
    */
   shipping_address_id?: number;
@@ -1551,17 +1661,17 @@ export interface IPayment {
   /** A string indicating the current status of the payment, most commonly "settled" or "authed". */
   status?: string;
   /**
-   * The transaction\'s shipping date and time, in epoch seconds.
+   * The transaction's shipping date and time, in epoch seconds.
    * @min 946684800
    */
   shipped_timestamp?: number | null;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   create_timestamp?: number;
   /**
-   * The transaction\'s creation date and time, in epoch seconds.
+   * The transaction's creation date and time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
@@ -1583,6 +1693,7 @@ export interface IPayment {
 export interface IPong {
   /**
    * The authenticated application's ID
+   * @format int64
    * @min 1
    */
   application_id?: number;
@@ -1592,6 +1703,7 @@ export interface IPong {
 export interface IShopReceipt {
   /**
    * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
    * @min 1
    */
   receipt_id?: number;
@@ -1602,6 +1714,7 @@ export interface IShopReceipt {
   receipt_type?: number;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) (seller) fulfilling the purchase.
+   * @format int64
    * @min 1
    */
   seller_user_id?: number;
@@ -1612,33 +1725,34 @@ export interface IShopReceipt {
   seller_email?: string | null;
   /**
    * The numeric ID for the [user](/documentation/reference#tag/User) making the purchase.
+   * @format int64
    * @min 1
    */
   buyer_user_id?: number;
-  /** The email address string for the buyer of the listing. */
+  /** The email address string for the buyer of the listing. It will be null if access hasn't been granted. Access is case-by-case and subject to approval. */
   buyer_email?: string | null;
   /** The name string for the recipient in the shipping address. */
   name?: string;
   /** The first address line string for the recipient in the shipping address. */
-  first_line?: string;
+  first_line?: string | null;
   /** The optional second address line string for the recipient in the shipping address. */
   second_line?: string | null;
   /** The city string for the recipient in the shipping address. */
-  city?: string;
+  city?: string | null;
   /** The state string for the recipient in the shipping address. */
   state?: string | null;
   /** The zip code string (not necessarily a number) for the recipient in the shipping address. */
-  zip?: string;
+  zip?: string | null;
   /** The current order status string. One of: `paid`, `completed`, `open`, `payment processing` or `canceled`. */
   status?: "paid" | "completed" | "open" | "payment processing" | "canceled" | "fully refunded" | "partially refunded";
   /** The formatted shipping address string for the recipient in the shipping address. */
-  formatted_address?: string;
+  formatted_address?: string | null;
   /** The ISO-3166 alpha-2 country code string for the recipient in the shipping address. */
-  country_iso?: string;
-  /** The payment method string identifying purchaser's payment method, which must be one of: \'cc\' (credit card), \'paypal\', \'check\', \'mo\' (money order), \'bt\' (bank transfer), \'other\', \'ideal\', \'sofort\', \'apple_pay\', \'google\', \'android_pay\', \'google_pay\', \'klarna\', \'k_pay_in_4\' (klarna), \'k_pay_in_3\' (klarna), or \'k_financing\' (klarna). */
+  country_iso?: string | null;
+  /** The payment method string identifying purchaser's payment method, which must be one of: 'cc' (credit card), 'paypal', 'check', 'mo' (money order), 'bt' (bank transfer), 'other', 'ideal', 'sofort', 'apple_pay', 'google', 'android_pay', 'google_pay', 'klarna', 'k_pay_in_4' (klarna), 'k_pay_in_3' (klarna), or 'k_financing' (klarna). */
   payment_method?: string;
   /** The email address string for the email address to which to send payment confirmation */
-  payment_email?: string;
+  payment_email?: string | null;
   /** An optional message string from the seller. */
   message_from_seller?: string | null;
   /** An optional message string from the buyer. */
@@ -1650,12 +1764,12 @@ export interface IShopReceipt {
   /** When true, seller shipped the products. */
   is_shipped?: boolean;
   /**
-   * The receipt\'s creation time, in epoch seconds.
+   * The receipt's creation time, in epoch seconds.
    * @min 946684800
    */
   create_timestamp?: number;
   /**
-   * The receipt\'s creation time, in epoch seconds.
+   * The receipt's creation time, in epoch seconds.
    * @min 946684800
    */
   created_timestamp?: number;
@@ -1673,11 +1787,13 @@ export interface IShopReceipt {
   is_gift?: boolean;
   /** A gift message string the buyer requests delivered with the product. */
   gift_message?: string;
+  /** The name of the person who sent the gift. */
+  gift_sender?: string;
   /** A number equal to the total_price minus the coupon discount plus tax and shipping costs. */
   grandtotal?: IMoney;
   /** A number equal to the total_price minus coupon discounts. Does not included tax or shipping costs. */
   subtotal?: IMoney;
-  /** A number equal to the sum of the individual listings\' (price * quantity). Does not included tax or shipping costs. */
+  /** A number equal to the sum of the individual listings' (price * quantity). Does not included tax or shipping costs. */
   total_price?: IMoney;
   /** A number equal to the total shipping cost of the receipt. */
   total_shipping_cost?: IMoney;
@@ -1701,6 +1817,7 @@ export interface IShopReceipt {
 export interface IShopReceiptShipment {
   /**
    * The unique numeric ID of a Shop Receipt Shipment record.
+   * @format int64
    * @min 1
    */
   receipt_shipping_id?: number | null;
@@ -1755,11 +1872,13 @@ export interface IListingReviews {
 export interface IListingReview {
   /**
    * The shop's numeric ID.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
   /**
    * The ID of the ShopListing that the TransactionReview belongs to.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
@@ -1812,21 +1931,25 @@ export interface ITransactionReviews {
 export interface ITransactionReview {
   /**
    * The shop's numeric ID.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
   /**
    * The ID of the ShopListing that the TransactionReview belongs to.
+   * @format int64
    * @min 1
    */
   listing_id?: number;
   /**
    * The ID of the ShopReceipt Transaction that the TransactionReview belongs to.
+   * @format int64
    * @min 1
    */
   transaction_id?: number;
   /**
    * The numeric ID of the user who was the buyer in this transaction. Note: This field may be absent, depending on the buyer's privacy settings.
+   * @format int64
    * @min 1
    */
   buyer_user_id?: number | null;
@@ -1881,7 +2004,8 @@ export interface ISellerTaxonomyNodes {
 /** A taxonomy node in the seller taxonomy tree. */
 export interface ISellerTaxonomyNode {
   /**
-   * The unique numeric ID of an Etsy taxonomy node, which is a metadata category for listings organized into the seller taxonomy hierarchy tree. For example, the \"shoes\" taxonomy node (ID: 1429, level: 1) is higher in the hierarchy than \"girls' shoes\" (ID: 1440, level: 2). The taxonomy nodes assigned to a listing support access to specific standardized product scales and properties. For example, listings assigned the taxonomy nodes \"shoes\" or \"girls' shoes\" support access to the \"EU\" shoe size scale with its associated property names and IDs for EU shoe sizes, such as property `value_id`:\"1394\", and `name`:\"38\".
+   * The unique numeric ID of an Etsy taxonomy node, which is a metadata category for listings organized into the seller taxonomy hierarchy tree. For example, the "shoes" taxonomy node (ID: 1429, level: 1) is higher in the hierarchy than "girls' shoes" (ID: 1440, level: 2). The taxonomy nodes assigned to a listing support access to specific standardized product scales and properties. For example, listings assigned the taxonomy nodes "shoes" or "girls' shoes" support access to the "EU" shoe size scale with its associated property names and IDs for EU shoe sizes, such as property `value_id`:"1394", and `name`:"38".
+   * @format int64
    * @min 1
    */
   id?: number;
@@ -1894,6 +2018,7 @@ export interface ISellerTaxonomyNode {
   name?: string;
   /**
    * The numeric taxonomy ID of the parent of this node.
+   * @format int64
    * @min 1
    * @default null
    */
@@ -1919,6 +2044,7 @@ export interface ITaxonomyNodeProperties {
 export interface ITaxonomyNodeProperty {
   /**
    * The unique numeric ID of this product property.
+   * @format int64
    * @min 1
    */
   property_id?: number;
@@ -1948,6 +2074,7 @@ export interface ITaxonomyNodeProperty {
 export interface ITaxonomyPropertyScale {
   /**
    * The unique numeric ID of a scale.
+   * @format int64
    * @min 1
    */
   scale_id?: number;
@@ -1961,6 +2088,7 @@ export interface ITaxonomyPropertyScale {
 export interface ITaxonomyPropertyValue {
   /**
    * The numeric ID of this property value.
+   * @format int64
    * @min 1
    */
   value_id?: number | null;
@@ -1968,6 +2096,7 @@ export interface ITaxonomyPropertyValue {
   name?: string;
   /**
    * The numeric scale ID of the scale to which this property value belongs.
+   * @format int64
    * @min 1
    */
   scale_id?: number | null;
@@ -1986,6 +2115,7 @@ export interface IShippingCarriers {
 export interface IShippingCarrier {
   /**
    * The numeric ID of this shipping carrier.
+   * @format int64
    * @min 1
    */
   shipping_carrier_id?: number;
@@ -2005,6 +2135,132 @@ export interface IShippingCarrierMailClass {
   name?: string;
 }
 
+/** Represents a shop's holiday preference */
+export interface IShopHolidayPreference {
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shop_id?: number;
+  /** The unique id that maps to the holiday a country observes. See the [Fulfillment Tutorial docs](https://developer.etsy.com/documentation/tutorials/fulfillment/#country-holidays) for more info */
+  holiday_id?:
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "7"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "13"
+    | "14"
+    | "15"
+    | "16"
+    | "17"
+    | "18"
+    | "19"
+    | "20"
+    | "21"
+    | "22"
+    | "23"
+    | "24"
+    | "25"
+    | "26"
+    | "27"
+    | "28"
+    | "29"
+    | "30"
+    | "31"
+    | "32"
+    | "33"
+    | "34"
+    | "35"
+    | "36"
+    | "37"
+    | "38"
+    | "39"
+    | "40"
+    | "41"
+    | "42"
+    | "43"
+    | "44"
+    | "45"
+    | "46"
+    | "47"
+    | "48"
+    | "49"
+    | "50"
+    | "51"
+    | "52"
+    | "53"
+    | "54"
+    | "55"
+    | "56"
+    | "57"
+    | "58"
+    | "59"
+    | "60"
+    | "61"
+    | "62"
+    | "63"
+    | "64"
+    | "65"
+    | "66"
+    | "67"
+    | "68"
+    | "69"
+    | "70"
+    | "71"
+    | "72"
+    | "73"
+    | "74"
+    | "75"
+    | "76"
+    | "77"
+    | "78"
+    | "79"
+    | "80"
+    | "81"
+    | "82"
+    | "83"
+    | "84"
+    | "85"
+    | "86"
+    | "87"
+    | "88"
+    | "89"
+    | "90"
+    | "91"
+    | "92"
+    | "93"
+    | "94"
+    | "95"
+    | "96"
+    | "97"
+    | "98"
+    | "99"
+    | "100"
+    | "101"
+    | "102"
+    | "103"
+    | "104"
+    | "105";
+  /**
+   * The country iso where the shop is located.
+   * @format ISO 3166-1 alpha-2
+   */
+  country_iso?: string;
+  /** A boolean value for whether the shop will process orders on a particular holiday. */
+  is_working?: boolean;
+  /** The name of the holiday that a country observes. */
+  holiday_name?: string;
+}
+
 /** A set of Shop records. */
 export interface IShops {
   /**
@@ -2020,11 +2276,13 @@ export interface IShops {
 export interface IShopReturnPolicy {
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   return_policy_id?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
@@ -2054,10 +2312,48 @@ export interface IShopProductionPartners {
   results?: IShopProductionPartner[];
 }
 
+/** Represents a processing profile to set a product offering's readiness state and processing time info. */
+export interface IShopProcessingProfile {
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shop_id?: number;
+  /**
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * @format int64
+   * @min 1
+   */
+  readiness_state_id?: number;
+  /** The readiness state of a product: \"1\" means \"ready_to_ship\", and \"2\" means \"made_to_order\" */
+  readiness_state?: "ready_to_ship" | "made_to_order";
+  /**
+   * The minimum number of days for processing a specific product.
+   * @min 0
+   */
+  min_processing_days?: number;
+  /**
+   * The maximum number of days for processing a specific product.
+   * @min 0
+   */
+  max_processing_days?: number;
+  /** Translated display label string for processing days, for example "3 - 5 days". */
+  processing_days_display_label?: string;
+}
+
+/** Represents several ProcessingProfiles. */
+export interface IShopProcessingProfiles {
+  /** @min 0 */
+  count?: number;
+  results?: IShopProcessingProfile[];
+}
+
 /** A section within a shop, into which a user can sort listings. */
 export interface IShopSection {
   /**
    * The numeric ID of a section in a specific Etsy shop.
+   * @format int64
    * @min 1
    */
   shop_section_id?: number;
@@ -2070,6 +2366,7 @@ export interface IShopSection {
   rank?: number;
   /**
    * The numeric ID of the [user](/documentation/reference#tag/User) who owns this shop section.
+   * @format int64
    * @min 1
    */
   user_id?: number;
@@ -2127,11 +2424,13 @@ export type IScopes = object;
 export interface IUserAddress {
   /**
    * The numeric ID of the user's address.
+   * @format int64
    * @min 1
    */
   user_address_id?: number;
   /**
    * The user's numeric ID.
+   * @format int64
    * @min 1
    */
   user_id?: number;
@@ -2146,7 +2445,7 @@ export interface IUserAddress {
   /** The state field of the user's address. */
   state?: string | null;
   /** The zip code field of the user's address. */
-  zip?: string;
+  zip?: string | null;
   /** The ISO code of the country in this address. */
   iso_country_code?: string | null;
   /** The name of the user's country. */
@@ -2169,12 +2468,14 @@ export interface IUserAddresses {
 /** Represents a single user of the site */
 export interface ISelf {
   /**
-   * The numeric ID of a user. This number is also a valid shop ID for the user\'s shop.
+   * The numeric ID of a user. This number is also a valid shop ID for the user's shop.
+   * @format int64
    * @min 1
    */
   user_id?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shop_id?: number;
@@ -2197,11 +2498,11 @@ export interface ICreateDraftListingPayload {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made:
     | "made_to_order"
-    | "2020_2023"
+    | "2020_2025"
     | "2010_2019"
-    | "2004_2009"
-    | "before_2004"
-    | "2000_2003"
+    | "2006_2009"
+    | "before_2006"
+    | "2000_2005"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -2217,16 +2518,19 @@ export interface ICreateDraftListingPayload {
     | "before_1700";
   /**
    * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * @format int64
    * @min 1
    */
   taxonomy_id: number;
   /**
    * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number | null;
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   return_policy_id?: number | null;
@@ -2234,6 +2538,7 @@ export interface ICreateDraftListingPayload {
   materials?: string[] | null;
   /**
    * The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null.
+   * @format int64
    * @min 1
    */
   shop_section_id?: number | null;
@@ -2241,6 +2546,12 @@ export interface ICreateDraftListingPayload {
   processing_min?: number | null;
   /** The maximum number of days required to process this listing. Default value is null. */
   processing_max?: number | null;
+  /**
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * @format int64
+   * @min 1
+   */
+  readiness_state_id?: number | null;
   /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
   tags?: string[] | null;
   /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
@@ -2301,6 +2612,17 @@ export interface ICreateDraftListingPayload {
   type?: "physical" | "download" | "both";
 }
 
+export interface ICreateDraftListingParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+}
+
 export interface IGetListingsByShopParams {
   /**
    * When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com.
@@ -2335,8 +2657,11 @@ export interface IGetListingsByShopParams {
    * @default null
    */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -2353,8 +2678,13 @@ export interface IGetListingParams {
    * @default null
    */
   language?: string;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /** This parameter will include in the response a suggested title for the listing, if one is available. Since suggestions are only available to the listing's owner, client must submit an oauth_access_token scoped to the owner of the listing. */
+  allow_suggested_title?: boolean;
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listingId: number;
@@ -2363,6 +2693,7 @@ export interface IGetListingParams {
 export interface IUploadListingFilePayload {
   /**
    * The unique numeric ID of a file associated with a digital listing.
+   * @format int64
    * @min 1
    */
   listing_file_id?: number;
@@ -2375,6 +2706,7 @@ export interface IUploadListingFilePayload {
   name?: string;
   /**
    * The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.
+   * @format int64
    * @min 1
    * @default 1
    */
@@ -2424,6 +2756,7 @@ export interface IFindAllListingsActiveParams {
   max_price?: number;
   /**
    * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * @format int64
    * @min 1
    * @default null
    */
@@ -2433,6 +2766,8 @@ export interface IFindAllListingsActiveParams {
    * @default null
    */
   shop_location?: string;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
 }
 
 export interface IFindAllActiveListingsByShopParams {
@@ -2464,8 +2799,11 @@ export interface IFindAllActiveListingsByShopParams {
    * @default null
    */
   keywords?: string;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -2479,6 +2817,7 @@ export interface IUploadListingImagePayload {
   image?: Readable | null;
   /**
    * The numeric ID of the primary [listing image](/documentation/reference#tag/ShopListing-Image) for this transaction.
+   * @format int64
    * @min 1
    */
   listing_image_id?: number;
@@ -2499,7 +2838,7 @@ export interface IUploadListingImagePayload {
    */
   is_watermarked?: boolean;
   /**
-   * Alt text for the listing image. Max length 250 characters.
+   * Alt text for the listing image. Max length 500 characters.
    * @default ""
    */
   alt_text?: string;
@@ -2510,8 +2849,11 @@ export interface IGetListingInventoryParams {
   show_deleted?: boolean;
   /** An enumerated string that attaches a valid association. Default value is null. */
   includes?: "Listing";
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listingId: number;
@@ -2526,6 +2868,7 @@ export interface IUpdateListingInventoryPayload {
     property_values?: {
       /**
        * The unique ID of an Etsy [listing property](/documentation/reference#operation/getListingProperties).
+       * @format int64
        * @min 1
        */
       property_id: number;
@@ -2533,6 +2876,7 @@ export interface IUpdateListingInventoryPayload {
       value_ids: number[];
       /**
        * The numeric ID of a single Etsy.com measurement scale. For example, for shoe size, there are three `scale_id`s available - `UK`, `US/Canada`, and `EU`, where `US/Canada` has `scale_id` 19.
+       * @format int64
        * @min 1
        */
       scale_id?: number | null;
@@ -2552,6 +2896,12 @@ export interface IUpdateListingInventoryPayload {
       quantity: number;
       /** True if the offering is shown to buyers */
       is_enabled: boolean;
+      /**
+       * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+       * @format int64
+       * @min 1
+       */
+      readiness_state_id: number | null;
     }[];
   }[];
   /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change product prices, if any. For example, if you charge specific prices for different sized products in the same listing, then this array contains the property ID for size. */
@@ -2560,6 +2910,56 @@ export interface IUpdateListingInventoryPayload {
   quantity_on_property?: number[];
   /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color. */
   sku_on_property?: number[];
+  /** An array of unique [listing property](/documentation/reference#operation/getListingProperties) ID integers for the properties that change processing profile, if any. For example, if you need specific processing profiles for different colored products in the same listing, then this array contains the property ID for color. */
+  readiness_state_on_property?: number[] | null;
+}
+
+export interface IUpdateListingInventoryParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
+   * @min 1
+   */
+  listingId: number;
+}
+
+export interface IGetListingProductParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The listing to return a ListingProduct for.
+   * @format int64
+   * @min 1
+   */
+  listingId: number;
+  /**
+   * The numeric ID for a specific [product](/documentation/reference#tag/ShopListing-Product) purchased from a listing.
+   * @format int64
+   * @min 1
+   */
+  productId: number;
+}
+
+export interface IGetListingOfferingParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * @format int64
+   * @min 1
+   */
+  listingId: number;
+  /**
+   * @format int64
+   * @min 1
+   */
+  productId: number;
+  /**
+   * @format int64
+   * @min 1
+   */
+  productOfferingId: number;
 }
 
 export interface IGetListingsByListingIdsParams {
@@ -2588,6 +2988,7 @@ export interface IGetFeaturedListingsByShopParams {
   offset?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -2600,6 +3001,7 @@ export interface IUpdateListingPropertyPayload {
   values: string[];
   /**
    * The numeric ID of a single Etsy.com measurement scale. For example, for shoe size, there are three `scale_id`s available - `UK`, `US/Canada`, and `EU`, where `US/Canada` has `scale_id` 19.
+   * @format int64
    * @min 1
    */
   scale_id?: number;
@@ -2619,13 +3021,17 @@ export interface IGetShopReceiptTransactionsByListingParams {
    * @default 0
    */
   offset?: number;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listingId: number;
@@ -2662,11 +3068,13 @@ export interface IUpdateListingPayload {
   should_auto_renew?: boolean;
   /**
    * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * @format int64
    * @min 1
    */
   shipping_profile_id?: number | null;
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies). Required for active physical listings. This requirement does not apply to listings of EU-based shops.
+   * @format int64
    * @min 1
    */
   return_policy_id?: number | null;
@@ -2708,6 +3116,7 @@ export interface IUpdateListingPayload {
   is_taxable?: boolean;
   /**
    * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * @format int64
    * @min 1
    */
   taxonomy_id?: number;
@@ -2718,11 +3127,11 @@ export interface IUpdateListingPayload {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2023"
+    | "2020_2025"
     | "2010_2019"
-    | "2004_2009"
-    | "before_2004"
-    | "2000_2003"
+    | "2006_2009"
+    | "before_2006"
+    | "2000_2005"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -2736,7 +3145,7 @@ export interface IUpdateListingPayload {
     | "1800s"
     | "1700s"
     | "before_1700";
-  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. */
+  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop's home page. */
   featured_rank?: number | null;
   /** When true, this listing is personalizable. The default value is null. */
   is_personalizable?: boolean;
@@ -2756,116 +3165,40 @@ export interface IUpdateListingPayload {
   type?: "physical" | "download" | "both" | null;
 }
 
-export interface IUpdateListingDeprecatedPayload {
-  /** An array of numeric image IDs of the images in a listing, which can include up to 10 images. */
-  image_ids?: number[];
-  /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{P}\p{Sm}\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
-  title?: string;
-  /** A description string of the product for sale in the listing. */
-  description?: string;
-  /** A list of material strings for materials used in the product. Valid materials strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
-  materials?: string[] | null;
-  /** When true, renews a listing for four months upon expiration. */
-  should_auto_renew?: boolean;
+export interface IUpdateListingParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
-   * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
-  shipping_profile_id?: number | null;
-  /** The numeric ID of the [shop section](/documentation/reference#tag/Shop-Section) for this listing. Default value is null. */
-  shop_section_id?: number | null;
+  shopId: number;
   /**
-   * The numeric weight of the product measured in units set in 'item_weight_unit'. Default value is null. If set, the value must be greater than 0.
-   * @format float
-   * @min 0
-   * @max 1.79769313486e+308
-   */
-  item_weight?: number | null;
-  /**
-   * The numeric length of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
-   * @format float
-   * @min 0
-   * @max 1.79769313486e+308
-   */
-  item_length?: number | null;
-  /**
-   * The numeric width of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
-   * @format float
-   * @min 0
-   * @max 1.79769313486e+308
-   */
-  item_width?: number | null;
-  /**
-   * The numeric height of the product measured in units set in 'item_dimensions_unit'. Default value is null. If set, the value must be greater than 0.
-   * @format float
-   * @min 0
-   * @max 1.79769313486e+308
-   */
-  item_height?: number | null;
-  /** A string defining the units used to measure the weight of the product. Default value is null. */
-  item_weight_unit?: "oz" | "lb" | "g" | "kg" | null;
-  /** A string defining the units used to measure the dimensions of the product. Default value is null. */
-  item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
-  /** When true, applicable [shop](/documentation/reference#tag/Shop) tax rates apply to this listing at checkout. */
-  is_taxable?: boolean;
-  /**
-   * The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information.
+   * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
-  taxonomy_id?: number;
-  /** A comma-separated list of tag strings for the listing. When creating or updating a listing, valid tag strings contain only letters, numbers, whitespace characters, -, ', ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{Zs}\-'™©®]/u) Default value is null. */
-  tags?: string[] | null;
-  /** An enumerated string indicating who made the product. Helps buyers locate the listing under the Handmade heading. Requires 'is_supply' and 'when_made'. */
-  who_made?: "i_did" | "someone_else" | "collective";
-  /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
-  when_made?:
-    | "made_to_order"
-    | "2020_2023"
-    | "2010_2019"
-    | "2004_2009"
-    | "before_2004"
-    | "2000_2003"
-    | "1990s"
-    | "1980s"
-    | "1970s"
-    | "1960s"
-    | "1950s"
-    | "1940s"
-    | "1930s"
-    | "1920s"
-    | "1910s"
-    | "1900s"
-    | "1800s"
-    | "1700s"
-    | "before_1700";
-  /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop’s home page. */
-  featured_rank?: number | null;
-  /** When true, this listing is personalizable. The default value is null. */
-  is_personalizable?: boolean;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
-  personalization_is_required?: boolean;
-  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
-  personalization_char_count_max?: number;
-  /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
-  personalization_instructions?: string;
-  /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
-  state?: "active" | "inactive";
-  /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
-  is_supply?: boolean;
-  /** An array of unique IDs of production partner ids. */
-  production_partner_ids?: number[] | null;
-  /** An enumerated type string that indicates whether the listing is physical or a digital download. */
-  type?: "physical" | "download" | "both" | null;
+  listingId: number;
 }
 
 export interface IUpdateVariationImagesPayload {
   /** A list of variation image data. */
   variation_images: {
-    /** @min 1 */
+    /**
+     * @format int64
+     * @min 1
+     */
     property_id: number;
-    /** @min 1 */
+    /**
+     * @format int64
+     * @min 1
+     */
     value_id: number;
-    /** @min 1 */
+    /**
+     * @format int64
+     * @min 1
+     */
     image_id: number;
   }[];
 }
@@ -2873,6 +3206,7 @@ export interface IUpdateVariationImagesPayload {
 export interface IUploadListingVideoPayload {
   /**
    * The unique ID of a video associated with a listing.
+   * @format int64
    * @min 1
    */
   video_id?: number;
@@ -2911,6 +3245,7 @@ export interface IGetShopPaymentAccountLedgerEntriesParams {
   offset?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -2920,6 +3255,7 @@ export interface IGetPaymentAccountLedgerEntryPaymentsParams {
   ledger_entry_ids: number[];
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -2930,9 +3266,27 @@ export interface IGetPaymentsParams {
   payment_ids: number[];
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
+}
+
+export interface IGetShopReceiptParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+  /**
+   * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
+   * @min 1
+   */
+  receiptId: number;
 }
 
 export interface IUpdateShopReceiptPayload {
@@ -2940,6 +3294,23 @@ export interface IUpdateShopReceiptPayload {
   was_shipped?: boolean | null;
   /** When `true`, returns receipts where the seller has recieved payment for the receipt. When `false`, returns receipts where payment has not been received. */
   was_paid?: boolean | null;
+}
+
+export interface IUpdateShopReceiptParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+  /**
+   * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
+   * @min 1
+   */
+  receiptId: number;
 }
 
 export interface IGetShopReceiptsParams {
@@ -2998,8 +3369,11 @@ export interface IGetShopReceiptsParams {
   was_delivered?: boolean | null;
   /** When `true`, the endpoint will only return the canceled receipts. When `false`, the endpoint will only return non-canceled receipts. */
   was_canceled?: boolean | null;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -3021,11 +3395,13 @@ export interface IGetListingsByShopReceiptParams {
   offset?: number;
   /**
    * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
    * @min 1
    */
   receiptId: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -3040,6 +3416,40 @@ export interface ICreateReceiptShipmentPayload {
   send_bcc?: boolean;
   /** Message to include in notification to the buyer. */
   note_to_buyer?: string;
+}
+
+export interface ICreateReceiptShipmentParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+  /**
+   * The receipt to submit tracking for.
+   * @format int64
+   * @min 1
+   */
+  receiptId: number;
+}
+
+export interface IGetShopReceiptTransactionsByReceiptParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+  /**
+   * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
+   * @format int64
+   * @min 1
+   */
+  receiptId: number;
 }
 
 export interface IGetReviewsByListingParams {
@@ -3068,6 +3478,7 @@ export interface IGetReviewsByListingParams {
   max_created?: number | null;
   /**
    * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
    * @min 1
    */
   listingId: number;
@@ -3099,6 +3510,7 @@ export interface IGetReviewsByShopParams {
   max_created?: number | null;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -3125,6 +3537,11 @@ export interface IUpdateShopPayload {
   policy_additional?: string;
 }
 
+export interface IUpdateHolidayPreferencesPayload {
+  /** A boolean value for whether the shop will process orders on a particular holiday. */
+  is_working: boolean;
+}
+
 export interface IFindShopsParams {
   /** The shop's name string. */
   shop_name: string;
@@ -3146,11 +3563,13 @@ export interface IFindShopsParams {
 export interface IConsolidateShopReturnPoliciesPayload {
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   source_return_policy_id: number;
   /**
    * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
    * @min 1
    */
   destination_return_policy_id: number;
@@ -3168,6 +3587,72 @@ export interface IUpdateShopReturnPolicyPayload {
   accepts_exchanges: boolean;
   /** The deadline for the Return Policy, measured in days. The value must be one of the following: [7, 14, 21, 30, 45, 60, 90]. */
   return_deadline?: number | null;
+}
+
+export interface ICreateShopReadinessStateDefinitionPayload {
+  /** The readiness state of a product: \"1\" means \"ready_to_ship\", and \"2\" means \"made_to_order\" */
+  readiness_state: "ready_to_ship" | "made_to_order";
+  /**
+   * The minimum number of days or weeks for processing a specific product.
+   * @min 1
+   * @max 10
+   */
+  min_processing_time: number;
+  /**
+   * The maximum number of days or weeks for processing a specific product.
+   * @min 1
+   * @max 10
+   */
+  max_processing_time: number;
+  /**
+   * The unit used to represent how long a processing time is. A week is equivalent to how many days the seller works per week as stated in their processing schedule. If none is provided, the unit is set to \"days\".
+   * @default "days"
+   */
+  processing_time_unit?: "days" | "weeks";
+}
+
+export interface IGetShopReadinessStateDefinitionsParams {
+  /**
+   * The maximum number of results to return.
+   * @min 1
+   * @max 100
+   * @default 25
+   */
+  limit?: number;
+  /**
+   * The number of records to skip before selecting the first result.
+   * @min 0
+   * @default 0
+   */
+  offset?: number;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+}
+
+export interface IUpdateShopReadinessStateDefinitionPayload {
+  /** The readiness state of a product: \"1\" means \"ready_to_ship\", and \"2\" means \"made_to_order\" */
+  readiness_state?: "ready_to_ship" | "made_to_order";
+  /**
+   * The minimum number of days or weeks for processing a specific product.
+   * @min 1
+   * @max 10
+   */
+  min_processing_time?: number;
+  /**
+   * The maximum number of days or weeks for processing a specific product.
+   * @min 1
+   * @max 10
+   */
+  max_processing_time?: number;
+  /**
+   * The unit used to represent how long a processing time is. A week is equivalent to how many days the seller works per week as stated in their processing schedule. If none is provided, the unit is set to \"days\".
+   * @default "days"
+   */
+  processing_time_unit?: "days" | "weeks";
 }
 
 export interface ICreateShopSectionPayload {
@@ -3208,6 +3693,7 @@ export interface IGetListingsByShopSectionIdParams {
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
@@ -3246,7 +3732,7 @@ export interface ICreateShopShippingProfilePayload {
    */
   max_processing_time: number;
   /**
-   * The unit used to represent how long a processing time is. A week is equivalent to 5 business days. If none is provided, the unit is set to "business_days".
+   * The unit used to represent how long a processing time is. A week is equivalent to the set processing schedule (default to 5 business days). If none is provided, the unit is set to "business_days".
    * @default "business_days"
    */
   processing_time_unit?: "business_days" | "weeks";
@@ -3262,7 +3748,7 @@ export interface ICreateShopShippingProfilePayload {
    */
   destination_region?: "eu" | "non_eu" | "none";
   /**
-   * The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`.
+   * The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` supports postal codes. See the [Fulfillment Tutorial docs](https://developer.etsy.com/documentation/tutorials/fulfillment/#countries-requiring-postal-codes) for more info
    * @default ""
    */
   origin_postal_code?: string;
@@ -3314,12 +3800,12 @@ export interface IUpdateShopShippingProfilePayload {
    */
   max_processing_time?: number;
   /**
-   * The unit used to represent how long a processing time is. A week is equivalent to 5 business days. If none is provided, the unit is set to "business_days".
+   * The unit used to represent how long a processing time is. A week is equivalent to the set processing schedule (default to 5 business days). If none is provided, the unit is set to "business_days".
    * @default "business_days"
    */
   processing_time_unit?: "business_days" | "weeks";
   /**
-   * The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` is `US` or `CA`.
+   * The postal code string (not necessarily a number) for the location from which the listing ships. Required if the `origin_country_iso` supports postal codes. See the [Fulfillment Tutorial docs](https://developer.etsy.com/documentation/tutorials/fulfillment/#countries-requiring-postal-codes) for more info
    * @default null
    */
   origin_postal_code?: string;
@@ -3392,11 +3878,13 @@ export interface IGetShopShippingProfileDestinationsByShippingProfileParams {
   offset?: number;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
   /**
    * The numeric ID of the [shipping profile](/documentation/reference#operation/getShopShippingProfile) associated with the listing. Required when listing type is `physical`.
+   * @format int64
    * @min 1
    */
   shippingProfileId: number;
@@ -3566,8 +4054,11 @@ export interface IGetShopReceiptTransactionsByShopParams {
    * @default 0
    */
   offset?: number;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
    * @min 1
    */
   shopId: number;
