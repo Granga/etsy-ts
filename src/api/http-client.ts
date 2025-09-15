@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
 import FormData from "form-data";
 import { SecurityDataFilter } from "../types/SecurityDataFilter";
+import { IAxiosRetryConfig } from "axios-retry";
 
 export type QueryParamsType = Record<string | number, any>;
 
@@ -27,6 +28,7 @@ export interface ApiConfig extends Omit<AxiosRequestConfig, "data" | "cancelToke
   securityWorker?: (params: SecurityDataFilter) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
   secure?: boolean;
   format?: ResponseType;
+  axiosRetryConfig?: IAxiosRetryConfig
 }
 
 export enum ContentType {

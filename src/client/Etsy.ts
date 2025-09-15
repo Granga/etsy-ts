@@ -26,6 +26,8 @@ import { UserAddress } from "../api/UserAddress";
 import { ISecurityDataStorage } from "../types/ISecurityDataStorage";
 import { TokenRefresher } from "./TokenRefresher";
 
+import axiosRetry, { exponentialDelay } from "axios-retry";
+
 export class Etsy {
   httpClient: HttpClient;
   BuyerTaxonomy: BuyerTaxonomy;
@@ -54,10 +56,11 @@ export class Etsy {
   UserAddress: UserAddress;
 
   constructor(
-    {apiKey, securityDataStorage, enableTokenRefresh = true}: {
+    {apiKey, securityDataStorage, enableTokenRefresh = true, enableAxiosRetry = false}: {
       apiKey: string,
       securityDataStorage: ISecurityDataStorage,
       enableTokenRefresh?: boolean
+      enableAxiosRetry?: boolean
     },
     apiConfig?: ApiConfig
   ) {
@@ -79,6 +82,12 @@ export class Etsy {
 
     if (enableTokenRefresh) {
       new TokenRefresher(apiKey, this.httpClient.instance, securityDataStorage).init();
+    }
+    if (enableAxiosRetry) {
+      axiosRetry(this.httpClient.instance, {
+        retryDelay: exponentialDelay,
+        ...apiConfig?.axiosRetryConfig
+      });
     }
 
     this.BuyerTaxonomy = new BuyerTaxonomy(this.httpClient);
