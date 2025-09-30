@@ -313,7 +313,7 @@ export interface IShopListing {
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
   /**
-   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Returned only when the listing is `active` and of type `physical`, and the endpoint is either shop-scoped (path contains `shop_id`) or a single-listing request such as `getListing`. For every other case this field can be null.
    * @format int64
    * @min 1
    */
@@ -589,7 +589,7 @@ export interface IShopListingWithAssociations {
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
   /**
-   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Returned only when the listing is `active` and of type `physical`, and the endpoint is either shop-scoped (path contains `shop_id`) or a single-listing request such as `getListing`. For every other case this field can be null.
    * @format int64
    * @min 1
    */
@@ -1317,14 +1317,12 @@ export interface IShopReceiptTransaction {
   shipping_profile_id?: number | null;
   /**
    * The minimum number of days for processing the listing.
-   * @format int64
-   * @min 1
+   * @min 0
    */
   min_processing_days?: number | null;
   /**
    * The maximum number of days for processing the listing.
-   * @format int64
-   * @min 1
+   * @min 0
    */
   max_processing_days?: number | null;
   /** Name of the selected shipping method. */
@@ -2321,7 +2319,7 @@ export interface IShopProcessingProfile {
    */
   shop_id?: number;
   /**
-   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Returned only when the listing is `active` and of type `physical`, and the endpoint is either shop-scoped (path contains `shop_id`) or a single-listing request such as `getListing`. For every other case this field can be null.
    * @format int64
    * @min 1
    */
@@ -2547,7 +2545,7 @@ export interface ICreateDraftListingPayload {
   /** The maximum number of days required to process this listing. Default value is null. */
   processing_max?: number | null;
   /**
-   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+   * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Returned only when the listing is `active` and of type `physical`, and the endpoint is either shop-scoped (path contains `shop_id`) or a single-listing request such as `getListing`. For every other case this field can be null.
    * @format int64
    * @min 1
    */
@@ -2897,7 +2895,7 @@ export interface IUpdateListingInventoryPayload {
       /** True if the offering is shown to buyers */
       is_enabled: boolean;
       /**
-       * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Required when listing type is `physical`.
+       * The numeric ID of the [processing profile](/documentation/reference#operation/getShopReadinessStateDefinition) associated with the listing. Returned only when the listing is `active` and of type `physical`, and the endpoint is either shop-scoped (path contains `shop_id`) or a single-listing request such as `getListing`. For every other case this field can be null.
        * @format int64
        * @min 1
        */
