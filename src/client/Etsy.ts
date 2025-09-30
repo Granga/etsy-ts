@@ -6,6 +6,7 @@ import { Payment } from "../api/Payment";
 import { Review } from "../api/Review";
 import { SellerTaxonomy } from "../api/SellerTaxonomy";
 import { Shop } from "../api/Shop";
+import { ShopHolidayPreferences } from "../api/ShopHolidayPreferences";
 import { ShopListing } from "../api/ShopListing";
 import { ShopListingFile } from "../api/ShopListingFile";
 import { ShopListingImage } from "../api/ShopListingImage";
@@ -36,6 +37,7 @@ export class Etsy {
   Review: Review;
   SellerTaxonomy: SellerTaxonomy;
   Shop: Shop;
+  ShopHolidayPreferences: ShopHolidayPreferences;
   ShopListing: ShopListing;
   ShopListingFile: ShopListingFile;
   ShopListingImage: ShopListingImage;
@@ -90,6 +92,7 @@ export class Etsy {
     this.Review = new Review(this.httpClient);
     this.SellerTaxonomy = new SellerTaxonomy(this.httpClient);
     this.Shop = new Shop(this.httpClient);
+    this.ShopHolidayPreferences = new ShopHolidayPreferences(this.httpClient);
     this.ShopListing = new ShopListing(this.httpClient);
     this.ShopListingFile = new ShopListingFile(this.httpClient);
     this.ShopListingImage = new ShopListingImage(this.httpClient);
@@ -102,7 +105,7 @@ export class Etsy {
     this.ShopProductionPartner = new ShopProductionPartner(this.httpClient);
     this.ShopReceipt = new ShopReceipt(this.httpClient);
     this.ShopReceiptTransactions = new ShopReceiptTransactions(this.httpClient);
-    this.ShopProcessingProfiles = new ShopProcessingProfiles(this.httpClient)
+    this.ShopProcessingProfiles = new ShopProcessingProfiles(this.httpClient);
     this.ShopReturnPolicy = new ShopReturnPolicy(this.httpClient);
     this.ShopSection = new ShopSection(this.httpClient);
     this.ShopShippingProfile = new ShopShippingProfile(this.httpClient);
