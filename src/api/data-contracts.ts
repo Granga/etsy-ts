@@ -635,18 +635,6 @@ export interface IShopShippingProfile {
    */
   user_id?: number;
   /**
-   * The minimum number of days for processing the listing.
-   * @min 0
-   */
-  min_processing_days?: number | null;
-  /**
-   * The maximum number of days for processing the listing.
-   * @min 0
-   */
-  max_processing_days?: number | null;
-  /** Translated display label string for processing days. */
-  processing_days_display_label?: string;
-  /**
    * The ISO code of the country from which the listing ships.
    * @format ISO 3166-1 alpha-2
    */
@@ -739,7 +727,7 @@ export interface IShopShippingProfileUpgrade {
   /** Name for the shipping upgrade shown to shoppers at checkout, e.g. USPS Priority. */
   upgrade_name?: string;
   /** The type of the shipping upgrade. Domestic (0) or international (1). */
-  type?: "0" | "1";
+  type?: 0 | 1;
   /**
    * The positive non-zero numeric position in the images displayed in a listing, with rank 1 images appearing in the left-most position in a listing.
    * @min 0
@@ -2143,111 +2131,111 @@ export interface IShopHolidayPreference {
   shop_id?: number;
   /** The unique id that maps to the holiday a country observes. See the [Fulfillment Tutorial docs](https://developer.etsy.com/documentation/tutorials/fulfillment/#country-holidays) for more info */
   holiday_id?:
-    | "1"
-    | "2"
-    | "3"
-    | "4"
-    | "5"
-    | "6"
-    | "7"
-    | "8"
-    | "9"
-    | "10"
-    | "11"
-    | "12"
-    | "13"
-    | "14"
-    | "15"
-    | "16"
-    | "17"
-    | "18"
-    | "19"
-    | "20"
-    | "21"
-    | "22"
-    | "23"
-    | "24"
-    | "25"
-    | "26"
-    | "27"
-    | "28"
-    | "29"
-    | "30"
-    | "31"
-    | "32"
-    | "33"
-    | "34"
-    | "35"
-    | "36"
-    | "37"
-    | "38"
-    | "39"
-    | "40"
-    | "41"
-    | "42"
-    | "43"
-    | "44"
-    | "45"
-    | "46"
-    | "47"
-    | "48"
-    | "49"
-    | "50"
-    | "51"
-    | "52"
-    | "53"
-    | "54"
-    | "55"
-    | "56"
-    | "57"
-    | "58"
-    | "59"
-    | "60"
-    | "61"
-    | "62"
-    | "63"
-    | "64"
-    | "65"
-    | "66"
-    | "67"
-    | "68"
-    | "69"
-    | "70"
-    | "71"
-    | "72"
-    | "73"
-    | "74"
-    | "75"
-    | "76"
-    | "77"
-    | "78"
-    | "79"
-    | "80"
-    | "81"
-    | "82"
-    | "83"
-    | "84"
-    | "85"
-    | "86"
-    | "87"
-    | "88"
-    | "89"
-    | "90"
-    | "91"
-    | "92"
-    | "93"
-    | "94"
-    | "95"
-    | "96"
-    | "97"
-    | "98"
-    | "99"
-    | "100"
-    | "101"
-    | "102"
-    | "103"
-    | "104"
-    | "105";
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15
+    | 16
+    | 17
+    | 18
+    | 19
+    | 20
+    | 21
+    | 22
+    | 23
+    | 24
+    | 25
+    | 26
+    | 27
+    | 28
+    | 29
+    | 30
+    | 31
+    | 32
+    | 33
+    | 34
+    | 35
+    | 36
+    | 37
+    | 38
+    | 39
+    | 40
+    | 41
+    | 42
+    | 43
+    | 44
+    | 45
+    | 46
+    | 47
+    | 48
+    | 49
+    | 50
+    | 51
+    | 52
+    | 53
+    | 54
+    | 55
+    | 56
+    | 57
+    | 58
+    | 59
+    | 60
+    | 61
+    | 62
+    | 63
+    | 64
+    | 65
+    | 66
+    | 67
+    | 68
+    | 69
+    | 70
+    | 71
+    | 72
+    | 73
+    | 74
+    | 75
+    | 76
+    | 77
+    | 78
+    | 79
+    | 80
+    | 81
+    | 82
+    | 83
+    | 84
+    | 85
+    | 86
+    | 87
+    | 88
+    | 89
+    | 90
+    | 91
+    | 92
+    | 93
+    | 94
+    | 95
+    | 96
+    | 97
+    | 98
+    | 99
+    | 100
+    | 101
+    | 102
+    | 103
+    | 104
+    | 105;
   /**
    * The country iso where the shop is located.
    * @format ISO 3166-1 alpha-2
@@ -2596,7 +2584,7 @@ export interface ICreateDraftListingPayload {
   personalization_instructions?: string;
   /** An array of unique IDs of production partner ids. */
   production_partner_ids?: number[] | null;
-  /** An array of numeric image IDs of the images in a listing, which can include up to 10 images. */
+  /** An array of numeric image IDs of the images in a listing, which can include up to 20 images. */
   image_ids?: number[] | null;
   /** When true, tags the listing as a supply product, else indicates that it's a finished product. Helps buyers locate the listing under the Supplies heading. Requires 'who_made' and 'when_made'. */
   is_supply?: boolean;
@@ -2968,6 +2956,8 @@ export interface IGetListingsByListingIdsParams {
    * @default null
    */
   includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
 }
 
 export interface IGetFeaturedListingsByShopParams {
@@ -2984,6 +2974,8 @@ export interface IGetFeaturedListingsByShopParams {
    * @default 0
    */
   offset?: number;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
    * @format int64
@@ -3054,7 +3046,7 @@ export interface IUpdateListingTranslationPayload {
 }
 
 export interface IUpdateListingPayload {
-  /** An array of numeric image IDs of the images in a listing, which can include up to 10 images. */
+  /** An array of numeric image IDs of the images in a listing, which can include up to 20 images. */
   image_ids?: number[];
   /** The listing's title string. When creating or updating a listing, valid title strings contain only letters, numbers, punctuation marks, mathematical symbols, whitespace characters, ™, ©, and ®. (regex: /[^\p{L}\p{Nd}\p{P}\p{Sm}\p{Zs}™©®]/u) You can only use the %, :, & and + characters once each. */
   title?: string;
@@ -3391,6 +3383,8 @@ export interface IGetListingsByShopReceiptParams {
    * @default 0
    */
   offset?: number;
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The numeric ID for the [receipt](/documentation/reference#tag/Shop-Receipt) associated to this transaction.
    * @format int64
@@ -3587,6 +3581,23 @@ export interface IUpdateShopReturnPolicyPayload {
   return_deadline?: number | null;
 }
 
+export interface IGetListingsByShopReturnPolicyParams {
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
+  /**
+   * The numeric ID of the [Return Policy](/documentation/reference#operation/getShopReturnPolicies).
+   * @format int64
+   * @min 1
+   */
+  returnPolicyId: number;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+}
+
 export interface ICreateShopReadinessStateDefinitionPayload {
   /** The readiness state of a product: \"1\" means \"ready_to_ship\", and \"2\" means \"made_to_order\" */
   readiness_state: "ready_to_ship" | "made_to_order";
@@ -3689,6 +3700,8 @@ export interface IGetListingsByShopSectionIdParams {
    * @default "desc"
    */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
+  /** This parameter needed to enable new parameters and response values related to processing profiles. */
+  legacy?: boolean;
   /**
    * The unique positive non-zero numeric ID for an Etsy Shop.
    * @format int64
@@ -3722,13 +3735,13 @@ export interface ICreateShopShippingProfilePayload {
    * @min 1
    * @max 10
    */
-  min_processing_time: number;
+  min_processing_time?: number;
   /**
    * The maximum processing time the listing needs to ship.
    * @min 1
    * @max 10
    */
-  max_processing_time: number;
+  max_processing_time?: number;
   /**
    * The unit used to represent how long a processing time is. A week is equivalent to the set processing schedule (default to 5 business days). If none is provided, the unit is set to "business_days".
    * @default "business_days"
@@ -3943,7 +3956,7 @@ export interface IUpdateShopShippingProfileDestinationPayload {
 
 export interface ICreateShopShippingProfileUpgradePayload {
   /** The type of the shipping upgrade. Domestic (0) or international (1). */
-  type: "0" | "1";
+  type: 0 | 1;
   /** Name for the shipping upgrade shown to shoppers at checkout, e.g. USPS Priority. */
   upgrade_name: string;
   /**
@@ -3992,7 +4005,7 @@ export interface IUpdateShopShippingProfileUpgradePayload {
    */
   upgrade_name?: string;
   /** The type of the shipping upgrade. Domestic (0) or international (1). */
-  type?: "0" | "1";
+  type?: 0 | 1;
   /**
    * Additional cost of adding the shipping upgrade.
    * @format float

@@ -9,6 +9,7 @@ import {
   IGetListingsByListingIdsParams,
   IGetListingsByShopParams,
   IGetListingsByShopReceiptParams,
+  IGetListingsByShopReturnPolicyParams,
   IGetListingsByShopSectionIdParams,
   IListingPropertyValue,
   IListingPropertyValues,
@@ -371,10 +372,14 @@ export class ShopListing {
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
-  getListingsByShopReturnPolicy = (returnPolicyId: number, shopId: number, params: RequestParams = {}) =>
+  getListingsByShopReturnPolicy = (
+    { returnPolicyId, shopId, ...query }: IGetListingsByShopReturnPolicyParams,
+    params: RequestParams = {},
+  ) =>
     this.http.request<IShopListings, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/policies/return/${returnPolicyId}/listings`,
       method: "GET",
+      query: query,
       secure: true,
       format: "json",
       ...params,
