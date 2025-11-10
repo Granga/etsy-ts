@@ -25,7 +25,6 @@ export class ShopProcessingProfiles {
    * @response `201` `IShopProcessingProfile` A single ReadinessStateDefinition
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
-   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */

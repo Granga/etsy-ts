@@ -1430,6 +1430,11 @@ export interface IPaymentAccountLedgerEntry {
   reference_type?: string;
   /** The object id the ledger entry refers to. */
   reference_id?: string | null;
+  /**
+   * The parent ledger entry ID used to match related entries (e.g., vat_seller_services to originating seller fees).
+   * @min 0
+   */
+  parent_entry_id?: number;
   /** List of refund objects on an Etsy Payments transaction. All monetary amounts are in USD pennies unless otherwise specified. */
   payment_adjustments?: IPaymentAdjustment[];
 }
