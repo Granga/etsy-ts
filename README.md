@@ -12,6 +12,9 @@ Etsy API wrapper written in TypeScript. Includes types for all Etsy API endpoint
 See example in [examples/run.ts](examples/example.ts)  
 Find full [API v3 documentation](https://developer.etsy.com) on Etsy.
 
+### Breaking changes when migrating from 6.x.x to 7.x.x
+- `Etsy` class constructor now requires a `sharedSecret` parameter in addition to `apiKey`. This is required by Etsy starting January 18, 2026. Find your shared secret on the [Your Apps](https://www.etsy.com/developers/your-apps) page. See [Etsy's documentation](https://developer.etsy.com/documentation/essentials/requests) for more details.
+
 ### Breaking changes when migrating from 3.x.x to 4.x.x
 - Support for Etsy APIv2 is removed
 - All v3 modules are now imported from the root of the package, e.g. `import { Etsy } from 'etsy-ts'` instead

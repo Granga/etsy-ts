@@ -1,11 +1,11 @@
 {
   "name": "etsy-ts",
-  "version": "6.1.1",
+  "version": "7.0.3",
   "description": "Etsy API wrapper written in typescript.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.13.2",
     "axios-auth-refresh": "^3.3.6",
     "form-data": "^4.0.0",
     "tslib": "^2.5.0"

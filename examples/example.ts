@@ -8,6 +8,7 @@ import { SecurityDataStorage } from "./SecurityDataStorage";
     const apiCredentials = await fs.readJSON("./examples/api-credentials.json");
     const client = new Etsy({
       apiKey: apiCredentials.apiKey,
+      sharedSecret: apiCredentials.sharedSecret,
       securityDataStorage: new SecurityDataStorage()
     });
 

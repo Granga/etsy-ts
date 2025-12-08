@@ -27,3 +27,6 @@ test.png
 
 tsconfig.tsbuildinfo
 yarn-error.log
+
+# Claude Code
+.claude/
