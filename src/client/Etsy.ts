@@ -58,8 +58,9 @@ export class Etsy {
   UserAddress: UserAddress;
 
   constructor(
-    {apiKey, securityDataStorage, enableTokenRefresh = true}: {
+    {apiKey, sharedSecret, securityDataStorage, enableTokenRefresh = true}: {
       apiKey: string,
+      sharedSecret: string,
       securityDataStorage: ISecurityDataStorage,
       enableTokenRefresh?: boolean
     },
@@ -69,7 +70,7 @@ export class Etsy {
       const securityData = await securityDataStorage.findAccessToken(filter);
       return {
         headers: {
-          ...{"x-api-key": apiKey},
+          ...{"x-api-key": `${apiKey}:${sharedSecret}`},
           ...(securityData?.accessToken ? {"Authorization": `Bearer ${securityData.accessToken}`} : undefined),
         }
       }
