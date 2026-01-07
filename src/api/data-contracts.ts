@@ -251,11 +251,11 @@ export interface IShopListing {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2025"
+    | "2020_2026"
     | "2010_2019"
-    | "2006_2009"
-    | "before_2006"
-    | "2000_2005"
+    | "2007_2009"
+    | "before_2007"
+    | "2000_2006"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -527,11 +527,11 @@ export interface IShopListingWithAssociations {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2025"
+    | "2020_2026"
     | "2010_2019"
-    | "2006_2009"
-    | "before_2006"
-    | "2000_2005"
+    | "2007_2009"
+    | "before_2007"
+    | "2000_2006"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -2489,11 +2489,11 @@ export interface ICreateDraftListingPayload {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made:
     | "made_to_order"
-    | "2020_2025"
+    | "2020_2026"
     | "2010_2019"
-    | "2006_2009"
-    | "before_2006"
-    | "2000_2005"
+    | "2007_2009"
+    | "before_2007"
+    | "2000_2006"
     | "1990s"
     | "1980s"
     | "1970s"
@@ -3122,11 +3122,11 @@ export interface IUpdateListingPayload {
   /** An enumerated string for the era in which the maker made the product in this listing. Helps buyers locate the listing under the Vintage heading. Requires 'is_supply' and 'who_made'. */
   when_made?:
     | "made_to_order"
-    | "2020_2025"
+    | "2020_2026"
     | "2010_2019"
-    | "2006_2009"
-    | "before_2006"
-    | "2000_2005"
+    | "2007_2009"
+    | "before_2007"
+    | "2000_2006"
     | "1990s"
     | "1980s"
     | "1970s"
