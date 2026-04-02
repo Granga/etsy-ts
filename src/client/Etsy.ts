@@ -12,6 +12,7 @@ import { ShopListingFile } from "../api/ShopListingFile";
 import { ShopListingImage } from "../api/ShopListingImage";
 import { ShopListingInventory } from "../api/ShopListingInventory";
 import { ShopListingOffering } from "../api/ShopListingOffering";
+import { ShopListingPersonalization } from "../api/ShopListingPersonalization";
 import { ShopListingProduct } from "../api/ShopListingProduct";
 import { ShopListingTranslation } from "../api/ShopListingTranslation";
 import { ShopListingVariationImage } from "../api/ShopListingVariationImage";
@@ -42,6 +43,7 @@ export class Etsy {
   ShopListingFile: ShopListingFile;
   ShopListingImage: ShopListingImage;
   ShopListingInventory: ShopListingInventory;
+  ShopListingPersonalization: ShopListingPersonalization;
   ShopListingOffering: ShopListingOffering;
   ShopListingProduct: ShopListingProduct;
   ShopListingTranslation: ShopListingTranslation;
