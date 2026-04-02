@@ -106,6 +106,7 @@ export class Etsy {
     this.ShopListingVariationImage = new ShopListingVariationImage(this.httpClient);
     this.ShopListingVideo = new ShopListingVideo(this.httpClient);
     this.ShopProductionPartner = new ShopProductionPartner(this.httpClient);
+    this.ShopListingPersonalization = new ShopListingPersonalization(this.httpClient);
     this.ShopReceipt = new ShopReceipt(this.httpClient);
     this.ShopReceiptTransactions = new ShopReceiptTransactions(this.httpClient);
     this.ShopProcessingProfiles = new ShopProcessingProfiles(this.httpClient);
