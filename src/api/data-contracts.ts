@@ -210,13 +210,13 @@ export interface IShopListing {
   is_taxable?: boolean;
   /** When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. */
   is_customizable?: boolean;
-  /** When true, this listing is personalizable. The default value is null. */
+  /** When true, this listing is personalizable. The default value is false. */
   is_personalizable?: boolean;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_is_required?: boolean;
-  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_char_count_max?: number | null;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_instructions?: string | null;
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type?: "physical" | "download" | "both";
@@ -301,7 +301,7 @@ export interface IShopListing {
   /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   style?: string[];
   /** A string describing the files attached to a digital listing. */
-  file_data?: string;
+  file_data?: string | null;
   /** When true, the listing has variations. */
   has_variations?: boolean;
   /** When true, renews a listing for four months upon expiration. */
@@ -310,6 +310,8 @@ export interface IShopListing {
   language?: string | null;
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The [`getListingInventory`](/documentation/reference/#operation/getListingInventory) method requests exact prices for available offerings. */
   price?: IMoney;
+  /** The listing price converted to the currency requested via the currency parameter. Only present when the currency parameter is provided. Null if the conversion rate is unavailable. */
+  converted_price?: IMoney | null;
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
   /**
@@ -486,13 +488,13 @@ export interface IShopListingWithAssociations {
   is_taxable?: boolean;
   /** When true, a buyer may contact the seller for a customized order. The default value is true when a shop accepts custom orders. Does not apply to shops that do not accept custom orders. */
   is_customizable?: boolean;
-  /** When true, this listing is personalizable. The default value is null. */
+  /** When true, this listing is personalizable. The default value is false. */
   is_personalizable?: boolean;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_is_required?: boolean;
-  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_char_count_max?: number | null;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_instructions?: string | null;
   /** An enumerated type string that indicates whether the listing is physical or a digital download. */
   listing_type?: "physical" | "download" | "both";
@@ -577,7 +579,7 @@ export interface IShopListingWithAssociations {
   /** An array of style strings for this listing, each of which is free-form text string such as "Formal", or "Steampunk". When creating or updating a listing, the listing may have up to two styles. Valid style strings contain only letters, numbers, and whitespace characters. (regex: /[^\p{L}\p{Nd}\p{Zs}]/u) Default value is null. */
   style?: string[];
   /** A string describing the files attached to a digital listing. */
-  file_data?: string;
+  file_data?: string | null;
   /** When true, the listing has variations. */
   has_variations?: boolean;
   /** When true, renews a listing for four months upon expiration. */
@@ -586,6 +588,8 @@ export interface IShopListingWithAssociations {
   language?: string | null;
   /** The positive non-zero price of the product. (Sold product listings are private) Note: The price is the minimum possible price. The [`getListingInventory`](/documentation/reference/#operation/getListingInventory) method requests exact prices for available offerings. */
   price?: IMoney;
+  /** The listing price converted to the currency requested via the currency parameter. Only present when the currency parameter is provided. Null if the conversion rate is unavailable. */
+  converted_price?: IMoney | null;
   /** The numerical taxonomy ID of the listing. See [SellerTaxonomy](/documentation/reference#tag/SellerTaxonomy) and [BuyerTaxonomy](/documentation/reference#tag/BuyerTaxonomy) for more information. */
   taxonomy_id?: number | null;
   /**
@@ -616,6 +620,9 @@ export interface IShopListingWithAssociations {
   translations?: IListingTranslations | null;
   /** The number of times the listing has been viewed. This value is tabulated once per day and **only for active listings**, so the value is not real-time. If `0`, the listing has either not been viewed, not yet tabulated, was not active during the last tabulation or there was an error fetching the value. If a value is expected, call `getListing` to confirm the value. */
   views?: number;
+  personalization?: IEtsyModulesListingPersonalizationApiResourcesOpenApiListingPersonalization | null;
+  /** The buyer-facing price for a listing, including VAT, inclusive shipping (UK), and active promotions. Requires buyer_country parameter. Shows base_price, shipping_cost, original_price (display price), and discounted_price if a promotion is active. Currently only supported on the /listings/batch endpoint. */
+  buyer_price?: IListingBuyerPrice | null;
 }
 
 /** Represents a profile used to set a listing's shipping information. Please note that it's not possible to create calculated shipping templates via the API. However, you can associate calculated shipping profiles created from Shop Manager with listings using the API. */
@@ -1136,6 +1143,7 @@ export interface IListingTranslations {
   pl?: IListingTranslation | null;
   pt?: IListingTranslation | null;
   ru?: IListingTranslation | null;
+  sv?: IListingTranslation | null;
 }
 
 /** Represents the translation data for a Listing. */
@@ -1154,6 +1162,54 @@ export interface IListingTranslation {
   description?: string | null;
   /** The tags of the Listing of this Translation. */
   tags?: string[];
+}
+
+export interface IEtsyModulesListingPersonalizationApiResourcesOpenApiListingPersonalization {
+  personalization_questions?: IEtsyModulesListingPersonalizationApiResourcesOpenApiPersonalizationQuestion[];
+}
+
+export interface IEtsyModulesListingPersonalizationApiResourcesOpenApiPersonalizationQuestion {
+  /**
+   * @format int64
+   * @min 1
+   */
+  question_id?: number | null;
+  question_text?: string;
+  instructions?: string | null;
+  question_type?: string;
+  required?: boolean;
+  max_allowed_characters?: number | null;
+  max_allowed_files?: number | null;
+  options?: {
+    /**
+     * @format int64
+     * @min 1
+     */
+    option_id: number | null;
+    label: string;
+  }[];
+}
+
+/** The buyer-facing price for a listing, including VAT, inclusive shipping (UK), and active promotions. */
+export interface IListingBuyerPrice {
+  /** The pre-discount listing price with VAT applied, excluding shipping. When a promotion is active, this is the price before the discount is applied. */
+  base_price?: IMoney;
+  /** The shipping cost with VAT applied. Only present for UK buyers. */
+  shipping_cost?: IMoney | null;
+  /** The all-in display price (base + shipping for UK). This is the price to show to the buyer. */
+  original_price?: IMoney;
+  /** The sale price (all-in). Null if no active promotion. */
+  discounted_price?: IMoney | null;
+  /** The discount amount as money (original_price - discounted_price). Null if no active promotion. */
+  discount_amount?: IMoney | null;
+  /** The discount percentage (e.g. 20 for 20% off). Null if no active promotion or if the promotion is a fixed-amount discount. */
+  discount_percentage?: number | null;
+  /** Whether an active promotion applies to this listing. */
+  has_discount?: boolean;
+  /** The start timestamp of the active promotion. Null if no active promotion. */
+  discount_start_epoch?: number | null;
+  /** The end timestamp of the active promotion. Null if no active promotion. */
+  discount_end_epoch?: number | null;
 }
 
 /** Represents a list of listing image resources, each of which contains the reference URLs and metadata for an image. */
@@ -1699,7 +1755,7 @@ export interface IShopReceipt {
    */
   receipt_id?: number;
   /**
-   * The numeric value for the Etsy channel that serviced the purchase: 0 for Etsy.com, 1 for a Pattern shop.
+   * The numeric value for the Etsy channel that serviced the purchase: 0 or 5 for Etsy.com, 1 for a Pattern shop.
    * @min 0
    */
   receipt_type?: number;
@@ -2579,13 +2635,13 @@ export interface ICreateDraftListingPayload {
   item_weight_unit?: "oz" | "lb" | "g" | "kg" | null;
   /** A string defining the units used to measure the dimensions of the product. Default value is null. */
   item_dimensions_unit?: "in" | "ft" | "mm" | "cm" | "m" | "yd" | "inches" | null;
-  /** When true, this listing is personalizable. The default value is null. */
+  /** When true, this listing is personalizable. The default value is false. */
   is_personalizable?: boolean;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_is_required?: boolean;
-  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_char_count_max?: number;
-  /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_instructions?: string;
   /** An array of unique IDs of production partner ids. */
   production_partner_ids?: number[] | null;
@@ -2644,10 +2700,20 @@ export interface IGetListingsByShopParams {
    */
   sort_order?: "asc" | "ascending" | "desc" | "descending" | "up" | "down";
   /**
-   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'.
+   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations', 'Videos', 'Inventory' and 'Personalization'.
    * @default null
    */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+  includes?: (
+    | "Shipping"
+    | "Images"
+    | "Shop"
+    | "User"
+    | "Translations"
+    | "Inventory"
+    | "Videos"
+    | "Personalization"
+    | "BuyerPrice"
+  )[];
   /** This parameter needed to enable new parameters and response values related to processing profiles. */
   legacy?: boolean;
   /**
@@ -2660,10 +2726,20 @@ export interface IGetListingsByShopParams {
 
 export interface IGetListingParams {
   /**
-   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'.
+   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations', 'Videos', 'Inventory' and 'Personalization'.
    * @default null
    */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+  includes?: (
+    | "Shipping"
+    | "Images"
+    | "Shop"
+    | "User"
+    | "Translations"
+    | "Inventory"
+    | "Videos"
+    | "Personalization"
+    | "BuyerPrice"
+  )[];
   /**
    * The IETF language tag for the language of this translation. Ex: `de`, `en`, `es`, `fr`, `it`, `ja`, `nl`, `pl`, `pt`.
    * @default null
@@ -2759,6 +2835,19 @@ export interface IFindAllListingsActiveParams {
   shop_location?: string;
   /** This parameter needed to enable new parameters and response values related to processing profiles. */
   legacy?: boolean;
+  /** When true, filters out mature/adult content from search results. */
+  is_safe?: boolean;
+  /**
+   * The ISO 4217 alphabetic currency code (e.g., EUR, MXN) for price conversion. If provided, the listing price will be converted to this currency.
+   * @default null
+   */
+  currency?: string;
+  /**
+   * The ISO 3166-1 alpha-2 country code (e.g., DE, MX). Filters results to listings that ship to this country.
+   * @format ISO 3166-1 alpha-2
+   * @default null
+   */
+  buyer_country?: string;
 }
 
 export interface IFindAllActiveListingsByShopParams {
@@ -2957,12 +3046,33 @@ export interface IGetListingsByListingIdsParams {
   /** The list of numeric IDS for the listings in a specific Etsy shop. */
   listing_ids: number[];
   /**
-   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations' and 'Inventory'.
+   * An enumerated string that attaches a valid association. Acceptable inputs are 'Shipping', 'Shop', 'Images', 'User', 'Translations', 'Videos', 'Inventory' and 'Personalization'.
    * @default null
    */
-  includes?: ("Shipping" | "Images" | "Shop" | "User" | "Translations" | "Inventory" | "Videos")[];
+  includes?: (
+    | "Shipping"
+    | "Images"
+    | "Shop"
+    | "User"
+    | "Translations"
+    | "Inventory"
+    | "Videos"
+    | "Personalization"
+    | "BuyerPrice"
+  )[];
   /** This parameter needed to enable new parameters and response values related to processing profiles. */
   legacy?: boolean;
+  /**
+   * The ISO 4217 alphabetic currency code (e.g., EUR, MXN) for price conversion. If provided, the listing price will be converted to this currency.
+   * @default null
+   */
+  currency?: string;
+  /**
+   * The ISO 3166-1 alpha-2 country code (e.g., GB, DE). Used for buyer-facing price calculations (VAT, inclusive shipping). Does not filter listings.
+   * @format ISO 3166-1 alpha-2
+   * @default null
+   */
+  buyer_country?: string;
 }
 
 export interface IGetFeaturedListingsByShopParams {
@@ -2987,6 +3097,57 @@ export interface IGetFeaturedListingsByShopParams {
    * @min 1
    */
   shopId: number;
+}
+
+export interface IUpdateListingPersonalizationPayload {
+  personalization_questions: {
+    /**
+     * The ID of the personalization question. This field is optional. Include it when updating an existing question; omit it when creating a new question. Note: This value may change if the personalization question is updated.
+     * @format int64
+     * @min 1
+     */
+    question_id?: number | null;
+    /** The title of the personalization question. Must be between 1 and 45 characters. Note: During the migration to the new personalization endpoints, if you're still using a legacy UI (without a title input),please send the default value 'Personalization'. */
+    question_text: string;
+    /** Optional instructions for a personalization question. This field is not allowed for 'dropdown' questions. For legacy, single personalization, max length is 256 characters. Once multiple personalization questions are enabled, the max length will be 120 characters. */
+    instructions?: string | null;
+    /** The type of the personalization question. Note: Currently, only a single question with type 'text_input' is supported. See https://developers.etsy.com/documentation/tutorials/personalization-migration for details about new question types. */
+    question_type: "text_input" | "dropdown" | "unlabeled_upload" | "labeled_upload";
+    /** When true, the personalization question is required. */
+    required: boolean;
+    /** The maximum number of files the buyer may upload in response to a personalization question. This field is optional and only applicable to 'unlabeled_upload' and 'labeled_upload' questions. */
+    max_allowed_files?: number | null;
+    /** The maximum number of characters the buyer may enter in response to a personalization question. This field is optional and only applicable to 'text_input' questions. */
+    max_allowed_characters?: number | null;
+    /** The list of options for a personalization question. For 'dropdown' questions, this list contains the options for the dropdown. For 'labeled_upload' questions, this list contains the labels for the files that the buyer may upload, and must match the max_allowed_files value.. */
+    options?: {
+      /**
+       * The ID of the option. This field is optional. Include it when updating an existing option; omit it when creating a new option. Note: This value may change if the option or question is updated.
+       * @format int64
+       * @min 1
+       */
+      option_id?: number | null;
+      /** The option label. Note: For 'dropdown' questions, max length is 20 characters. For 'labeled_upload' questions, max length is 45 characters. */
+      label: string;
+    }[];
+  }[];
+}
+
+export interface IUpdateListingPersonalizationParams {
+  /** This query parameter indicates that the caller supports up to 5 personalization questions and the following question types: 'text_input', 'dropdown', 'unlabeled_upload', 'labeled_upload'. Sending this param without updating your application can lead to inadvertantly deleting seller-entered data. */
+  supports_multiple_personalization_questions?: boolean | null;
+  /**
+   * The unique positive non-zero numeric ID for an Etsy Shop.
+   * @format int64
+   * @min 1
+   */
+  shopId: number;
+  /**
+   * The numeric ID for the [listing](/documentation/reference#tag/ShopListing) associated to this transaction.
+   * @format int64
+   * @min 1
+   */
+  listingId: number;
 }
 
 export interface IUpdateListingPropertyPayload {
@@ -3142,13 +3303,13 @@ export interface IUpdateListingPayload {
     | "before_1700";
   /** The positive non-zero numeric position in the featured listings of the shop, with rank 1 listings appearing in the left-most position in featured listing on a shop's home page. */
   featured_rank?: number | null;
-  /** When true, this listing is personalizable. The default value is null. */
+  /** When true, this listing is personalizable. The default value is false. */
   is_personalizable?: boolean;
-  /** When true, this listing requires personalization. The default value is null. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] When true, this listing requires personalization. The default value is false. NOTE: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_is_required?: boolean;
-  /** This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] This is an integer value representing the maximum length for the personalization message entered by the buyer. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_char_count_max?: number;
-  /** A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. */
+  /** [DEPRECATED] A string representing instructions for the buyer to enter the personalization. Will only change if is_personalizable is 'true'. Note: This field will be removed on Apr. 9th, 2026. See https://developers.etsy.com/documentation/tutorials/personalization-migration for migration details. */
   personalization_instructions?: string;
   /** When _updating_ a listing, this value can be either `active` or `inactive`. Note: Setting a `draft` listing to `active` will also publish the listing on etsy.com and requires that the listing have an image set. Setting a `sold_out` listing to active will update the quantity to 1 and renew the listing on etsy.com. */
   state?: "active" | "inactive";

@@ -12,6 +12,7 @@ import { ShopListingFile } from "../api/ShopListingFile";
 import { ShopListingImage } from "../api/ShopListingImage";
 import { ShopListingInventory } from "../api/ShopListingInventory";
 import { ShopListingOffering } from "../api/ShopListingOffering";
+import { ShopListingPersonalization } from "../api/ShopListingPersonalization";
 import { ShopListingProduct } from "../api/ShopListingProduct";
 import { ShopListingTranslation } from "../api/ShopListingTranslation";
 import { ShopListingVariationImage } from "../api/ShopListingVariationImage";
@@ -42,6 +43,7 @@ export class Etsy {
   ShopListingFile: ShopListingFile;
   ShopListingImage: ShopListingImage;
   ShopListingInventory: ShopListingInventory;
+  ShopListingPersonalization: ShopListingPersonalization;
   ShopListingOffering: ShopListingOffering;
   ShopListingProduct: ShopListingProduct;
   ShopListingTranslation: ShopListingTranslation;
@@ -104,6 +106,7 @@ export class Etsy {
     this.ShopListingVariationImage = new ShopListingVariationImage(this.httpClient);
     this.ShopListingVideo = new ShopListingVideo(this.httpClient);
     this.ShopProductionPartner = new ShopProductionPartner(this.httpClient);
+    this.ShopListingPersonalization = new ShopListingPersonalization(this.httpClient);
     this.ShopReceipt = new ShopReceipt(this.httpClient);
     this.ShopReceiptTransactions = new ShopReceiptTransactions(this.httpClient);
     this.ShopProcessingProfiles = new ShopProcessingProfiles(this.httpClient);
