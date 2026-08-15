@@ -21,10 +21,7 @@ import { SecurityDataStorage } from "./SecurityDataStorage";
 
     if (listings && listings.length > 0) {
       // Update listing title
-      await client.ShopListing.updateListing({
-        shopId: shop.shop_id!,
-        listingId: listings[0].listing_id!
-      }, {
+      await client.ShopListing.updateListing(shop.shop_id!, listings[0].listing_id!, {
         title: `Test listing. Please DO NOT purchase. ${new Date().toISOString().slice(0, 19).replace(/[-:]/g, '-').replace('T', '-')}`,
       }, {etsyUserId});
 
