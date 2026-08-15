@@ -12,6 +12,11 @@ Etsy API wrapper written in TypeScript. Includes types for all Etsy API endpoint
 See example in [examples/run.ts](examples/example.ts)  
 Find full [API v3 documentation](https://developer.etsy.com) on Etsy.
 
+### Breaking changes when migrating from 7.x.x to 8.x.x
+- `createDraftListing` and `updateListing` now take plain arguments instead of a params object: `createDraftListing(shopId, data)` and `updateListing(shopId, listingId, data)`. The `legacy` query parameter was removed by Etsy (the processing-profiles migration is complete, so the API always behaves as if `legacy: false`).
+- `ICreateDraftListingParams` and `IUpdateListingParams` interfaces are removed — drop any imports of them.
+- `updateShopReceipt` now sends `application/json` instead of url-encoded form data.
+
 ### Breaking changes when migrating from 6.x.x to 7.x.x
 - `Etsy` class constructor now requires a `sharedSecret` parameter in addition to `apiKey`. This is required by Etsy starting January 18, 2026. Find your shared secret on the [Your Apps](https://www.etsy.com/developers/your-apps) page. See [Etsy's documentation](https://developer.etsy.com/documentation/essentials/requests) for more details.
 
