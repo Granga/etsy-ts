@@ -119,7 +119,7 @@ export class ShopReceipt {
       query: query,
       body: data,
       secure: true,
-      type: ContentType.UrlEncoded,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });

@@ -36,7 +36,7 @@ export class ShopListingVideo {
    * @name GetListingVideo
    * @request GET:/v3/application/listings/{listing_id}/videos/{video_id}
    * @secure
-   * @response `200` `IListingVideo` The metatdata for a video associated with a listing.
+   * @response `200` `IListingVideo` The metadata for a video associated with a listing.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.

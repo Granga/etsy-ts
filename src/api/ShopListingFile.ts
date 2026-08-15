@@ -37,7 +37,7 @@ export class ShopListingFile {
    * @name GetListingFile
    * @request GET:/v3/application/shops/{shop_id}/listings/{listing_id}/files/{listing_file_id}
    * @secure
-   * @response `200` `IShopListingFile` The metatdata for a file associated with a digital listing.
+   * @response `200` `IShopListingFile` The metadata for a file associated with a digital listing.
    * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
    * @response `401` `IErrorSchema` The request lacks valid authentication credentials. See the error message for details.
    * @response `403` `IErrorSchema` The request attempted to perform an operation it is not allowed to. See the error message for details.

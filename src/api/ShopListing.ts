@@ -1,5 +1,4 @@
 import {
-  ICreateDraftListingParams,
   ICreateDraftListingPayload,
   IErrorSchema,
   IFindAllActiveListingsByShopParams,
@@ -11,13 +10,13 @@ import {
   IGetListingsByShopReceiptParams,
   IGetListingsByShopReturnPolicyParams,
   IGetListingsByShopSectionIdParams,
+  IGetListingsShippingByListingIdsParams,
   IListingPropertyValue,
   IListingPropertyValues,
   IShopListing,
   IShopListings,
   IShopListingsWithAssociations,
   IShopListingWithAssociations,
-  IUpdateListingParams,
   IUpdateListingPayload,
   IUpdateListingPropertyPayload,
 } from "./data-contracts";
@@ -44,15 +43,10 @@ export class ShopListing {
    * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
-  createDraftListing = (
-    { shopId, ...query }: ICreateDraftListingParams,
-    data: ICreateDraftListingPayload,
-    params: RequestParams = {},
-  ) =>
+  createDraftListing = (shopId: number, data: ICreateDraftListingPayload, params: RequestParams = {}) =>
     this.http.request<IShopListing, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings`,
       method: "POST",
-      query: query,
       body: data,
       secure: true,
       type: ContentType.UrlEncoded,
@@ -303,6 +297,27 @@ export class ShopListing {
       ...params,
     });
   /**
+   * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notificationPrimary wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/discussions" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Retrieves the shipping profile for each listing referenced by listing ID. Requires the `shops_r` OAuth scope. Limit 100 listing IDs per request. All requested listing IDs must exist — if any single ID is not found, the entire request returns a 404. Shipping profile data (including `shipping_profile_id`) is only returned for listings owned by the authenticated user; it is nulled out for listings owned by other sellers.
+   *
+   * @tags ShopListing
+   * @name GetListingsShippingByListingIds
+   * @request GET:/v3/application/listings/batch/shipping
+   * @secure
+   * @response `200` `IShopListingsWithAssociations` A list of listings with their shipping profiles.
+   * @response `400` `IErrorSchema` There was a problem with the request data. See the error message for details.
+   * @response `404` `IErrorSchema` A resource could not be found. See the error message for details.
+   * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
+   */
+  getListingsShippingByListingIds = (query: IGetListingsShippingByListingIdsParams, params: RequestParams = {}) =>
+    this.http.request<IShopListingsWithAssociations, IErrorSchema>({
+      path: `/v3/application/listings/batch/shipping`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
    * @description <div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><span class="wt-badge wt-badge--notificationPrimary wt-bg-slime-tint wt-mr-xs-2">General Release</span><a class="wt-text-link" href="https://github.com/etsy/open-api/discussions" target="_blank" rel="noopener noreferrer">Report bug</a></div><div class="wt-display-flex-xs wt-align-items-center wt-mt-xs-2 wt-mb-xs-3"><p class="wt-text-body-01 banner-text">This endpoint is ready for production use.</p></div> Updates a listing, identified by a listing ID, for a specific shop identified by a shop ID. Note that this is a PATCH method type. When activating, or manually renewing a physical listing, the shipping profile referenced by the `shipping_profile_id`, and all of its fields, along with its entries and upgrades must be complete and valid. If the shipping profile is not complete and valid, we will throw an exception with an error message that guides the request sender to update whatever data is bad.   Digital listings that are not made to order must have a file upload associated with it to be activated. While the listing is a draft, shipping profile and file upload are not required in any case.
    *
    * @tags ShopListing
@@ -317,15 +332,10 @@ export class ShopListing {
    * @response `409` `IErrorSchema` There was a request conflict with the current state of the target resource. See the error message for details.
    * @response `500` `IErrorSchema` The server encountered an internal error. See the error message for details.
    */
-  updateListing = (
-    { shopId, listingId, ...query }: IUpdateListingParams,
-    data: IUpdateListingPayload,
-    params: RequestParams = {},
-  ) =>
+  updateListing = (shopId: number, listingId: number, data: IUpdateListingPayload, params: RequestParams = {}) =>
     this.http.request<IShopListing, IErrorSchema>({
       path: `/v3/application/shops/${shopId}/listings/${listingId}`,
       method: "PATCH",
-      query: query,
       body: data,
       secure: true,
       type: ContentType.UrlEncoded,
